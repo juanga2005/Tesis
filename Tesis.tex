@@ -306,8 +306,10 @@ of regularity we want for thr GP fitting. Some of the most common kernels are (s
 \end{itemize}
 
 As we can see covariance kernel are defined in terms of parameters so depending on the model
-under study we can find the paramters that best suits the model. \textbf{Talk about
-how to find the paramters of the model}
+under study we can find the paramters that best suits the model. The question now is: how
+to choose the right parameters for the model? To answer this question we must talk about 
+Bayesian model selecion.
+
 
 
 
@@ -455,9 +457,25 @@ that case the design that maximizes the minimum distance among its elements is g
 the points that live in each of the 8 vertex of the cube. In this case $d^{o}=1$. The prolbem of finding
 the optimum in a maximin design is hard, therefore in general is necessary to use computational tools
 for optimization. In chapter 4 we will see how to use these computational tools to create
-a proper experimental maximin design. 
-\textbf{Here talk a little bit about what kind of criteria can you use to assess the goodness of the design}
-\newpage
+a proper experimental maximin design.
+
+The conexion of maximin experimental designs with GP is the following. Consider the
+GP $\{f(x)\}_{x\in T}$. If we fix $S$ and let $f_{s}$ to be the conditional distribution 
+of $\{f(x)\}_{x\in T}$ given the realizations $f(s), s\in S$, if we let $K_{s}$ to be 
+the correlation of the distribution $f(s), s\in S$. Then it can be shown
+that the minimax design minimizes the quantity
+\begin{equation*}
+M(S)=-det(K_{s}).
+\end{equation*}
+Since the covariance matrix is positive defined (hence the correlation matrix is also positive defined)
+, then $det(K_{s})>0$. By minimizing the  negative of the determinant  we are gettin looking
+for the maximum value of the determinat. This is achieved when the column vectors of a matrix
+are close to orthogonal. In statistical terms what we are looking for is 
+the least possible correlation between the difference points in the maximin design. Here
+is where its importance lies.
+\newline
+
+ 
 If we have a good space filling design, then we have a good fit when using GPs to interpolate in the 
 points we want to get information about. If we have a realiable fitting we have the chance
 to reduce the dimensionality of the model and hence its complexity. For instance assume that
