@@ -8,7 +8,7 @@
 \usepackage[pdftex]{graphicx}
 \usepackage{setspace}
 \usepackage{mathrsfs}
-
+\usepackage{float}
 
 %Theorems
 \newtheorem{definition}{Definition}
@@ -637,6 +637,106 @@ For the next chapter we are going to explain how to use in a toy problem all of 
 chapter, so for chapter four we can focus on the results instead on how we applied what was explained here. 
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Chapter 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Test Problem: How Theory Works in Practice}
+
+In the previous chapter we described an overview of the theoretical and computational tools needed obtain
+the solution to Bayesian inverse problems and uncertainty quantification of the solution. In this chapter
+we are going to work on a test problem. The idea is to illustrate how the theory can be applied in practice, so,
+in chapter four we can focus mainly on the results and the  solution of the problem described in chapter one.
+
+
+
+
+To talk about the solution of an inverse problem we first need to specify what is the forward problem. 
+To keep things not to complicated we are going to define the forward problem as the following
+partial differential equation (PDE)
+
+\begin{equation}\label{eqntoyproblem}
+\left\{
+	\begin{array}{ll}
+		\Delta u=e^{-b\|x\|_{2}} &\mbox{for } x\in\Omega=[0,1]\times [0,1]\subset\mathbb{R}^{2} \\
+		u=0 & \mbox{for } x\in\partial\Omega
+	\end{array}
+\right.
+\end{equation} 
+
+where $b$ is some real parameter. The  way to think about this problem is as follows: the 
+function $u$ represents somei physical quantity of interest that is modeled by equation (\ref{eqntoyproblem}).
+In the language of chapter two this system is represented by the function $f(\cdot)$. But there is a 
+caveat with this model, we don't know the value of the parameter $b$ that best describes the reality.
+All we have is some (small) number of experimental measurements $m$  of the function $u$ within $\Omega$. 
+An easy way to solve the problem of finding the bet $b$ that suits the experimental data would go as follows.
+If you truly believe that model (\ref{eqntoyproblem}) describes the behaviour of $u$, then build
+a program that simulates that system for a big range of parameters $b$ and then pick the results
+that are closer to the experimental data. Problem solved? Not quite, even for this simple system
+running too many simulations for different parameters $b$ is computationally expensive and time
+consuming. Let alone more realistic physical models with more complicated set of equations describing
+them. 
+\newline
+A more feasible solution is given by the theory developed in chapter two. Run a few times a program
+that simulates model (\ref{eqntoyproblem}), then construct a computationally cheap\footnote{Cheap relative
+to the computational cost of actually simulate the physical system through equation (\ref{eqntoyproblem})}
+ emulator $\hat{f}(\cdot)$ to fill the missing data on possible values for $b$. Then with  the 
+aid of Bayes formula, find the posterior for $b$ given the experimental data $m$, i.e.
+\begin{equation*}
+P(b|m)\propto P(m|b)P(b).
+\end{equation*}
+With this posterior find a possible value of $b$ (e.g mean of the posterior) and quantify the uncertainty
+with respect to that prediction (e.g. 95\% Bayesian confidence interval). Now that we have the recipe we
+can put hands on in the calculations. 
+\newline
+
+To generate syntetic data of model (\ref{eqntoyproblem}) we proceed as follows. We assume that the true value 
+of $b$ is $0.925$ then run a Matlab script that simulates the PDE using the five point extensil for the laplacian
+in a finite difference scheme \cite{thomas2013numerical}. The solution with $b=0.925$ is shown in Figure 
+\ref{figsolU}.  To simulate the experimental measures $m$, we chose 10 random points in the domain
+and evalute the numerical solution there. To each of the measurements we added the noise of a
+random variable normally distributed with mean $0$ and $\sigma=0.01$. With this we get a signal 
+to noise ration (SNR) of about 1:3. In real life measurements are more precise than this, however
+in this test problem we are not taking into account the inaccuracies from the model itself to describe
+the phisical reality. To compensate for that we chose a bigger SNR. 
+\newline
+With the synthetic data at hand we can tackle the question of what value of $b$ fits the data the most.
+In principle $b\in\mathbb{R}$, so virtually $b$ could be any real value. In real life most of the time
+the physics of the problem dictates the allowed values of $b$ and experience allows to bound
+what the real value of $b$ could be. In our case we pretend that the physics
+and experience tell that   $b$ is a positive number that  could be  anywhere between
+zero and two, that is we strongly believe that $b\in (0,2]$.
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{./FigChap3/solu}
+\caption{Numerical solution of the system (\ref{eqntoyproblem}) using a finite difference scheme. The mesh
+size used in $x$ and $y$ was $0.01$. The value of the parameter $b$ was set at $0.925$. The black dots
+in the plot represent the points used to generate the synthetic data about the experimental
+measures $m$.}
+\label{figsolU}
+\end{figure}
+
+
+At this point  we use the concept of emulator as in the previous chapter. If we had unlimited computational
+power or time then we can run the finite difference scheme used to obtain Figure \ref{figsolU} with
+a huge set of possible values for $b$ in the interval $(0,2]$. And pick the value that replicates the
+better the syntetic data $m$. Since we do not have unlimited computational power or time what we
+are going to do is to pick some $n$  values $b_{k}\in (0,2], k=1,2,\ldots,n$, run the finite difference
+scheme on those and then use an emulator $\hat{f}$ with GPs to fill the missing data. The criteria to 
+choose the number $n$ comes from considerations of how much time and computational resources we have.
+For this case we chose $n=10$. How to distribute those 10 points in the interval $(0,2]$. Here we
+use the concept space filling design. In the one dimensional setting it is not hard to see that
+a maximin design gives an equal spacing of the 10 points in the interval $(0,2]$ hence we choose
+\begin{equation*}
+b_{k}=0.2k \qquad\text{for }k=1,2,\ldots,10.
+\end{equation*}
+
+We are ready to run the emulator $\hat{f}$ for these values of $b$, get a numerical value at
+the 10 points in the domain where the synthetic data were created (black dots in Figure \ref{figsolU})
+and use GPs to fill the missing information. Take into account that this process of `filling the blanks'
+has to be done in all of the 10 measurement points in the domain $\Omega$ of definition of the phyiscal model.
+
+\textbf{Here show the experimental results from using GPs and shit like that}
 
 
 
