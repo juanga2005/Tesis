@@ -17,6 +17,15 @@
 
 
 %Commands
+
+%Prior, posterior and likelihood
+\newcommand{\post}{\mathbb{P}_{post}}
+\newcommand{\like}{\mathbb{P}_{like}}
+\newcommand{\prior}{\mathbb{P}_{prior}}
+\newcommand{\p}{\mathbb{P}}
+
+
+%Other commands
 \newcommand{\E}{\mathbb{E}} %Expectation
 \newcommand{\tvs}{\mathscr{X}} %TVS symbol
 
@@ -41,7 +50,7 @@
 \end{doublespace}
 {\large Juan Gabriel Garc{\'i}a Osorio}\\[1cm]
 Advisor: John Stockie\\[1cm]
-Co-advisor: Paul Tupper\\[1cm]
+Commitee: Paul Tupper\\[1cm]
 Burnaby B.C - May  2017
 \end{center}
 
@@ -65,46 +74,79 @@ Burnaby B.C - May  2017
 %\pdfmarkupcomment[markup=Squiggly,color=green]{what eve}{Change this shit}
 
 
-The foundations of the strategy we are going to use  to estimate parameters and solve inverse problems
-  lies in the 
-framework of Bayesian statistics. Unlike orthodox statistics, in the Bayesian approach, randomness
-is a measure of uncertainty, is not a matter of frequency \cite{jaynes2003probability}. 
+The foundations of  our approach to estimate parameters and solve inverse problems is  the 
+framework of Bayesian statistics. Unlike frequentist statistics, in the Bayesian approach, randomness
+is a measure of uncertainty, is not a matter of frequency . For instance a question like
+what is the probability of having  life in Mars? If the answer is say 0.01, in the frequentist
+stastistics framework, this number is interpreted as, for every hundred times we go to 
+mars under identical circumstances, one of those times we will find life there. In the Bayesian
+approach the number 0.01 is interpreted as: given our current level of knowledge about mars
+we think that is very unlikely that mars shelters life. Clearly there is a big phylosofical
+difference between these two approaches that has a direct impact in how far reaching is each point of view  \cite{jaynes2003probability}.
 
 
 %Talking about Bayes rule
-In real life uncertainty with respect to a measurement or a quantity of interest is usually 
-connected  with the uncertainty associated to other variables and the nature of  the 
-problem under study. Bayesian theory provides a solid framework to underpin the relation between
-different quantities and its associated uncertainty, using whatever information
-is available. The bridge that connects the previous idea
-with the mathematical language is the so-called Bayes formula 
+In real life the uncertainty associated to a  measurement or  quantity of interest is usually 
+connected  with the uncertainty  of other variables involved in the problem under study.
+In general the connection between the different variables is far from trivial and hard to assess.
+Bayesian methodology provides a rigurous framework for the study of 
+this connection, using whatever information
+is available for the problem. The cornerstone of this idea
+in the mathematical language is the  Bayes formula 
 \begin{equation}\label{eqnBayes}
-P(A|B)=\frac{P(B|A)P(A)}{P(B)}.
+\post(A|B)=\frac{\like(B|A)\prior(A)}{\p(B)}.
 \end{equation}
-Mathematically  $A$ and $B$   are subsets of some sample space $\Omega$.
-$P$ is a probability measure defined on some $\sigma$-algebra of  $\Omega$.
-To introduce  some language, the term $P(B|A)$ is called the likelihood, $P(A)$ is called the prior and
-$P(B)$ is just a constant that normalizes to one the integral
-\begin{equation*}
-\int_{\Omega} P(A|B)dP.
-\end{equation*}
-The term $P(A|B)$ is called the posterior.
 
- In plain
-english what formula (\ref{eqnBayes}) says is: \textbf{to know the uncertainty associated with the variable $A$
-given that you know what happened with varaible $B$ it is necessary to know what would be the uncertainty
-associated with the variable $B$ assuming that you know what happened with variable $A$ and that
-weighted by how much uncertainty do you have about the variable $A$}.
+To explain in detail the above equation, let us first do the following defintion
+\cite{dudley2002real}
+\begin{definition}\label{dfn:probabilitytriple}
+A probability space is a triple $(\Omega,\mathscr{F},\p)$, where $\Omega$ is a set called 
+sample space.
+The element $\mathscr{F}$ is a subset of the power set of $\Omega$ that satisfies
+\begin{enumerate}
+\item $\emptyset,\Omega\in\mathscr{F}$.
+\item If $A\in\mathscr{F}$ then $A^{c}\in\mathscr{F}$.
+\item If $A_{1},A_{2},\ldots \in\mathscr{F}$ then $\bigcup_{i\in\mathbb{N}}A_{i}\in\mathscr{F}$.
+\end{enumerate}
+A set that satisfies properties 1 to 3 is called a $\sigma-$ algebra and its elements are called
+events. The map $\p:\mathscr{F}\rightarrow [0,1]$ satisfies
+\begin{enumerate}
+\item $\p(\Omega)=1$.
+\item If $A_{1},A_{2},\ldots \in\mathscr{F}$ are pairwise disjoint, then 
+\begin{equation*}
+\p(\bigcup_{i\in\mathbb{N}}A_{i})=\sum_{i\in\mathbb{N}}\p(A_{i}).
+\end{equation*}
+\end{enumerate}
+$\p$ is called a probability measure.
+\end{definition}
+
+
+In equation (\ref{eqnBayes}), $\p,\prior,\like,\post$ are different probability measures defined in the
+same sample space $\Omega$. The sets $A$ and $B$ are subsets of the sample space $\Omega$ and 
+are elements of the associated $\sigma-$algebra $\mathscr{F}$. The bar in the probability
+measures e.g. $\like(\cdot|\cdot)$, means conditional probability. Let us introduce some terminology:
+ the term $\like(B|A)$ is called the \textit{likelihood} of $B$ given $A$, $\prior(A)$ is called the 
+\textit{prior} for $A$. The prior expreses how much we believe the event $A$ to happen without assuming
+anything about how the event $B$ might influence the event $A$. 
+The term $\p(B)$ is a \textit{normalization constant} defined as 
+\begin{equation*}
+Z(B)=\int_{\Omega} \like(B|A)\prior(A)d\p.
+\end{equation*}
+The term $\post(A|B)$ is  the \textit{posterior}.
+
+Simply put  formula (\ref{eqnBayes}) implies: the probability that the event $A$ given that
+the event $B$ has already occurred is proportional to the probability of the event $B$ given
+that the event $A$ has already happened weighted by the prior probability of $A$.
 \newline
 
 
 
 %Ilustratory example
-This interpretation of Bayes formula serves as a motivation to use it in the field of inverse problems. 
-To illustrate this idea consider the following example: it's a beautiful morning, you are just chilling 
-out at your place and them BAM! a rock smash the front window of your house. You want to know who threw
-the rock, so your first question to solve is. Where was the rock thrown? In this scenario you can
-think of $A$ and $B$  in formula (\ref{eqnBayes}) as
+This interpretation of Bayes rule serves as a motivation for using it in the field of inverse problems. 
+\textbf{Rememeber to talk a little bit more why inverse problems are suited by the Bayesian approach}
+Let us be precise of how the Bayesian approach can be used to solve inverse problems with an example. 
+Consider the problem of finding the location where a rock that smashed a window was thrown. We can
+start by considering the following events
 \begin{center}
 $A$=x,y,z coordinates where the rock was thrown.\newline
 $B$=x,y,z coordinates where the rock hit the window.
@@ -746,7 +788,16 @@ with the experimental measurement for each of the 10 sites (black line).
 \label{fignofitted}
 \end{figure}
 
+As we can see in Figure \ref{fignofitted}, the emulator sometimes overestimates the value of $b$ and sometimes
+underestimates it, this behaviour is expected. The hope is that this inaccuracies oscilate around the true
+value of $b$.
 
+Since we only have a limited number of prediction of the emulator for different values of $b$ (black points
+in Figure \ref{fignofitted}), we would like to extrapolate/interpolate those results to get
+more data and with that extra data, assess the value of $b$. As explained in Chapter 2, one very useful 
+way to obtain the extra data is through Gaussian processes. Using the language of the previous chapter
+what we want to do is, having the training points $\{(x_{i},f(x_{i})\}_{i=1}^{10}$ we want to predict 
+the value of different test points $x_{i}^{*}$. 
 
 \bibliography{Tesis}
 \bibliographystyle{plain}
