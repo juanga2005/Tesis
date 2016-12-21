@@ -722,9 +722,9 @@ that simulates model (\ref{eqntoyproblem}), then construct a computationally che
 to the computational cost of actually simulate the physical system through equation (\ref{eqntoyproblem})}
  emulator $\hat{f}(\cdot)$ to fill the missing data on possible values for $b$. Then with  the 
 aid of Bayes formula, find the posterior for $b$ given the experimental data $m$, i.e.
-\begin{equation*}
+\begin{equation}\label{eqnpropto}
 P(b|m)\propto P(m|b)P(b).
-\end{equation*}
+\end{equation}
 With this posterior find a possible value of $b$ (e.g mean of the posterior) and quantify the uncertainty
 with respect to that prediction (e.g. 95\% Bayesian confidence interval). Now that we have the recipe we
 can put hands on in the calculations. 
@@ -783,7 +783,7 @@ with the experimental measurement for each of the 10 sites (black line).
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{./FigChap3/nofitted}
+\includegraphics[scale=0.7]{./FigChap3/fitted}
 \caption{whatever}
 \label{fignofitted}
 \end{figure}
@@ -797,7 +797,49 @@ in Figure \ref{fignofitted}), we would like to extrapolate/interpolate those res
 more data and with that extra data, assess the value of $b$. As explained in Chapter 2, one very useful 
 way to obtain the extra data is through Gaussian processes. Using the language of the previous chapter
 what we want to do is, having the training points $\{(x_{i},f(x_{i})\}_{i=1}^{10}$ we want to predict 
-the value of different test points $x_{i}^{*}$. 
+the value of different test points $x_{i}^{*}$. This prediction is shown as a red line in Figure
+\ref{fignofitted}.  The GP fit allows us to approxiamte as much value as we want, along with the uncertainty
+associated with the prediction. Having this data we can now proceed to use the Bayesian methodology.
+The idea goes as follows. if we denote the GP fit at at point $b$ as  $G(b)$, then we may assume
+an additive noise model for the output $y$ as
+\begin{equation}\label{eqnadditivenoise}
+y=G(b)+\vec{\epsilon}.
+\end{equation}
+$\vec{\epsilon}$ is a random vector distributed as $\vec{\epsilon}\sim\mathscr{N}(0,\sigma I)$. Where $sigma=bla$
+and $I$ is the $10\times 10$ identity matrix.
+In the Bayesian framework we are interest in finding the value of $b$ given the experimental measurements $m$.
+To that end we go back to the begining of this chapter and use equation (\ref{eqnpropto}). To use this equation
+we need to find the likelihood $\like(m|b)$. Under the assumption of the additive noise model in equation
+(\ref{eqnadditivenoise}) we get as in the smashed window example in chapter 2 that
+\begin{equation*}
+m|b\sim\mathscr{N}(G(b),\sigma I),
+\end{equation*}
+more precisely
+\begin{equation*}
+\like(m|b)=\frac{1}{(2\pi\sigma)^{n/2}}\exp\left(-\frac{\|G(b)-m\|_{2}^{2}}{2\sigma^{2}}\right).
+\end{equation*}
+
+
+
+Now we need to choose a prior for $b$. This is a delicate issue and a polemic one in the Statistics community.
+The prior should reflect all of our current knowledge about $b$. However your knowledge about $b$ might be 
+different than my knowledge about $b$, hence your prior for $b$ might look different than mine. For
+the moment  we won't worry about that. Let's assume that our prior for $b$ is given by
+\begin{equation*}
+b\sim U(0,2).
+\end{equation*}
+where $U(a,b)$ is the uniform distribution in $a,b$. Putting all of this into formula (\ref{eqnpropto}) we get
+\begin{equation*}
+\post(b|m)\propto\chi_{[0,2]}\exp\left(-\frac{\|G(b)-m\|_{2}^{2}}{2\sigma^{2}}\right),
+\end{equation*}
+where $\chi_{[a,b]}$ is the indicator function of the set $[a,b]$. As we mentioned in chapter 2,
+the solution to an inverse problem in the Bayesian framework is the posterior. The question is:
+how can we use this posterior to infer the value of $b$ and the uncertainty associated to it? 
+\textbf{Here talk about how this integral is untractable}.
+
+To make inferences about the value of $b$ we resort to a family of techniques from sampling probability
+distributions known as Markov Chain Monte Carlo (MCMC)\textbf{Cite algun libro del MCMC}.
+
 
 \bibliography{Tesis}
 \bibliographystyle{plain}
