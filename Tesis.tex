@@ -832,7 +832,22 @@ where $U(a,b)$ is the uniform distribution in $a,b$. Putting all of this into fo
 \begin{equation*}
 \post(b|m)\propto\chi_{[0,2]}\exp\left(-\frac{\|G(b)-m\|_{2}^{2}}{2\sigma^{2}}\right),
 \end{equation*}
-where $\chi_{[a,b]}$ is the indicator function of the set $[a,b]$. As we mentioned in chapter 2,
+where $\chi_{[a,b]}$ is the indicator function of the set $[a,b]$. This equation can be 
+interpreted as the update in knowledge from to prior to the posterior in the light of the
+experimental data obtained represented by the likelihood. This change from prior to 
+posterior is shown below.
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.8]{./FigChap3/prior_posterior.jpg}
+\caption{whatever}
+\end{figure} 
+
+
+
+
+
+
+As we mentioned in chapter 2,
 the solution to an inverse problem in the Bayesian framework is the posterior. The question is:
 how can we use this posterior to infer the value of $b$ and the uncertainty associated to it? 
 \textbf{Here talk about how this integral is untractable}.
@@ -840,7 +855,43 @@ how can we use this posterior to infer the value of $b$ and the uncertainty asso
 To make inferences about the value of $b$ we resort to a family of techniques from sampling probability
 distributions known as Markov Chain Monte Carlo (MCMC)\textbf{Cite algun libro del MCMC}.
 
+After using the MCMC we get the following plot 
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.8]{./FigChap3/histogram_mcmc.jpg}
+\caption{whatever}
+\end{figure}
+
+
+
+\subsection*{How important is the prior to make inferences?}
+It is constructive to go in some depth and explore how prominent is the role of the prior probability
+in making inferences about a problem. Let us consider the same problem as above, we want to estimate
+the value of the paramter $b$. For demonstration purposes, let us assume two things. The parameter
+$b$ can be any real number (not just $0<b\leq 2$ as before) and
+\begin{equation*}
+b\sim\mathscr{N}(b^{*},\sigma_{b}^{2}),
+\end{equation*}
+where $b^{*}$ and $\sigma_{b}$ are parameters to be set later.  With this new prior the formula
+for the posterior becomes 
+\begin{equation*}
+\post(b|m)\propto \exp\left(-\frac{\|m-G(b)\|_{2}^{2}}{2\sigma^{2}}-\frac{(b-b^{*})^{2}}{2\sigma_{b}^{2}}\right).
+\end{equation*}
+
+
+
+
+
+As before, assume that the true
+value of $b$ is $0.925$. To ilustrate the role that the prior has in the inference of the value
+of $b$ given the experimental data $m$, let us assume that 
+\begin{equation*}
+b\sim\mathscr{N}(4,2.5).
+\end{equation*}
+That is, the person that proposed this prior is confident that within $95\%$ of confidence, the true value of
+$b$ is in the interval $[1.8,8.2]$. Let us see what happens with the posterior in equation (\ref{eqnpropto})
+when we get more and more experimental data. 
 \bibliography{Tesis}
 \bibliographystyle{plain}
 
