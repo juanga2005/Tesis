@@ -143,7 +143,21 @@ that the event $A$ has already happened weighted by the prior probability of $A$
 
 %Ilustratory example
 This interpretation of Bayes rule serves as a motivation for using it in the field of inverse problems. 
-\textbf{Rememeber to talk a little bit more why inverse problems are suited by the Bayesian approach}
+Inverse problems are  of the type `find the cause of this effect'. This name is relative to what is known
+as the direct problem. These are problems of the type `find the effect of this cause'. Often inverse problems
+ ill-posed, this means
+that these problems might  not satisfy one or more of the following properties \cite{lebedev2012functional}:
+\begin{itemize}
+\item Existence: There exists a solution for the problem.
+\item Uniqueness: The problem has a unique solution.
+\item Stability: Small changes in inputs result in small changes in outputs.
+\end{itemize}
+This is a serious issue. If the problem under study has at least one solution but  is not stable, for example, 
+how can we assess the accuracy of the result obtained? An statistical approach is called for under
+this setting. But the most important reason of why the Bayesian framework is useful to solve inverse problems
+is that Bayes rule unifies the problem of 'find the cause of this effect' (e.g. finding the posterior)
+with the direct problem of `find the effect of this cause' (e.g. finding the likelihood).
+
 Let us be precise of how the Bayesian approach can be used to solve inverse problems with an example. 
 Consider the problem of finding the location where a rock that smashed a window was thrown. We can
 start by considering the following events
@@ -151,75 +165,82 @@ start by considering the following events
 $A$=x,y,z coordinates where the rock was thrown.\newline
 $B$=x,y,z coordinates where the rock hit the window.
 \end{center}
-In this case Bayes formula is telling us that if we want to know where the rock was thrown given that we 
-know the coordinates where the rock hit the windows (finding the posterior $P(A|B)$), we need to assume that we know
-where was actually the rock thrown and estimate how likely is that, from that assumed position the rock 
-would hit in the place where it did (finding the likelihood $P(B|A)$). For different suppositions of where the rock
-was thrown. We need to weight that with how much do we  believe about the real position where the rock
- was actually thrown 
-(choosing the prior $P(A)$).
+In this case Bayes formula  tells us that if we want to estimate the likely locations  where the rock was 
+thrown from (find the posterior probability), given that we 
+know the coordinates where it hit the window we need to include our prior believe on where
+do we think the rock was actually thrown (Setting a prior probability). Also it is necessary
+to find the connection with the direct problem. In this case the direct problem is to find where
+the rock hit the window assuming that we know where it was thrown (find the likelihood probability) 
 \newline
 
 
 
-Let's evaluate how we could tackle each one of the problems mentioned above. First to find the likelihood
-we need to know how the hit position of the rock  in the window  is related to the location where it was
-thrown. If we treat air resistance as a source of uncertainty in our calculations we can use
-the kinematics equations of physics for parabolic trajectories, i.e.
+Let us evaluate how we could estimate the different probabilities mentioned in the previous paragraph. 
+First, to find the likelihood
+we need to know how the rock's impact position  in the window  is related to the launch location 
+. If we treat air resistance as a source of uncertainty  we can use
+the kinematics equations  for parabolic trajectories to get \cite{arnol2013mathematical}
 \begin{equation}\label{eqnKinematics}
-\vec{r}=\vec{r_{0}}+\vec{v_{0}}t+\frac{1}{2}\vec{g}t^{2},
+\textbf{r}=\textbf{r}_{0}+\textbf{v}_{0}t+\frac{1}{2}\textbf{g}t^{2},
 \end{equation} 
-where $\vec{r},\vec{r_{0}}$ are the final and initial position of the rock respectively, $\vec{v_{0}}$ is 
-the initial velocity the rock was thrown and $\vec{g}$ is the gravity vector. The scalar $t$ represents time.
-Now in a more physical language, to estimate the likelihood is equivalent to estimate $\vec{r}$ (where the 
-rock hit the window) assuming we know $\vec{r}_{0}$ (where it was thrown). However the problem now complicates, since
-we also need to estimate the initial velocity of the rock $\vec{v_{0}}$. Estimating $t$ is not a problem
-since once all the other variables are estimated the value of $t$ is known. 
+where $\textbf{r}$ and $\textbf{r}_{0}$ are the final and initial position of the rock respectively, 
+$\textbf{v}_{0}$ is 
+the initial velocity  and $\textbf{g}$ is the gravity vector. The scalar $t$ represents time.
+In a more physical language, to estimate the likelihood it is necessary to estimate $\textbf{r}$ (where the 
+rock hit the window) assuming we know $\textbf{r}_{0}$ (where it was thrown). 
+To do so,
+we  need to estimate the initial velocity of the rock $\textbf{v}_{0}$. 
+Once all the other variables are identified the value of $t$ can be computed in a straightforward manner. 
 
-We are aware of the fact
-that equations in physics are just models of reality and as such is just an approximation to it. To take
-that into account we add an extra layer to the model by adding some noise, we propose 
+Equations in physics are just models of reality and as such are just an approximation to it. To take
+this into account we add an extra layer to the model by adding a random parameter that accounts
+for the discrepancy of our model. We propose 
 \begin{equation*}
-\vec{r}=\vec{r_{0}}+\vec{v_{0}}t+\frac{1}{2}\vec{g}t^{2}+\vec{\epsilon},
+\textbf{r}=\textbf{r}_{0}+\textbf{v}_{0}t+\frac{1}{2}\textbf{g}t^{2}+\mathbf{\epsilon},
 \end{equation*} 
-where $\vec{\epsilon}$ is a random vector distributed as $\vec{\epsilon}\sim\mathscr{N}(0,\sigma I)$. Here $I$
-represents the $3\times 3$ identity matrix and $\sigma>0$ is related to how much we believe in the accuracy
+where $\mathbf{\epsilon}$ is a random vector distributed as $\vec{\epsilon}\sim\mathscr{N}(0,\sigma I)$. Here $I$
+represents the $3\times 3$ identity matrix and $\sigma>0$ parametrizes one belief in quantifing the 
+accuracy  
 of equation (\ref{eqnKinematics}).  By introducing a random variable into the model
-we can now think that all the variables involved 
-are random variables too, that is, we now look at the  associated stochastic equation,
- therefore we can change the notation in equation (\ref{eqnBayes}) to 
-the more suggestive (assuming no prior relation between $\vec{r}_{0}$ and $\vec{v}_{0}$)
+we can now think of all of the variables involved  in equation (\ref{eqnKinematics})
+as random, that is, we now look at the  associated stochastic equation. With this notation
+we can cast equation (\ref{eqnBayes}) into  (assuming independence between $\textbf{r}_{0}$ and $\textbf{v}_{0}$)
 \begin{equation*}
-P(\vec{r_{0}}|\vec{r},\vec{v_{0}})=\frac{P(\vec{r}|\vec{r_{0}},v_{0})P(\vec{r_{0}})}{P(\vec{r}|\vec{v}_{0})}.
+\post(\textbf{r}_{0}|\textbf{r},\textbf{v}_{0})=\frac{\like(\textbf{r}|\textbf{r}_{0},\textbf{v}_{0})
+\prior(\textbf{r}_{0})}{\p(\textbf{r}|\textbf{v}_{0})}.
 \end{equation*}
 
 
 
-The nice aspect about the way we introduce the  uncertainty term  is that it can be shown that 
-the following holds \cite{Somersalo}
+Since $\mathbf{\epsilon}$ is Gaussian we can readily obtain \cite{Somersalo}
 \begin{equation*}
-\vec{r}|\vec{r_{0}},\vec{v}_{0}\sim \mathscr{N}(\vec{r}_{0}+v_{0}t+\frac{1}{2}\vec{g}t^{2},\sigma I).
+\textbf{r}|\textbf{r}_{0},\textbf{v}_{0}\sim \mathscr{N}(\textbf{r}_{0}+\textbf{v}_{0}t+\frac{1}{2}\textbf{g}t^{2}
+,\sigma I).
 \end{equation*}
 
-This means that assuming a Gaussian noise we automatically get the distribution  for the likelihood. 
-We now turn our attention to model the prior.
-
-Going back to  our hypothetical
-scenario where we are chilling at our place and a rock smashed our window. We recall
-that  have a very annoying neighbor in 
-front of our house. He is known for being a very aggressive person, so he is our main suspect. We have the hunch
-that the rock was thrown from his bedroom or at least near to it. One way to model this hunch is assuming
+This equation gives an explicit density for the likelihood. We now turn our attention to model the prior.
+Suppose that we suspect that the rock was thrown from the bedroom of one of our neighboors.
+ One way to model this suspicion is to assume a prior distribution on $\textbf{r}_{0}$ as
 \begin{equation*}
-\vec{r_{0}}\sim\mathscr{N}(\vec{x},\lambda I),
+\textbf{r}_{0}\sim\mathscr{N}(\textbf{z},\lambda I),
 \end{equation*}
-where $\vec{x}$ is the coordinate vector of the center of mass of his room and $\lambda$ represent how much do we believe
-the rock was thrown exactly from the point $\vec{x}$. This is one way to model the prior for our problem.
+where $\textbf{z}$ is the coordinate vector of the center of mass of neighbohr's room and $\lambda$ represents 
+the variance of the launch location around the point $\textbf{z}$. We note that  this is one way to model 
+ prior knowledge and other priors are also possible for our problem.
 
-Finally for the normalization constant we choose $P(\vec{r}|\vec{v}_{0})$ to be such that
+The last quantity to find is   the normalization constant $\p(\textbf{r}|\textbf{v}_{0})$. Since all
+probabilities are normalized we get
+\begin{eqnarray*}
+1=\int_{\mathbb{R}^{3}}\post(\textbf{r}_{0}|\textbf{r},\textbf{v}_{0})d\textbf{r}_{0}\\
+=\int_{\mathbb{R}^{3}}\frac{\like(\textbf{r}|\textbf{r}_{0},\textbf{v}_{0})
+\prior(\textbf{r}_{0})}{\p(\textbf{r}|\textbf{v}_{0})}d\textbf{r}_{0}.
+\end{eqnarray*} 
+Since the denominator in the last integrand is a constant with respect to the variable of integration 
+we conclude
 \begin{equation*}
-\int_{\mathbb{R}^{3}}P(\vec{r_{0}}|\vec{r},\vec{v}_{0})d\vec{r_{0}}=1\Rightarrow 
-P(\vec{r}|\vec{v}_{0})=\int_{\mathbb{R}^{3}}P(\vec{r}|\vec{r_{0}},\vec{v}_{0})P(\vec{r_{0}})d\vec{r_{0}}.
-\end{equation*} 
+\p(\textbf{r}|\textbf{v}_{0})=\int_{\mathbb{R}^{3}}\like(\textbf{r}|\textbf{r}_{0},\textbf{v}_{0})
+\prior(\textbf{r}_{0})d\textbf{r}_{0}.
+\end{equation*}
 
 
 To evaluate our model, we decide to write a computer code that simulates (\ref{eqnKinematics}) for a wide range of different values
@@ -892,6 +913,11 @@ b\sim\mathscr{N}(4,2.5).
 That is, the person that proposed this prior is confident that within $95\%$ of confidence, the true value of
 $b$ is in the interval $[1.8,8.2]$. Let us see what happens with the posterior in equation (\ref{eqnpropto})
 when we get more and more experimental data. 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.7]{./FigChap3/posterior_evolution}
+\caption{bla}
+\end{figure}
 \bibliography{Tesis}
 \bibliographystyle{plain}
 
