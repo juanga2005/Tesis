@@ -87,7 +87,13 @@ difference between these two approaches that has a direct impact in how far reac
 
 %Talking about Bayes rule
 In real life the uncertainty associated to a  measurement or  quantity of interest is usually 
-connected  with the uncertainty  of other variables involved in the problem under study.
+connected  with the uncertainty  of other variables involved in the problem under study. 
+At this point we mention that When we talk about uncertainty we are talking about every possible 
+source of randomness  or  lack of information. That is, the use of the word uncertainty in this work
+is related to either epistemic (A phenomenon might not be random but the complete lack of 
+understanding of it makes us see it as random) or aleatory (Inherent to the nature of phenomenon, for 
+example this is the kind of randomness physicists believe is happening in quantum mechanics)
+\cite{kennedy2001bayesian}.
 In general the connection between the different variables is far from trivial and hard to assess.
 Bayesian methodology provides a rigurous framework for the study of 
 this connection, using whatever information
@@ -132,7 +138,9 @@ The term $\p(B)$ is a \textit{normalization constant} defined as
 \begin{equation*}
 Z(B)=\int_{\Omega} \like(B|A)\prior(A)d\p.
 \end{equation*}
-The term $\post(A|B)$ is  the \textit{posterior}.
+The term $\post(A|B)$ is  the \textit{posterior}. The posterior contains all the information 
+gained when comparing our beliefs (prior) with experimental data (likelihood). The posterior
+is the \textit{solution of an inverse problem} when using the  Bayesian framework.
 
 Simply put  formula (\ref{eqnBayes}) implies: the probability that the event $A$ given that
 the event $B$ has already occurred is proportional to the probability of the event $B$ given
@@ -205,10 +213,10 @@ of equation (\ref{eqnKinematics}).  By introducing a random variable into the mo
 we can now think of all of the variables involved  in equation (\ref{eqnKinematics})
 as random, that is, we now look at the  associated stochastic equation. With this notation
 we can cast equation (\ref{eqnBayes}) into  (assuming independence between $\textbf{r}_{0}$ and $\textbf{v}_{0}$)
-\begin{equation*}
+\begin{equation}\label{eqnpostrock}
 \post(\textbf{r}_{0}|\textbf{r},\textbf{v}_{0})=\frac{\like(\textbf{r}|\textbf{r}_{0},\textbf{v}_{0})
 \prior(\textbf{r}_{0})}{\p(\textbf{r}|\textbf{v}_{0})}.
-\end{equation*}
+\end{equation}
 
 
 
@@ -243,80 +251,80 @@ we conclude
 \end{equation*}
 
 
-To evaluate our model, we decide to write a computer code that simulates (\ref{eqnKinematics}) for a wide range of different values
-of $\vec{r},\vec{v_{0}}$ fixing $\vec{r_{0}}$. Then simulate (\ref{eqnKinematics}) fixing a different value 
-of $r_{0}$ and simulating for the same range of $\vec{r},\vec{v_{0}}$ and so on. With the data obtained from
-the simulation we can finally evaluate the posterior $P(\vec{r_{0}}|\vec{r},I)$. Recalling that in general
-the posterior is a probability density, we can use it to estimate in several ways, what we consider to be
-the best estimate of where the rock was thrown and the  uncertainty attached to that estimate .
- For instance we can pick
-any of these estimates \cite{Somersalo}
+Having the likelihood, prior and normalization constant allow us to compute the posterior using
+Bayes rule. Note that the posterior is a probability density so in order to obtain useful
+statistics,  is necessary to sample from it. How to sample from a probability density is going
+to be explained in the next chapter. For the moment assume we have the means to sample from the 
+posterior in equation (\ref{eqnpostrock}). Having samples from the posterior we can obtain
+pointwise estimates of the parameters of interest. Common choices of pointwise estimates
+include
 \begin{eqnarray*}
-\vec{r}_{MAP}=argmax_{\vec{r_{0}}\in\mathbb{R}^{3}} P(\vec{r_{0}}|\vec{r}), \\ 
-\vec{r}_{CM}=\int_{\mathbb{R}^{3}} \vec{r_{0}}P(\vec{r_{0}}|\vec{r})d\vec{r_{0}},\\
-\vec{r}_{ML}=argmax_{\vec{r_{0}}\in\mathbb{R}^{3}}P(\vec{r}|\vec{r_{0}}).
-\end{eqnarray*} 
-In these equations $\vec{r_{MAP}}$ is known as the maximum a posteriori estimate, $\vec{r}_{CM}$ is the 
-conditional mean estimate and $\vec{r}_{ML}$ is the maximum likelihood estimate.
+\textbf{r}_{MAP}=argmax_{\textbf{r}_{0}}\post(\textbf{r}_{0}|\textbf{r},\textbf{v}_{0}). 
+\qquad\text{(Maximum a posteriori)}\\
+\textbf{r}_{CM}=\int_{\mathbb{R}^{3}}\textbf{r}_{0}\post(\textbf{r}_{0}|\textbf{r},\textbf{v}_{0})d\textbf{r}_{0}.
+\qquad\text{(Conditional mean)}. \\
+\textbf{r}_{ML}=argmax_{\textbf{r}_{0}}\post(\textbf{r}_{0}|\textbf{r},\textbf{v}_{0}).
+\qquad\text{(Maximum likelihood)}
+\end{eqnarray*}
+
+Each  of these estimates have strenghts and weaknesess. If the posterior is bimodal, then the conditional
+mean might point at a value with very low probability, whereas the maximum a posteriori might be more 
+relaible. If the posterior has no critical points then the mean might be use as a point estimate. We can 
+also assess how confident we are about the point estimate. If $\textbf{r}^{*}$ is our point
+estimate we can calculate $\alpha>0$ such that
+\begin{equation*}
+\int_{B(\textbf{r}^{*},\alpha)}\post(\textbf{r}_{0}|\textbf{r},\textbf{v}_{0})d\textbf{r}_{0}=0.95,
+\end{equation*}
+where $B(\textbf{r}^{*},\alpha)$ is a ball centered at $\textbf{r}_{0}$ and radius $\alpha$. This 
+uncertainty estimate can be think of as a generalization of a Bayesian $95\%$ confidence interval.
+Another way to estimate uncertainty is by calculating the variance of $\textbf{r}$ with respect
+to the measure $\post$. 
 \newline
 
-Voil{\'a}! We solved our crime, we have a way to estimate where the rock was thrown and a way to measure how
-confident we are about it. The posterior is what is called a solution in Bayesian inverse problems.
+We solved our mistery, we have a way to estimate where the rock was thrown and a way to measure how
+confident we are about this estimate. 
 \newline
 
 
 %Caveats of computing complex models
-Unfortunately in real life things are not as easy as  were described here in the above example. 
-In reality we have to deal with several issues such as
+Practial problems are often substantially more challenging than the above example. Often times we have to 
+deal with several issues such as 
+
 \begin{enumerate}
-\item Uncertainties in experimental measurements difficult to assess.
-\item Not enough information to create a reliable estimate.
-\item Computational complexity of the physical model makes prohibitive too many simulations.
-\item The dimensionality of the probabilities involved is high so sampling from them is far from trivial.
-\item Evaluating any of the possible estimates for the quantity of interest might be very hard.
+\item Uncertainties in experimental measurements.
+\item Lack of sufficient information and data.
+\item Computational complexity of  physical models that are too expensive to evaluate.
+\item Parameters of interest belong to high dimensional spaces so the associated probability density is 
+hard to sample from.
+\item Evaluating any of the possible point estimates for the quantity of interest might be very hard.
 \end{enumerate}
-Just to name a few of the issues that arises when dealing with Bayesian inverse problems. To solve each
-one of this issues we have available tons of different approaches. In the problem described in the 
-introduction of this work (Chapter 1), all of the issues mentioned above come into play. In this chapter we are
-going to discuss from a theoretical and computational point of view how to deal with issues 
-3, 4 and 5 of the list.
+In the problem described in the Chapter 1, we have to deal with the above mentioned issues.
+In this chapter we are going to discuss our approach to deal with issues 3, 4 and 5 above. We 
+ommit 1 and 2, since these issues are intrinsic in the physics of the problem and   the methodology used 
+to obtain the experimental data, both of these aspects are out of our hands.
 
 
 %%%%Dealing with computational complexity
 \section{Dealing with  the computational complexity of the physical model}
-Physical models of the reality are usually complex and when numerically simulated, are computationally intense.
-Following O'Hagan in \cite{o2006bayesian}, we can think of a physical or mathematical model as a function
-$f(\cdot)$ that takes a vector $x$ of inputs and gives back a vector $y$ of outputs. But as mentioned before 
-models are just that, models, so the question is: how to evaluate the uncertainty associated to the model? 
-Of course when we talk about uncertainty we are talking about every possible source of randomness in the 
-model or  lack of information of it. That is, the use of the word uncertainty in this work
- is related to either
-epistemic or aleatory \cite{kennedy2001bayesian}.
-\newline
-
-Besides uncertainty there is another very important concept: sensitivity. When looking at a  model's performance
-it is critical to assess how changes or uncertainties 
- in the input $x$ affect the output $y$. Therefore if we assess sensitivity
-of the model we can assess uncertainty of the outputs. One more reason one might be interest in performing
-a sensitivity analysis is to detect what variables are relevant and what variables are not, allowing to reduce
-the dimensionality of the problem .
-
-As mentioned in the introduction chapter the physical model we are dealing with is complex 
-and computationally intense.
-This means that assessing the uncertainty and sensitivity  associated via classical methods as in 
-\cite{saltelli2000sensitivity} is not feasible.Here is where the concept of emulator as defined in \cite{o2006bayesian} comes into play. The idea is to 
-approximate the function $f(\cdot)$ with an approximation function $\hat{f}(\cdot)$. But the approximation
-is not any approximation, is what we call and statistical approximation. The idea of this statistical 
-approximation is to associate a probability distribution to each value $f(x)$ then take the mean
-of this distribution as $\hat{f}(x)$, for example.
-\newline
-Now that we have an idea of what we want as an approximation for the emulator, how can we construct it?
-Following \cite{o2006bayesian} the idea to create the emulator is a process that satisfies
+Models of physical processes are often complex and are  expensive to simulate numerically.
+Following O'Hagan  \cite{o2006bayesian}, we think of our  mathematical model as a function
+$M(\cdot)$ that takes a vector $\textbf{x}$ of inputs and gives back a vector $\textbf{y}$ of outputs.  
+Mathematical models are approximations to explain the reality and as such there is uncertainty associated
+to them. Since mathematical models are expensive,
+this means that estimating the uncertainty via   classical methods such  as in 
+\cite{saltelli2000sensitivity} is not feasible. Here the concept of emulator as defined in \cite{o2006bayesian} 
+comes into play. We 
+approximate the function $M(\cdot)$, which is assumed to be expensive to evaluate,
+ with a function $\hat{M}(\cdot)$, that is cheaper to evaluate. To construct an approximation,   
+we  associate a 
+probability distribution to each value $M(x)$ and then take the mean
+of this distribution as $\hat{M}(x)$, for example. We will call such approximation $\hat{M}(\cdot)$ and emulator. 
+Following \cite{o2006bayesian} we create the emulator in the following steps 
 \begin{itemize}
-\item At points $x$  were we know the output of the physical model i.e. $f(x)$  we want to approximate
-the emulator at those points should satisfy $\hat{f}(x)=f(x)$ with uncertainty zero.
-\item For the points $x^{*}$ where we don't know the output $f(x^{*})$, the emulator should
-give back an estimate $\hat{f}(x^{*})$, based on the distribution for $f(x^{*})$. 
+\item At points $\textbf{x}$  were we know the output of the mathematical model i.e. $M(\textbf{x})$,
+the emulator shoudl satisfy $\hat{M}(\textbf{x})=M(\textbf{x})$.
+\item For the points $\textbf{x}^{*}$ where we don't know the output $M(\textbf{x}^{*})$, the emulator should
+give back an estimate $\hat{M}(\textbf{x}^{*})$, based on the distribution for $M(\textbf{x}^{*})$. 
 That estimate should reflect the uncertainty associated with
 the interpolation/extrapolation done at that point.
 \end{itemize} 
@@ -324,8 +332,8 @@ the interpolation/extrapolation done at that point.
 
 %Talking about Gaussian processes
 
-In Bayesian analysis of computer code output one of the methods to produce an emulator with the desired
-extrapolation/interpolation properties is what is known as a  Gaussian process (GP). 
+A very popular  method to produce an emulator with the desired
+extrapolation/interpolation properties is what is known as a  Gaussian process (GP).  
 
 \subsection{Gaussian Processes}
 
@@ -529,9 +537,15 @@ sacrificing quality in the prediction for the test points. This can be accomplis
 through  something known as  space filling designs. 
 \newline
 
-
+%%%Sensitivity. The first paragraph should be relocated
 \subsection{Experimental Design and Sensitivity Analysis}
 
+Besides uncertainty there is another very important concept: sensitivity. When looking at a  model's performance
+it is critical to assess how changes or uncertainties 
+ in the input $x$ affect the output $y$. Therefore if we assess sensitivity
+of the model we can assess uncertainty of the outputs. One more reason one might be interest in performing
+a sensitivity analysis is to detect what variables are relevant and what variables are not, allowing to reduce
+the dimensionality of the problem .
 At this point it is clear that if we want to use GPs to fit the data obtained through an emulator 
 $\hat{f}(x)$ we need to decide how many runs of the emulator we are going to do. If the domain of the
 emulator is a subset of $\mathbb{R}^{n}$ then we need to decide what points in the domain we are going 
