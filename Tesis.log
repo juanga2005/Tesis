@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2016.3.4)  23 DEC 2016 19:17
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2016.3.4)  22 JAN 2017 16:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -279,25 +279,26 @@ Chapter 1.
 ]
 Chapter 2.
 [9]
+Underfull \hbox (badness 10000) in paragraph at lines 146--150
+
+ []
+
+
 Overfull \hbox (12.87354pt too wide) has occurred while \output is active
 \OT1/cmr/m/n/12 10 \OT1/cmr/m/sl/12 CHAPTER 2.  THEORETICAL AND COMPUTATIONAL F
 RAMEWORK
  []
 
 [10]
-Underfull \hbox (badness 10000) in paragraph at lines 145--149
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 160.
 
- []
-
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 159.
-
-(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 159.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 160.
 
-Underfull \hbox (badness 10000) in paragraph at lines 176--183
+Underfull \hbox (badness 10000) in paragraph at lines 177--184
 
  []
 
@@ -308,12 +309,12 @@ RAMEWORK
  []
 
 [12] [13]
-Underfull \hbox (badness 10000) in paragraph at lines 277--283
+Underfull \hbox (badness 10000) in paragraph at lines 286--288
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 284--287
+Underfull \hbox (badness 10000) in paragraph at lines 289--292
 
  []
 
@@ -330,7 +331,7 @@ L MODEL \OT1/cmr/m/n/12 15
  []
 
 [15]
-Underfull \hbox (badness 10000) in paragraph at lines 364--367
+Underfull \hbox (badness 10000) in paragraph at lines 394--398
 
  []
 
@@ -341,7 +342,7 @@ RAMEWORK
  []
 
 [16]
-Underfull \hbox (badness 10000) in paragraph at lines 416--420
+Underfull \hbox (badness 10000) in paragraph at lines 416--417
 
  []
 
@@ -352,8 +353,8 @@ L MODEL \OT1/cmr/m/n/12 17
  []
 
 [17]
-Overfull \hbox (19.40398pt too wide) detected at line 477
-[][]\OMS/cmsy/m/n/12 j[] ^^X \U/rsfs/m/n/12 N [] \OML/cmm/m/it/12 :
+Underfull \hbox (badness 10000) in paragraph at lines 458--465
+
  []
 
 
@@ -363,8 +364,15 @@ RAMEWORK
  []
 
 [18]
-Underfull \hbox (badness 10000) in paragraph at lines 487--488
+Overfull \hbox (25.07817pt too wide) in paragraph at lines 523--527
+\OT1/cmr/m/n/12 The zero mean mod-els the as-sump-tion of no trend in the data.
+ Here $(\OML/cmm/m/it/12 K\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 X; X\OT1/cmr/m/n/12
+ ))[] =
+ []
 
+
+Overfull \hbox (24.121pt too wide) detected at line 537
+[][]\OMS/cmsy/m/n/12 j[] ^^X \U/rsfs/m/n/12 N [] \OML/cmm/m/it/12 :
  []
 
 
@@ -374,17 +382,12 @@ L MODEL \OT1/cmr/m/n/12 19
  []
 
 [19]
-Underfull \hbox (badness 10000) in paragraph at lines 514--522
+Underfull \hbox (badness 10000) in paragraph at lines 583--587
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 526--539
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 543--557
+Underfull \hbox (badness 10000) in paragraph at lines 588--603
 
  []
 
@@ -395,7 +398,7 @@ RAMEWORK
  []
 
 [20]
-Underfull \hbox (badness 10000) in paragraph at lines 582--590
+Underfull \hbox (badness 10000) in paragraph at lines 614--622
 
  []
 
@@ -406,19 +409,25 @@ L MODEL \OT1/cmr/m/n/12 21
  []
 
 [21]
+Underfull \hbox (badness 10000) in paragraph at lines 656--664
+
+ []
+
+
 Overfull \hbox (12.87354pt too wide) has occurred while \output is active
 \OT1/cmr/m/n/12 22 \OT1/cmr/m/sl/12 CHAPTER 2.  THEORETICAL AND COMPUTATIONAL F
 RAMEWORK
  []
 
 [22]
-Overfull \hbox (79.34001pt too wide) detected at line 629
-[][] \OML/cmm/m/it/12 fdx \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 f[] \OT1/cmr/m/n/1
-2 + [][] [] \OML/cmm/m/it/12 f[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 x[]\OT1/cmr/m
-/n/12 ) + [][] [] \OML/cmm/m/it/12 f[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 x[]; x[
-]\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 dx \OT1/cmr/m/n/12 + [] + [][] \OML/cmm/m/it
-/12 f[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 x[]; [] ; x[]\OT1/cmr/m/n/12 )\OML/cmm
-/m/it/12 dx: \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 f[]:
+Overfull \hbox (99.01038pt too wide) detected at line 730
+[][] \OML/cmm/m/it/12 'dx \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 '[] \OT1/cmr/m/n/1
+2 + [][] [] \OML/cmm/m/it/12 '[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 x[]\OT1/cmr/m
+/n/12 )\OML/cmm/m/it/12 dx \OT1/cmr/m/n/12 + [][] [] \OML/cmm/m/it/12 '[]\OT1/c
+mr/m/n/12 (\OML/cmm/m/it/12 x[]; x[]\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 dx \OT1/c
+mr/m/n/12 + [] + [][] \OML/cmm/m/it/12 '[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 x[]
+; [] ; x[]\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 dx \OT1/cmr/m/n/12 = \OML/cmm/m/it/
+12 '[]:
  []
 
 
@@ -450,14 +459,14 @@ RAMEWORK
 ]
 Chapter 3.
 [27]
-Underfull \hbox (badness 10000) in paragraph at lines 762--767
+Underfull \hbox (badness 10000) in paragraph at lines 864--869
 
  []
 
-<./FigChap3/solu.jpg, id=113, 570.13pt x 411.5375pt>
+<./FigChap3/solu.jpg, id=107, 570.13pt x 411.5375pt>
 File: ./FigChap3/solu.jpg Graphic file (type jpg)
  <use ./FigChap3/solu.jpg>
-Package pdftex.def Info: ./FigChap3/solu.jpg used on input line 788.
+Package pdftex.def Info: ./FigChap3/solu.jpg used on input line 890.
 (pdftex.def)             Requested size: 285.0643pt x 205.76825pt.
 
 Overfull \hbox (12.06956pt too wide) has occurred while \output is active
@@ -466,11 +475,11 @@ IN PRACTICE
  []
 
 [28] [29 <./FigChap3/solu.jpg>]
-<./FigChap3/fitted.jpg, id=120, 505.89pt x 505.89pt>
+<./FigChap3/fitted.jpg, id=116, 505.89pt x 505.89pt>
 File: ./FigChap3/fitted.jpg Graphic file (type jpg)
 
 <use ./FigChap3/fitted.jpg>
-Package pdftex.def Info: ./FigChap3/fitted.jpg used on input line 821.
+Package pdftex.def Info: ./FigChap3/fitted.jpg used on input line 923.
 (pdftex.def)             Requested size: 354.12057pt x 354.12057pt.
 
 Overfull \hbox (12.06956pt too wide) has occurred while \output is active
@@ -479,15 +488,15 @@ IN PRACTICE
  []
 
 [30 <./FigChap3/fitted.jpg>]
-<./FigChap3/prior_posterior.jpg, id=124, 504.9264pt x 505.1673pt>
+<./FigChap3/prior_posterior.jpg, id=120, 504.9264pt x 505.1673pt>
 File: ./FigChap3/prior_posterior.jpg Graphic file (type jpg)
 
 <use ./FigChap3/prior_posterior.jpg>
-Package pdftex.def Info: ./FigChap3/prior_posterior.jpg used on input line 876.
+Package pdftex.def Info: ./FigChap3/prior_posterior.jpg used on input line 978.
 
 (pdftex.def)             Requested size: 403.94167pt x 404.13438pt.
 
-Overfull \hbox (13.94167pt too wide) in paragraph at lines 876--877
+Overfull \hbox (13.94167pt too wide) in paragraph at lines 978--979
  [][] 
  []
 
@@ -498,14 +507,14 @@ IN PRACTICE
  []
 
 [32 <./FigChap3/prior_posterior.jpg>]
-<./FigChap3/histogram_mcmc.jpg, id=132, 505.89pt x 505.89pt>
+<./FigChap3/histogram_mcmc.jpg, id=128, 505.89pt x 505.89pt>
 File: ./FigChap3/histogram_mcmc.jpg Graphic file (type jpg)
 
 <use ./FigChap3/histogram_mcmc.jpg>
-Package pdftex.def Info: ./FigChap3/histogram_mcmc.jpg used on input line 897.
+Package pdftex.def Info: ./FigChap3/histogram_mcmc.jpg used on input line 999.
 (pdftex.def)             Requested size: 404.71254pt x 404.71254pt.
 
-Overfull \hbox (14.71254pt too wide) in paragraph at lines 897--898
+Overfull \hbox (14.71254pt too wide) in paragraph at lines 999--1000
  [][] 
  []
 
@@ -513,12 +522,12 @@ Overfull \hbox (14.71254pt too wide) in paragraph at lines 897--898
 Underfull \vbox (badness 1596) has occurred while \output is active []
 
  [33 <./FigChap3/histogram_mcmc.jpg>]
-<./FigChap3/posterior_evolution.jpg, id=136, 504.9264pt x 505.1673pt>
+<./FigChap3/posterior_evolution.jpg, id=132, 504.9264pt x 505.1673pt>
 File: ./FigChap3/posterior_evolution.jpg Graphic file (type jpg)
 
 <use ./FigChap3/posterior_evolution.jpg>
 Package pdftex.def Info: ./FigChap3/posterior_evolution.jpg used on input line 
-932.
+1034.
 (pdftex.def)             Requested size: 353.44608pt x 353.6147pt.
  (./Tesis.bbl
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -537,44 +546,40 @@ IN PRACTICE
 
 [36
 
-]
+] [37]
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ™ in font cmr12!
- [37]) [38] (./Tesis.aux) ) 
+) [38] (./Tesis.aux) ) 
 Here is how much of TeX's memory you used:
- 2797 strings out of 495063
- 37189 string characters out of 3182202
- 93554 words of memory out of 3000000
- 5906 multiletter control sequences out of 15000+200000
+ 2803 strings out of 495063
+ 37306 string characters out of 3182202
+ 93600 words of memory out of 3000000
+ 5912 multiletter control sequences out of 15000+200000
  15651 words of font info for 61 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
  37i,12n,26p,411b,222s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmbx8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cme
-x10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl12.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/rsfs/rsfs10.pfb>
-Output written on Tesis.pdf (38 pages, 1282595 bytes).
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mbx8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmsl12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6
+.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/public/rsfs/rsfs10.pfb>
+Output written on Tesis.pdf (38 pages, 1253270 bytes).
 PDF statistics:
- 225 PDF objects out of 1000 (max. 8388607)
- 154 compressed objects within 2 object streams
+ 209 PDF objects out of 1000 (max. 8388607)
+ 142 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  31 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -27,7 +27,7 @@
 
 %Other commands
 \newcommand{\E}{\mathbb{E}} %Expectation
-\newcommand{\tvs}{\mathscr{X}} %TVS symbol
+\newcommand{\tvs}{\mathscr{T}} %TVS symbol
 
 
 
@@ -88,7 +88,7 @@ difference between these two approaches that has a direct impact in how far reac
 %Talking about Bayes rule
 In real life the uncertainty associated to a  measurement or  quantity of interest is usually 
 connected  with the uncertainty  of other variables involved in the problem under study. 
-At this point we mention that When we talk about uncertainty we are talking about every possible 
+At this point we mention that when we talk about uncertainty we are talking about every possible 
 source of randomness  or  lack of information. That is, the use of the word uncertainty in this work
 is related to either epistemic (A phenomenon might not be random but the complete lack of 
 understanding of it makes us see it as random) or aleatory (Inherent to the nature of phenomenon, for 
@@ -105,7 +105,7 @@ in the mathematical language is the  Bayes formula
 
 To explain in detail the above equation, let us first do the following defintion
 \cite{dudley2002real}
-\begin{definition}\label{dfn:probabilitytriple}
+\begin{definition}\label{dfnprobabilitytriple}
 A probability space is a triple $(\Omega,\mathscr{F},\p)$, where $\Omega$ is a set called 
 sample space.
 The element $\mathscr{F}$ is a subset of the power set of $\Omega$ that satisfies
@@ -127,8 +127,9 @@ $\p$ is called a probability measure.
 \end{definition}
 
 
-In equation (\ref{eqnBayes}), $\p,\prior,\like,\post$ are different probability measures defined in the
-same sample space $\Omega$. The sets $A$ and $B$ are subsets of the sample space $\Omega$ and 
+%In equation (\ref{eqnBayes}), $\p,\prior,\like,\post$ are different probability measures defined in the
+%same sample space $\Omega$. 
+The sets $A$ and $B$ are subsets of the sample space $\Omega$ and 
 are elements of the associated $\sigma-$algebra $\mathscr{F}$. The bar in the probability
 measures e.g. $\like(\cdot|\cdot)$, means conditional probability. Let us introduce some terminology:
  the term $\like(B|A)$ is called the \textit{likelihood} of $B$ given $A$, $\prior(A)$ is called the 
@@ -139,7 +140,7 @@ The term $\p(B)$ is a \textit{normalization constant} defined as
 Z(B)=\int_{\Omega} \like(B|A)\prior(A)d\p.
 \end{equation*}
 The term $\post(A|B)$ is  the \textit{posterior}. The posterior contains all the information 
-gained when comparing our beliefs (prior) with experimental data (likelihood). The posterior
+gained when comparing our beliefs (contained in the prior) with experimental data (likelihood). The posterior
 is the \textit{solution of an inverse problem} when using the  Bayesian framework.
 
 Simply put  formula (\ref{eqnBayes}) implies: the probability that the event $A$ given that
@@ -152,8 +153,8 @@ that the event $A$ has already happened weighted by the prior probability of $A$
 %Ilustratory example
 This interpretation of Bayes rule serves as a motivation for using it in the field of inverse problems. 
 Inverse problems are  of the type `find the cause of this effect'. This name is relative to what is known
-as the direct problem. These are problems of the type `find the effect of this cause'. Often inverse problems
- ill-posed, this means
+as the forward problem. Forward problems are  of the type `find the effect of this cause'. Often inverse problems
+are ill-posed, this means
 that these problems might  not satisfy one or more of the following properties \cite{lebedev2012functional}:
 \begin{itemize}
 \item Existence: There exists a solution for the problem.
@@ -170,7 +171,7 @@ Let us be precise of how the Bayesian approach can be used to solve inverse prob
 Consider the problem of finding the location where a rock that smashed a window was thrown. We can
 start by considering the following events
 \begin{center}
-$A$=x,y,z coordinates where the rock was thrown.\newline
+$A$=x,y,z coordinates where the rock was thrown.\\
 $B$=x,y,z coordinates where the rock hit the window.
 \end{center}
 In this case Bayes formula  tells us that if we want to estimate the likely locations  where the rock was 
@@ -193,7 +194,8 @@ the kinematics equations  for parabolic trajectories to get \cite{arnol2013mathe
 \end{equation} 
 where $\textbf{r}$ and $\textbf{r}_{0}$ are the final and initial position of the rock respectively, 
 $\textbf{v}_{0}$ is 
-the initial velocity  and $\textbf{g}$ is the gravity vector. The scalar $t$ represents time.
+the initial velocity  and $\textbf{g}$ is  a vector that points to the center of the earth and has a 
+magnitude equal to the value of the gravity. The scalar $t$ represents time.
 In a more physical language, to estimate the likelihood it is necessary to estimate $\textbf{r}$ (where the 
 rock hit the window) assuming we know $\textbf{r}_{0}$ (where it was thrown). 
 To do so,
@@ -232,7 +234,7 @@ Suppose that we suspect that the rock was thrown from the bedroom of one of our 
 \begin{equation*}
 \textbf{r}_{0}\sim\mathscr{N}(\textbf{z},\lambda I),
 \end{equation*}
-where $\textbf{z}$ is the coordinate vector of the center of mass of neighbohr's room and $\lambda$ represents 
+where $\textbf{z}$ is the coordinate vector of the center of mass of our neighbohr's room and $\lambda$ represents 
 the variance of the launch location around the point $\textbf{z}$. We note that  this is one way to model 
  prior knowledge and other priors are also possible for our problem.
 
@@ -276,9 +278,12 @@ estimate we can calculate $\alpha>0$ such that
 \int_{B(\textbf{r}^{*},\alpha)}\post(\textbf{r}_{0}|\textbf{r},\textbf{v}_{0})d\textbf{r}_{0}=0.95,
 \end{equation*}
 where $B(\textbf{r}^{*},\alpha)$ is a ball centered at $\textbf{r}_{0}$ and radius $\alpha$. This 
-uncertainty estimate can be think of as a generalization of a Bayesian $95\%$ confidence interval.
-Another way to estimate uncertainty is by calculating the variance of $\textbf{r}$ with respect
-to the measure $\post$. 
+uncertainty estimate can be think of as a generalization of as the Bayesian version 
+of the frequentist's $95\%$ confidence interval.
+Another way to estimate the uncertainty is by calculating the covariance matrix as
+\begin{equation*}
+\int_{\mathbb{R}^{3}}(\textbf{r}-\textbf{r}^{*})\otimes(\textbf{r}-\textbf{r}^{*})d\p.
+\end{equation*}
 \newline
 
 We solved our mistery, we have a way to estimate where the rock was thrown and a way to measure how
@@ -322,165 +327,89 @@ of this distribution as $\hat{M}(x)$, for example. We will call such approximati
 Following \cite{o2006bayesian} we create the emulator in the following steps 
 \begin{itemize}
 \item At points $\textbf{x}$  were we know the output of the mathematical model i.e. $M(\textbf{x})$,
-the emulator shoudl satisfy $\hat{M}(\textbf{x})=M(\textbf{x})$.
+the emulator should satisfy $\hat{M}(\textbf{x})=M(\textbf{x})$.
 \item For the points $\textbf{x}^{*}$ where we don't know the output $M(\textbf{x}^{*})$, the emulator should
 give back an estimate $\hat{M}(\textbf{x}^{*})$, based on the distribution for $M(\textbf{x}^{*})$. 
 That estimate should reflect the uncertainty associated with
 the interpolation/extrapolation done at that point.
 \end{itemize} 
 
-
+From now on in this work we are going to refer to the mathematical model or the computationally expensive
+function to calculate as $M$. The emulator that approximates this function is going to be denoted by $\hat{M}$.
 %Talking about Gaussian processes
 
 A very popular  method to produce an emulator with the desired
-extrapolation/interpolation properties is what is known as a  Gaussian process (GP).  
+extrapolation/interpolation properties is what is known as a Gaussian Process, we will discuss this topic next.  
 
 \subsection{Gaussian Processes}
+The conditions we need to get an emulator $\hat{M}(\cdot)$ as stated above imply that we need
+to work with a probability distribution for each point $\textbf{x}$ in the domain of the emulator.
+This means that in order to create an emulator as specified in the previous section we need
+to deal with a very big (probably uncountable) number of random variables. When dealing with 
+several random variables there is one probability density that is computationally tractable and
+easy to work with: The multivariate Gaussian in $n$ dimensions is given by \cite{lifshits2013gaussian}
+\begin{equation*}
+f(\textbf{x})=\frac{1}{2\pi det(\Sigma)^{-\frac{1}{2}}}\exp((\textbf{x}-\textbf{x}^{*})^{T}\Sigma^{-1}
+(\textbf{x}-\textbf{x}^{*})),
+\end{equation*}
+where $x^{*}$ is the mean of the distribution and $\Sigma$ is a positive definite $n\times n$
+matrix  called the covariance matrix. We shall write
+\begin{equation}\label{eqnMultivariate}
+\textbf{X}\sim \mathcal{N}(\textbf{x}^{*},\Sigma),
+\end{equation}
+when the random vector $\textbf{X}$ is  distributed as
+ the multivariate Gaussian with mean $\textbf{x}^{*}$ and covariance matrix
+$\Sigma$. If $\textbf{X}=(X_{1},X_{2},\ldots,X_{n})$ we say that the 
+random variables $X_{1},\ldots,X_{n}$ are \textit{jointly Gaussian}. The computational advantages
+when working with a vector distributed as in  $\ref{eqnMultivariate}$ motivates the following definition.
 
 \begin{definition}\label{dfnGP}
-A GP is a collection of random variables $\{f(x)\}_{x\in X}$, for some index family $X$,
- such that any finite set of them has a jointly
-Gaussian distribution \cite{rasmussen2006gaussian}. 
+A Gaussian process (GP) is a collection of random variables $\{g(x)\}_{x\in A}$, for some set $A$, 
+possibly uncountable,
+ such that any finite subset $\{g(\alpha_{k})\}_{k=1}^{N}\subset\{g(\alpha)\}_{\alpha\in A}$ for 
+$\{\alpha_{k}\}_{k=1}^{N}\subset A$ are jointly Gaussian
+\cite{rasmussen2006gaussian}. 
 \end{definition}
 
-A GP is specified by two quantities, the mean function and the covariance function. 
-Following the same notation as in Rasmussen \cite{rasmussen2006gaussian} we set
+A GP is specified by a mean function and a covariance operator or kernel. 
+Following  Rasmussen \cite{rasmussen2006gaussian} we define
 \begin{eqnarray*}
-m(x)=\E(f(x)),\\
-k(x,x')=\E((f(x)-m(x))(f(x')-m(x'))).
+m(x):=\E(g(x)),\qquad\text{(Mean)}\\
+k(x,x')=\E((g(x)-m(x))(g(x')-m(x')))\qquad\text{(Kernel)}.
 \end{eqnarray*}
-So if $\{f(x)\}$ is a GP with mean $m(x)$ and covariance $k(x,x')$ we will write
+If $\{g(x)\}$ is a GP with mean $m(x)$ and covariance $k(x,x')$ we will write
 \begin{equation*}
-f(x)\sim \textbf{GP}(m(x),k(x,x')).
+g(x)\sim \textbf{GP}(m(x),k(x,x')).
 \end{equation*} 
 
-To understand the notion of a GP observe that what  
-we are trying to do is to approximate a function $f(\cdot)$, then
-the symbol $f(x)$ represents a random variable whose realizations are  the possible values of the
- function $f(\cdot)$ at $x$ and $m(x)$ is the best approximation we can do to predict the actual value 
-of $f(\cdot)$ at that point $x$. The uncertainty associated to that prediction is going to be related
-to the quantity $k(x,x)$.
+To understand the notion of a GP, recall that our goal is to create
+an emulator $\hat{f}(\cdot)$ that approximates a function $f$. 
+For a fixed $x\in A$. A realization of the  random variable $g(x)$ represents
+a possible value of $f(x)$. The mean function at that point $x$, i.e. $m(x)$ 
+represents the best prediction about the true value of $f(x)$. The uncertainty 
+associated to that prediction is given by the quantity $k(x,x)$.
 
-Since we are going to use GP to fit  data in a high dimensional euclidean space, it will be convenient to think
-of the set of index $X$ in definition \ref{dfnGP} as $\mathbb{R}^{n}$ for some $n\geq 1$. 
+ 
+
+We are going to use GPs to fit  functions in  high dimensional euclidean space, therefore from 
+here on we thing 
+of the set of index set $A$ in definition \ref{dfnGP} as $\mathbb{R}^{n}$ for some $n\geq 1$. 
 \newline
 
-The reason why the definition of a Gaussian process is useful and powerful is because a GP is 
-completely characterized by $m(x)$ and $k(x,x')$\footnote{ $k(x,x')$ 
-is usually known as the kernel of the GP}\cite{lifshits2012lectures}. Therefore to fit and 
-predict using GPs we only need to define just two quantities. For example the way to choose
-the covariance kernel is with the aid of some real valued function. For example a very common covariance
-function is given by what is called the squared exponential (SE)
+The reason why the definition  Gaussian processes is useful in practice is that  GPs are 
+completely characterized by $m(x)$ and $k(x,x')$\cite{lifshits2012lectures}. 
+ For example a  common covariance or kernel 
+function squared exponential (SE)
 \begin{equation}\label{eqnsquareexponential}
 k(x,x')=e^{-\frac{1}{2}\|x-x'\|_{2}^{2}}.
 \end{equation}
-In this case this definition of the covariance is telling us that points that are close to each other
-are highly correlated whereas far away points has a correlation that decays exponentially fast with distance.
+The reason to use the name squared exponential instead of Gaussian is to avoid confusion with
+the probability distribution.
+This  covariance function tells us that points that are close to each other
+are highly correlated whereas far away points have a correlation that decays exponentially fast.
 There are some `standard' ways to choose the covariance function depending on the kind
-of regularity we want for the GP fitting. To see what is the relation between regularity
-of the fitting and the kernel we need to realize that once the covariance function has been 
-specified we end up with a distributions over some function space. Talking 
-about distribution over spaces of functions is a delicate topic that has to be done in a rigorous manner.
-That is why at this point it is convenient to digress for a moment an talk about distributions in 
-function spaces. The details presented here follow from \cite{lifshits2012lectures}.
-
-\subsubsection{Distributions Over Function Spaces}
-Since in general the relevant function spaces (e.g. $L^{p}$ spaces, Sobolev spaces, etc...) are 
-normed vector spaces, they have a topology inherited from the metric induced by the norm, therefore 
-in general, function spaces are topological vector spaces (TVS). 
-
-If $\mathscr{X}$ is a TVS and $\mathscr{X}^{*}$ is its dual, we will denote the action of an 
-element $f\in\tvs^{*}$ over an element $x\in\tvs$ as $\langle f,x\rangle$. On the other
-hand we  define a random vector taking values in $\tvs$ as a measurable map 
-\begin{equation*}
-X:(\Omega,\mathscr{F},P)\longrightarrow\tvs,
-\end{equation*}
-where $(\Omega,\mathscr{F},P)$ is a probability space. To say that 
-a random variable  $X$ takes vales in $\tvs$ we will write $X\in\tvs$. 
-Therefore by letting $\tvs=L^{2}(\mathbb{R})$, for 
-example, we now understand what does it mean $X\in L^{2}(\mathbb{R})$.
-
-On the other hand we say that a random vector $X\in\tvs$ is called Gaussian if $\langle f,x\rangle$ is
-a normally distributed random variable for all $f\in\tvs^{*}$. Observe that $x$ represents  a realization
-of $X$, so the definition of a Gaussian vector in $\tvs$ makes sense. For normally
-distributed random vectors in $\mathbb{R}^{n}$ we have quantities like expectation and covariance matrix.
-In a more   general ( possible infinite dimensional) framework we say that a vector $a\in\tvs$ is the 
-expectation of $X\in\tvs$ if 
-\begin{equation*}
-\E(f,X)=\langle f, a\rangle,\qquad\text{for all }f\in\tvs^{*}.
-\end{equation*}
-Also a linear operator $K:\tvs^{*}\longrightarrow \tvs$ is called the covariance operator (e.g covariance
-matrix in the finite dimensional case) if
-\begin{equation*}
-cov(\langle f_{1},X\rangle,\langle f_{2},X\rangle)=\langle f_{1},Kf_{2}\rangle,
-\end{equation*}
-for all $f_{1},f_{2}\in\tvs^{*}$. It can be shown that the covariance operator has the same nice properties
-as in the finite dimensional case, such as symmetry and non-negative definiteness. 
-\newline
-
-With the construction of a rigorous framework that allows us to talk about Gaussian distributions in 
-function spaces we can see why once the covariance function and the mean function are defined then we 
-have created a Gaussian distribution over some function of spaces and why the nature of the function
-space depends heavily on the regularity properties of the covariance kernel. In 
-this work we are going to be mainly concerned to work with kernels that are at least continuous
-(For example the SE kernel in equation (\ref{eqnsquareexponential}) is $C^{\infty}$). To see why 
-by just giving a recipe for the covariance and the mean defines a distribution over some function
-spaces, consider the following case, which is our case of interest in this work. Since we are 
-interest in at least continuous covariance functions consider $\tvs=\mathbb{C}(T)$ where 
-$T\subset\mathbb{R}^{n}$ and $T$ is compact. The space of real valued continuous functions in $T$ is a Banach
-space with the norm \cite{bressan1900lecture}
-\begin{equation*}
-\|g\|=\max_{x\in T}|g(x)|.
-\end{equation*}
-The dual space of $\tvs$ is given by $\tvs^{*}=\mathbb{M}(T)$ the set of sign measures on $T$. In this 
-case the duality is given by 
-\begin{equation*}
-\langle\mu,g \rangle=\int_{T}gd\mu.
-\end{equation*}
-Therefore by having a GP,  $\{f(x)\}_{x\in T}$ (see definition \ref{dfnGP}) with mean function $m(x)$ and 
-covariance function $k(x,x')$,  we can see the GP  as a Gaussian random variable $f\in\tvs$ with mean
-and covariance operator defined as
-\cite{lifshits2012lectures} 
-\begin{eqnarray*}
-\E(f)=m\in\mathbb{C}(T), \\
-(K\nu)(s)=\int_{\mathbb{R}^{n}}k(x,x')\nu(dx'),\qquad\text{for }\nu\in\mathbb{M}(T).
-\end{eqnarray*}
-
-With this  mathematical framework to work with GP, it is possible to explain how
-they work. Imagine that we have some experimental measurements or emulator results (train inputs) 
-$\{(x_{i},f(x_{i}))\}_{i=1}^{m}\in\mathbb{R}^{n+1}$,
-for a real valued function $f:\mathbb{R}^{n}\longrightarrow\mathbb{R}$. Having these values 
-we would like to make inference on the possible values of $f$ on some set of points $\{x_{j}^{*}\}_{j=1}^{k}$ (test inputs).
-Since we assumed  that $\{f(x)\}$ is a GP, that means that the vectors
-\begin{eqnarray*}
-\textbf{f}=\begin{bmatrix}f(x_{1}) & \ldots & f(x_{m}) \end{bmatrix}^{T}, \\
-\textbf{f}_{*}=\begin{bmatrix}f(x_{1}^{*}) & \ldots & f(x_{l}^{*}) \end{bmatrix}^{T}.
-\end{eqnarray*}
-Have a  jointly Gaussian distribution given by  (assuming no trend in the data, i.e. mean zero).
-\begin{equation}\label{eqnconditional}
-\begin{bmatrix}
-\textbf{f} \\
-\textbf{f}_{*}
-\end{bmatrix}\sim\mathscr{N}\left(0,\begin{bmatrix} K(X,X) & K(X,X_{*}) \\
-						    K(X_{*},X) & K(X_{*},X_{*}) \end{bmatrix}
-\right),
-\end{equation}	
-where $(K(X,X))_{ij}=cov(f(x_{i}),f(x_{j})), K(X,X_{*})_{ij}=cov(f(x_{i}),f(x_{j}^{*}))$ and so forth.
-
-
-Since we know the vector $\textbf{f}$ and we want to make inferences about the vector $\textbf{f}_{*}$,
-then we are looking for the distribution of $\textbf{f}_{*}|\textbf{f}$. By well known properties
-of the multivariate Gaussian distribution we can check that \cite{lifshits2013gaussian}
-\begin{equation}\label{eqnformulameancovariance}
-\textbf{f}_{*}|\textbf{f}\sim\mathscr{N}\left(K(X_{*},X)K(X,X)^{-1}\textbf{f},
-K(X_{*},X_{*})-K(X_{*},X)K(X,X)^{-1}K(X,X_{*})\right).
-\end{equation}
-So to interpolate the function along the test inputs we can choose the mean  of the distribution
-of $\textbf{f}_{*}|\textbf{f}$ as the interpolant. Also we can have a good idea of how reliable if the fitting
-by looking at the covariance matrix. As we can see choosing the covariance kernel to create
-the covariance matrix is a crucial step in the fitting process. How do we choose the kernel?
-There are some standard ways to do that and some standard kernels to choose from.
-Some of the most common kernels are (setting $r=\|x-x'\|_{2}$)
+of regularity we want for the GP fitting.
+Some of the most common kernels are \cite{rasmussen2006gaussian} (setting $r=\|x-x'\|_{2}$)
 
 \begin{itemize}
 \item Gauss: $k(r;\theta)=e^{-\frac{1}{2}(\frac{r}{\theta})^{2}}$
@@ -488,190 +417,363 @@ Some of the most common kernels are (setting $r=\|x-x'\|_{2}$)
 \item Matern $\frac{3}{2}: k(r;\theta)=(1+\frac{\sqrt{3}r}{\theta})e^{-\frac{\sqrt{3}r}{\theta}}$.
 \item Matern $\frac{5}{2}: k(r;\theta)=(1+\frac{\sqrt{5}r}{\theta}+\frac{5}{3}
 (\frac{r}{\theta})^{2})e^{-\frac{\sqrt{5}r}{\theta}}$.
-\item Power-Exponential: $k(r;\theta,p)=e^{-(\frac{r}{\theta})^{p}}$
+\item Power-Exponential: $k(r;\theta,p)=e^{-(\frac{r}{\theta})^{p}}$.
 \end{itemize}
 
-As we can see covariance kernels are usually defined in terms of parameters, so depending on the model
-under study we can find the parameters that best suits the model. The question now is: how
-to choose the right parameters for the model? Consider the following situation: we have a 
-set of training points $\{(x_{i},f(x_{i}))\}_{i=1}^{n}$ and we want to predict the 
-outputs $f(x)$ for some points in $x$ that is not in the training set. To do the prediction
-using GPs we choose some kernel  $k(r;\theta)$ that depends on the parameter $\theta$ 
-($\theta$ could be an scalar, vector, etc.). In this case to predict the values of 
-$y=\{f(x_{1}^{*}),\ldots f(x_{m}^{*})\}$, we can use
-Bayes rule and optimize the likelihood, mathematically we want to optimize
+Mathematically, GPs are measures on function spaces. We now discuss them in this
+context following \cite{lifshits2012lectures}.
+
+
+
+
+\subsubsection{Distributions Over Function Spaces}
+Interesting function spaces (e.g. $L^{p}$ spaces, Sobolev spaces, etc...) are 
+normed vector spaces, with a topology inherited from the metric induced by the norm, and so 
+, function spaces are topological vector spaces (TVS). 
+
+Let $\mathscr{T}$ be a TVS and  let $\mathscr{T}^{*}$ be its dual. We will denote the action of an 
+element $h\in\tvs^{*}$ over an element $z\in\tvs$ with $\langle h,z\rangle$. Moreover 
+we  define a random variable taking values in $\tvs$ as a map 
 \begin{equation*}
-p(y|\{(x_{i},f(x_{i}))\}_{i=1}^{n},\theta).
+X:(\Omega,\mathscr{F},P)\longrightarrow\tvs,
 \end{equation*}
-By definition \ref{dfnGP} we know that the conditional probability has to be distributed as
-a multivariate normal distribution\footnote{Recall that the $n-dimensional$ Gaussian measure
-$N(\mu,\Sigma)$ has
-Lebesgue density given by $\frac{1}{\sqrt{(2\pi)^{n}|\Sigma|}}\exp{\left(-\frac{1}{2}(x-\mu)^{T}\Sigma^{-1}
-(x-\mu)\right)}$}, hence by taking the $\log$ of the probability we get
-\begin{equation}\label{eqnloglikelihood}
-\log(p(y|\{(x_{i},f(x_{i}))\}_{i=1}^{n},\theta))=-\frac{1}{2}y^{T}K_{y}(\theta)^{-1}y-
-\frac{1}{2}\log|K_{y}(\theta)|-\frac{n}{2}\log(2\pi).
-\end{equation}
-Here $K_{y}(\theta)$ is the covariance matrix associated to the GP conditional to  $\{(x_{i},f(x_{i}))\}$ 
-(see equation (\ref{eqnconditional})). In this case we can see explicitly the dependence on 
-the parameter $\theta$ for the  prediction of the Gaussian Process. Since we want to do 
-the best possible prediction, it makes sense to try to optimize equation (\ref{eqnloglikelihood}) 
-with respect to the parameter $\theta$. This gives a reliable criteria on how to tune up
-the parameters of the chosen kernel. 
+that is measurable with respect to the $\sigma$-algebra generated by the topology
+of $\tvs$. This $\sigma$-algebra is known as the Borel $\sigma$-algebra for $\tvs$.
+The triple $(\Omega,\mathscr{F},P)$ is a probability space as in definition \ref{dfnprobabilitytriple}. 
+We use the shorthand notation  $X\in\tvs$ whenever the random variable $X$ take vales in $\tvs$. 
+For example if $\tvs=L^{2}(\mathbb{R})$,  then  $X\in L^{2}(\mathbb{R})$ means that $X$ is a measurable
+map from the probability space $(\Omega,\mathscr{F},P)$ into $L^{2}(\mathbb{R})$.
+
+We say that a random variable $X\in\tvs$ is called Gaussian if $\langle h,X\rangle$ is
+a Gaussian random variable on the real line for all $h\in\tvs^{*}$. We say that a vector $a\in\tvs$ is the 
+expectation of $X\in\tvs$ if 
+\begin{equation*}
+\E(f,X)=\langle f, a\rangle,\qquad\text{for all }f\in\tvs^{*}.
+\end{equation*}
+Also a linear and positive definite operator $K:\tvs^{*}\longrightarrow \tvs$ 
+is called the covariance operator (e.g covariance
+matrix in the finite dimensional case) if
+\begin{equation*}
+cov(\langle f_{1},X\rangle,\langle f_{2},X\rangle)=\langle f_{1},Kf_{2}\rangle,
+\end{equation*}
+for all $f_{1},f_{2}\in\tvs^{*}$. In this case we say that $X$ is distributed as 
+$\mathcal{N}(a,K)$ if  $X$ has mean $a$ and covariance operator $K$. It is worth mentioning
+that given a covariance operator $L$ and an element $b\in\tvs$ the distribution $\mathcal{N}(b,L)$
+does not always exist. But if it does to define the  Gaussian measure $\mathcal{N}(a,K)$ it is
+only necessary to know $a$ and $K$.
 \newline
 
+%%%%%%%%%%%%%%%%%%%%%%%Think about this bit %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%with the construction of a rigorous framework that allows us to talk about gaussian distributions in 
+%function spaces we can see why once the covariance function and the mean function are defined then we 
+%have created a Gaussian distribution over some function of spaces and why the nature of the function
+%space depends heavily on the regularity properties of the covariance kernel. 
+
+%%%%%%%%%%%%%%%%%This is also you need to think about %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%What is the connection between K and a covariance function k(x,x')?%%%
+
+%In this work we are going to be mainly concerned to work with kernels that are at least continuous
+%(For example the SE kernel in equation (\ref{eqnsquareexponential}) is $C^{\infty}$). 
+As an example consider the  $\tvs=\mathbb{C}(T)$ where 
+$T\subset\mathbb{R}^{n}$ and $T$ is compact. This is the  space of real valued continuous functions 
+defined in 
+$T$. This  is a Banach
+space with the norm \cite{bressan1900lecture}
+\begin{equation*}
+\|h\|=\max_{x\in T}|h(x)|.
+\end{equation*}
+The dual space of $\tvs$ is given by $\tvs^{*}=\mathbb{M}(T)$ the set of signed measures defined on 
+the borel $\sigma-$ algebra of  $T$. In this 
+case the duality pairing is given by 
+\begin{equation*}
+\langle\mu,g \rangle=\int_{T}gd\mu.
+\end{equation*}
+Given a GP,  $\{g(t)\}_{t\in T}$ (see definition \ref{dfnGP}) with mean function $m(t)$ and 
+covariance kernel $k(t,t')$, this can be thought as a Gaussian measure $\mathcal{N}(m,K)$
+where
+\cite{lifshits2012lectures} 
+\begin{eqnarray*}
+\E(f)=m\in\mathbb{C}(T), \\
+(K\nu)(t)=\int_{T}k(t,t')\nu(dt'),\qquad\text{for }\nu\in\mathbb{M}(T).
+\end{eqnarray*}
+
+The above example shows the connection between GPs and distribution over function spaces. More
+precisely how it is connected to Gaussian measures in function spaces. Now we move on
+into explaining how to use GPs in a practical setting.
+
+Assume  we have some  results  (training inputs) from an expensive function to evalueate $M$ 
+$\{(x_{i},y_{i})\}_{i=1}^{m}\subset\mathbb{R}^{n}\times\mathbb{R}$, where $M(x_{i})=y_{i}$, for
+simplicity we assume no trend in the training inputs. Given this data 
+we would like to infer  possible values of $M$ on another set of points $\{x_{j}^{*}\}_{j=1}^{k}$ (test inputs).
+by creating an emulator $\hat{M}$ (see introduction to section 2.1).
+To construct $\hat{M}$  we  use the GP denoted by $\{f(x)\}$ where $x$ belongs to the domain of $M$. By
+definition \ref{dfnGP}, the random vectors
+\begin{eqnarray*}
+\textbf{f}=\begin{bmatrix}f(x_{1}) & \ldots & f(x_{m}) \end{bmatrix}^{T}, \\
+\textbf{f}^{*}=\begin{bmatrix}f(x_{1}^{*}) & \ldots & f(x_{l}^{*}) \end{bmatrix}^{T},
+\end{eqnarray*}
+are  jointly Gaussian, i.e. 
+\begin{equation}\label{eqnconditional}
+\begin{bmatrix}
+\textbf{f} \\
+\textbf{f}^{*}
+\end{bmatrix}\sim\mathscr{N}\left(0,\begin{bmatrix} K(X,X) & K(X,X^{*}) \\
+						    K(X^{*},X) & K(X^{*},X^{*}) \end{bmatrix}
+\right),
+\end{equation}	
+The zero mean models the assumption of no trend in the data. 
+Here
+$(K(X,X))_{ij}=cov(f(x^{i}),f(x^{j})), K(X,X^{*})_{ij}=cov(f(x_{i}),f(x_{j}^{*}))$ and so forth.
 
 
+By the requirements asked in the definition of an emulator at the begining of section 2.1
+ the vector $\textbf{f}$ is known and should be equal to $\{y_{i}\}_{i=1}^{m}$.  
+We want to make inferences about the vector $\textbf{f}_{*}$,
+therefore we are looking for the distribution of $\textbf{f}_{*}|\textbf{f}$. By well known properties
+of the multivariate Gaussian distribution we can obtain  \cite{lifshits2013gaussian}
+\begin{equation}\label{eqnformulameancovariance}
+\textbf{f}^{*}|\textbf{f}\sim\mathscr{N}\left(K(X^{*},X)K(X,X)^{-1}\textbf{f},
+K(X^{*},X^{*})-K(X^{*},X)K(X,X)^{-1}K(X,X^{*})\right).
+\end{equation}
+Note that in the mean $K(X^{*},X)K(X,X)^{-1}\textbf{f}$ if we replace the test inputs in the matrix
+$K(X^{*},X)$ by the train inputs, then, this matrix transforms into $K(X,X)$. With this the mean
+would be $K(X,X)^{-1}K(X,X)\textbf{f}=\textbf{f}$ and the covariance matrix would be the zeros matrix. 
+In this case the predicted values by the distribution are exactly the training inputs $\textbf{f}$.
+This shows that the mean of the distribution interpolates the values  of $M$. The prediction for
+a point $x^{*}$ that is not part of the training set lives with $68\%$ of confidence in the interval
+\begin{equation*}
+K(x^{*},X)K(X,X)^{-1}\textbf{f}\pm K(x^{*},x^{*})-K(x^{*},X)K(X,X)^{-1}K(X,x^{*}).
+\end{equation*}
 
-If we are dealing with a complex high-dimensional physical model
-that is emulated by $\hat{f}$, we need to be very careful of what points to choose as our training points
-for our GP. Usually training points come from the output of the simulation of the physical
-model through the emulator $\hat{f}$, this is a problem. Ideally 
+This shows that choosing the covariance kernel 
+is a crucial step in the fitting process. In practice we choose from a standard collection of kernels
+that give us different degrees of flexibility for the GP. Among these standar kernels we have: Gauss,
+exponential, Matern $\frac{3}{2}$ and $\frac{5}{2}$ and power-exponential.
+
+Covariance kernels are usually defined in terms of parameters, so depending on the data 
+we can find the parameters that best suit the data. Given a kernel class, the question now is: how
+to choose the right parameters for the data? Going back to the problem of approximating $M$
+by $\hat{M}$ were  we had a 
+set of training points $\{(x_{i},y_{i})\}_{i=1}^{m}$ and we wanted to predict the 
+outputs for  $M(\textbf{x})$ for some points in $x$ that is not in the training set. To do the prediction
+using GPs we choose some kernel  $k(x,x';\theta)$ that depends on the parameter $\theta$ 
+($\theta$ could be a scalar, vector, etc.). In this case to predict the values of 
+$y^{*}=\{M(x_{1}^{*}),\ldots M(x_{m}^{*})\}$, we can use
+Bayes rule and optimize the likelihood.
+\begin{equation*}
+p(y^{*}|\{(x_{i},y_{i})\}_{i=1}^{m},\theta).
+\end{equation*}
+By definition \ref{dfnGP} we know that the conditional probability has to be distributed as
+a multivariate normal distribution. More precisely
+
+\begin{equation}\label{eqnlikelihoodExponential}
+p(y^{*}|\{(x_{i},y_{i})\}_{i=1}^{m},\theta)=\frac{1}{(2\pi)^{\frac{m}{2}}det(K_{y^{*}}(\theta))}
+e^{-\frac{1}{2}(y^{*T}K_{y^{*}}(\theta)^{-1}y^{*})}.
+\end{equation}
+Where $K_{y^{*}}(\theta)$ is the matrix $K(X,X)$ in equation (\ref{eqnconditional}). We explicitly
+show the dependence on $y^{*}$ and $\theta$ for clarity. We want to maximize (\ref{eqnlikelihoodExponential}),
+this goal is unchanged if we take logarithms on both sides  the equation to get
+
+
+\begin{equation}\label{eqnloglikelihood}
+\log(p(y^{*}|\{(x_{i},y_{i})\}_{i=1}^{n},\theta))=-\frac{1}{2}y^{*T}K_{y^{*}}(\theta)^{-1}y^{*}-
+\frac{1}{2}\log|K_{y^{*}}(\theta)|-\frac{n}{2}\log(2\pi).
+\end{equation}
+
+By maximizing this equation with respect to $\theta$ we find the value of this parameter
+that explains the best the data $y^{*}$ given $(x_{i},y_{i})$. This example shows a 
+methodology for tuning the parameters. 
+\newline
+
+So far we have not talked about how to choose the training points $\{x_{i}\}_{i=1}^{m}$. To see
+why the way we choose the points has direct impact in the quality of the interpolation of the GP,
+consider the problem of interpolating a function $F$ with support in $[0,1]$ having only five training
+points. If we pick the points $\{0,0.001,0.002,0.003,0.004\}$ the extrapolation error for points beyond $0.5$, say,
+is going to be big, whereas if we choose $\{0,0.25,0.5,0.75,1\}$ the interpolation error for points beyond
+the origin is going to be reduced. In higher dimensions this issue is even more delicate.  Ideally 
 we would like to pick as many training points as possible to make the fitting better, but picking too many points
-to do the interpolation might result in a very high computational demand, on the other hand if we pick up
-just a few points to do the emulation and then do the fitting with those points, this might result in a really
-bad fitting with the consequence of obtaining unreliable inferences when using GPs to fit the test points. This
-shows that we need a systematic way to choose how to get the training points. We need to choose those points
-in a way that we can fill as much space as possible with as few training points as possible without
-sacrificing quality in the prediction for the test points. This can be accomplish
-through  something known as  space filling designs. 
+to create the training set, might result in a very high computational demand if the function $M$ is expensive
+to calculate. On the other hand if we pick up
+ few points to create the training set, then we  might ending up with unreliable predictions for the test
+set. Thus we need a systematic way to choose  the training points. One strategy is to  
+ fill as much of the space as possible with as few training points as possible without
+sacrificing the quality of the prediction for the test points. This can be accomplish
+through    space filling designs which we will now discuss. 
 \newline
 
 %%%Sensitivity. The first paragraph should be relocated
-\subsection{Experimental Design and Sensitivity Analysis}
+\subsection{Experimental Design }
 
-Besides uncertainty there is another very important concept: sensitivity. When looking at a  model's performance
-it is critical to assess how changes or uncertainties 
- in the input $x$ affect the output $y$. Therefore if we assess sensitivity
-of the model we can assess uncertainty of the outputs. One more reason one might be interest in performing
-a sensitivity analysis is to detect what variables are relevant and what variables are not, allowing to reduce
-the dimensionality of the problem .
-At this point it is clear that if we want to use GPs to fit the data obtained through an emulator 
-$\hat{f}(x)$ we need to decide how many runs of the emulator we are going to do. If the domain of the
-emulator is a subset of $\mathbb{R}^{n}$ then we need to decide what points in the domain we are going 
-to choose as well. This is a very delicate issue since we need to find the right balance between
-the number of possible emulations given time and computational power constraints
- and a good distribution in space of these training points to get a good
-fitting in the output on   every test point we choose.
+%Besides uncertainty there is another very important concept: sensitivity. When looking at a  model's performance
+%it is critical to assess how changes or uncertainties 
+% in the input $x$ affect the output $y$. Therefore if we assess sensitivity
+%of the model we can assess uncertainty of the outputs. One more reason one might be interest in performing
+%a sensitivity analysis is to detect what variables are relevant and what variables are not, allowing to reduce
+%the dimensionality of the problem .
+
+ To interpolate the data obtained from evaluating the computationally expensive function
+$M$ using GPs, we need to decide in how many different points are we going to evaluate $M$. 
+As mentioned in the previous section this is a very delicate issue since we need to find 
+the right balance between
+the number of possible evaluations of $M$ given time, computational budget 
+ and a good spread of data points int the space to get a good
+fit to the model.
 \newline
  
-Given an set $T$, there are several ways to create space filling designs for it 
+Given an set $T\subset\mathbb{R}^{n}$, there are several ways to create space filling designs 
 \cite{pronzato2012design}. In this work we are going to focus on maximin designs
-\cite{johnson1990minimax}. To define this kind of design, consider a metric space $(T,d)$ (e.g.
-$T\subset\mathbb{R}^{n}$, compact and $d$ the Euclidean distance) and any subset of $T$, 
-$S$ with finite (fixed) cardinality, say $|S|=n$.
-A maximim distance design $S^{o}$ is such that
+\cite{johnson1990minimax}. Consider a metric space $(T,d)$ (e.g.
+$T\subset\mathbb{R}^{n}$, compact and $d$ the Euclidean distance) and a subset $S$ of $T$, 
+with finite (fixed) cardinality, say $|S|=n$.
+A maximin distance design $S^{o}$ is a collection of points in $S$ is such that
 \begin{equation*}
-\max_{S}\min_{s,s'}d(s,s')=\min_{s,s'\in S^{o}}d(s,s')=d^{o}.
+\max_{S\subset T,\text{ }|S|=n}\min_{s,s'\in S}d(s,s')=\min_{s,s'\in S^{o}}d(s,s')=d^{o}.
 \end{equation*}
 That is, we are looking for the set $S^{o}$ of cardinality $n$ that maximizes the minimum distance among 
 its elements. As an example consider $T=[0,1]^{3}$, the unit cube in $\mathbb{R}^{3}$ and $n=8$, in 
-that case the design that maximizes the minimum distance among its elements is given by choosing
-the points that live in each of the 8 vertex of the cube. In this case $d^{o}=1$. The problem of finding
-the optimum in a maximin design is hard, therefore in general is necessary to use computational tools
-for optimization. In chapter 4 we will see how to use these computational tools to create
-a proper experimental maximin design.
+this case the design that maximizes the minimum distance among its elements is given by choosing
+ the 8 vertices of the cube. In this case we have $d^{o}=1$. The problem of finding
+the optimal  maximin design is difficult to solve, therefore in practice we use computational tools
+to find approximate solutions.  Different kind of algorithms can be used for the optimization
+of the design, like genetic algorithms, simulated annealing, particle swarm, etc. A survey
+on the optimization methods for computer experimental designs  can be found in 
+\cite{viana2010algorithm}. In Chapter 4 we will see how  these computational tools can be used to 
+create an experimental maximin design.
 
-The connexion of maximin experimental designs with GP is the following. Consider the
-GP $\{f(x)\}_{x\in T}$. If we fix $S$ and let $f_{s}$ to be the conditional distribution 
-of $\{f(x)\}_{x\in T}$ given the realizations $f(s), s\in S$, if we let $K_{s}$ to be 
-the correlation of the distribution $f(s), s\in S$. Then it can be shown
-that the minimax design minimizes the quantity
+We now discuss the connection between maximin experimental designs with GPs. Consider a
+GP $\{f(x)\}_{x\in T}$. If we fix $S=\{s_{1},\ldots,s_{n}\}\subset T$  and consider the random vector
+\begin{equation*}
+\textbf{f}=[f(s_{1}),\ldots,f(s_{n})],
+\end{equation*}
+
+
+
+and let $K_{s}$ to be 
+the correlation matrix for the probability distribution of $\textbf{f}$. Then it can be shown
+that the minimax design minimizes the quantity \cite{johnson1990minimax}
 \begin{equation*}
 M(S)=-det(K_{s}).
 \end{equation*}
-Since the covariance matrix is positive defined (hence the correlation matrix is also positive defined)
-, then $det(K_{s})>0$. By minimizing the  negative of the determinant  we are getting looking
-for the maximum value of the determinant. This is achieved when the column vectors of a matrix
-are close to orthogonal. In statistical terms what we are looking for is 
-the least possible correlation between the difference points in the maximin design. Here
-is where its importance lies.
+Since the covariance matrix is positive definite (hence the correlation matrix is also positive definite)
+, then $det(K_{s})>0$. By minimizing the  negative of the determinant  we are maximizing
+ the determinant. This is achieved when the column vectors of a matrix
+are orthogonal. In statistical terms  we are looking for  
+the least possible correlation between the different points in the maximin design. \textbf{Give intuition
+of why this is so} 
 \newline
 
+
+\subsection{Sensitivity Analysis}
  
-If we have a good space filling design, then we have a good fit when using GPs to interpolate  the 
-points we want to get information about. If we have a reliable fitting we have the chance
-to reduce the dimensionality of the model and hence its complexity. Indeed, assume that
-you want to fit a function  $f:T\subset \mathbb{R}^{n}\longrightarrow\mathbb{R}$ and you want to 
-know if all the $n$ variables in the domain are relevant to understand  the behaviour of $f$. For 
-example if $f$ behaves like the function $f(x_{1},\ldots,x_{n})=x_{1}+x_{2}+10^{-8}x_{3}$ on $T=[0,1]^{n}$, 
-then clearly 
-instead of working in an $n-$dimensional space and dealing with all its complexities we can
-reduce the model to a simple $2-$dimensional one. The question is then. How to quantify the 
-dependence (or sensitivity) of $f$ on $x_{1},\ldots,x_{n}$? There are multiple ways to perform such
-sensitivity analysis \cite{saltelli2000sensitivity}. In this work we are going to focus on
-the method  introduced
-by Ilya Meyerovich Sobol. This method is what is called a variance-based Monte Carlo method (VBMCM).
-The idea of a VBMCM is to use the variance produced by  the inputs of a function as an indicator of its importance.
-The description of Sobol's method follows from \cite{saltelli2000sensitivity}.
+If we have a good space filling design, we can construct a good GP, in the sense that 
+the uncertainty in the interpolation is less compared to the interpolation error when
+using other space filling design. 
+%then we have a good fit when using gps to interpolate  the 
+%points we want to get information about. 
+If we have a reliable fitting we can confidently assess what dimensions of the model are relevant.
+This allows to reduce the dimensionality of the problem by considering just these dimensions.
+For 
+example if the model $M$ we want to approximate is given  by $M(x_{1},\ldots,x_{n})=x_{1}+x_{2}+10^{-8}x_{3}$ 
+on $T=[0,1]^{n}$. Clearly this model can be reduced to   2 dimensions from 3 dimensions. 
+The question  now is how to quantify the 
+dependence  of $M$ on $x_{1},\ldots,x_{n}$? One way to do this is by doing a 
+sensitivity analysis . In summary, the goal of 
+sensitivity analysis is to assess, either qualitatively on quantitave, how
+the output of a model $M$ depends on variation of its arguments. There are plenty of 
+methods to perform a sensitivity analisis, a very good reference on this topic is
+\cite{saltelli2000sensitivity}.
+
+
+
+
+In this work we  focus in
+the method  described in \cite{sobol1993sensitivity}. This  is a variance-based Monte Carlo method (VBMCM).
+The idea of  VBMCMs is to use the variance produced by  the inputs of a function as an indicator of 
+their importance.
+Our description of Sobol's method follows that of \cite{saltelli2000sensitivity}.
+
 
 Witout lost of generallity we may assume that we have a function 
-$f: \Omega^{n}\subset\mathbb{R}^{n}\longrightarrow \mathbb{R}$ where $\Omega^{k}$ is the $n-$dimensional
-unit cube\footnote{Since our goal is to study the behaviour of a function that is obtained by the output
-of some physical experiment or simulation of it we may assume that the functions of interested in this 
-work have a compact domain, hence by some reescaling we can always assume that the domain of the function
-under study has as its domain the unit hypercube}. Sobol's idea was to decompose $f$ as 
+$\varphi: \Omega^{n}\subset\mathbb{R}^{n}\longrightarrow \mathbb{R}$ where $\Omega^{n}$ is the $n-$dimensional
+unit cube. Since our goal of this work is to study the behaviour of a function that is obtained by the output
+of some physical experiment or simulation of it, we may assume that the functions of interest 
+ have  compact domain, hence by some reescaling we can always assume that the domain of the function
+under study can be mapped surjectively into the unit hypercube. We decompose $\varphi$ as 
 \begin{equation*}
-f(x_{1},\ldots,x_{n})=f_{0}+\sum_{k=1}^{n}f_{k}(x_{k})+\sum_{1\leq k< l\leq n}f_{kl}(x_{k},x_{l})+\ldots+
-f_{1,2,\ldots,n}(x_{1},\ldots,x_{n}).
+\varphi(x_{1},\ldots,x_{n})=\varphi_{0}+\sum_{k=1}^{n}\varphi_{k}(x_{k})+
+\sum_{1\leq k< l\leq n}\varphi_{kl}(x_{k},x_{l})+\ldots+
+\varphi_{1,2,\ldots,n}(x_{1},\ldots,x_{n}).
 \end{equation*}
-The functions in this decomposition cannot be arbitrary functions. First $f_{0}$ has to be a constant.
-On the other hand the other functions must satisfy
+Here $\varphi_{0}$ is a constant and for indices $i_{1},\ldots,i_{j}$ the functions
+$\varphi_{i_{1},\ldots,i_{j}}$ satisfy
+
+\begin{equation}\label{eqnSobolCond1}
+\int_{[0,1]}\varphi_{i_{1},\ldots,i_{j}}dx_{i_{k}}=0\qquad\text{if }  i_{k}\in \{i_{1},\ldots,i_{j}\}
+\end{equation} 
+Therefore by Fubinni's theorem \cite{lerner2014course} we may conclude that functions with different subindices are 
+ pairwise orthogonal in $\Omega^{n}$ with the standard inner product of $\mathbb{R}^{n}$\cite{bressan1900lecture}. 
+To see this, without loss of generality
+we may  consider the functions $g=\varphi_{i_{1},\ldots,i_{j}}$ and $h=\varphi_{l_{1},\ldots,l_{k}}$ 
+with $(i_{1},\ldots,i_{j})\neq(l_{i},\ldots,l_{k})$, with $i_{1}\neq l_{1}$. In this case we have
 \begin{equation*}
-\int_{[0,1]}f_{i_{1},\ldots,i_{s}}dx_{i_{k}}=0\qquad\text{if } 1\leq k\leq s.
-\end{equation*} 
-Therefore by Fubinni's theorem we may conclude that functions with different subindices are 
- pairwise orthogonal in $\Omega^{n}$. The second consequence of this result is that
-\begin{equation*}
-\int_{\Omega^{n}}fdx=f_{0}+\int_{\Omega^{n}}\sum_{k=1}^{n}f_{k}(x_{k})+
-\int_{\Omega^{n}}\sum_{1\leq k< l\leq n}f_{kl}(x_{k},x_{l})dx+\ldots+
-\int_{\Omega^{n}}f_{1,2,\ldots,n}(x_{1},\ldots,x_{n})dx.=f_{0}.
+\langle g,h\rangle=\int_{[0,1]}\ldots\int_{[0,1]}\underbrace{\left(\int_{[0,1]}\varphi_{i_{1},
+\ldots,i_{j}}dx_{i_{1}}\right)}_{\text{$=0$ by (\ref{eqnSobolCond1})}}
+\left(\int_{[0,1]}\varphi_{l_{1},\ldots,l_{k}}dx_{l_{1}}\right)dx_{\sim i_{1},l_{1}}=0.
 \end{equation*}
-So by obtaining $f_{0}$ we can use recursion to obtain the other functions in the decomposition. For example
-if $dx_{\sim 1}$ represent integration with respect to $x_{2},x_{3},\ldots, x_{n}$, it is not 
-hard to see that 
+where the symbols to the right of $\sim$ represent the variables ommited in the integration.
+
+A second consequence (\ref{eqnSobolCond1}) is 
 \begin{equation*}
-f_{1}(x_{1})=-f_{0}+\int_{[0,1]^{n-1}}f(x)dx_{\sim 1}.
+\int_{\Omega^{n}}\varphi dx=\varphi_{0}+\int_{\Omega^{n}}\sum_{k=1}^{n}\varphi_{k}(x_{k})dx+
+\int_{\Omega^{n}}\sum_{1\leq k< l\leq n}\varphi_{kl}(x_{k},x_{l})dx+\ldots+
+\int_{\Omega^{n}}\varphi_{1,2,\ldots,n}(x_{1},\ldots,x_{n})dx=\varphi_{0}.
 \end{equation*}
-Similar formulas hold for the other functions in  the decomposition of $f$. By knowing explicitly all
-the functions in the decomposition allows us to assess the relevance of each variable in the 
-behaviour of $f$ by defining on them its variances. The total variance $D$ of $f$ is defined as
+Thus given $\varphi_{0}$ we can find the other functions in the decomposition recursively. For example  
 \begin{equation*}
-D=\int_{\Omega^{n}}f^{2}(x)dx-f_{0}^{2}.
+\varphi_{1}(x_{1})=-\varphi_{0}+\int_{[0,1]^{n-1}}\varphi(x)dx_{\sim 1}.
 \end{equation*}
-As we can see this is the same as the usual definition of the variance of a random variable $X$  in statistics: 
+Similar formulas hold for the other functions in  the decomposition of $\varphi$. By knowing all
+the functions in the decomposition we are able  to assess the effect of each variable on the 
+behaviour of $\varphi$, considering the variance of $\varphi$. The total variance $D$ of $\varphi$ is defined as
 \begin{equation*}
-Var(X)=\E(X^{2})-\E(X)^{2}.
+D=\int_{\Omega^{n}}\varphi^{2}(x)dx-\varphi_{0}^{2}.
 \end{equation*}
-Where in this case the expectation operator is obtained by taking the integral over the whole space $\Omega^{n}$.
-Similarly we compute the partial variances as
+Similarly we can compute the partial variances as
 \begin{equation*}
 D_{i_{1},\ldots,i_{s}}=\int_{[0,1]^{n-1}}f^{2}_{i_{1},\ldots,i_{s}}dx_{i_{1}}\ldots dx_{i_{s}}.
 \end{equation*}
-With these variances we define the $s-th$ order sensitivity  as
+With these variances we define the $s-th$ order sensitivity Sobol index  
 \begin{equation*} 
 S_{i_{1},\ldots,i_{s}}=\frac{D_{i_{1},\ldots,i_{s}}}{D}.
 \end{equation*}
 This quantity is a measure of the effect in the output from the interaction of the 
-variables $x_{i_{1}},x_{i_{2}},\ldots,x_{i_{s}}$. If 
-we want to know the effect in the output given by   each of the variables 
-$x_{1},\ldots,x_{n}$ we would have to study
-the first order sensitivity indices $S_{1},\ldots,S_{n}$.
-Finally if we want to assess the full effect that one variable has on the output of a function $f$ we calculate
-what is defined as the total effect index. If for example we want to calculate the total effect index
-for the variable $x_{1}$ we would do so by calculating
+variables $x_{i_{1}},x_{i_{2}},\ldots,x_{i_{s}}$ that cannot be exaplained by 
+the sum of the effect of each variable. If 
+we want to know the separate effect  of the variables 
+$x_{1},\ldots,x_{n}$ in the output, we have to study
+the first order sensitivity indices $S_{1},\ldots,S_{n}$ given by
 \begin{equation*}
-S_{1}+S_{12}+S_{13}+\ldots+S_{123}+S_{124}+\ldots+S_{12\ldots n}.
+S_{i}=\frac{D_{i}}{D}\qquad\text{for }i=1,\ldots,n.
+\end{equation*}
+
+Finally if we want to assess the full effect of a  variable  on the output, we calculate a quantity known 
+as the total effect index. If for example we want to calculate the total effect index
+for the variable $x_{i}$ we would do so by calculating
+\begin{equation*}
+S_{i}+S_{i1}+S_{i2}+\ldots+S_{i12}+S_{i13}+\ldots+S_{12\ldots,i,\ldots, n}.
 \end{equation*}
 
 
-As we can see working with GPs and doing  a  sensitivity analysis  of a 
-function via Sobol indices is not hard conceptually but computationally challenging. Writing a routine that
-interpolate test points using training points as the base  using GPs or calculate sensitivity using 
-Sobol indices accurately might be time consuming.
+Estimating Sobol indices for a function $M$ after being interpolated by the emulator $\hat{M}$
+we need to calculate high dimensional integrals. This is computationally challenging.
+We need to  write a routine that
+interpolates test points using training points  using GPs and then   calculate 
+Sobol indices via computing high dimensional integrals in a accurate way.  
+This is  time consuming.
 That is why as  we will see
-in chapter three and  four we used R packages to assist us with this kind of calculations. 
-Talking about the packages used in this work is our next topic.
+in chapter three and  four we used R packages to assist us with this kind of calculations so
+we get computationally efficient and accurate results. An overview of the R packages using 
+in this work can be found in Appendix A. 
 
 
 %Talking about R packages
