@@ -4,45 +4,45 @@ The top-level auxiliary file: Tesis.aux
 The style file: plain.bst
 Database file #1: Tesis.bib
 Warning--empty journal in rasmussen2006gaussian
-You've used 19 entries,
+You've used 20 entries,
             2118 wiz_defined-function locations,
-            607 strings with 6569 characters,
-and the built_in function-call counts, 5262 in all, are:
-= -- 498
-> -- 222
+            611 strings with 6655 characters,
+and the built_in function-call counts, 5477 in all, are:
+= -- 517
+> -- 229
 < -- 6
-+ -- 91
-- -- 70
-* -- 335
-:= -- 911
-add.period$ -- 57
-call.type$ -- 19
-change.case$ -- 78
++ -- 94
+- -- 72
+* -- 343
+:= -- 949
+add.period$ -- 60
+call.type$ -- 20
+change.case$ -- 81
 chr.to.int$ -- 0
-cite$ -- 20
-duplicate$ -- 219
-empty$ -- 448
-format.name$ -- 70
-if$ -- 1082
+cite$ -- 21
+duplicate$ -- 231
+empty$ -- 470
+format.name$ -- 72
+if$ -- 1128
 int.to.chr$ -- 0
-int.to.str$ -- 19
-missing$ -- 30
-newline$ -- 98
-num.names$ -- 38
-pop$ -- 115
+int.to.str$ -- 20
+missing$ -- 32
+newline$ -- 103
+num.names$ -- 40
+pop$ -- 123
 preamble$ -- 1
-purify$ -- 70
+purify$ -- 73
 quote$ -- 0
-skip$ -- 134
+skip$ -- 140
 stack$ -- 0
-substring$ -- 269
-swap$ -- 24
+substring$ -- 274
+swap$ -- 25
 text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 54
+type$ -- 56
 warning$ -- 1
-while$ -- 52
-width$ -- 21
-write$ -- 204
+while$ -- 54
+width$ -- 22
+write$ -- 214
 (There was 1 warning)

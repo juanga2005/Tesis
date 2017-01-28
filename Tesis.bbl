@@ -59,6 +59,11 @@ Mikhail~Anatolevich Lifshits.
 \newblock {\em Gaussian random functions}, volume 322.
 \newblock Springer Science \& Business Media, 2013.
 
+\bibitem{murphy2012machine}
+Kevin~P Murphy.
+\newblock {\em Machine learning: a probabilistic perspective}.
+\newblock MIT press, 2012.
+
 \bibitem{o2006bayesian}
 Anthony O’Hagan.
 \newblock Bayesian analysis of computer code outputs: a tutorial.
