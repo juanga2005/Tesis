@@ -10,6 +10,27 @@
 \usepackage{mathrsfs}
 \usepackage{float}
 
+
+
+
+
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{}
+\chead{}
+\rhead{}
+\lfoot{}
+\cfoot{\thepage}
+\rfoot{}
+ %\usepackage{fancyhdr,floatpag}
+
+%\pagestyle{fancy}
+%\fancyhf{}% Clear page header/footer
+%\renewcommand{\headrulewidth}{0pt}% No header rule
+\fancyfoot[C]{\thepage}
+
+%\floatpagestyle{fancy}% Page style for float-page only
 %Theorems
 \newtheorem{definition}{Definition}
 
@@ -77,7 +98,7 @@ The foundations of  our approach to estimate parameters and solve inverse proble
 framework of Bayesian statistics. Unlike frequentist statistics, in the Bayesian approach, randomness
 is a measure of uncertainty,  not a matter of frequency . A question like:
 what is the probability of having  life in Mars? If the answer is say 0.01, in the frequentist
-stastistics framework, this number is interpreted as, for every hundred times we go to 
+statistics framework, this number is interpreted as, for every hundred times we go to 
 mars under identical circumstances, one of those times we will find life there. In the Bayesian
 approach the number 0.01 is interpreted as: given our current level of knowledge about mars
 we think that is very unlikely that mars shelters life. Clearly there is a big philosophical
@@ -95,7 +116,7 @@ example this is the kind of randomness physicists believe is happening in quantu
 \cite{kennedy2001bayesian}.
 
 In general the connection between the different variables is far from trivial and hard to assess.
-Bayesian methodology provides a rigurous framework for the study of 
+Bayesian methodology provides a rigorous framework for the study of 
 this connection, using whatever information
 is available for the problem. The cornerstone of this idea
 in the mathematical language is the  Bayes formula 
@@ -103,7 +124,7 @@ in the mathematical language is the  Bayes formula
 \post(A|B)=\frac{\like(B|A)\prior(A)}{\p(B)}.
 \end{equation}
 
-To explain in detail the above equation and further theory, let us first do the following two defintions
+To explain in detail the above equation and further theory, let us first do the following two definitions
 \cite{dudley2002real}
 \begin{definition}\label{dfnprobabilitytriple}
 A probability space is a triple $(\Omega,\mathscr{F},\p)$, where $\Omega$ is a set called 
@@ -151,11 +172,11 @@ In this case the components of $\textbf{X}$ are said to be \textit{joinly Gaussi
 
 %In equation (\ref{eqnBayes}), $\p,\prior,\like,\post$ are different probability measures defined in the
 %same sample space $\Omega$. 
-The sets $A$ and $B$ are subsets of the sample space $\Omega$ and 
+Going back to equation (\ref{eqnBayes}), the sets $A$ and $B$ are subsets of the sample space $\Omega$ and 
 are elements of the associated $\sigma-$algebra $\mathscr{F}$. The bar in the probability
 measures e.g. $\like(\cdot|\cdot)$, means conditional probability. Let us introduce some terminology:
  the term $\like(B|A)$ is called the \textit{likelihood} of $B$ given $A$, $\prior(A)$ is called the 
-\textit{prior} probability for $A$. The prior expreses how much we believe the event $A$ to happen without assuming
+\textit{prior} probability for $A$. The prior expresses how much we believe the event $A$ to happen without assuming
 anything about how the event $B$ might influence the event $A$. 
 The term $\p(B)$ is a \textit{normalization constant} defined as 
 \begin{equation*}
@@ -502,7 +523,7 @@ space with the norm \cite{bressan1900lecture}
 \|h\|=\max_{x\in T}|h(x)|.
 \end{equation*}
 The dual space of $\tvs$ is given by $\tvs^{*}=\mathbb{M}(T)$ the set of signed measures defined on 
-the borel $\sigma-$ algebra of  $T$. In this 
+the Borel $\sigma-$ algebra of  $T$. In this 
 case the duality pairing is given by 
 \begin{equation*}
 \langle\mu,g \rangle=\int_{T}gd\mu.
@@ -611,11 +632,14 @@ software packages for optimization, search for the minimum not the maximum.}
 By minimizing this equation with respect to $\theta$ we find a possible value of this parameter
 that explains the best the data $y^{*}$ given $(\x_{i},y_{i})$. This example shows a 
 methodology for tuning in the parameters. Another common way to tune in the parameters
-is using a $K$-fold cross validation \cite{murphy2012machine}. The idea is to split or partition
-the training data into $K$ disjoint sets. At the $j$-th step we use the $j-th$ set in 
+is using  $K$-fold cross validation \cite{murphy2012machine}. The idea is to split or partition
+the training data into $K$ disjoint sets and label them from 1 to $K$. At the $j$-th step we use the $j$-th set in 
 the partition as the test set and the other $K-1$ sets as the training sets. We do this
 $K$ times so each set in the partition serves as the test set one time. For each
-of this cases we calculate the average value of the lo 
+of this cases we calculate  the error in the prediction for the test set and take
+the average of all the errors as a measure of how adequate a particular choice of 
+the parameters is. In the end we pick up the combination of  parameters that
+averaged the smallest error. 
 \newline
 
 So far we have not talked about how to choose the training points $\{\x_{i}\}_{i=1}^{m}$. To see
@@ -683,17 +707,19 @@ GP $\{f(x)\}_{x\in T}$. If we fix $S=\{s_{1},\ldots,s_{n}\}\subset T$  and consi
 
 and let $K_{s}$ to be 
 the correlation matrix for the probability distribution of $\textbf{f}$. Then it can be shown
-that the minimax design minimizes the quantity \cite{johnson1990minimax}
+that the minimax design minimizes the quantity 
 \begin{equation*}
-M(S)=-det(K_{s}).
+D(S)=-det(K_{s}).
 \end{equation*}
-Since the covariance matrix is positive definite (hence the correlation matrix is also positive definite)
-, then $det(K_{s})>0$. By minimizing the  negative of the determinant  we are maximizing
- the determinant. This is achieved when the column vectors of a matrix
-are orthogonal. In statistical terms  we are looking for  
-the least possible correlation between the different points in the maximin design. \textbf{Give intuition
-of why this is so} 
+This matrix is the same as the covariance matrix in equation (\ref{eqnconditional}).
+A survey on the theory behind maximin distance designs can be found in \cite{johnson1990minimax}.
 \newline
+
+
+%ince the covariance matrix is positive definite (hence the correlation matrix is also positive definite)
+%, then $det(K_{s})>0$. By minimizing the  negative of the determinant  we are maximizing
+% the determinant. This is achieved when the column vectors of a matrix
+%are orthogonal. 
 
 
 \subsection{Sensitivity Analysis}
@@ -755,7 +781,7 @@ with $(i_{1},\ldots,i_{j})\neq(l_{i},\ldots,l_{k})$, with $i_{1}\neq l_{1}$. In 
 \ldots,i_{j}}dx_{i_{1}}\right)}_{\text{$=0$ by (\ref{eqnSobolCond1})}}
 \left(\int_{[0,1]}\varphi_{l_{1},\ldots,l_{k}}dx_{l_{1}}\right)dx_{\sim i_{1},l_{1}}=0.
 \end{equation*}
-where the symbols to the right of $\sim$ represent the variables ommited in the integration.
+where the symbols to the right of $\sim$ represent the variables omitted in the integration.
 
 A second consequence of the equation (\ref{eqnSobolCond1}) is 
 \begin{eqnarray*}
@@ -791,7 +817,7 @@ With these variances we define the $s-th$ order  Sobol index
 S_{i_{1},\ldots,i_{s}}=\frac{D_{i_{1},\ldots,i_{s}}}{D}.
 \end{equation*}
 This quantity is a measure of the effect in the output from the interaction of the 
-variables $x_{i_{1}},x_{i_{2}},\ldots,x_{i_{s}}$ that cannot be exaplained by 
+variables $x_{i_{1}},x_{i_{2}},\ldots,x_{i_{s}}$ that cannot be explained by 
 the sum of the effect of each variable. If 
 we want to know the separate effect  of the variables 
 $x_{1},\ldots,x_{n}$ in the output, we have to study
@@ -813,6 +839,7 @@ we need to calculate high dimensional integrals. This is computationally challen
 We need to  write a routine that
 interpolates $M(\cdot)$ to test points by knowing its output on the training points  
 using GPs. After that we need to   calculate 
+
 Sobol indices via computing high dimensional integrals in a accurate way.  
 This is  time consuming.
 That is why as  we will see
@@ -822,7 +849,7 @@ in this work can be found in Appendix A.
 
 
 %Talking about R packages
-
+\newpage
 \subsection{R packages}
 In this work we used two different R packages. One to do the fitting with GPs (DiceKriging) and the other to do 
 a sensitivity analysis using Sobol Indices (Sensitivity). We are going to briefly describe both of this packages.
