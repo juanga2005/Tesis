@@ -96,12 +96,6 @@ Somersalo and Kaipio.
 \newblock {\em Statistical and computational inverse problems}.
 \newblock Springer-Verlag, 2005.
 
-\bibitem{thomas2013numerical}
-James~William Thomas.
-\newblock {\em Numerical partial differential equations: finite difference
-  methods}, volume~22.
-\newblock Springer Science \& Business Media, 2013.
-
 \bibitem{viana2010algorithm}
 Felipe~AC Viana, Gerhard Venter, and Vladimir Balabanov.
 \newblock An algorithm for fast optimal latin hypercube design of experiments.

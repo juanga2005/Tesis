@@ -303,14 +303,14 @@ to be explained in the next chapter. For the moment assume we have the means to 
 posterior in equation (\ref{eqnpostrock}). By having samples from the posterior we can obtain
 pointwise estimates of the parameters of interest. Common choices of pointwise estimates
 include
-\begin{eqnarray*}
+\begin{eqnarray}\label{eqnpointestimates}
 \textbf{r}_{MAP}=argmax_{\textbf{r}_{0}}\post(\textbf{r}_{0}|\textbf{r},\textbf{v}_{0}). 
 \qquad\text{(Maximum a posteriori)}\\
 \textbf{r}_{CM}=\int_{\mathbb{R}^{3}}\textbf{r}_{0}\post(\textbf{r}_{0}|\textbf{r},\textbf{v}_{0})d\textbf{r}_{0}.
 \qquad\text{(Conditional mean)}. \\
 \textbf{r}_{ML}=argmax_{\textbf{r}_{0}}\post(\textbf{r}_{0}|\textbf{r},\textbf{v}_{0}).
 \qquad\text{(Maximum likelihood)}
-\end{eqnarray*}
+\end{eqnarray}
 
 Each  of these estimates have strengths and weaknesses. If the posterior is bimodal, then the conditional
 mean might point at a value with very low probability, whereas the maximum a posteriori might be more 
@@ -892,16 +892,14 @@ chapter, so for chapter four we can focus on the results instead on how we appli
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Chapter 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Test Problem: How Theory Works in Practice}
 
-In the previous chapter we described an overview of the theoretical and computational tools needed obtain
-the solution to Bayesian inverse problems and uncertainty quantification of the solution. In this chapter
-we are going to work on a test problem. The idea is to illustrate how the theory can be applied in practice, so,
-in chapter four we can focus mainly on the results and the  solution of the problem described in chapter one.
+In the previous chapter we review some  of the theoretical and computational tools needed obtain
+the solution to Bayesian inverse problems. In this chapter
+we are going to work on a toy problem to illustrate how the theory explained can be applied, so
+in Chapter 4 we can focus mainly on the results and the  solution of the problem described in Chapter 1.
 
 
-
-
-To talk about the solution of an inverse problem we first need to specify what is the forward problem. 
-To keep things not to complicated we are going to define the forward problem as the following
+To talk about an inverse problem  we first need to specify  the forward problem. 
+We define the forward problem as the solution of the  following
 partial differential equation (PDE)
 
 \begin{equation}\label{eqntoyproblem}
@@ -913,42 +911,46 @@ partial differential equation (PDE)
 \right.
 \end{equation} 
 
-where $b$ is some real parameter. The  way to think about this problem is as follows: the 
-function $u$ represents somei physical quantity of interest that is modeled by equation (\ref{eqntoyproblem}).
-In the language of chapter two this system is represented by the function $f(\cdot)$. But there is a 
-caveat with this model, we don't know the value of the parameter $b$ that best describes the reality.
-All we have is some (small) number of experimental measurements $m$  of the function $u$ within $\Omega$. 
-An easy way to solve the problem of finding the bet $b$ that suits the experimental data would go as follows.
-If you truly believe that model (\ref{eqntoyproblem}) describes the behaviour of $u$, then build
-a program that simulates that system for a big range of parameters $b$ and then pick the results
-that are closer to the experimental data. Problem solved? Not quite, even for this simple system
-running too many simulations for different parameters $b$ is computationally expensive and time
-consuming. Let alone more realistic physical models with more complicated set of equations describing
-them. 
-\newline
-A more feasible solution is given by the theory developed in chapter two. Run a few times a program
-that simulates model (\ref{eqntoyproblem}), then construct a computationally cheap\footnote{Cheap relative
-to the computational cost of actually simulate the physical system through equation (\ref{eqntoyproblem})}
- emulator $\hat{f}(\cdot)$ to fill the missing data on possible values for $b$. Then with  the 
-aid of Bayes formula, find the posterior for $b$ given the experimental data $m$, i.e.
-\begin{equation}\label{eqnpropto}
-P(b|m)\propto P(m|b)P(b).
-\end{equation}
-With this posterior find a possible value of $b$ (e.g mean of the posterior) and quantify the uncertainty
-with respect to that prediction (e.g. 95\% Bayesian confidence interval). Now that we have the recipe we
-can put hands on in the calculations. 
+where $b$ is some real positive parameter. The 
+function $u$ represents some physical quantity $\tilde{u}$ of interest whose behaviour is  modeled by equation (\ref{eqntoyproblem}).
+Recall from Chaper 2 that the goal is to create an emulator $\hat{M}(\cdot)$  that approximates
+the output $y$  of a computationally expensive function  $M(\cdot)$ at a point $\textbf{x}$ in its domain. 
+In the context of equation (\ref{eqntoyproblem}) the domain of the function $M(\cdot)$ is $\Omega\times[0,\infty)$
+and the output $y$ at a point $(\textbf{x},b)\in\Omega\times [0,1]$ is given by the value of the solution $u$ at that 
+point, i.e. $u(\textbf{x};b)=M(\textbf{x};b)$. 
+
+We are going to assume that we have ten experimental measurements 
+of $\tilde{u}$ at points $\{\x_{1},\x_{2},\ldots,\x_{10}\}$ , that is we measured the quantities 
+$D:=\{\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)\}$.
+We want to estimate the value of $b$ that explains the best the experimental data. The obvious approach to achieve this
+would be to solve equation (\ref{eqntoyproblem}) for a big number of values $b$ in the interval $[0,L]$ where $L$ 
+is large enough to guarantee that there exists a $b^{*}\in [0,L]$ such that the set $\{u(\x_{1};b^{*}),\ldots,u(\x_{10};b^{*})\}$
+has `small' discrepancy with the experimental data for $\tilde{u}$. For the sake of the example we assume that solving
+equation (\ref{eqntoyproblem}) is computationally expensive and solving it for a big range of different values of $b$
+is not feasible. Therefore it is necessary to construct an emulator $\hat{M}(\cdot)$ that approximates $M(\cdot)$ as
+explained in the previous Chapter. We can solve equation (\ref{eqntoyproblem}) for a number of values for $b$
+that makes the cost of solving (\ref{eqntoyproblem}) for these values acceptable. Then use the emulator
+$\hat{M}(\cdot)$ to predict the output of $M(\cdot)$ for as many different values of $b$ as possible. 
+To distinguish the out of the emulator at the point $(\x,b)$ is going to be denoted by $\hat{u}(\x,b)$.
 \newline
 
-To generate syntetic data of model (\ref{eqntoyproblem}) we proceed as follows. We assume that the true value 
-of $b$ is $0.925$ then run a Matlab script that simulates the PDE using the five point extensil for the laplacian
-in a finite difference scheme \cite{thomas2013numerical}. The solution with $b=0.925$ is shown in Figure 
-\ref{figsolU}.  To simulate the experimental measures $m$, we chose 10 random points in the domain
-and evalute the numerical solution there. To each of the measurements we added the noise of a
-random variable normally distributed with mean $0$ and $\sigma=0.01$. With this we get a signal 
-to noise ration (SNR) of about 1:3. In real life measurements are more precise than this, however
-in this test problem we are not taking into account the inaccuracies from the model itself to describe
-the phisical reality. To compensate for that we chose a bigger SNR. 
+To incorporate the experimental data in the estimation of $b$ we can use Bayes rule and estimate the posterior distribution for $b$
+\begin{equation}\label{eqnpropto}
+P(b|D)=\frac{P(D|b)P(b)}{p(D)}.
+\end{equation}
+Having the posterior we can estimate $b$ using any of the point estimates given in equation (\ref{eqnpointestimates}) along
+with the estimation of the uncertainty of the point estimate.
 \newline
+
+Now we are going to explain how we are going to generate the experimental measures $\{\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)\}$
+ (\ref{eqntoyproblem}) we proceed as follows. We assume that the true value of $b$ is $0,925$. Then we solve equation (\ref{eqntoyproblem})
+using this value of $b$. Then we pick up ten random points and save the value of $u$ at those location (see Figure \ref{figsolU}).  We add up some noise from
+a normal distribution with mean $0$ and $\sigma=0.01$ to each on of the ten values. The resulting numbers obtained is what we use
+as the experimental data $D=\{\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)\}$. The noise added to the data obtained from the solution of
+(\ref{eqntoyproblem}) simulates errors in the experimental measurements plus inaccuaracies of the model to describe the true behaviour of $\tilde{u}$.
+
+
+\newpage
 With the synthetic data at hand we can tackle the question of what value of $b$ fits the data the most.
 In principle $b\in\mathbb{R}$, so virtually $b$ could be any real value. In real life most of the time
 the physics of the problem dictates the allowed values of $b$ and experience allows to bound
