@@ -932,15 +932,13 @@ explained in the previous Chapter. We can solve equation (\ref{eqntoyproblem}) f
 that makes the cost of solving (\ref{eqntoyproblem}) for these values acceptable. Then use the emulator
 $\hat{M}(\cdot)$ to predict the output of $M(\cdot)$ for as many different values of $b$ as possible. 
 To distinguish the out of the emulator at the point $(\x,b)$ is going to be denoted by $\hat{u}(\x,b)$.
-\newline
 
 To incorporate the experimental data in the estimation of $b$ we can use Bayes rule and estimate the posterior distribution for $b$
 \begin{equation}\label{eqnpropto}
-P(b|D)=\frac{P(D|b)P(b)}{p(D)}.
+\post(b|D)=\frac{\like(D|b)\prior(b)}{\p(D)}.
 \end{equation}
 Having the posterior we can estimate $b$ using any of the point estimates given in equation (\ref{eqnpointestimates}) along
 with the estimation of the uncertainty of the point estimate.
-\newline
 
 Now we are going to explain how we are going to generate the experimental measures $\{\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)\}$
  (\ref{eqntoyproblem}) we proceed as follows. We assume that the true value of $b$ is $0,925$. Then we solve equation (\ref{eqntoyproblem})
@@ -950,13 +948,6 @@ as the experimental data $D=\{\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)\}$
 (\ref{eqntoyproblem}) simulates errors in the experimental measurements plus inaccuaracies of the model to describe the true behaviour of $\tilde{u}$.
 
 
-\newpage
-With the synthetic data at hand we can tackle the question of what value of $b$ fits the data the most.
-In principle $b\in\mathbb{R}$, so virtually $b$ could be any real value. In real life most of the time
-the physics of the problem dictates the allowed values of $b$ and experience allows to bound
-what the real value of $b$ could be. In our case we pretend that the physics
-and experience tell that   $b$ is a positive number that  could be  anywhere between
-zero and two, that is we strongly believe that $b\in (0,2]$.
 
 
 \begin{figure}[H]
@@ -964,25 +955,58 @@ zero and two, that is we strongly believe that $b\in (0,2]$.
 \includegraphics[scale=0.5]{./FigChap3/solu}
 \caption{Numerical solution of the system (\ref{eqntoyproblem}) using a finite difference scheme. The mesh
 size used in $x$ and $y$ was $0.01$. The value of the parameter $b$ was set at $0.925$. The black dots
-in the plot represent the points used to generate the synthetic data about the experimental
-measures $m$.}
+in the plot represent the points used to generate the experimental data about the experimental data
+$\{\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)\}$}
 \label{figsolU}
 \end{figure}
-
-
-At this point  we use the concept of emulator as in the previous chapter. If we had unlimited computational
-power or time then we can run the finite difference scheme used to obtain Figure \ref{figsolU} with
-a huge set of possible values for $b$ in the interval $(0,2]$. And pick the value that replicates the
-better the syntetic data $m$. Since we do not have unlimited computational power or time what we
-are going to do is to pick some $n$  values $b_{k}\in (0,2], k=1,2,\ldots,n$, run the finite difference
-scheme on those and then use an emulator $\hat{f}$ with GPs to fill the missing data. The criteria to 
-choose the number $n$ comes from considerations of how much time and computational resources we have.
-For this case we chose $n=10$. How to distribute those 10 points in the interval $(0,2]$. Here we
-use the concept space filling design. In the one dimensional setting it is not hard to see that
-a maximin design gives an equal spacing of the 10 points in the interval $(0,2]$ hence we choose
+Now we proceed to estimate the value of $b$ that explains the best the data by using Bayes formula (\ref{eqnpropto}).
+First we need to choose the prior probability for $b$. For the sake of the example, let us assume that 
+equation (\ref{eqntoyproblem}) describes a well known physical process and it is known that
+the parameter $b$ cannot be greater than $2$. In this case one way to choose the prior probablity
+for $b$ that does not assume any other knowledge than $b\in (0,2]$ is the uniform distribution. 
+Given a Borel measurable set $A\subset(0,2]$, the probability of $b$ belonging to $A$ is given by
 \begin{equation*}
-b_{k}=0.2k \qquad\text{for }k=1,2,\ldots,10.
+\frac{1}{2}\int_{A}dx.
 \end{equation*}
+In this case we have 
+\begin{equation*}
+\prior(b)=\frac{1}{2}\textbf{1}_{(0,2]},
+\end{equation*}
+where $\textbf{1}_{(0,2]}$ is the indicator function of the set $(0,2]$. The indicator function for a borel measurable set $C$ is
+\begin{equation*}
+\textbf{1}_{C}(y)=\left\{
+	\begin{array}{ll}
+		1 & \mbox{if }	y\in C\\
+		0 & \mbox{if }   y\in C^{c}
+	\end{array}
+\right.
+\end{equation*}
+
+To estimate the likelihood we need to know how $b$ is connected with the data $D$. The connection is given by 
+equation (\ref{eqntoyproblem}). By solving explicitly this equation we can find a functional relation
+between $u$ and $b$ for each one of the ten locations depicted in Figure \ref{figsolU}.
+ In this case it is possible to explicitly solve equation (\ref{eqntoyproblem}). However
+the relation between $u$ and $b$ is  given by an infinite Fourier series. Having a functional relation given
+by an infinite series is often not very useful. The approach we are going to use is the following: by assumption
+solving equation (\ref{eqntoyproblem}) is computationally expensive. Assume that given time and computational budget
+we can solve the PDE for no more than 10 different values of $b$. The idea is to use GPs as described
+in Chapter 2 to interpolate for the values of $b\in (0,2]$ where we do not solve equation (\ref{eqntoyproblem}). 
+\newline
+We need to choose 10 values of $b$, $\{b_{1},\dots,b_{10}\}$ to solve the PDE in a way that the interpolation error for 
+the other values of $b$ in the set $(0,2]$ is small compared to the error in the interpolation if we were to choose
+a different set of values. To choose the 10 points we use a maximin design as explained in Chapter 2. In this case
+it is straightforward to check that the way to choose the points that maximize the minimum distance among them
+is by locating them in an equidistant manner
+\begin{equation*}
+\{0.2,0.4,\ldots,2\}.
+\end{equation*}
+This set gives the maximin design for our problem. 
+
+
+
+With this, we create the set of training points as $\{b_{i},u(\x_{k},b_{i})\}_{i=1}^{10}$ for each of the 
+$k=10$ sites where we have the experimental measures $\{\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)\}$.
+
 
 We are ready to run the emulator $\hat{f}$ for these values of $b$, get a numerical value at
 the 10 points in the domain where the synthetic data were created (black dots in Figure \ref{figsolU})

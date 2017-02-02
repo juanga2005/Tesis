@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.7.20)  31 JAN 2017 21:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.7.20)  1 FEB 2017 23:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -359,31 +359,33 @@ Underfull \hbox (badness 10000) in paragraph at lines 713--717
 
 [23] [24] [25] [26]
 Chapter 3.
-
-Underfull \hbox (badness 10000) in paragraph at lines 922--936
-
- []
-
 [27
 
-]
-Underfull \hbox (badness 10000) in paragraph at lines 940--944
-
- []
-
-[28] <./FigChap3/solu.jpg, id=112, 562.1pt x 421.575pt>
+] <./FigChap3/solu.jpg, id=109, 562.1pt x 421.575pt>
 File: ./FigChap3/solu.jpg Graphic file (type jpg)
 
 <use ./FigChap3/solu.jpg>
-Package pdftex.def Info: ./FigChap3/solu.jpg used on input line 964.
+Package pdftex.def Info: ./FigChap3/solu.jpg used on input line 955.
 (pdftex.def)             Requested size: 281.04932pt x 210.78697pt.
- [29 <./FigChap3/solu.jpg>]
-<./FigChap3/fitted.jpg, id=116, 505.89pt x 505.89pt>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [28]
+[29 <./FigChap3/solu.jpg>]
+Overfull \hbox (35.6794pt too wide) in paragraph at lines 1007--1009
+\OT1/cmr/m/n/12 of the $\OML/cmm/m/it/12 k \OT1/cmr/m/n/12 = 10$ sites where we
+ have the ex-per-i-men-tal mea-sures $\OMS/cmsy/m/n/12 f[]\OT1/cmr/m/n/12 ([][]
+; \OML/cmm/m/it/12 b\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 ; [] ; []\OT1/cmr/m/n/12 
+([][]; \OML/cmm/m/it/12 b\OT1/cmr/m/n/12 )\OMS/cmsy/m/n/12 g$\OT1/cmr/m/n/12 . 
+
+ []
+
+<./FigChap3/fitted.jpg, id=116, 505.1673pt x 505.1673pt>
 File: ./FigChap3/fitted.jpg Graphic file (type jpg)
 
 <use ./FigChap3/fitted.jpg>
-Package pdftex.def Info: ./FigChap3/fitted.jpg used on input line 997.
-(pdftex.def)             Requested size: 354.12057pt x 354.12057pt.
+Package pdftex.def Info: ./FigChap3/fitted.jpg used on input line 1021.
+(pdftex.def)             Requested size: 353.6147pt x 353.6147pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -393,11 +395,11 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 File: ./FigChap3/prior_posterior.jpg Graphic file (type jpg)
 
 <use ./FigChap3/prior_posterior.jpg>
-Package pdftex.def Info: ./FigChap3/prior_posterior.jpg used on input line 1052
+Package pdftex.def Info: ./FigChap3/prior_posterior.jpg used on input line 1076
 .
 (pdftex.def)             Requested size: 403.94167pt x 404.13438pt.
 
-Overfull \hbox (13.94167pt too wide) in paragraph at lines 1052--1053
+Overfull \hbox (13.94167pt too wide) in paragraph at lines 1076--1077
  [][] 
  []
 
@@ -405,22 +407,22 @@ Overfull \hbox (13.94167pt too wide) in paragraph at lines 1052--1053
 File: ./FigChap3/histogram_mcmc.jpg Graphic file (type jpg)
 
 <use ./FigChap3/histogram_mcmc.jpg>
-Package pdftex.def Info: ./FigChap3/histogram_mcmc.jpg used on input line 1073.
+Package pdftex.def Info: ./FigChap3/histogram_mcmc.jpg used on input line 1097.
 
 (pdftex.def)             Requested size: 404.71254pt x 404.71254pt.
 
-Overfull \hbox (14.71254pt too wide) in paragraph at lines 1073--1074
+Overfull \hbox (14.71254pt too wide) in paragraph at lines 1097--1098
  [][] 
  []
 
 [33 <./FigChap3/prior_posterior.jpg>] [34 <./FigChap3/histogram_mcmc.jpg>]
-<./FigChap3/posterior_evolution.jpg, id=135, 504.9264pt x 505.1673pt>
+<./FigChap3/posterior_evolution.jpg, id=135, 505.1673pt x 505.1673pt>
 File: ./FigChap3/posterior_evolution.jpg Graphic file (type jpg)
 
 <use ./FigChap3/posterior_evolution.jpg>
 Package pdftex.def Info: ./FigChap3/posterior_evolution.jpg used on input line 
-1108.
-(pdftex.def)             Requested size: 353.44608pt x 353.6147pt.
+1132.
+(pdftex.def)             Requested size: 353.6147pt x 353.6147pt.
  (./Tesis.bbl
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -439,7 +441,7 @@ Here is how much of TeX's memory you used:
  6076 multiletter control sequences out of 15000+600000
  17077 words of font info for 65 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 37i,14n,43p,411b,265s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,14n,43p,515b,265s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
 mbx8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10
@@ -457,7 +459,7 @@ y6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/
 share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/s
 hare/texlive/texmf-dist/fonts/type1/public/rsfs/rsfs10.pfb>
-Output written on Tesis.pdf (38 pages, 1252190 bytes).
+Output written on Tesis.pdf (38 pages, 1237294 bytes).
 PDF statistics:
  209 PDF objects out of 1000 (max. 8388607)
  142 compressed objects within 2 object streams
