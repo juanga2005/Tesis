@@ -9,7 +9,7 @@
 \usepackage{setspace}
 \usepackage{mathrsfs}
 \usepackage{float}
-
+\usepackage{pbox}
 
 
 
@@ -912,7 +912,8 @@ partial differential equation (PDE)
 \end{equation} 
 
 where $b$ is some real positive parameter. The 
-function $u$ represents some physical quantity $\tilde{u}$ of interest whose behaviour is  modeled by equation (\ref{eqntoyproblem}).
+function $u$ represents the mathematical approximation of  a quantity with a physical interpretation  $\tilde{u}$. The  behaviour
+of $\tilde{u}$ is assumed to be    modeled by equation (\ref{eqntoyproblem}).
 Recall from Chaper 2 that the goal is to create an emulator $\hat{M}(\cdot)$  that approximates
 the output $y$  of a computationally expensive function  $M(\cdot)$ at a point $\textbf{x}$ in its domain. 
 In the context of equation (\ref{eqntoyproblem}) the domain of the function $M(\cdot)$ is $\Omega\times[0,\infty)$
@@ -920,32 +921,69 @@ and the output $y$ at a point $(\textbf{x},b)\in\Omega\times [0,1]$ is given by 
 point, i.e. $u(\textbf{x};b)=M(\textbf{x};b)$. 
 
 We are going to assume that we have ten experimental measurements 
-of $\tilde{u}$ at points $\{\x_{1},\x_{2},\ldots,\x_{10}\}$ , that is we measured the quantities 
+of $\tilde{u}$ at points $P:=\{\x_{1},\x_{2},\ldots,\x_{10}\}$. That is, we measured the quantities 
 $D:=\{\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)\}$.
-We want to estimate the value of $b$ that explains the best the experimental data. The obvious approach to achieve this
+We want to estimate the value of $b$ that explains the best the experimental data $D$. The obvious approach to achieve this
 would be to solve equation (\ref{eqntoyproblem}) for a big number of values $b$ in the interval $[0,L]$ where $L$ 
 is large enough to guarantee that there exists a $b^{*}\in [0,L]$ such that the set $\{u(\x_{1};b^{*}),\ldots,u(\x_{10};b^{*})\}$
-has `small' discrepancy with the experimental data for $\tilde{u}$. For the sake of the example we assume that solving
+has `small' discrepancy with the experimental data for $D$. For the sake of the example we assume that solving
 equation (\ref{eqntoyproblem}) is computationally expensive and solving it for a big range of different values of $b$
 is not feasible. Therefore it is necessary to construct an emulator $\hat{M}(\cdot)$ that approximates $M(\cdot)$ as
-explained in the previous Chapter. We can solve equation (\ref{eqntoyproblem}) for a number of values for $b$
-that makes the cost of solving (\ref{eqntoyproblem}) for these values acceptable. Then use the emulator
+explained in the previous Chapter.  Then solve equation (\ref{eqntoyproblem}) for a number of 
+different values for  $b$
+that makes the cost of solving (\ref{eqntoyproblem})  acceptable. Finally use the emulator
 $\hat{M}(\cdot)$ to predict the output of $M(\cdot)$ for as many different values of $b$ as possible. 
-To distinguish the out of the emulator at the point $(\x,b)$ is going to be denoted by $\hat{u}(\x,b)$.
+The value of the emulator at the point $(\x,b)$  is going to be denoted by $\hat{u}(\x,b)$. The following
+table summarices the notation that is going to be used from now on in this Chapter.
 
-To incorporate the experimental data in the estimation of $b$ we can use Bayes rule and estimate the posterior distribution for $b$
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline 
+Symbol & Meaning \tabularnewline 
+\hline 
+\hline
+\hline 
+$\tilde{u}(\x;b)$ & \pbox{7cm}{Value of the physical variable at the point $\x$
+with parameter $b$.\\} \tabularnewline 
+\hline 
+\hline
+$u(\x;b)$ & \pbox{7cm}{Numerical solution of equation (\ref{eqntoyproblem})
+at $\x$ with parameter $b$.\\} \tabularnewline
+\hline
+\hline 
+$\hat{u}(\x;b)$ & \pbox{7cm}{Value of the interpolation of the GP at the point $\x$ with parameter
+$b$\\}.  \tabularnewline
+\hline
+\hline 
+$P:=\{\x_{1},\ldots,\x_{10}\}$ & \pbox{7cm}{Points where the experimental measures where taken\\}.  \tabularnewline
+\hline
+\hline 
+$D:=\{\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)\}$ & \pbox{7cm}{Values of the experimental measurements for the variable $\tilde{u}$\\}.  \tabularnewline
+\hline
+\end{tabular}
+
+\caption{Summary of symbols used in Chapter 3.}
+\label{tabSymboltable}
+\end{table}
+
+We want to estimate the value of $b$ that explains the best the experimental data $D$. To incorporate these data into the inference, 
+we can use Bayes rule and estimate the posterior distribution for $b$
 \begin{equation}\label{eqnpropto}
 \post(b|D)=\frac{\like(D|b)\prior(b)}{\p(D)}.
 \end{equation}
 Having the posterior we can estimate $b$ using any of the point estimates given in equation (\ref{eqnpointestimates}) along
-with the estimation of the uncertainty of the point estimate.
+with the  the uncertainty of it.
 
-Now we are going to explain how we are going to generate the experimental measures $\{\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)\}$
- (\ref{eqntoyproblem}) we proceed as follows. We assume that the true value of $b$ is $0,925$. Then we solve equation (\ref{eqntoyproblem})
-using this value of $b$. Then we pick up ten random points and save the value of $u$ at those location (see Figure \ref{figsolU}).  We add up some noise from
-a normal distribution with mean $0$ and $\sigma=0.01$ to each on of the ten values. The resulting numbers obtained is what we use
-as the experimental data $D=\{\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)\}$. The noise added to the data obtained from the solution of
-(\ref{eqntoyproblem}) simulates errors in the experimental measurements plus inaccuaracies of the model to describe the true behaviour of $\tilde{u}$.
+Before we procceed  with finding the posterior distribution for $b$, let us explain how we are going to generate the experimental measures $D$. 
+Assume that the true value of $b$ is $0,925$. Then we solve equation (\ref{eqntoyproblem})
+using this value of $b$. Next we pick  ten random points and save the value of the numerical 
+solution $u$ at those location (see Figure \ref{figsolU}).  To those values we add  noise from
+a normal distribution with mean $0$ and $\sigma=0.01$ to each  of the ten values. The resulting numbers obtained are what we use
+as the experimental data $D=\{\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)\}$. The noise added to the data obtained from the
+numerical  solution of equation
+(\ref{eqntoyproblem}) plays the role of possible  errors in the experimental measurements plus inaccuaracies of the 
+model to describe the true behaviour of $\tilde{u}$.
 
 
 
@@ -959,20 +997,21 @@ in the plot represent the points used to generate the experimental data about th
 $\{\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)\}$}
 \label{figsolU}
 \end{figure}
-Now we proceed to estimate the value of $b$ that explains the best the data by using Bayes formula (\ref{eqnpropto}).
-First we need to choose the prior probability for $b$. For the sake of the example, let us assume that 
+Now we proceed to estimate the value of $b$ that explains the data $D$  using Bayes formula (\ref{eqnpropto}).
+First we need to choose a prior distribution for $b$. For the sake of the example, let us assume that 
 equation (\ref{eqntoyproblem}) describes a well known physical process and it is known that
-the parameter $b$ cannot be greater than $2$. In this case one way to choose the prior probablity
+the parameter $b$ cannot be greater than $2$. In this case one way to choose a prior distribution
 for $b$ that does not assume any other knowledge than $b\in (0,2]$ is the uniform distribution. 
-Given a Borel measurable set $A\subset(0,2]$, the probability of $b$ belonging to $A$ is given by
+Given a Borel measurable set $A\subset(0,2]$, the probability that $b$ belongs to $A$ is given by
 \begin{equation*}
 \frac{1}{2}\int_{A}dx.
 \end{equation*}
 In this case we have 
 \begin{equation*}
-\prior(b)=\frac{1}{2}\textbf{1}_{(0,2]},
+\prior(b)=\frac{1}{2}\textbf{1}_{(0,2]}(b),
 \end{equation*}
 where $\textbf{1}_{(0,2]}$ is the indicator function of the set $(0,2]$. The indicator function for a borel measurable set $C$ is
+defined as
 \begin{equation*}
 \textbf{1}_{C}(y)=\left\{
 	\begin{array}{ll}
@@ -987,41 +1026,78 @@ equation (\ref{eqntoyproblem}). By solving explicitly this equation we can find 
 between $u$ and $b$ for each one of the ten locations depicted in Figure \ref{figsolU}.
  In this case it is possible to explicitly solve equation (\ref{eqntoyproblem}). However
 the relation between $u$ and $b$ is  given by an infinite Fourier series. Having a functional relation given
-by an infinite series is often not very useful. The approach we are going to use is the following: by assumption
+by an infinite series is often not very useful. The approach we are going to use is the following: by assumption,
 solving equation (\ref{eqntoyproblem}) is computationally expensive. Assume that given time and computational budget
-we can solve the PDE for no more than 10 different values of $b$. The idea is to use GPs as described
-in Chapter 2 to interpolate for the values of $b\in (0,2]$ where we do not solve equation (\ref{eqntoyproblem}). 
+we can solve the PDE for no more than 10 different values of $b$ (Having ten values of $b$ and ten points
+where we measure $\tilde{u}$ is just coincidence). The idea is to use GPs as described
+in Chapter 2 to interpolate for the values of $b\in (0,2]$ that we did not evaluate solve equation (\ref{eqntoyproblem}). 
 \newline
-We need to choose 10 values of $b$, $\{b_{1},\dots,b_{10}\}$ to solve the PDE in a way that the interpolation error for 
+We need to choose ten values of $b$, $\{b_{1},\dots,b_{10}\}$ to solve the PDE (\ref{eqntoyproblem}) in a way that the interpolation error for 
 the other values of $b$ in the set $(0,2]$ is small compared to the error in the interpolation if we were to choose
-a different set of values. To choose the 10 points we use a maximin design as explained in Chapter 2. In this case
-it is straightforward to check that the way to choose the points that maximize the minimum distance among them
-is by locating them in an equidistant manner
+a different set of ten values. To choose the ten points we use a maximin design as explained in Chapter 2. In this case
+it is straightforward to check that the way to choose the points that maximizes the minimum distance among the points
+is by locating them in an equidistant manner i.e.
 \begin{equation*}
 \{0.2,0.4,\ldots,2\}.
 \end{equation*}
 This set gives the maximin design for our problem. 
 
+Having the design, it is now possible to  create the set of training points as $\{b_{i},u(\x_{k},b_{i})\}_{i=1}^{10}$ for each of the 
+$k=10$ sites where we obtained the experimental measures $\{\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)\}$. Using the training
+points we create the GP for each of the ten sites. For the interpolation we use as a test set
+\begin{equation*}
+\{0.01,0.02,\ldots,1.99,2\}.
+\end{equation*} 
+In Figure \ref{fignofitted} are plotted the training points, the GP fit over the test points, along with the true value of $b$
+and the experimental measure $\tilde{u}(\x_{k};b)$ for each of the ten sites.
 
 
-With this, we create the set of training points as $\{b_{i},u(\x_{k},b_{i})\}_{i=1}^{10}$ for each of the 
-$k=10$ sites where we have the experimental measures $\{\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)\}$.
 
-
-We are ready to run the emulator $\hat{f}$ for these values of $b$, get a numerical value at
-the 10 points in the domain where the synthetic data were created (black dots in Figure \ref{figsolU})
-and use GPs to fill the missing information. Take into account that this process of `filling the blanks'
-has to be done in all of the 10 measurement points in the domain $\Omega$ of definition of the phyiscal model.
-
-In Figure \ref{fignofitted} we can see the results from running the emulator (black dots) compared
-with the experimental measurement for each of the 10 sites (black line).
+%
+%We are ready to run the emulator $\hat{f}$ for these values of $b$, get a numerical value at
+%the 10 points in the domain where the synthetic data were created (black dots in Figure \ref{figsolU})
+%and use GPs to fill the missing information. Take into account that this process of `filling the blanks'
+%has to be done in all of the 10 measurement points in the domain $\Omega$ of definition of the phyiscal model.
+%
+%In Figure \ref{fignofitted} we can see the results from running the emulator (black dots) compared
+%with the experimental measurement for each of the 10 sites (black line).
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.7]{./FigChap3/fitted}
-\caption{whatever}
+\caption{Training points, GP fit, true value of $b$ and experimental measures for each one of the ten sites labeled
+from 1 to 10 in Figure \ref{figsolU}}
 \label{fignofitted}
 \end{figure}
+
+The intersection of the blue dotted line with the black dotted line in Figure \ref{fignofitted} represents, the value the numerical 
+solution $u$  would attain  if it were to  perfectly model the physical variable $\tilde{u}$. Since we added noise to the values
+$\{u(\x_{1};0.925),\ldots,u(\x_{10};0.925)\}$ we know that the value of $\tilde{u}$ has to be different from the value of $u$.
+\newline
+
+The solid line in Figure \ref{fignofitted} gives a functional relation between $\hat{u}$ and $b$ for each of the ten sites.
+Let us denote $G_{k}(b):=\hat{u}(\x_{k};b)$ and $y_{k}=\tilde{u}(\x_{k};b)$ for $k=1,\ldots,10$. A possible functional relation
+that connects these quantities is
+\begin{equation}\label{eqnreal2interp}
+y_{k}=G_{k}(b)+\epsilon_{k},\qquad\text{where } \epsilon_{k}\sim\mathcal{N}(0,\lambda),
+\end{equation}
+with $\lambda$ a positive number that models how much we believe the true value of $\tilde{u}$ differs from the GP prediction $\hat{u}$.
+If we define the vectors $\textbf{y}=[\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10,b})]^{T}$ and 
+$\textbf{G}(b)=[\hat{u}(\x_{1};b),\ldots,\hat{u}(\x_{10};b)]^{T}$, equation (\ref{eqnreal2interp}) can we written more compactly as
+\begin{equation*}
+\textbf{y}=\textbf{G}(b)+\epsilon,\qquad\text{where }\epsilon\sim\mathcal{N}(0,\lambda I_{10\times 10}).
+\end{equation*}
+\newpage
+
+Observe that in the likelihood $\like(D|b)$, the variable is the elements in $D$ while $b$ is fixed. The
+vector $\textbf{y}$ is the result of letting the elements of $D$ to vary, thus
+\begin{equation*}
+\like(D|b)=\p(\textbf{y}|b).
+\end{equation*}
+
+\textbf{Aca terminaste por hoy}
+
+
 
 As we can see in Figure \ref{fignofitted}, the emulator sometimes overestimates the value of $b$ and sometimes
 underestimates it, this behaviour is expected. The hope is that this inaccuracies oscilate around the true
