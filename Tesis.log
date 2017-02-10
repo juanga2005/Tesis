@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.7.20)  2 FEB 2017 22:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.7.20)  3 FEB 2017 18:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -432,15 +432,28 @@ ors $[] = [[]([][]; \OML/cmm/m/it/12 b\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 ; [] ;
 []\OT1/cmr/m/n/12 ([][])][]$
  []
 
-[32] [33] <./FigChap3/prior_posterior.jpg, id=130, 504.9264pt x 505.1673pt>
+<./FigChap3/prior_posterior.jpg, id=124, 505.89pt x 505.89pt>
 File: ./FigChap3/prior_posterior.jpg Graphic file (type jpg)
 
 <use ./FigChap3/prior_posterior.jpg>
-Package pdftex.def Info: ./FigChap3/prior_posterior.jpg used on input line 1150
+Package pdftex.def Info: ./FigChap3/prior_posterior.jpg used on input line 1168
 .
-(pdftex.def)             Requested size: 403.94167pt x 404.13438pt.
+(pdftex.def)             Requested size: 404.71254pt x 404.71254pt.
 
-Overfull \hbox (13.94167pt too wide) in paragraph at lines 1150--1151
+Overfull \hbox (14.71254pt too wide) in paragraph at lines 1168--1169
+ [][] 
+ []
+
+[32] [33 <./FigChap3/prior_posterior.jpg>]
+<./FigChap3/histogram_mcmc.jpg, id=131, 505.89pt x 505.89pt>
+File: ./FigChap3/histogram_mcmc.jpg Graphic file (type jpg)
+
+<use ./FigChap3/histogram_mcmc.jpg>
+Package pdftex.def Info: ./FigChap3/histogram_mcmc.jpg used on input line 1190.
+
+(pdftex.def)             Requested size: 404.71254pt x 404.71254pt.
+
+Overfull \hbox (14.71254pt too wide) in paragraph at lines 1190--1193
  [][] 
  []
 
@@ -448,31 +461,17 @@ Overfull \hbox (13.94167pt too wide) in paragraph at lines 1150--1151
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [34]
-<./FigChap3/histogram_mcmc.jpg, id=134, 505.89pt x 505.89pt>
-File: ./FigChap3/histogram_mcmc.jpg Graphic file (type jpg)
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-<use ./FigChap3/histogram_mcmc.jpg>
-Package pdftex.def Info: ./FigChap3/histogram_mcmc.jpg used on input line 1171.
-
-(pdftex.def)             Requested size: 404.71254pt x 404.71254pt.
-
-Overfull \hbox (14.71254pt too wide) in paragraph at lines 1171--1172
- [][] 
- []
-
-[35 <./FigChap3/prior_posterior.jpg>] [36 <./FigChap3/histogram_mcmc.jpg>]
+ [35 <./FigChap3/histogram_mcmc.jpg>] [36]
 <./FigChap3/posterior_evolution.jpg, id=141, 505.1673pt x 505.1673pt>
 File: ./FigChap3/posterior_evolution.jpg Graphic file (type jpg)
 
 <use ./FigChap3/posterior_evolution.jpg>
 Package pdftex.def Info: ./FigChap3/posterior_evolution.jpg used on input line 
-1206.
+1246.
 (pdftex.def)             Requested size: 353.6147pt x 353.6147pt.
- (./Tesis.bbl
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [37]
-[38 <./FigChap3/posterior_evolution.jpg>] [39
+ [37 <./FigChap3/posterior_evolution.jpg>] (./Tesis.bbl [38] [39
 
 ]
 Missing character: There is no â in font cmr12!
@@ -480,10 +479,10 @@ Missing character: There is no € in font cmr12!
 Missing character: There is no ™ in font cmr12!
 ) [40] (./Tesis.aux) ) 
 Here is how much of TeX's memory you used:
- 3084 strings out of 494977
- 40749 string characters out of 6180183
- 98520 words of memory out of 5000000
- 6215 multiletter control sequences out of 15000+600000
+ 3089 strings out of 494977
+ 40842 string characters out of 6180183
+ 98575 words of memory out of 5000000
+ 6220 multiletter control sequences out of 15000+600000
  17077 words of font info for 65 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  37i,18n,43p,515b,287s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -504,7 +503,7 @@ y6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/
 share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/s
 hare/texlive/texmf-dist/fonts/type1/public/rsfs/rsfs10.pfb>
-Output written on Tesis.pdf (40 pages, 1257640 bytes).
+Output written on Tesis.pdf (40 pages, 1248694 bytes).
 PDF statistics:
  215 PDF objects out of 1000 (max. 8388607)
  146 compressed objects within 2 object streams

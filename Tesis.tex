@@ -1007,9 +1007,9 @@ Given a Borel measurable set $A\subset(0,2]$, the probability that $b$ belongs t
 \frac{1}{2}\int_{A}dx.
 \end{equation*}
 In this case we have 
-\begin{equation*}
+\begin{equation}\label{eqnpriortoyproblem}
 \prior(b)=\frac{1}{2}\textbf{1}_{(0,2]}(b),
-\end{equation*}
+\end{equation}
 where $\textbf{1}_{(0,2]}$ is the indicator function of the set $(0,2]$. The indicator function for a borel measurable set $C$ is
 defined as
 \begin{equation*}
@@ -1079,139 +1079,194 @@ The solid line in Figure \ref{fignofitted} gives a functional relation between $
 Let us denote $G_{k}(b):=\hat{u}(\x_{k};b)$ and $y_{k}=\tilde{u}(\x_{k};b)$ for $k=1,\ldots,10$. A possible functional relation
 that connects these quantities is
 \begin{equation}\label{eqnreal2interp}
-y_{k}=G_{k}(b)+\epsilon_{k},\qquad\text{where } \epsilon_{k}\sim\mathcal{N}(0,\lambda),
+y_{k}=G_{k}(b)+\epsilon_{k},\qquad\text{where } \epsilon_{k}\sim\mathcal{N}(0,\lambda^{2}),
 \end{equation}
 with $\lambda$ a positive number that models how much we believe the true value of $\tilde{u}$ differs from the GP prediction $\hat{u}$.
 If we define the vectors $\textbf{y}=[\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10,b})]^{T}$ and 
 $\textbf{G}(b)=[\hat{u}(\x_{1};b),\ldots,\hat{u}(\x_{10};b)]^{T}$, equation (\ref{eqnreal2interp}) can we written more compactly as
-\begin{equation*}
-\textbf{y}=\textbf{G}(b)+\epsilon,\qquad\text{where }\epsilon\sim\mathcal{N}(0,\lambda I_{10\times 10}).
-\end{equation*}
-\newpage
+\begin{equation}\label{eqnvector2interp}
+\textbf{y}=\textbf{G}(b)+\epsilon,\qquad\text{where }\epsilon\sim\mathcal{N}(0,\lambda^{2} I_{10\times 10}).
+\end{equation}
 
 Observe that in the likelihood $\like(D|b)$, the variable is the elements in $D$ while $b$ is fixed. The
 vector $\textbf{y}$ is the result of letting the elements of $D$ to vary, thus
-\begin{equation*}
+\begin{equation}\label{eqnequivalence}
 \like(D|b)=\p(\textbf{y}|b).
-\end{equation*}
-
-\textbf{Aca terminaste por hoy}
-
-
-
-As we can see in Figure \ref{fignofitted}, the emulator sometimes overestimates the value of $b$ and sometimes
-underestimates it, this behaviour is expected. The hope is that this inaccuracies oscilate around the true
-value of $b$.
-
-Since we only have a limited number of prediction of the emulator for different values of $b$ (black points
-in Figure \ref{fignofitted}), we would like to extrapolate/interpolate those results to get
-more data and with that extra data, assess the value of $b$. As explained in Chapter 2, one very useful 
-way to obtain the extra data is through Gaussian processes. Using the language of the previous chapter
-what we want to do is, having the training points $\{(x_{i},f(x_{i})\}_{i=1}^{10}$ we want to predict 
-the value of different test points $x_{i}^{*}$. This prediction is shown as a red line in Figure
-\ref{fignofitted}.  The GP fit allows us to approxiamte as much value as we want, along with the uncertainty
-associated with the prediction. Having this data we can now proceed to use the Bayesian methodology.
-The idea goes as follows. if we denote the GP fit at at point $b$ as  $G(b)$, then we may assume
-an additive noise model for the output $y$ as
-\begin{equation}\label{eqnadditivenoise}
-y=G(b)+\vec{\epsilon}.
 \end{equation}
-$\vec{\epsilon}$ is a random vector distributed as $\vec{\epsilon}\sim\mathscr{N}(0,\sigma I)$. Where $sigma=bla$
-and $I$ is the $10\times 10$ identity matrix.
-In the Bayesian framework we are interest in finding the value of $b$ given the experimental measurements $m$.
-To that end we go back to the begining of this chapter and use equation (\ref{eqnpropto}). To use this equation
-we need to find the likelihood $\like(m|b)$. Under the assumption of the additive noise model in equation
-(\ref{eqnadditivenoise}) we get as in the smashed window example in chapter 2 that
-\begin{equation*}
-m|b\sim\mathscr{N}(G(b),\sigma I),
-\end{equation*}
-more precisely
-\begin{equation*}
-\like(m|b)=\frac{1}{(2\pi\sigma)^{n/2}}\exp\left(-\frac{\|G(b)-m\|_{2}^{2}}{2\sigma^{2}}\right).
-\end{equation*}
 
-
-
-Now we need to choose a prior for $b$. This is a delicate issue and a polemic one in the Statistics community.
-The prior should reflect all of our current knowledge about $b$. However your knowledge about $b$ might be 
-different than my knowledge about $b$, hence your prior for $b$ might look different than mine. For
-the moment  we won't worry about that. Let's assume that our prior for $b$ is given by
+Since the random vector $\epsilon$ has multinormal distribution, we can use equation (\ref{eqnvector2interp})
+to conclude \cite{Somersalo}
 \begin{equation*}
-b\sim U(0,2).
+\textbf{y}|b\sim \mathcal{N}(\textbf{G}(b),\lambda^{2} I_{10\times 10}),
 \end{equation*}
-where $U(a,b)$ is the uniform distribution in $a,b$. Putting all of this into formula (\ref{eqnpropto}) we get
+Explicitly
+\begin{equation}\label{eqnlikelihoodtoyproblem}
+\p(\textbf{y}|b)\propto e^{-\frac{1}{2\lambda^{2}}\|\textbf{G}(b)-\textbf{y}\|_{2}^{2}},
+\end{equation}
+where the proportionality constant normalizes the distribution on the right hand side to one. Since
+the denominator in Bayes rule in equation (\ref{eqnpropto}) is independent of $b$ and serves only 
+as a normalization constant we can use equations (\ref{eqnpriortoyproblem}), (\ref{eqnequivalence}) and (\ref{eqnlikelihoodtoyproblem})  
+and write 
 \begin{equation*}
-\post(b|m)\propto\chi_{[0,2]}\exp\left(-\frac{\|G(b)-m\|_{2}^{2}}{2\sigma^{2}}\right),
+\post(b|D)\propto\like(D|b)\prior(b)\propto \textbf{1}_{(0,2]}(b)e^{-\frac{1}{2\lambda^{2}}\|\textbf{G}(b)-\textbf{y}\|_{2}^{2}}.
 \end{equation*}
-where $\chi_{[a,b]}$ is the indicator function of the set $[a,b]$. This equation can be 
-interpreted as the update in knowledge from to prior to the posterior in the light of the
-experimental data obtained represented by the likelihood. This change from prior to 
-posterior is shown below.
+An interpretation of this result is that before taking experimental measurements all we knew about the parameter $b$ was
+that $b\in (0,2]$ after weghting this prior believe with the data $D$ our current state of knowledge about the
+parameter $b$ is encoded in the posterior distribution. Figure \ref{figlikeprior} plots this update in our knowledge about $b$.
+
+%
+%As we can see in Figure \ref{fignofitted}, the emulator sometimes overestimates the value of $b$ and sometimes
+%underestimates it, this behaviour is expected. The hope is that this inaccuracies oscilate around the true
+%value of $b$.
+%
+%Since we only have a limited number of prediction of the emulator for different values of $b$ (black points
+%in Figure \ref{fignofitted}), we would like to extrapolate/interpolate those results to get
+%more data and with that extra data, assess the value of $b$. As explained in Chapter 2, one very useful 
+%way to obtain the extra data is through Gaussian processes. Using the language of the previous chapter
+%what we want to do is, having the training points $\{(x_{i},f(x_{i})\}_{i=1}^{10}$ we want to predict 
+%the value of different test points $x_{i}^{*}$. This prediction is shown as a red line in Figure
+%\ref{fignofitted}.  The GP fit allows us to approxiamte as much value as we want, along with the uncertainty
+%associated with the prediction. Having this data we can now proceed to use the Bayesian methodology.
+%The idea goes as follows. if we denote the GP fit at at point $b$ as  $G(b)$, then we may assume
+%an additive noise model for the output $y$ as
+%\begin{equation}\label{eqnadditivenoise}
+%y=G(b)+\vec{\epsilon}.
+%\end{equation}
+%$\vec{\epsilon}$ is a random vector distributed as $\vec{\epsilon}\sim\mathscr{N}(0,\sigma I)$. Where $sigma=bla$
+%and $I$ is the $10\times 10$ identity matrix.
+%In the Bayesian framework we are interest in finding the value of $b$ given the experimental measurements $m$.
+%To that end we go back to the begining of this chapter and use equation (\ref{eqnpropto}). To use this equation
+%we need to find the likelihood $\like(m|b)$. Under the assumption of the additive noise model in equation
+%(\ref{eqnadditivenoise}) we get as in the smashed window example in chapter 2 that
+%\begin{equation*}
+%m|b\sim\mathscr{N}(G(b),\sigma I),
+%\end{equation*}
+%more precisely
+%\begin{equation*}
+%\like(m|b)=\frac{1}{(2\pi\sigma)^{n/2}}\exp\left(-\frac{\|G(b)-m\|_{2}^{2}}{2\sigma^{2}}\right).
+%\end{equation*}
+%
+%
+%
+%Now we need to choose a prior for $b$. This is a delicate issue and a polemic one in the Statistics community.
+%The prior should reflect all of our current knowledge about $b$. However your knowledge about $b$ might be 
+%different than my knowledge about $b$, hence your prior for $b$ might look different than mine. For
+%the moment  we won't worry about that. Let's assume that our prior for $b$ is given by
+%\begin{equation*}
+%b\sim U(0,2).
+%\end{equation*}
+%where $U(a,b)$ is the uniform distribution in $a,b$. Putting all of this into formula (\ref{eqnpropto}) we get
+%\begin{equation*}
+%\post(b|m)\propto\chi_{[0,2]}\exp\left(-\frac{\|G(b)-m\|_{2}^{2}}{2\sigma^{2}}\right),
+%\end{equation*}
+%where $\chi_{[a,b]}$ is the indicator function of the set $[a,b]$. This equation can be 
+%interpreted as the update in knowledge from to prior to the posterior in the light of the
+%experimental data obtained represented by the likelihood. This change from prior to 
+%posterior is shown below.
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.8]{./FigChap3/prior_posterior.jpg}
-\caption{whatever}
+\caption{Plots for the prior distribution, posterior distribution and true value of the paramter $b$ we are infering.}
+\label{figlikeprior}
 \end{figure} 
+Having a visual represenation of the posterior distribution is useful, but, in order to obtain statistics
+for the possible value of $b$ we need to sample from the posterior. A family of methods that allow to sample
+from fairly arbitary distributions are known as Markov Chain Montecarlo (MCMC). We know do a disgression
+to explain the main ideas behind MCMC.
+\begin{itemize}
+\item\textbf{Talk about the general theory of MCMC}
+\item\textbf{Talk about the Metropolis Hastings Algorithm}
+\end{itemize}
 
 
+Returning to the problem of sampling the posterior distribution for $b$. We are going to use the Metropolis Hastings algorithm
+using an step size of $\delta=0.23$, $10000$ samples and we chose the first $5000$ to be the burning period. The results 
+of applying the MH algorithm is shown below  
 
 
-
-
-As we mentioned in chapter 2,
-the solution to an inverse problem in the Bayesian framework is the posterior. The question is:
-how can we use this posterior to infer the value of $b$ and the uncertainty associated to it? 
-\textbf{Here talk about how this integral is untractable}.
-
-To make inferences about the value of $b$ we resort to a family of techniques from sampling probability
-distributions known as Markov Chain Monte Carlo (MCMC)\textbf{Cite algun libro del MCMC}.
-
-After using the MCMC we get the following plot 
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.8]{./FigChap3/histogram_mcmc.jpg}
-\caption{whatever}
+\caption{Histogram obtained for the posterior distribution (\ref{eqnpropto}) 
+from $5000$ samples from MH algorithm with step size $\delta=0.23$. The solid line
+is graph for the posterior.}
 \end{figure}
 
-
+With the samples obtained we readily obtain the conditional mean (\textbf{Talk about the weak law of large numbers
+and also about the error you get from using it})
+\begin{equation*}
+b_{cm}=\int_{(0,2]}b\post(b|D)db\approx\frac{1}{5000}\sum_{j=1}^{5000}b_{j}=0.9247042,
+\end{equation*}
+where the summands $b_{j}$ are the samples obtained after the burn period of $5000$ samples. We can 
+also estimate the variance of this estimate as 
+\begin{equation*}
+\int_{(0,2]}(b-b_{cm})^{2}\post(b|D)db\approx\frac{1}{5000}\sum_{j=1}^{5000}(b_{j}-b_{cm})^{2}=0.01427.
+\end{equation*}
+With these values we can say that with $95\%$ of probabilty, the true value of $b$ belongs to the
+interval
+\begin{equation*}
+[0.9247042-2\sqrt{0.01427},0.92470422+2\sqrt{0.01427}]=[0.68579,1.163618].
+\end{equation*}
 
 \subsection*{How important is the prior to make inferences?}
-It is constructive to go in some depth and explore how prominent is the role of the prior probability
-in making inferences about a problem. Let us consider the same problem as above, we want to estimate
-the value of the paramter $b$. For demonstration purposes, let us assume two things. The parameter
-$b$ can be any real number (not just $0<b\leq 2$ as before) and
+It is constructive to  explore how relevant is the choice  of the prior distribution
+in making inferences about a parameter of interest. Let us consider the same problem as above
+. We want to estimate
+the value of the paramter $b$. For demonstration purposes, let us assume two things: the parameter
+$b$ can be any real number (not just $0<b\leq 2$ as before) and we assume a prior distribution for $b$ as
 \begin{equation*}
 b\sim\mathscr{N}(b^{*},\sigma_{b}^{2}),
 \end{equation*}
 where $b^{*}$ and $\sigma_{b}$ are parameters to be set later.  With this new prior the formula
-for the posterior becomes 
+for the posterior is calculated as 
 \begin{equation*}
-\post(b|m)\propto \exp\left(-\frac{\|m-G(b)\|_{2}^{2}}{2\sigma^{2}}-\frac{(b-b^{*})^{2}}{2\sigma_{b}^{2}}\right).
+\post(b|\textbf{y})\propto \exp\left(-\frac{\|\textbf{y}-\textbf{G}(b)\|_{2}^{2}}{2\sigma^{2}}-\frac{(b-b^{*})^{2}}{2\sigma_{b}^{2}}\right).
 \end{equation*}
-
-
-
-
-
 As before, assume that the true
 value of $b$ is $0.925$. To ilustrate the role that the prior has in the inference of the value
-of $b$ given the experimental data $m$, let us assume that 
+of the parameter given the data $\textbf{y}$, suppose that 
 \begin{equation*}
 b\sim\mathscr{N}(4,2.5).
 \end{equation*}
-That is, the person that proposed this prior is confident that within $95\%$ of confidence, the true value of
-$b$ is in the interval $[1.8,8.2]$. Let us see what happens with the posterior in equation (\ref{eqnpropto})
-when we get more and more experimental data. 
+This prior assumes that, with $95\%$ of confidence, the value of
+$b$ is in the interval $[1.8,8.2]$. Clearly there is a mismatch between
+the true value of $b$ and the range of values that the prior distribution
+assign with high probability. In Figure \ref{figpostevolution} it is shown
+how the posterior evolves when we calculate the likelihood with more 
+and more data. The first frame shows the result when only the measurement
+$\tilde{u}(\x_{1};b)$ is taken into account. The second frame
+when the measures $\tilde{u}(\x_{1};b),\tilde{u}(\x_{2};b)$ are taken
+into account. In each frame we proceed adding one more measurement 
+at a time and in the tenth frame we calculate the posterior
+using the data obtained from all ten points.
+
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.7]{./FigChap3/posterior_evolution}
-\caption{bla}
+\caption{Evolution of the posterior distribution when more experimental data is taken into account}
+\label{figpostevolution}
 \end{figure}
+
+The sequence of plots in Figure \ref{figpostevolution} shows that the experimental data creates a new mode
+in the posterior distribution that is close to the true value of $b$. In the end of the sequence where we consider
+all 10 expeirmental measures, the mode that is close to the true value of $b$ is bigger than the mode originate
+by the prior at the point $b=4$. The reason for this final posterior distribution is that the prior gives a large
+probability to values around $b=4$, whereas give a close to zero probability for values around $b=0.925$.
+When the experimental data is used, the likelihood distribution points to values close to $b=0.925$. The more data
+we use the stronger the weight that the likelihood has compared to the prior distribution. However since
+the prior distribution gives negligible probability to the true value of $b$, when all data are used there
+is an equilibrium between the likelihood and prior that is expressed as a bimodal distribution. This result
+is a cautonary tale. If we know how to choose the prior distribution in a way that is meaningful to the
+problem, reliable inference could be done with small ammount of data. On the contrary if the prior distribution
+is not realistic with the problem at hand, inference may not be reliable and a big ammount of data is needed
+to correct for the bias in prior distribution. We can summarize this with the following analogy: if you really believe
+in Santa you will need abudant evindence that he does not exist.
+
+
+
+
+
 \bibliography{Tesis}
 \bibliographystyle{plain}
-
-
-
-
 \end{document}
