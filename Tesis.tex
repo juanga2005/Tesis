@@ -895,7 +895,7 @@ chapter, so for chapter four we can focus on the results instead on how we appli
 In the previous chapter we review some  of the theoretical and computational tools needed obtain
 the solution to Bayesian inverse problems. In this chapter
 we are going to work on a toy problem to illustrate how the theory explained can be applied, so
-in Chapter 4 we can focus mainly on the results and the  solution of the problem described in Chapter 1.
+in Chapter 4 we can focus mainly on  results for the  solution of the problem described in Chapter 1.
 
 
 To talk about an inverse problem  we first need to specify  the forward problem. 
@@ -918,7 +918,7 @@ Recall from Chaper 2 that the goal is to create an emulator $\hat{M}(\cdot)$  th
 the output $y$  of a computationally expensive function  $M(\cdot)$ at a point $\textbf{x}$ in its domain. 
 In the context of equation (\ref{eqntoyproblem}) the domain of the function $M(\cdot)$ is $\Omega\times[0,\infty)$
 and the output $y$ at a point $(\textbf{x},b)\in\Omega\times [0,1]$ is given by the value of the solution $u$ at that 
-point, i.e. $u(\textbf{x};b)=M(\textbf{x};b)$. 
+point, i.e. $u(\textbf{x};b)=M(\textbf{x},b)$. 
 
 We are going to assume that we have ten experimental measurements 
 of $\tilde{u}$ at points $P:=\{\x_{1},\x_{2},\ldots,\x_{10}\}$. That is, we measured the quantities 
@@ -929,8 +929,8 @@ is large enough to guarantee that there exists a $b^{*}\in [0,L]$ such that the 
 has `small' discrepancy with the experimental data for $D$. For the sake of the example we assume that solving
 equation (\ref{eqntoyproblem}) is computationally expensive and solving it for a big range of different values of $b$
 is not feasible. Therefore it is necessary to construct an emulator $\hat{M}(\cdot)$ that approximates $M(\cdot)$ as
-explained in the previous Chapter.  Then solve equation (\ref{eqntoyproblem}) for a number of 
-different values for  $b$
+explained in  Chapter 2.  Then solve equation (\ref{eqntoyproblem}) for a number of 
+different values of  $b$
 that makes the cost of solving (\ref{eqntoyproblem})  acceptable. Finally use the emulator
 $\hat{M}(\cdot)$ to predict the output of $M(\cdot)$ for as many different values of $b$ as possible. 
 The value of the emulator at the point $(\x,b)$  is going to be denoted by $\hat{u}(\x,b)$. The following
@@ -967,18 +967,19 @@ $D:=\{\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)\}$ & \pbox{7cm}{Values of 
 \label{tabSymboltable}
 \end{table}
 
-We want to estimate the value of $b$ that explains the best the experimental data $D$. To incorporate these data into the inference, 
-we can use Bayes rule and estimate the posterior distribution for $b$
+We want to estimate the value of $b$ that explains the best the experimental data $D$. 
+To incorporate these data into the inference, 
+we can use Bayes rule and estimate the posterior distribution for $b$, that is
 \begin{equation}\label{eqnpropto}
 \post(b|D)=\frac{\like(D|b)\prior(b)}{\p(D)}.
 \end{equation}
 Having the posterior we can estimate $b$ using any of the point estimates given in equation (\ref{eqnpointestimates}) along
-with the  the uncertainty of it.
+with the  the uncertainty associated with that estimate.
 
 Before we procceed  with finding the posterior distribution for $b$, let us explain how we are going to generate the experimental measures $D$. 
 Assume that the true value of $b$ is $0,925$. Then we solve equation (\ref{eqntoyproblem})
 using this value of $b$. Next we pick  ten random points and save the value of the numerical 
-solution $u$ at those location (see Figure \ref{figsolU}).  To those values we add  noise from
+solution $u$ at those location (see Figure \ref{figsolU}).  Finally we add  noise from
 a normal distribution with mean $0$ and $\sigma=0.01$ to each  of the ten values. The resulting numbers obtained are what we use
 as the experimental data $D=\{\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)\}$. The noise added to the data obtained from the
 numerical  solution of equation
@@ -991,9 +992,10 @@ model to describe the true behaviour of $\tilde{u}$.
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.5]{./FigChap3/solu}
-\caption{Numerical solution of the system (\ref{eqntoyproblem}) using a finite difference scheme. The mesh
+\caption{Numerical solution of the system (\ref{eqntoyproblem}) using a five points estencil finite difference
+for the Laplacian. The mesh
 size used in $x$ and $y$ was $0.01$. The value of the parameter $b$ was set at $0.925$. The black dots
-in the plot represent the points used to generate the experimental data about the experimental data
+in the plot represent the points used to generate the experimental data 
 $\{\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)\}$}
 \label{figsolU}
 \end{figure}
@@ -1024,13 +1026,15 @@ defined as
 To estimate the likelihood we need to know how $b$ is connected with the data $D$. The connection is given by 
 equation (\ref{eqntoyproblem}). By solving explicitly this equation we can find a functional relation
 between $u$ and $b$ for each one of the ten locations depicted in Figure \ref{figsolU}.
- In this case it is possible to explicitly solve equation (\ref{eqntoyproblem}). However
+
+In the problem of this Chapter   it is possible to explicitly solve equation (\ref{eqntoyproblem}). However
 the relation between $u$ and $b$ is  given by an infinite Fourier series. Having a functional relation given
-by an infinite series is often not very useful. The approach we are going to use is the following: by assumption,
+by an infinite series is often not very useful. Hence, the  approach we are going to use is the following: 
+by assumption,
 solving equation (\ref{eqntoyproblem}) is computationally expensive. Assume that given time and computational budget
 we can solve the PDE for no more than 10 different values of $b$ (Having ten values of $b$ and ten points
 where we measure $\tilde{u}$ is just coincidence). The idea is to use GPs as described
-in Chapter 2 to interpolate for the values of $b\in (0,2]$ that we did not evaluate solve equation (\ref{eqntoyproblem}). 
+in Chapter 2 to interpolate for the values of $b\in (0,2]$ where we did not  solve equation (\ref{eqntoyproblem}). 
 \newline
 We need to choose ten values of $b$, $\{b_{1},\dots,b_{10}\}$ to solve the PDE (\ref{eqntoyproblem}) in a way that the interpolation error for 
 the other values of $b$ in the set $(0,2]$ is small compared to the error in the interpolation if we were to choose
@@ -1040,15 +1044,18 @@ is by locating them in an equidistant manner i.e.
 \begin{equation*}
 \{0.2,0.4,\ldots,2\}.
 \end{equation*}
-This set gives the maximin design for our problem. 
-
-Having the design, it is now possible to  create the set of training points as $\{b_{i},u(\x_{k},b_{i})\}_{i=1}^{10}$ for each of the 
-$k=10$ sites where we obtained the experimental measures $\{\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)\}$. Using the training
+This set gives the maximin design for our problem.
+\newline 
+Having the design, it is now possible to  create the set of training points as 
+$\{b_{i},u(\x_{k},b_{i})\}_{i=1}^{10}$ for each of the 
+$k=10$ sites where we obtained the experimental measures $\{\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)\}$.
+ Using the training
 points we create the GP for each of the ten sites. For the interpolation we use as a test set
 \begin{equation*}
 \{0.01,0.02,\ldots,1.99,2\}.
 \end{equation*} 
-In Figure \ref{fignofitted} are plotted the training points, the GP fit over the test points, along with the true value of $b$
+In Figure \ref{fignofitted} are plotted the training points, 
+the GP fit over the test points, along with the true value of $b$
 and the experimental measure $\tilde{u}(\x_{k};b)$ for each of the ten sites.
 
 
@@ -1070,13 +1077,18 @@ from 1 to 10 in Figure \ref{figsolU}}
 \label{fignofitted}
 \end{figure}
 
-The intersection of the blue dotted line with the black dotted line in Figure \ref{fignofitted} represents, the value the numerical 
-solution $u$  would attain  if it were to  perfectly model the physical variable $\tilde{u}$. Since we added noise to the values
-$\{u(\x_{1};0.925),\ldots,u(\x_{10};0.925)\}$ we know that the value of $\tilde{u}$ has to be different from the value of $u$.
+The intersection of the blue dotted line with the black dotted line in Figure \ref{fignofitted} represents, 
+the value the numerical 
+solution $u$  would attain  if it were to  perfectly model the physical variable $\tilde{u}$. 
+Since we added noise to the values
+$\{u(\x_{1};0.925),\ldots,u(\x_{10};0.925)\}$ we know that the value of $\tilde{u}$ has to be different 
+from the value of $u$.
 \newline
 
-The solid line in Figure \ref{fignofitted} gives a functional relation between $\hat{u}$ and $b$ for each of the ten sites.
-Let us denote $G_{k}(b):=\hat{u}(\x_{k};b)$ and $y_{k}=\tilde{u}(\x_{k};b)$ for $k=1,\ldots,10$. A possible functional relation
+The solid line in Figure \ref{fignofitted} gives a functional relation between $\hat{u}$ and $b$ for each of the 
+ten sites.
+Let us denote $G_{k}(b):=\hat{u}(\x_{k};b)$ and $y_{k}=u(\x_{k};b)$ for $k=1,\ldots,10$. A possible 
+functional relation
 that connects these quantities is
 \begin{equation}\label{eqnreal2interp}
 y_{k}=G_{k}(b)+\epsilon_{k},\qquad\text{where } \epsilon_{k}\sim\mathcal{N}(0,\lambda^{2}),
@@ -1171,26 +1183,63 @@ parameter $b$ is encoded in the posterior distribution. Figure \ref{figlikeprior
 \end{figure} 
 Having a visual represenation of the posterior distribution is useful, but, in order to obtain statistics
 for the possible value of $b$ we need to sample from the posterior. A family of methods that allow to sample
-from fairly arbitary distributions are known as Markov Chain Montecarlo (MCMC). We know do a disgression
-to explain the main ideas behind MCMC.
-\begin{itemize}
-\item\textbf{Talk about the general theory of MCMC}
-\item\textbf{Talk about the Metropolis Hastings Algorithm}
-\end{itemize}
+from fairly arbitary distributions are known as Markov Chain Montecarlo (MCMC). In this work we are going to 
+focus in a family of submethods known as Metropolis-Hastings algorithms (MH). We are going to explain
+how MH works in practice using the posterior for $b$ as an example. 
+\newline
+\newline
+Consider the posterior distribution $\post(b|D)$. The idea is to wander around the support of the distribution
+in a way that points in the support with high probability are visited more often than those with low 
+probability. For example, if we are at a point $q_{1}$ and we want to move to a point $q_{2}$ we will accept 
+that move with probability one if $\post(p|D)\leq\post(q|D)$ and with probability 
+$\frac{\post(q|D)}{\post(p|D)}$ otherwise. On the other hand if we are at a point $q_{1}$, we choose
+in what direction to move randomly with some probability distribution that is easy to sample from.
+In this and the next Chapter we choose the uniform distribution to choose the direction to move.
+The scheme for the procedure describe above is 
 
+\begin{enumerate}
+\item pick a point $q_{1}$ in the support of the distribution\\
+\\
+\textbf{for} j=2:N
+\item $\qquad$Draw $u\sim U([0,\alpha])$
+\item $\qquad q_{j}\leftarrow q_{j-1}+u$
+\item $\qquad$Compute $\post(q_{j}|D)$
+\item $\qquad\beta\leftarrow\min(1,\frac{\post(q_{j}|D)}{\post(q_{j-1}|D)})$
+\item $\qquad$Draw $w\sim U([0,1])$\\
+\\
+$\qquad\qquad\qquad$\textbf{if} $w<\beta$ 
+\item $\qquad\qquad q_{j-1}=q_{j}$\\
+\\
+$\qquad\qquad$else
+\item
+	$\qquad\qquad q_{j-1}=q_{j-1}$\\
+\textbf{end}\\
+\textbf{end}
+\end{enumerate}
 
-Returning to the problem of sampling the posterior distribution for $b$. We are going to use the Metropolis Hastings algorithm
-using an step size of $\delta=0.23$, $10000$ samples and we chose the first $5000$ to be the burning period. The results 
-of applying the MH algorithm is shown below  
+Choosing the parameter $\alpha$ in the scheme above has to be done in a way so the acceptance rate
+is about $25\%$ \cite{casella2008monte}. It can be shown that the sequence $q_{1},q_{2},\ldots,q_{N}$
+are realizations of a Markov chain that in the limit as $N\rightarrow\infty$ the samples come from
+$\post(b|D)$ and are independent. Since we do not have the computational power to let $N\rightarrow\infty$
+to achieve independence from the samples what is done in practice is to consider only
+the last $N/2$ samples obtained from the MH scheme and discard the rest of the samples.
+\newline
+Using the MH scheme to sample from the posterior distribution $\post(b|D)$ with $\alpha=0.23$
+and $N=10000$. We use the burning period of $5000$. Below is shown the result obtained
+from sampling the posterior.
 
+%Returning to the problem of sampling the posterior distribution for $b$. We are going to use the Metropolis Hastings algorithm
+%using an step size of $\delta=0.23$, $10000$ samples and we chose the first $5000$ to be the burning period. The results 
+%of applying the MH algorithm is shown below  
+%
 
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.8]{./FigChap3/histogram_mcmc.jpg}
 \caption{Histogram obtained for the posterior distribution (\ref{eqnpropto}) 
-from $5000$ samples from MH algorithm with step size $\delta=0.23$. The solid line
-is graph for the posterior.}
+from $5000$ samples from MH algorithm with step size $\alpha=0.23$. The solid line
+is the  graph for the posterior $\post(b|D)$.}
 \end{figure}
 
 With the samples obtained we readily obtain the conditional mean (\textbf{Talk about the weak law of large numbers
