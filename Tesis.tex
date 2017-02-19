@@ -1242,11 +1242,11 @@ from $5000$ samples from MH algorithm with step size $\alpha=0.23$. The solid li
 is the  graph for the posterior $\post(b|D)$.}
 \end{figure}
 
-With the samples obtained we readily obtain the conditional mean (\textbf{Talk about the weak law of large numbers
-and also about the error you get from using it})
-\begin{equation*}
+With the samples obtained we readily obtain the conditional mean  by using Monte Carlo integration
+
+\begin{equation}\label{eqnbcmMC}
 b_{cm}=\int_{(0,2]}b\post(b|D)db\approx\frac{1}{5000}\sum_{j=1}^{5000}b_{j}=0.9247042,
-\end{equation*}
+\end{equation}
 where the summands $b_{j}$ are the samples obtained after the burn period of $5000$ samples. We can 
 also estimate the variance of this estimate as 
 \begin{equation*}
@@ -1257,6 +1257,41 @@ interval
 \begin{equation*}
 [0.9247042-2\sqrt{0.01427},0.92470422+2\sqrt{0.01427}]=[0.68579,1.163618].
 \end{equation*}
+
+Let us disgress about the idea behind Monte Carlo integration. Consider the generic problem of evaluating the 
+integral
+\begin{equation}\label{eqnmontecarlo}
+\int_{\mathbb{R}^{n}}h(x)\rho(x)dx,
+\end{equation}  
+where $\rho$ is the Lebesgue density of some probability measure $\p$. This means that calculating (\ref{eqnmontecarlo}) 
+is equivalent to calculating the expected value of $h$, i.e.
+\begin{equation*}
+\mathbb{E}[h]=\int_{\mathbb{R}^{n}}h(x)\rho(x)dx.
+\end{equation*}
+If we generate a sample $\{x_{1},\ldots,x_{n}\}$ from $\rho$, then by the strong law of large numbers, the sequence of random
+variables
+\begin{equation*}
+h_{n}=\frac{1}{n}\sum_{k=1}^{n} h(x_{k}),
+\end{equation*}
+converges to $\mathbb{E}[h]$\cite{dudley2002real}. Furthermore if $\mathbb{E}[h^{2}]<\infty$ we can assess the speed of
+convergence and the quality of the approximation $h_{n}$ for $\mathbb{E}[h]$. By the central limit theorem
+the sequence of random  variables $h_{n}$
+\begin{equation*}
+\frac{h_{n}}{\sqrt{\sigma_{n}}}\rightarrow \mathcal{N}(\mathbb{E}[h],1),
+\end{equation*}
+where 
+\begin{equation*}
+\sigma_{n}=\frac{1}{n^{2}}\sum_{k=1}^{n}(h(x_{k})-h_{n})^{2}.
+\end{equation*}
+This means that the uncertainty in the approximation $h_{n}$ for $\mathbb{E}[h]$ goes to $0$ as $\mathcal{O}(\frac{1}{\sqrt{n}})$.
+Using these results about Monte Carlo integration in equation (\ref{eqnbcmMC}), witn $n=5000$ we conclude that with $95\%$ 
+confidence our result is within bla.
+\newline
+
+Now we are going to turn our attention in the importance of choosing the prior.
+
+
+
 
 \subsection*{How important is the prior to make inferences?}
 It is constructive to  explore how relevant is the choice  of the prior distribution
