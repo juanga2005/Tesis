@@ -50,7 +50,7 @@
 \newcommand{\E}{\mathbb{E}} %Expectation
 \newcommand{\tvs}{\mathscr{T}} %TVS symbol
 \newcommand{\x}{\textbf{x}}
-
+\newcommand{\y}{\textbf{y}}
 
 
 
@@ -890,51 +890,52 @@ chapter, so for chapter four we can focus on the results instead on how we appli
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Chapter 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Test Problem: How Theory Works in Practice}
+\chapter{Toy Problem: How Theory Works in Practice}
 
-In the previous chapter we review some  of the theoretical and computational tools needed obtain
+In the previous chapter we reviewed some  of the theoretical and computational tools needed obtain
 the solution to Bayesian inverse problems. In this chapter
 we are going to work on a toy problem to illustrate how the theory explained can be applied, so
 in Chapter 4 we can focus mainly on  results for the  solution of the problem described in Chapter 1.
 
-
-To talk about an inverse problem  we first need to specify  the forward problem. 
+To talk about an inverse problem  we  need to specify  the forward problem. 
 We define the forward problem as the solution of the  following
 partial differential equation (PDE)
 
 \begin{equation}\label{eqntoyproblem}
 \left\{
 	\begin{array}{ll}
-		\Delta u=e^{-b\|x\|_{2}} &\mbox{for } x\in\Omega=[0,1]\times [0,1]\subset\mathbb{R}^{2} \\
+		\Delta u=e^{-b\|\x\|_{2}} &\mbox{for } x\in\Omega=[0,1]\times [0,1]\subset\mathbb{R}^{2} \\
 		u=0 & \mbox{for } x\in\partial\Omega
 	\end{array}
 \right.
 \end{equation} 
-
 where $b$ is some real positive parameter. The 
-function $u$ represents the mathematical approximation of  a quantity with a physical interpretation  $\tilde{u}$. The  behaviour
+function $u$ represents the mathematical approximation of  a quantity with a physical interpretation  $\tilde{u}$. The  behavior
 of $\tilde{u}$ is assumed to be    modeled by equation (\ref{eqntoyproblem}).
-Recall from Chaper 2 that the goal is to create an emulator $\hat{M}(\cdot)$  that approximates
-the output $y$  of a computationally expensive function  $M(\cdot)$ at a point $\textbf{x}$ in its domain. 
-In the context of equation (\ref{eqntoyproblem}) the domain of the function $M(\cdot)$ is $\Omega\times[0,\infty)$
-and the output $y$ at a point $(\textbf{x},b)\in\Omega\times [0,1]$ is given by the value of the solution $u$ at that 
-point, i.e. $u(\textbf{x};b)=M(\textbf{x},b)$. 
 
-We are going to assume that we have ten experimental measurements 
-of $\tilde{u}$ at points $P:=\{\x_{1},\x_{2},\ldots,\x_{10}\}$. That is, we measured the quantities 
-$D:=\{\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)\}$.
-We want to estimate the value of $b$ that explains the best the experimental data $D$. The obvious approach to achieve this
+In Chapter 2 we explained how to build an emulator $\hat{M}(\cdot)$  that approximates
+the output $y$  of a computationally expensive function  $M(\cdot)$ at a point  in its domain. 
+In the context of this chapter, the function $M(\cdot)$ takes as input a point  $(\textbf{x},b)\in\Omega\times [0,1]$. The
+output is the value of the solution $u$ at that 
+point, i.e. $u(\textbf{x};b)=M(\textbf{x},b)$. Now we proceed to explain the associated inverse problem and  how we are going to construct $\hat{M}(\cdot)$.  
+
+Assume that we have ten experimental measurements 
+of $\tilde{u}$. This measurements were taken  at the points $P:=\{\x_{1},\x_{2},\ldots,\x_{10}\}\subset\Omega$. 
+That is, we know the vector of measurements 
+$\textbf{y}=(\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b))$.
+We want to estimate the value of $b$ that explains the best the experimental data $\textbf{y}$. To estimate $b$ is the inverse problem. 
+The obvious approach to achieve this
 would be to solve equation (\ref{eqntoyproblem}) for a big number of values $b$ in the interval $[0,L]$ where $L$ 
 is large enough to guarantee that there exists a $b^{*}\in [0,L]$ such that the set $\{u(\x_{1};b^{*}),\ldots,u(\x_{10};b^{*})\}$
-has `small' discrepancy with the experimental data for $D$. For the sake of the example we assume that solving
+has `small' discrepancy with the experimental data $\y$. For the sake of the example we assume that solving
 equation (\ref{eqntoyproblem}) is computationally expensive and solving it for a big range of different values of $b$
-is not feasible. Therefore it is necessary to construct an emulator $\hat{M}(\cdot)$ that approximates $M(\cdot)$ as
+is not feasible. Therefore the need to construct an emulator $\hat{M}(\cdot)$ that approximates $M(\cdot)$ as
 explained in  Chapter 2.  Then solve equation (\ref{eqntoyproblem}) for a number of 
 different values of  $b$
 that makes the cost of solving (\ref{eqntoyproblem})  acceptable. Finally use the emulator
 $\hat{M}(\cdot)$ to predict the output of $M(\cdot)$ for as many different values of $b$ as possible. 
-The value of the emulator at the point $(\x,b)$  is going to be denoted by $\hat{u}(\x,b)$. The following
-table summarices the notation that is going to be used from now on in this Chapter.
+The value of the emulator at the point $(\x,b)$  is going to be denoted by $\hat{u}(\x;b)$. The following
+table summarizes the notation that is going to be used from now on in this Chapter.
 
 \begin{table}[H]
 \centering
@@ -952,39 +953,41 @@ $u(\x;b)$ & \pbox{7cm}{Numerical solution of equation (\ref{eqntoyproblem})
 at $\x$ with parameter $b$.\\} \tabularnewline
 \hline
 \hline 
-$\hat{u}(\x;b)$ & \pbox{7cm}{Value of the interpolation of the GP at the point $\x$ with parameter
+$\hat{u}(\x;b)$ & \pbox{7cm}{Value of the interpolation of the emulator $\hat{M}(\cdot)$ at the point $\x$ with parameter
 $b$\\}.  \tabularnewline
 \hline
 \hline 
-$P:=\{\x_{1},\ldots,\x_{10}\}$ & \pbox{7cm}{Points where the experimental measures where taken\\}.  \tabularnewline
+$P:=\{\x_{1},\ldots,\x_{10}\}$ & \pbox{7cm}{Points where the experimental measurements were taken\\}.  \tabularnewline
 \hline
 \hline 
-$D:=\{\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)\}$ & \pbox{7cm}{Values of the experimental measurements for the variable $\tilde{u}$\\}.  \tabularnewline
+$\y:=(\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b))$ & \pbox{7cm}{Values of the experimental measurements for the variable $\tilde{u}$\\}.  \tabularnewline
 \hline
 \end{tabular}
 
 \caption{Summary of symbols used in Chapter 3.}
 \label{tabSymboltable}
 \end{table}
+\newpage
+We want to estimate the value of $b$ that explains the best the experimental data $\y$. 
+To incorporate $\y$ into the inference, 
+we can use Bayes rule and estimate the posterior distribution for $b$ as
 
-We want to estimate the value of $b$ that explains the best the experimental data $D$. 
-To incorporate these data into the inference, 
-we can use Bayes rule and estimate the posterior distribution for $b$, that is
-\begin{equation}\label{eqnpropto}
-\post(b|D)=\frac{\like(D|b)\prior(b)}{\p(D)}.
+\begin{equation} \label{eqnpropto}
+\post(b|\y)=\frac{\like(\y|b)\prior(b)}{\p(\y)}.
 \end{equation}
-Having the posterior we can estimate $b$ using any of the point estimates given in equation (\ref{eqnpointestimates}) along
-with the  the uncertainty associated with that estimate.
 
-Before we procceed  with finding the posterior distribution for $b$, let us explain how we are going to generate the experimental measures $D$. 
+Having the posterior we can estimate $b$ using any of the point estimates given in equation (\ref{eqnpointestimates}) along
+with the  uncertainty associated with the chosen estimate.
+
+Before we proceed  to find the posterior distribution for $b$, let us explain how we are going to generate the experimental measurements $\y$. 
 Assume that the true value of $b$ is $0,925$. Then we solve equation (\ref{eqntoyproblem})
-using this value of $b$. Next we pick  ten random points and save the value of the numerical 
+using this value of $b$. Next we pick  ten points at random  and save the value of the numerical 
 solution $u$ at those location (see Figure \ref{figsolU}).  Finally we add  noise from
 a normal distribution with mean $0$ and $\sigma=0.01$ to each  of the ten values. The resulting numbers obtained are what we use
-as the experimental data $D=\{\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)\}$. The noise added to the data obtained from the
+as the experimental data $\y=(\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b))$. The noise added to the data obtained from the
 numerical  solution of equation
-(\ref{eqntoyproblem}) plays the role of possible  errors in the experimental measurements plus inaccuaracies of the 
-model to describe the true behaviour of $\tilde{u}$.
+(\ref{eqntoyproblem}) plays the role of possible  errors in the experimental measurements plus inaccuracies of the 
+model to describe the true behavior of $\tilde{u}$.
 
 
 
@@ -992,19 +995,19 @@ model to describe the true behaviour of $\tilde{u}$.
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.5]{./FigChap3/solu}
-\caption{Numerical solution of the system (\ref{eqntoyproblem}) using a five points estencil finite difference
-for the Laplacian. The mesh
+\caption{Numerical solution of the system (\ref{eqntoyproblem}) using a five points stencil finite difference
+approximation for the Laplacian. The mesh
 size used in $x$ and $y$ was $0.01$. The value of the parameter $b$ was set at $0.925$. The black dots
 in the plot represent the points used to generate the experimental data 
-$\{\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)\}$}
+$(\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b))$}
 \label{figsolU}
 \end{figure}
-Now we proceed to estimate the value of $b$ that explains the data $D$  using Bayes formula (\ref{eqnpropto}).
+Now that we explained how to generate the data $\y$, we  continue with how to estimate $b$   using Bayes formula (\ref{eqnpropto}).
 First we need to choose a prior distribution for $b$. For the sake of the example, let us assume that 
 equation (\ref{eqntoyproblem}) describes a well known physical process and it is known that
 the parameter $b$ cannot be greater than $2$. In this case one way to choose a prior distribution
-for $b$ that does not assume any other knowledge than $b\in (0,2]$ is the uniform distribution. 
-Given a Borel measurable set $A\subset(0,2]$, the probability that $b$ belongs to $A$ is given by
+for $b$ that does not assume any other knowledge than $b\in (0,2]$ is the \textit{uniform distribution}. 
+With this distribution, given a Borel measurable set $A\subset(0,2]$, the probability that $b$ belongs to $A$ is given by
 \begin{equation*}
 \frac{1}{2}\int_{A}dx.
 \end{equation*}
@@ -1012,7 +1015,7 @@ In this case we have
 \begin{equation}\label{eqnpriortoyproblem}
 \prior(b)=\frac{1}{2}\textbf{1}_{(0,2]}(b),
 \end{equation}
-where $\textbf{1}_{(0,2]}$ is the indicator function of the set $(0,2]$. The indicator function for a borel measurable set $C$ is
+where $\textbf{1}_{(0,2]}$ is the indicator function of the set $(0,2]$. The indicator function for a Borel measurable set $C$ is
 defined as
 \begin{equation*}
 \textbf{1}_{C}(y)=\left\{
@@ -1023,39 +1026,41 @@ defined as
 \right.
 \end{equation*}
 
-To estimate the likelihood we need to know how $b$ is connected with the data $D$. The connection is given by 
+To calculate the likelihood we need to know how $b$ is connected with the data $\y$. The connection is given by 
 equation (\ref{eqntoyproblem}). By solving explicitly this equation we can find a functional relation
 between $u$ and $b$ for each one of the ten locations depicted in Figure \ref{figsolU}.
-
-In the problem of this Chapter   it is possible to explicitly solve equation (\ref{eqntoyproblem}). However
+It is possible to explicitly solve equation (\ref{eqntoyproblem}). However
 the relation between $u$ and $b$ is  given by an infinite Fourier series. Having a functional relation given
 by an infinite series is often not very useful. Hence, the  approach we are going to use is the following: 
 by assumption,
 solving equation (\ref{eqntoyproblem}) is computationally expensive. Assume that given time and computational budget
 we can solve the PDE for no more than 10 different values of $b$ (Having ten values of $b$ and ten points
-where we measure $\tilde{u}$ is just coincidence). The idea is to use GPs as described
-in Chapter 2 to interpolate for the values of $b\in (0,2]$ where we did not  solve equation (\ref{eqntoyproblem}). 
+where we measured $\tilde{u}$ is just coincidence). The idea is to use GPs as described
+in Chapter 2 to interpolate for the values of $b\in (0,2]$ where we did not  solve equation (\ref{eqntoyproblem}). The value
+of the interpolation done by the GP at a point is going to play the role of the output of the   emulator $\hat{M}(\cdot)$ at that point.
 \newline
-We need to choose ten values of $b$, $\{b_{1},\dots,b_{10}\}$ to solve the PDE (\ref{eqntoyproblem}) in a way that the interpolation error for 
+
+We need to choose ten values of $b$  to solve the PDE (\ref{eqntoyproblem}) in a way that the interpolation error for 
 the other values of $b$ in the set $(0,2]$ is small compared to the error in the interpolation if we were to choose
-a different set of ten values. To choose the ten points we use a maximin design as explained in Chapter 2. In this case
+a different set of ten values for $b$. We shall denote the points as $\{b_{1},\dots,b_{10}\}$. To choose the ten points 
+we use a maximin design as explained in Chapter 2. In this case
 it is straightforward to check that the way to choose the points that maximizes the minimum distance among the points
 is by locating them in an equidistant manner i.e.
 \begin{equation*}
-\{0.2,0.4,\ldots,2\}.
+\{b_{1}=0.2,b_{2}=0.4,\ldots,b_{10}=2\}.
 \end{equation*}
 This set gives the maximin design for our problem.
 \newline 
-Having the design, it is now possible to  create the set of training points as 
+Having the design, it is now possible to  create the set of training points for the GP as 
 $\{b_{i},u(\x_{k},b_{i})\}_{i=1}^{10}$ for each of the 
-$k=10$ sites where we obtained the experimental measures $\{\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)\}$.
+$k=10$ sites where we obtained the experimental measurements $(\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b))$.
  Using the training
-points we create the GP for each of the ten sites. For the interpolation we use as a test set
+points, we create the GP for each of the ten sites. For the interpolation we use as a test set
 \begin{equation*}
 \{0.01,0.02,\ldots,1.99,2\}.
 \end{equation*} 
 In Figure \ref{fignofitted} are plotted the training points, 
-the GP fit over the test points, along with the true value of $b$
+the GP regression over the test points, along with the true value of $b$
 and the experimental measure $\tilde{u}(\x_{k};b)$ for each of the ten sites.
 
 
@@ -1072,7 +1077,7 @@ and the experimental measure $\tilde{u}(\x_{k};b)$ for each of the ten sites.
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.7]{./FigChap3/fitted}
-\caption{Training points, GP fit, true value of $b$ and experimental measures for each one of the ten sites labeled
+\caption{Training points, GP regression, true value of $b$ and experimental measures for each one of the ten sites labeled
 from 1 to 10 in Figure \ref{figsolU}}
 \label{fignofitted}
 \end{figure}
@@ -1087,26 +1092,23 @@ from the value of $u$.
 
 The solid line in Figure \ref{fignofitted} gives a functional relation between $\hat{u}$ and $b$ for each of the 
 ten sites.
-Let us denote $G_{k}(b):=\hat{u}(\x_{k};b)$ and $y_{k}=u(\x_{k};b)$ for $k=1,\ldots,10$. A possible 
+Let us denote $G_{k}(b):=\hat{u}(\x_{k};b)$ and $y_{k}=\tilde{u}(\x_{k};b)$ for $k=1,\ldots,10$. A possible 
 functional relation
 that connects these quantities is
 \begin{equation}\label{eqnreal2interp}
 y_{k}=G_{k}(b)+\epsilon_{k},\qquad\text{where } \epsilon_{k}\sim\mathcal{N}(0,\lambda^{2}),
 \end{equation}
-with $\lambda$ a positive number that models how much we believe the true value of $\tilde{u}$ differs from the GP prediction $\hat{u}$.
-If we define the vectors $\textbf{y}=[\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10,b})]^{T}$ and 
-$\textbf{G}(b)=[\hat{u}(\x_{1};b),\ldots,\hat{u}(\x_{10};b)]^{T}$, equation (\ref{eqnreal2interp}) can we written more compactly as
+with $\lambda$ a positive number that models how much we believe the value of $\tilde{u}$ differs from the GP prediction $\hat{u}$. 
+We chose the value $\lambda=5.4\times 10^{-3}$ to get a signal to noise ratio with $\y$ of 1:10.
+If we define the vector  
+$\textbf{G}(b)=(\hat{u}(\x_{1};b),\ldots,\hat{u}(\x_{10};b))$ and recalling the definition of $\y$ 
+(see table \ref{tabSymboltable}), equation (\ref{eqnreal2interp}) can we written more compactly as
 \begin{equation}\label{eqnvector2interp}
 \textbf{y}=\textbf{G}(b)+\epsilon,\qquad\text{where }\epsilon\sim\mathcal{N}(0,\lambda^{2} I_{10\times 10}).
 \end{equation}
 
-Observe that in the likelihood $\like(D|b)$, the variable is the elements in $D$ while $b$ is fixed. The
-vector $\textbf{y}$ is the result of letting the elements of $D$ to vary, thus
-\begin{equation}\label{eqnequivalence}
-\like(D|b)=\p(\textbf{y}|b).
-\end{equation}
 
-Since the random vector $\epsilon$ has multinormal distribution, we can use equation (\ref{eqnvector2interp})
+Since the random vector $\epsilon$ has multivariate Gaussian distribution, we can use equation (\ref{eqnvector2interp})
 to conclude \cite{Somersalo}
 \begin{equation*}
 \textbf{y}|b\sim \mathcal{N}(\textbf{G}(b),\lambda^{2} I_{10\times 10}),
@@ -1117,13 +1119,13 @@ Explicitly
 \end{equation}
 where the proportionality constant normalizes the distribution on the right hand side to one. Since
 the denominator in Bayes rule in equation (\ref{eqnpropto}) is independent of $b$ and serves only 
-as a normalization constant we can use equations (\ref{eqnpriortoyproblem}), (\ref{eqnequivalence}) and (\ref{eqnlikelihoodtoyproblem})  
-and write 
-\begin{equation*}
-\post(b|D)\propto\like(D|b)\prior(b)\propto \textbf{1}_{(0,2]}(b)e^{-\frac{1}{2\lambda^{2}}\|\textbf{G}(b)-\textbf{y}\|_{2}^{2}}.
-\end{equation*}
+as a normalization constant we can use equations (\ref{eqnpriortoyproblem}) and (\ref{eqnlikelihoodtoyproblem})  
+to write 
+\begin{equation}\label{eqnposteriorforb}
+\post(b|\y)\propto\like(\y|b)\prior(b)\propto \textbf{1}_{(0,2]}(b)e^{-\frac{1}{2\lambda^{2}}\|\textbf{G}(b)-\textbf{y}\|_{2}^{2}}.
+\end{equation}
 An interpretation of this result is that before taking experimental measurements all we knew about the parameter $b$ was
-that $b\in (0,2]$ after weghting this prior believe with the data $D$ our current state of knowledge about the
+that $b\in (0,2]$ after weighting this prior believe with the data $\y$ our current state of knowledge about the
 parameter $b$ is encoded in the posterior distribution. Figure \ref{figlikeprior} plots this update in our knowledge about $b$.
 
 %
@@ -1177,25 +1179,25 @@ parameter $b$ is encoded in the posterior distribution. Figure \ref{figlikeprior
 %posterior is shown below.
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.8]{./FigChap3/prior_posterior.jpg}
-\caption{Plots for the prior distribution, posterior distribution and true value of the paramter $b$ we are infering.}
+\includegraphics[scale=0.6]{./FigChap3/prior_posterior.jpg}
+\caption{Plots for the prior distribution, posterior distribution and true value of the parameter $b$.}
 \label{figlikeprior}
 \end{figure} 
-Having a visual represenation of the posterior distribution is useful, but, in order to obtain statistics
+Having a visual representation of the posterior distribution is useful, but, in order to obtain statistics
 for the possible value of $b$ we need to sample from the posterior. A family of methods that allow to sample
-from fairly arbitary distributions are known as Markov Chain Montecarlo (MCMC). In this work we are going to 
-focus in a family of submethods known as Metropolis-Hastings algorithms (MH). We are going to explain
-how MH works in practice using the posterior for $b$ as an example. 
+from fairly arbitrary distributions are known as Markov Chain Monte Carlo (MCMC). In this work we are going to 
+focus in a particular algorithm known as Metropolis-Hastings  (MH). We now proceed  to explain
+how MH works in practice using the posterior for $b$ in equation (\ref{eqnposteriorforb}) as an example. 
 \newline
 \newline
-Consider the posterior distribution $\post(b|D)$. The idea is to wander around the support of the distribution
+Consider the posterior distribution $\post(b|\y)$. The idea is to wander around the support of the distribution
 in a way that points in the support with high probability are visited more often than those with low 
 probability. For example, if we are at a point $q_{1}$ and we want to move to a point $q_{2}$ we will accept 
-that move with probability one if $\post(p|D)\leq\post(q|D)$ and with probability 
-$\frac{\post(q|D)}{\post(p|D)}$ otherwise. On the other hand if we are at a point $q_{1}$, we choose
-in what direction to move randomly with some probability distribution that is easy to sample from.
-In this and the next Chapter we choose the uniform distribution to choose the direction to move.
-The scheme for the procedure describe above is 
+that move with probability one if $\post(q_{1}|\y)\leq\post(q_{2}|\y)$ and with probability 
+$\frac{\post(q_{2}|\y)}{\post(q_{1}|\y)}$ otherwise. On the other hand if we are at a point $q_{1}$, we choose
+in what direction to move, randomly, using some probability distribution that is easy to sample from.
+In this and the next Chapter we choose the uniform distribution to decide in what  direction to move.
+The pseudocode  for the MH algorithm as described above is \cite{Somersalo}
 
 \begin{enumerate}
 \item pick a point $q_{1}$ in the support of the distribution\\
@@ -1208,25 +1210,31 @@ The scheme for the procedure describe above is
 \item $\qquad$Draw $w\sim U([0,1])$\\
 \\
 $\qquad\qquad\qquad$\textbf{if} $w<\beta$ 
-\item $\qquad\qquad q_{j-1}=q_{j}$\\
+\item $\qquad\qquad q_{j-1}=q_{j}$\qquad(Accept move)\\
 \\
-$\qquad\qquad$else
+$\qquad\qquad$\textbf{else}
 \item
 	$\qquad\qquad q_{j-1}=q_{j-1}$\\
 \textbf{end}\\
 \textbf{end}
 \end{enumerate}
 
-Choosing the parameter $\alpha$ in the scheme above has to be done in a way so the acceptance rate
-is about $25\%$ \cite{casella2008monte}. It can be shown that the sequence $q_{1},q_{2},\ldots,q_{N}$
+The rule of thumb for choosing the parameter $\alpha$ in the scheme above is that   the proportion of times we accept
+a move 
+is about $0.25$ \cite{casella2008monte}. It can be shown that the sequence $q_{1},q_{2},\ldots,q_{N}$
 are realizations of a Markov chain that in the limit as $N\rightarrow\infty$ the samples come from
-$\post(b|D)$ and are independent. Since we do not have the computational power to let $N\rightarrow\infty$
-to achieve independence from the samples what is done in practice is to consider only
-the last $N/2$ samples obtained from the MH scheme and discard the rest of the samples.
+$\post(b|\y)$ and are independent. This convergence result works under mild conditions over the distribution that is being sampled.
+For more details about the theory behind MCMC methods we refer the reader to \cite{casella2008monte}. 
+Since we do not have the computational power to let $N\rightarrow\infty$
+to achieve independence from the samples, what is done in practice is to consider a number $N$ as big as possible given computational and time constraints. 
+Then consider only 
+a fraction of the last  samples obtained. For example we may choose the last $N/2$ samples obtained from the MH scheme and 
+discard the rest of the samples. The iterations where we obtain samples that we discard later is know as 
+the \textit{burning period}.
 \newline
-Using the MH scheme to sample from the posterior distribution $\post(b|D)$ with $\alpha=0.23$
-and $N=10000$. We use the burning period of $5000$. Below is shown the result obtained
-from sampling the posterior.
+Using the MH scheme to sample from the posterior distribution $\post(b|\y)$ with $\alpha=0.23$
+and $N=10000$. We set the burning period to be the set  of the first $5000$ samples. Below is shown the result obtained
+from sampling the posterior in equation (\ref{eqnposteriorforb}).
 
 %Returning to the problem of sampling the posterior distribution for $b$. We are going to use the Metropolis Hastings algorithm
 %using an step size of $\delta=0.23$, $10000$ samples and we chose the first $5000$ to be the burning period. The results 
@@ -1236,13 +1244,14 @@ from sampling the posterior.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.8]{./FigChap3/histogram_mcmc.jpg}
+\includegraphics[scale=0.50]{./FigChap3/histogram_mcmc.jpg}
 \caption{Histogram obtained for the posterior distribution (\ref{eqnpropto}) 
 from $5000$ samples from MH algorithm with step size $\alpha=0.23$. The solid line
 is the  graph for the posterior $\post(b|D)$.}
 \end{figure}
 
-With the samples obtained we readily obtain the conditional mean  by using Monte Carlo integration
+With the samples obtained we readily obtain useful statistics for $b$. For example we can estimate
+ the conditional mean  by using Monte Carlo integration
 
 \begin{equation}\label{eqnbcmMC}
 b_{cm}=\int_{(0,2]}b\post(b|D)db\approx\frac{1}{5000}\sum_{j=1}^{5000}b_{j}=0.9247042,
@@ -1252,13 +1261,14 @@ also estimate the variance of this estimate as
 \begin{equation*}
 \int_{(0,2]}(b-b_{cm})^{2}\post(b|D)db\approx\frac{1}{5000}\sum_{j=1}^{5000}(b_{j}-b_{cm})^{2}=0.01427.
 \end{equation*}
-With these values we can say that with $95\%$ of probabilty, the true value of $b$ belongs to the
+With these values we can say that with $95\%$ of probability, the true value of $b$ belongs to the
 interval
 \begin{equation*}
 [0.9247042-2\sqrt{0.01427},0.92470422+2\sqrt{0.01427}]=[0.68579,1.163618].
 \end{equation*}
 
-Let us disgress about the idea behind Monte Carlo integration. Consider the generic problem of evaluating the 
+
+Let us digress about the idea behind Monte Carlo integration. Consider the generic problem of evaluating the $n$-dimensional
 integral
 \begin{equation}\label{eqnmontecarlo}
 \int_{\mathbb{R}^{n}}h(x)\rho(x)dx,
@@ -1268,36 +1278,43 @@ is equivalent to calculating the expected value of $h$, i.e.
 \begin{equation*}
 \mathbb{E}[h]=\int_{\mathbb{R}^{n}}h(x)\rho(x)dx.
 \end{equation*}
-If we generate a sample $\{x_{1},\ldots,x_{n}\}$ from $\rho$, then by the strong law of large numbers, the sequence of random
+If we have $X_{1},\ldots,X_{n}$ random variables independent with density $\rho$, then by the strong law of large numbers, the sequence of random
 variables
 \begin{equation*}
-h_{n}=\frac{1}{n}\sum_{k=1}^{n} h(x_{k}),
+h_{n}=\frac{1}{n}\sum_{k=1}^{n} h(X_{k}),
 \end{equation*}
 converges to $\mathbb{E}[h]$\cite{dudley2002real}. Furthermore if $\mathbb{E}[h^{2}]<\infty$ we can assess the speed of
 convergence and the quality of the approximation $h_{n}$ for $\mathbb{E}[h]$. By the central limit theorem
 the sequence of random  variables $h_{n}$
 \begin{equation*}
-\frac{h_{n}}{\sqrt{\sigma_{n}}}\rightarrow \mathcal{N}(\mathbb{E}[h],1),
+\frac{h_{n}-\mathbb{E}[h]}{\sqrt{\sigma_{n}}}\rightarrow \mathcal{N}(0,1),
 \end{equation*}
 where 
 \begin{equation*}
-\sigma_{n}=\frac{1}{n^{2}}\sum_{k=1}^{n}(h(x_{k})-h_{n})^{2}.
+\sigma_{n}=\frac{1}{n}\sum_{k=1}^{n}(h(X_{k})-h_{n})^{2}.
 \end{equation*}
 This means that the uncertainty in the approximation $h_{n}$ for $\mathbb{E}[h]$ goes to $0$ as $\mathcal{O}(\frac{1}{\sqrt{n}})$.
-Using these results about Monte Carlo integration in equation (\ref{eqnbcmMC}), witn $n=5000$ we conclude that with $95\%$ 
-confidence our result is within bla.
+In practice, to estimate the quality of the result from the Monte Carlo integration we use the approximation
+\begin{equation*}
+\p\left(\frac{h_{n}-\mathbb{E}[h]}{\sqrt{\sigma_{n}}}\leq x\right)\approx\Phi(x),
+\end{equation*}
+where 
+\begin{equation*}
+\Phi(x)=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{x}\exp(-\frac{x^{2}}{2})dx.
+\end{equation*}
 \newline
 
-Now we are going to turn our attention in the importance of choosing the prior.
+To conclude this Chapter we are going to turn our attention into the subjective part of Bayesian statistics.  We are 
+going to talk about  the role the  prior probability has in the inference process. 
 
 
 
 
 \subsection*{How important is the prior to make inferences?}
 It is constructive to  explore how relevant is the choice  of the prior distribution
-in making inferences about a parameter of interest. Let us consider the same problem as above
-. We want to estimate
-the value of the paramter $b$. For demonstration purposes, let us assume two things: the parameter
+in making inferences about a parameter of interest. Let us consider the same problem,
+we want to estimate
+the value of the parameter $b$. For demonstration purposes, let us assume two things: the parameter
 $b$ can be any real number (not just $0<b\leq 2$ as before) and we assume a prior distribution for $b$ as
 \begin{equation*}
 b\sim\mathscr{N}(b^{*},\sigma_{b}^{2}),
@@ -1305,10 +1322,10 @@ b\sim\mathscr{N}(b^{*},\sigma_{b}^{2}),
 where $b^{*}$ and $\sigma_{b}$ are parameters to be set later.  With this new prior the formula
 for the posterior is calculated as 
 \begin{equation*}
-\post(b|\textbf{y})\propto \exp\left(-\frac{\|\textbf{y}-\textbf{G}(b)\|_{2}^{2}}{2\sigma^{2}}-\frac{(b-b^{*})^{2}}{2\sigma_{b}^{2}}\right).
+\post(b|\textbf{y})\propto\underbrace{\exp\left(-\frac{\|\textbf{y}-\textbf{G}(b)\|_{2}^{2}}{2\sigma^{2}}\right)}_{\text{Likelihood}}\underbrace{\exp\left(-\frac{(b-b^{*})^{2}}{2\sigma_{b}^{2}}\right)}_{\text{Prior}}.
 \end{equation*}
 As before, assume that the true
-value of $b$ is $0.925$. To ilustrate the role that the prior has in the inference of the value
+value of $b$ is $0.925$. To illustrate the role that the prior has in the inference of the value
 of the parameter given the data $\textbf{y}$, suppose that 
 \begin{equation*}
 b\sim\mathscr{N}(4,2.5).
@@ -1316,11 +1333,13 @@ b\sim\mathscr{N}(4,2.5).
 This prior assumes that, with $95\%$ of confidence, the value of
 $b$ is in the interval $[1.8,8.2]$. Clearly there is a mismatch between
 the true value of $b$ and the range of values that the prior distribution
-assign with high probability. In Figure \ref{figpostevolution} it is shown
+assign with high probability. Let us evaluate how the posterior
+distribution for $b$ evolves as we consider more and more experimental
+data from the measurements of $\tilde{u}$.  In Figure \ref{figpostevolution} it is shown
 how the posterior evolves when we calculate the likelihood with more 
 and more data. The first frame shows the result when only the measurement
 $\tilde{u}(\x_{1};b)$ is taken into account. The second frame
-when the measures $\tilde{u}(\x_{1};b),\tilde{u}(\x_{2};b)$ are taken
+when the measurements $\tilde{u}(\x_{1};b),\tilde{u}(\x_{2};b)$ are taken
 into account. In each frame we proceed adding one more measurement 
 at a time and in the tenth frame we calculate the posterior
 using the data obtained from all ten points.
@@ -1334,18 +1353,18 @@ using the data obtained from all ten points.
 
 The sequence of plots in Figure \ref{figpostevolution} shows that the experimental data creates a new mode
 in the posterior distribution that is close to the true value of $b$. In the end of the sequence where we consider
-all 10 expeirmental measures, the mode that is close to the true value of $b$ is bigger than the mode originate
+all 10 experimental measurements, the mode that is close to the true value of $b$ is bigger than the mode originate
 by the prior at the point $b=4$. The reason for this final posterior distribution is that the prior gives a large
 probability to values around $b=4$, whereas give a close to zero probability for values around $b=0.925$.
 When the experimental data is used, the likelihood distribution points to values close to $b=0.925$. The more data
 we use the stronger the weight that the likelihood has compared to the prior distribution. However since
 the prior distribution gives negligible probability to the true value of $b$, when all data are used there
 is an equilibrium between the likelihood and prior that is expressed as a bimodal distribution. This result
-is a cautonary tale. If we know how to choose the prior distribution in a way that is meaningful to the
-problem, reliable inference could be done with small ammount of data. On the contrary if the prior distribution
-is not realistic with the problem at hand, inference may not be reliable and a big ammount of data is needed
-to correct for the bias in prior distribution. We can summarize this with the following analogy: if you really believe
-in Santa you will need abudant evindence that he does not exist.
+is a cautionary tale. If we know how to choose the prior distribution in a way that is meaningful to the
+problem, reliable inference could be done with small amount of data. On the contrary if the prior distribution
+is not realistic, inference may not be reliable and a big amount of data is needed
+to correct for the bias included in the prior distribution. We can summarize this with the following analogy: if you really believe
+in Santa you will need significant  evidence that he does not exist to stop believing in his existence.
 
 
 

@@ -8,4 +8,4 @@
 \contentsline {subsection}{\numberline {2.1.4}R packages}{26}
 \contentsline {subsubsection}{Package: DiceKriging}{26}
 \contentsline {subsubsection}{Package: Sensitivity}{26}
-\contentsline {chapter}{\numberline {3}Test Problem: How Theory Works in Practice}{27}
+\contentsline {chapter}{\numberline {3}Toy Problem: How Theory Works in Practice}{27}
