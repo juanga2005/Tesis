@@ -1,11 +1,11 @@
 \contentsline {chapter}{\numberline {1}Introduction}{7}
 \contentsline {chapter}{\numberline {2}Theoretical and Computational Framework}{9}
-\contentsline {section}{\numberline {2.1}Dealing with the computational complexity of the physical model}{15}
+\contentsline {section}{\numberline {2.1}Dealing with the computational complexity of the physical model}{16}
 \contentsline {subsection}{\numberline {2.1.1}Gaussian Processes}{16}
 \contentsline {subsubsection}{Distributions Over Function Spaces}{18}
 \contentsline {subsection}{\numberline {2.1.2}Experimental Design }{22}
 \contentsline {subsection}{\numberline {2.1.3}Sensitivity Analysis}{23}
-\contentsline {subsection}{\numberline {2.1.4}R packages}{26}
-\contentsline {subsubsection}{Package: DiceKriging}{26}
-\contentsline {subsubsection}{Package: Sensitivity}{26}
-\contentsline {chapter}{\numberline {3}Toy Problem: How Theory Works in Practice}{27}
+\contentsline {subsection}{\numberline {2.1.4}R packages}{27}
+\contentsline {subsubsection}{Package: DiceKriging}{27}
+\contentsline {subsubsection}{Package: Sensitivity}{27}
+\contentsline {chapter}{\numberline {3}Toy Problem: How Theory Works in Practice}{29}

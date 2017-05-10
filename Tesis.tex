@@ -9,7 +9,7 @@
 \usepackage{setspace}
 \usepackage{mathrsfs}
 \usepackage{float}
-\usepackage{pbox}
+%\usepackage{pbox}
 
 
 
@@ -94,49 +94,50 @@ Burnaby B.C - May  2017
 %\pdfmarkupcomment[markup=Squiggly,color=green]{what eve}{Change this shit}
 
 
-The foundations of  our approach to estimate parameters and solve inverse problems is  the 
-framework of Bayesian statistics. Unlike frequentist statistics, in the Bayesian approach, randomness
-is a measure of uncertainty,  not a matter of frequency . A question like:
-what is the probability of having  life in Mars? If the answer is say 0.01, in the frequentist
-statistics framework, this number is interpreted as, for every hundred times we go to 
-mars under identical circumstances, one of those times we will find life there. In the Bayesian
-approach the number 0.01 is interpreted as: given our current level of knowledge about mars
-we think that is very unlikely that mars shelters life. Clearly there is a big philosophical
+The framework of Bayesian statistics is the foundation of  our approach to estimate parameters and solve 
+inverse problems is. Unlike frequentist statistics, in the Bayesian approach, randomness
+is a measure of uncertainty,  not a matter of frequency . Consider an statement such  as:
+the probability of having life in the universe is 0.01. In the frequentist
+perspective, this number is interpreted as: for every hundred planets, on average, one planet shelters life.
+ In the Bayesian
+perspective the number 0.01 is interpreted as a measure of how certain we are about life in the universe. 
+Clearly there is a big philosophical
 difference between these two approaches that has a direct impact in how far reaching is each point of view  \cite{jaynes2003probability}.
 
 
 %Talking about Bayes rule
-In real life the uncertainty associated to a  measurement or  quantity of interest is usually 
-connected  with the uncertainty  of other variables involved in the problem under study. 
 At this point we mention that when we talk about uncertainty we are talking about every possible 
 source of randomness  or  lack of information. That is, the use of the word uncertainty in this work
 is related to either epistemic (A phenomenon might not be random but the complete lack of 
 understanding of it makes us see it as random) or aleatory (Inherent to the nature of phenomenon, for 
-example this is the kind of randomness physicists believe is happening in quantum mechanics)
-\cite{kennedy2001bayesian}.
-
-In general the connection between the different variables is far from trivial and hard to assess.
-Bayesian methodology provides a rigorous framework for the study of 
-this connection, using whatever information
-is available for the problem. The cornerstone of this idea
-in the mathematical language is the  Bayes formula 
+example this is the kind of randomness physicists believe is happening in quantum mechanics
+\cite{kennedy2001bayesian}). In real life the uncertainty associated with a  measurement or  quantity 
+of interest is usually connected  with the uncertainty  of other variables involved in the problem of interest. 
+The Bayesian framework provides a rigorous framework to study these uncertainties, 
+using whatever information is available for the problem. The cornerstone of this framework
+in the mathematical language is the  Bayes' formula 
 \begin{equation}\label{eqnBayes}
-\post(A|B)=\frac{\like(B|A)\prior(A)}{\p(B)}.
+\post(A|B)=\frac{1}{Z}\like(B|A)\prior(A).
 \end{equation}
+Intuitively, Bayes' rule says that the probability of the event $A$ to happen given that $B$ was observed is
+proportinal to the probability of $B$ to happen given $A$ was observed. This value is weghted by the
+the probability of $A$ to happen. Finally, $Z$ is a normalization constant.
 
-To explain in detail the above equation and further theory, let us first do the following two definitions
-\cite{dudley2002real}
+Let us make sense of  equation \ref{eqnBayes} in a more rigorous setting. 
+We begin with the following definitions taken from
+\cite{dudley2002real}.
 \begin{definition}\label{dfnprobabilitytriple}
 A probability space is a triple $(\Omega,\mathscr{F},\p)$, where $\Omega$ is a set called 
-sample space.
-The element $\mathscr{F}$ is a subset of the power set of $\Omega$ that satisfies
+sample space, $\mathscr{F}$ is a collection of subsets of $\Omega$ that satisfies
 \begin{enumerate}
 \item $\emptyset,\Omega\in\mathscr{F}$.
 \item If $A\in\mathscr{F}$ then $A^{c}\in\mathscr{F}$.
 \item If $A_{1},A_{2},\ldots \in\mathscr{F}$ then $\bigcup_{i\in\mathbb{N}}A_{i}\in\mathscr{F}$.
 \end{enumerate}
-A set that satisfies properties 1 to 3 is called a $\sigma-$ algebra and its elements are called
-events. The map $\p:\mathscr{F}\rightarrow [0,1]$ satisfies
+A  collection of sets that satisfies properties 1 to 3 is called a $\sigma-$ algebra and its elements are called
+events. 
+\\
+The map $\p:\mathscr{F}\rightarrow [0,1]$ is called a probability measure and satisfies
 \begin{enumerate}
 \item $\p(\Omega)=1$.
 \item If $A_{1},A_{2},\ldots \in\mathscr{F}$ are pairwise disjoint, then 
@@ -144,86 +145,74 @@ events. The map $\p:\mathscr{F}\rightarrow [0,1]$ satisfies
 \p(\bigcup_{i\in\mathbb{N}}A_{i})=\sum_{i\in\mathbb{N}}\p(A_{i}).
 \end{equation*}
 \end{enumerate}
-$\p$ is called a probability measure. 
 \end{definition}
 Another important notion is given by
-\begin{definition}\label{dfnrandonvariables}
-Given a probability space $(\Omega,\mathscr{F},\p)$, a function $X:\Omega\rightarrow\mathbb{R}$ is called 
-a random variable
-if $X^{-1}(C)\in\mathscr{F}$ for all $C$ in the $\sigma$-algebra generated by the open sets of $\mathbb{R}$.
- An $n$-dimensional random vector $\textbf{X}=(X_{1},\ldots,X_{n})$ is a function 
-$\textbf{X}:\Omega\rightarrow\mathbb{R}^{n}$, such that each component is a random variable. The 
-distribution of a random vector is the probability measure $\p\circ \textbf{X}^{-1}$. If for any 
-$C$ in the $\sigma$-algebra generated by the open sets in $\mathbb{R}^{n}$ we have
-\begin{equation}\label{eqnmultivariateGaussianDefinition}
-(\p\circ\textbf{X}^{-1})(C)=\int_{C}
-\frac{1}{2\pi det(\Sigma)^{-\frac{1}{2}}}\exp((\textbf{x}-\textbf{x}^{*})^{T}\Sigma^{-1}
-(\textbf{x}-\textbf{x}^{*}))d\textbf{x},
-\end{equation}
-then we say
-that $\textbf{X}$ has multivariate normal distribution with mean $\textbf{x}^{*}\in\mathbb{R}^{n}$
-and covariance matrix $\Sigma$, where $\Sigma$ is symmetric positive definite matrix. We shall write
-\begin{equation}\label{eqnMultivariate}
-\textbf{X}\sim \mathcal{N}(\textbf{x}^{*},\Sigma).
-\end{equation}
-In this case the components of $\textbf{X}$ are said to be \textit{joinly Gaussian}.
-\end{definition}
+
+\begin{center}
+Here I need to define the definition of conditional probability
+\end{center}
+
+
 
 
 %In equation (\ref{eqnBayes}), $\p,\prior,\like,\post$ are different probability measures defined in the
 %same sample space $\Omega$. 
 Going back to equation (\ref{eqnBayes}), the sets $A$ and $B$ are subsets of the sample space $\Omega$ and 
-are elements of the associated $\sigma-$algebra $\mathscr{F}$. The bar in the probability
-measures e.g. $\like(\cdot|\cdot)$, means conditional probability. Let us introduce some terminology:
- the term $\like(B|A)$ is called the \textit{likelihood} of $B$ given $A$, $\prior(A)$ is called the 
-\textit{prior} probability for $A$. The prior expresses how much we believe the event $A$ to happen without assuming
-anything about how the event $B$ might influence the event $A$. 
-The term $\p(B)$ is a \textit{normalization constant} defined as 
-\begin{equation*}
-Z=\int_{\Omega} \like(B|A)\prior(A)d\p.
-\end{equation*}
-The term $\post(A|B)$ is  the \textit{posterior}. The posterior contains all the information 
-gained when comparing our beliefs (contained in the prior) with experimental data (likelihood). 
-Simply put  formula (\ref{eqnBayes}) implies: the probability that the event $A$ given that
-the event $B$ has already occurred is proportional to the probability of the event $B$ given
-that the event $A$ has already happened weighted by the prior probability of $A$.
+are elements of the associated $\sigma-$algebra $\mathscr{F}$. The  notation
+ $\like(\cdot|\cdot)$ or $\post(\cdot|\cdot)$, denotes conditional probability. Let us introduce some terminology:
+ the term $\like(B|A)$ is called the \textit{likelihood} of $B$ given $A$. The term $\prior(A)$ is called the 
+\textit{prior} probability for $A$. The prior probability expresses how much we believe the event $A$ 
+to happen without assuming
+anything about  $B$. The term $\p(B)$ is a \textit{normalization constant} defined as 
+\begin{equation}\label{eqnNormalizationConstant}
+Z=\int_{\Omega} \like(B|A)d\prior(A).
+\end{equation}
+The term $\post(A|B)$ is  the \textit{posterior} probability of $A$ given $B$. 
+The posterior contains  the information 
+that we gained by comparing our beliefs (decoded in the prior probability) with experimental data 
+(decoded in the likelihood). 
 \newline
 
 
 
 %Ilustratory example
-This interpretation of Bayes rule serves as a motivation for using it in the field of inverse problems. 
-Inverse problems are  of the type `find the cause of this effect'. This name is relative to what is known
-as the forward problem. Forward problems are  of the type `find the effect of this cause'. That is why
-the posterior
-is the \textit{solution of an inverse problem} when using the  Bayesian framework.
+Now we look at the connection between Bayesian statistics and  the field of inverse problems. 
+Inverse problems are  often concerned with finding the cause of an effect. Whereas a forward
+problem is concerend with finding the effect of a cause. If we have information about the 
+forward problem, then we can use it to get information about the inverse problem. Bayes rule
+puts in a mathematical language the connection between inverse and forward problem. 
+If we consider the cause to be the
+event $A$ and the effect the event $B$, then the information of the forward problem
+is encoded in $\like(B|A)$. The information of the inverse problem is contained in 
+$\post(A|B)$. This is why in the Bayesian framework, the posterior probability
+is the $\textit{solution to an inverse problem}$.
+
 Often, inverse problems
 are ill-posed, this means
 that these problems might  not satisfy one or more of the following properties \cite{lebedev2012functional}:
+
 \begin{itemize}
 \item Existence: There exists a solution for the problem.
 \item Uniqueness: The problem has a unique solution.
 \item Stability: Small changes in inputs result in small changes in outputs.
 \end{itemize}
-This is a serious issue. If the problem under study has at least one solution but  is not stable, for example, 
-how can we assess the accuracy of the result obtained? Therefore an statistical approach is called for 
-. The reason why the Bayesian framework is useful to solve inverse problems
-is that Bayes rule unifies the problem of `find the cause of this effect' (e.g. finding the posterior)
-with the direct problem of `find the effect of this cause' (e.g. finding the likelihood).
+This is a serious issue. For example, if the problem under study has at least one solution but  is not stable, 
+then we have no way to assess the accuracy of the results obtained. 
+Therefore an statistical or non-deterministic approach is called for . As explained before, the Bayesian framework 
+is useful in this context. Bayes'rule connects the inverse problem  of finding the cause
+of an effect through the posterior with the forward problem of finding the effect of a cause
+through the likelihood.
 
-Let us be precise of how the Bayesian approach can be used to solve inverse problems with an example. 
-Consider the problem of finding the location where a rock that smashed a window was thrown. We can
-start by considering the following events
+Let us be clarify with an example how the Bayesian framework can be used to solve inverse problems. 
+Consider the problem of finding the location where a rock that impacted (and cracked) a window was launched. 
+We can start by considering the following events
 \begin{center}
-$A$=x,y,z coordinates where the rock was thrown.\\
-$B$=x,y,z coordinates where the rock hit the window.
+$A$= Coordinates of the launching location.\\
+$B$= Coordinates of the impact location.
 \end{center}
-In this case Bayes formula  tells us that if we want to estimate the likely locations  where the rock was 
-thrown from (find the posterior probability), given that we 
-know the coordinates where it hit the window we need to include our prior believe on where
-do we think the rock was actually thrown (Setting a prior probability). Also it is necessary
-to find the connection with the forward problem. In this case the forward problem is to estimate where
-the rock hit the window assuming that we know where it was thrown (find the likelihood probability) 
+Here we know $B$, but $A$ is unknown. We can use Bayes' rule to estimate $A$. In this case
+we need to find the connection with the forward problem, i.e. finding the likelihood $\like(B|A)$,
+and we need to set the prior probability for $A$. 
 \newline
 
 
@@ -236,24 +225,79 @@ the kinematics equations  for parabolic trajectories to get \cite{arnol2013mathe
 \begin{equation}\label{eqnKinematics}
 \textbf{r}=\textbf{r}_{0}+\textbf{v}_{0}t+\frac{1}{2}\textbf{g}t^{2},
 \end{equation} 
-where $\textbf{r}$ and $\textbf{r}_{0}$ are the final and initial position of the rock respectively, 
+where $\textbf{r}$ and $\textbf{r}_{0}$ are the final and initial position of the rock, 
 $\textbf{v}_{0}$ is 
-the initial velocity  and $\textbf{g}$ is  a vector that points to the center of the earth and has a 
-magnitude equal to the value of the gravity. The scalar $t$ represents time.
-In a more physical language, to estimate the likelihood it is necessary to estimate $\textbf{r}$ (where the 
-rock hit the window) assuming we know $\textbf{r}_{0}$ (where it was thrown). 
-To do so,
-we  need to estimate the initial velocity of the rock $\textbf{v}_{0}$. 
+the initial velocity of it,  and $\textbf{g}$ is  a vector that points to the center of the earth and has a 
+magnitude equal to the value of the gravity acceleration. The scalar $t$ represents time.
+In a more physical language, to compute the likelihood it is necessary to estimate $\textbf{r}$ (where the 
+rock hit the window) assuming we know $\textbf{r}_{0}$ (where it was thrown), and the initial velocity 
+of the rock $\textbf{v}_{0}$. 
 Once all the other variables are identified the value of $t$ can be computed in a straightforward manner. 
 
 Equations in physics are just models of reality and as such are just an approximation to it. To take
 this into account we add an extra layer to the model by adding a random parameter that accounts
-for the discrepancy of our model. We propose 
-\begin{equation*}
+for the discrepancy of our model with reality. We propose 
+\begin{equation}\label{eqnParabolicEpsilon}
 \textbf{r}=\textbf{r}_{0}+\textbf{v}_{0}t+\frac{1}{2}\textbf{g}t^{2}+\mathbf{\epsilon},
-\end{equation*} 
-where $\mathbf{\epsilon}$ is a random vector distributed as $\vec{\epsilon}\sim\mathscr{N}(0,\sigma I)$. Here $I$
-represents the $3\times 3$ identity matrix and $\sigma>0$ parametrizes one belief in quantifying the 
+\end{equation} 
+where $\mathbf{\epsilon}$ is a \textit{random vector} distributed as \textit{multivariate Gaussian}. 
+Before we proceed it is necessary to define more terminology and mathematical entities  that are going 
+to be used throughout the rest of the text. 
+
+\begin{definition}
+Given a set $\Omega$. For any subset $T\subset\Omega$, we define the $\sigma-$algebra generated by $T$ as
+the smallest $\sigma-$algebra in $\Omega$ that contains $T$.
+\end{definition}
+
+\begin{definition}
+Let $O$ be the set of all open sets in $\mathbb{R}^{n}$. The $\sigma-$algebra generated by $O$ is called
+the $\sigma-$algebra de Borel and is denoted by $\mathcal{B}^{n}$. If $n=1$ we set 
+$\mathcal{B}^{1}:=\mathcal{B}$.
+\end{definition}
+
+\begin{definition}\label{dfnrandonvariables}
+Given a probability space $(\Omega,\mathscr{F},\p)$, a function $X:\Omega\rightarrow\mathbb{R}$ is called 
+a random variable
+if $X^{-1}(C)\in\mathscr{F}$ for all $C\in\mathcal{B}$.
+\end{definition}
+
+\begin{definition}
+ An $n$-dimensional random vector $\textbf{X}=(X_{1},\ldots,X_{n})$ in $(\Omega,\mathscr{F},\p)$ 
+is a function $\textbf{X}:\Omega\rightarrow\mathbb{R}^{n}$, such that each component is a random variable. 
+\end{definition}
+
+\begin{definition}
+Given a probability space $(\Omega,\mathscr{F},\p)$ and an $n$ dimensional  random vector 
+$\mathbf{X}:\Omega\rightarrow\mathbb{R}^{n}$.
+Its distribution  is the probability measure
+\begin{equation*}
+\mu:\mathcal{B}^{n}\rightarrow [0,1],
+\end{equation*}
+where  $\mu$ defined by 
+\begin{equation*}
+\mu:=\p\circ \textbf{X}^{-1}.
+\end{equation*}
+\end{definition}
+\begin{definition}
+Given an $n$ dimensional random vector $\mathbf{X}$ such that for any 
+$C\in\mathcal{B}^{n}$ we have
+\begin{equation}\label{eqnmultivariateGaussianDefinition}
+\mu(C)=\int_{C}
+\frac{1}{2\pi det(\Sigma)^{-\frac{1}{2}}}\exp((\textbf{x}-\textbf{x}^{*})^{T}\Sigma^{-1}
+(\textbf{x}-\textbf{x}^{*}))d\textbf{x},
+\end{equation}
+then we say
+that $\textbf{X}$ has multivariate normal distribution with mean $\textbf{x}^{*}\in\mathbb{R}^{n}$
+and covariance matrix $\Sigma$, where $\Sigma$ is symmetric positive definite matrix. We shall write
+\begin{equation}\label{eqnMultivariate}
+\textbf{X}\sim \mathcal{N}(\textbf{x}^{*},\Sigma).
+\end{equation}
+In this case the components of $\textbf{X}$ are said to be \textit{jointly Gaussian}.
+\end{definition}
+
+We now return to equation (\ref{eqnParabolicEpsilon}). We assume $\epsilon\sim\mathcal{N}(0,\sigma^{2}I)$.
+Here $I$
+represents the $3\times 3$ identity matrix and $\sigma>0$ parametrizes One belief in quantifying the 
 accuracy  
 of equation (\ref{eqnKinematics}).  By introducing a random variable into the model
 we make all variables involved  in equation (\ref{eqnKinematics})
@@ -261,7 +305,7 @@ to be  random variables, that is, we now look at the  associated stochastic equa
 we can cast equation (\ref{eqnBayes}) into  (assuming independence between $\textbf{r}_{0}$ and $\textbf{v}_{0}$)
 \begin{equation}\label{eqnpostrock}
 \post(\textbf{r}_{0}|\textbf{r},\textbf{v}_{0})=\frac{\like(\textbf{r}|\textbf{r}_{0},\textbf{v}_{0})
-\prior(\textbf{r}_{0})}{\p(\textbf{r}|\textbf{v}_{0})}.
+\prior(\textbf{r}_{0})}{Z}.
 \end{equation}
 
 
@@ -269,40 +313,48 @@ we can cast equation (\ref{eqnBayes}) into  (assuming independence between $\tex
 Since $\mathbf{\epsilon}$ is Gaussian we can readily obtain \cite{Somersalo}
 \begin{equation*}
 \textbf{r}|\textbf{r}_{0},\textbf{v}_{0}\sim \mathscr{N}(\textbf{r}_{0}+\textbf{v}_{0}t+\frac{1}{2}\textbf{g}t^{2}
-,\sigma I),
+,\sigma^{2} I),
 \end{equation*}
-This equation gives an explicit density for the likelihood. We now turn our attention to model the prior.
+This last equation gives an explicit density for the likelihood. 
+
+We now turn our attention to  the prior.
 Suppose that we suspect that the rock was thrown from the bedroom of one of our neighbors.
  One way to model this suspicion is to assume a prior distribution on $\textbf{r}_{0}$ as
 \begin{equation*}
-\textbf{r}_{0}\sim\mathscr{N}(\textbf{z},\lambda I),
+\textbf{r}_{0}\sim\mathscr{N}(\textbf{w},\lambda^{2} I),
 \end{equation*}
-where $\textbf{z}$ is the coordinate vector of the center of mass of our neighbor's room and $\lambda$ represents 
-the variance of the launch location around the point $\textbf{z}$. We note that  this is one way to model 
- prior knowledge and other priors are also possible for our problem.
-
-The last quantity to find is   the normalization constant $\p(\textbf{r}|\textbf{v}_{0})$. Since all
-probabilities  are normalized, if we integrate over the whole space equation (\ref{eqnpostrock}), we get
-\begin{eqnarray*}
-1=\int_{\mathbb{R}^{3}}\post(\textbf{r}_{0}|\textbf{r},\textbf{v}_{0})d\textbf{r}_{0}\\
-=\int_{\mathbb{R}^{3}}\frac{\like(\textbf{r}|\textbf{r}_{0},\textbf{v}_{0})
-\prior(\textbf{r}_{0})}{\p(\textbf{r}|\textbf{v}_{0})}d\textbf{r}_{0}.
-\end{eqnarray*} 
-Since the denominator in the last integrand is  constant with respect to the variable of integration 
-we conclude
-\begin{equation*}
-\p(\textbf{r}|\textbf{v}_{0})=\int_{\mathbb{R}^{3}}\like(\textbf{r}|\textbf{r}_{0},\textbf{v}_{0})
-\prior(\textbf{r}_{0})d\textbf{r}_{0}.
-\end{equation*}
+where $\textbf{w}$ is the coordinate vector of the center of mass of our neighbor's room and $\lambda$ represents 
+the variance of the launch location around the point $\textbf{w}$. We note that  this is one way to model 
+ prior knowledge and other priors are also possible for our problem. Finally the normalization constant $Z$
+is given by the expression in equation (\ref{eqnNormalizationConstant}). Explictly we have
+%probabilities  are normalized, if we integrate over the whole space equation (\ref{eqnpostrock}), we get
+%\begin{eqnarray*}
+%1=\int_{\mathbb{R}^{3}}\post(\textbf{r}_{0}|\textbf{r},\textbf{v}_{0})d\textbf{r}_{0}\\
+%=\int_{\mathbb{R}^{3}}\frac{\like(\textbf{r}|\textbf{r}_{0},\textbf{v}_{0})
+%\prior(\textbf{r}_{0})}{\p(\textbf{r}|\textbf{v}_{0})}d\textbf{r}_{0}.
+%\end{eqnarray*} 
+%Since the denominator in the last integrand is  constant with respect to the variable of integration 
+%we conclude
+\begin{align*}
+Z&=\int_{\mathbb{R}^{3}}\like(\textbf{r}|\textbf{r}_{0},\textbf{v}_{0})
+\prior(\textbf{r}_{0})d\textbf{r}_{0}\\
+&= \frac{1}{(2\pi)^{6}(\sigma\lambda)^{3}}\int_{\mathbb{R}^{3}}
+\exp(-\frac{1}{2\sigma^{2}\lambda^{2}}
+\left(\|\textbf{r}-(\textbf{r}_{0}+\textbf{v}_{0}t+\frac{1}{2}\textbf{g}t^{2})\|^{2}
++\|\textbf{r}_{0}-\textbf{w}\|^{2}\right)d\textbf{r}_{0}.
+\end{align*}
 
 
 Having the likelihood, prior and normalization constant allow us to compute the posterior using
-Bayes rule. Note that the posterior is a probability density so in order to obtain useful
-statistics,  is necessary to sample from it. How to sample from a probability density is going
-to be explained in the next chapter. For the moment assume we have the means to sample from the 
-posterior in equation (\ref{eqnpostrock}). By having samples from the posterior we can obtain
-pointwise estimates of the parameters of interest. Common choices of pointwise estimates
-include
+Bayes rule. With this we can obtain different kind of estimates for the value $\textbf{r}$.  
+Common choices of pointwise estimates include
+
+%
+%
+%For the moment assume we have the means to sample from the 
+%posterior in equation (\ref{eqnpostrock}). By having samples from the posterior we can obtain
+%pointwise estimates of the parameters of interest. Common choices of pointwise estimates
+%include
 \begin{eqnarray}\label{eqnpointestimates}
 \textbf{r}_{MAP}=argmax_{\textbf{r}_{0}}\post(\textbf{r}_{0}|\textbf{r},\textbf{v}_{0}). 
 \qquad\text{(Maximum a posteriori)}\\
@@ -315,22 +367,28 @@ include
 Each  of these estimates have strengths and weaknesses. If the posterior is bimodal, then the conditional
 mean might point at a value with very low probability, whereas the maximum a posteriori might be more 
 reliable. If the posterior has no critical points then the mean might be use as a point estimate. We can 
-also assess how confident we are about the point estimate. If $\textbf{r}^{*}$ is our point
+also assess how confident we are about the point estimate. For example, if $\textbf{r}^{*}$ is our point
 estimate we can calculate $\alpha>0$ such that
 \begin{equation*}
 \int_{B(\textbf{r}^{*},\alpha)}\post(\textbf{r}_{0}|\textbf{r},\textbf{v}_{0})d\textbf{r}_{0}=0.95,
 \end{equation*}
-where $B(\textbf{r}^{*},\alpha)$ is a ball centered at $\textbf{r}_{0}$ and radius $\alpha$. This 
-uncertainty estimate can be thought of  the Bayesian version 
+where $B(\textbf{r}^{*},\alpha)$ is a ball centered at $\textbf{r}$ and radius $\alpha$. This 
+value of $\alpha$ can be thought of as  the Bayesian version 
 of the frequentist's $95\%$ confidence interval.
-Another way to estimate the uncertainty is by calculating the covariance matrix as
+Another way to estimate the uncertainty is by calculating the covariance matrix of $\textbf{r}$
+around $\textbf{r}_{0}$.
 \begin{equation*}
-\int_{\mathbb{R}^{3}}(\textbf{r}-\textbf{r}^{*})\otimes(\textbf{r}-\textbf{r}^{*})d\p,
+\int_{\mathbb{R}^{3}}(\textbf{r}_{0}-\textbf{r}^{*})\otimes(\textbf{r}_{0}-\textbf{r}^{*})d\post,
 \end{equation*}
 \newline
-and then the diagonal of this matrix is going to contain the variance on each of the variables.
-We solved our mystery, we have a way to estimate where the rock was thrown and a way to measure how
+and then the diagonal of this matrix will  contain the variance of each of the coordinates of $\textbf{r}^{*}$.
+To this end, we have a way to estimate where the rock was thrown from and a way to measure how
 confident we are about this estimate. 
+Note that the posterior is a probability density and it does not necessarily have a closed form. This
+makes difficult to calculate the uncertainties we mentioned abouve.
+Hence we need a way of extracting information from posterior. One approach is to generate independent samples
+from it and use them to obtain the different uncertainty estimates. How to sample from a probability 
+density is going to be explained in Chapter 3.  
 \newline
 
 
@@ -342,14 +400,14 @@ deal with several issues such as
 \item Uncertainties in experimental measurements.
 \item Lack of sufficient information and data.
 \item Computational complexity of  physical models that are too expensive to evaluate.
-\item Parameters of interest belong to high dimensional spaces so the associated probability density is 
+\item Parameters that might belong to high dimensional spaces so the associated probability density is 
 hard to sample from.
 \item Evaluating any of the possible point estimates for the quantity of interest might be very hard.
 \end{enumerate}
-In the problem described in the Chapter 1, we have to deal with the above mentioned issues.
+In the problem that we oulined in  Chapter 1, we have to deal with all of  the above mentioned issues.
 In this chapter we are going to discuss our approach to deal with issues 3, 4 and 5 above. We 
 omit 1 and 2, since these  are intrinsic in the physics of the problem and   the methodology used 
-to obtain the experimental data, both of these aspects are out of our hands.
+to obtain the experimental data, and so are out of our hands.
 
 
 %%%%Dealing with computational complexity
@@ -937,36 +995,36 @@ $\hat{M}(\cdot)$ to predict the output of $M(\cdot)$ for as many different value
 The value of the emulator at the point $(\x,b)$  is going to be denoted by $\hat{u}(\x;b)$. The following
 table summarizes the notation that is going to be used from now on in this Chapter.
 
-\begin{table}[H]
-\centering
-\begin{tabular}{|c|c|}
-\hline 
-Symbol & Meaning \tabularnewline 
-\hline 
-\hline
-\hline 
-$\tilde{u}(\x;b)$ & \pbox{7cm}{Value of the physical variable at the point $\x$
-with parameter $b$.\\} \tabularnewline 
-\hline 
-\hline
-$u(\x;b)$ & \pbox{7cm}{Numerical solution of equation (\ref{eqntoyproblem})
-at $\x$ with parameter $b$.\\} \tabularnewline
-\hline
-\hline 
-$\hat{u}(\x;b)$ & \pbox{7cm}{Value of the interpolation of the emulator $\hat{M}(\cdot)$ at the point $\x$ with parameter
-$b$\\}.  \tabularnewline
-\hline
-\hline 
-$P:=\{\x_{1},\ldots,\x_{10}\}$ & \pbox{7cm}{Points where the experimental measurements were taken\\}.  \tabularnewline
-\hline
-\hline 
-$\y:=(\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b))$ & \pbox{7cm}{Values of the experimental measurements for the variable $\tilde{u}$\\}.  \tabularnewline
-\hline
-\end{tabular}
-
-\caption{Summary of symbols used in Chapter 3.}
-\label{tabSymboltable}
-\end{table}
+%\begin{table}[H]
+%\centering
+%\begin{tabular}{|c|c|}
+%\hline 
+%Symbol & Meaning \tabularnewline 
+%\hline 
+%\hline
+%\hline 
+%$\tilde{u}(\x;b)$ & \pbox{7cm}{Value of the physical variable at the point $\x$
+%with parameter $b$.\\} \tabularnewline 
+%\hline 
+%\hline
+%$u(\x;b)$ & \pbox{7cm}{Numerical solution of equation (\ref{eqntoyproblem})
+%at $\x$ with parameter $b$.\\} \tabularnewline
+%\hline
+%\hline 
+%$\hat{u}(\x;b)$ & \pbox{7cm}{Value of the interpolation of the emulator $\hat{M}(\cdot)$ at the point $\x$ with parameter
+%$b$\\}.  \tabularnewline
+%\hline
+%\hline 
+%$P:=\{\x_{1},\ldots,\x_{10}\}$ & \pbox{7cm}{Points where the experimental measurements were taken\\}.  \tabularnewline
+%\hline
+%\hline 
+%$\y:=(\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b))$ & \pbox{7cm}{Values of the experimental measurements for the variable $\tilde{u}$\\}.  \tabularnewline
+%\hline
+%\end{tabular}
+%
+%\caption{Summary of symbols used in Chapter 3.}
+%\label{tabSymboltable}
+%\end{table}
 \newpage
 We want to estimate the value of $b$ that explains the best the experimental data $\y$. 
 To incorporate $\y$ into the inference, 
