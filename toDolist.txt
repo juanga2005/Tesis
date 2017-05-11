@@ -1,0 +1,8 @@
+This is a list that you need to do in the thesis
+
+######May 10 2017 ######
+
+1. Remember to define the notion of conditional probability
+2. Read sensitiviy analysis to see why uncertainty estimation using classical techniques is not possible
+3. Talk about the properties of the kernels and give the name of the section where this is going to happen
+in line 520 of the tex file.
