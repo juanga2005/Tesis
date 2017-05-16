@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2016.3.4)  10 MAY 2017 18:39
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2016.3.4)  16 MAY 2017 00:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -293,26 +293,26 @@ Chapter 2.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [9]
-Underfull \hbox (badness 10000) in paragraph at lines 169--175
+Underfull \hbox (badness 10000) in paragraph at lines 171--177
 
  []
 
 [10]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 195.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 197.
 
  (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 195.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 197.
  [11]
-Underfull \hbox (badness 10000) in paragraph at lines 213--217
+Underfull \hbox (badness 10000) in paragraph at lines 215--219
 
  []
 
 [12]
-Overfull \hbox (10.0724pt too wide) in paragraph at lines 265--267
-\OT1/cmr/bx/n/12 Definition 5. \OT1/cmr/m/it/12 An $\OML/cmm/m/it/12 n$\OT1/cmr
+Overfull \hbox (10.0724pt too wide) in paragraph at lines 267--269
+\OT1/cmr/bx/n/12 Definition 6. \OT1/cmr/m/it/12 An $\OML/cmm/m/it/12 n$\OT1/cmr
 /m/it/12 -dimensional ran-dom vec-tor $[] \OT1/cmr/m/n/12 = (\OML/cmm/m/it/12 X
 []; [] ; X[]\OT1/cmr/m/n/12 )$ \OT1/cmr/m/it/12 in $\OT1/cmr/m/n/12 (
 \OML/cmm/m/it/12 ; \U/rsfs/m/n/12 F\OML/cmm/m/it/12 ; \U/msb/m/n/12 P\OT1/cmr/m
@@ -320,190 +320,205 @@ Overfull \hbox (10.0724pt too wide) in paragraph at lines 265--267
  []
 
 [13]
-Overfull \hbox (9.14026pt too wide) in paragraph at lines 345--345
+Overfull \hbox (9.14026pt too wide) in paragraph at lines 347--347
 [] 
  []
 
 [14]
-Underfull \hbox (badness 10000) in paragraph at lines 382--393
+Underfull \hbox (badness 10000) in paragraph at lines 384--395
 
  []
 
-[15] [16]
-Underfull \hbox (badness 10000) in paragraph at lines 492--496
+[15]
+LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 446.
+ [16]
+Underfull \hbox (badness 10000) in paragraph at lines 505--509
 
  []
 
 [17]
-Underfull \hbox (badness 10000) in paragraph at lines 514--515
+Underfull \hbox (badness 10000) in paragraph at lines 527--528
 
  []
 
 [18]
-Underfull \hbox (badness 10000) in paragraph at lines 560--567
+Underfull \hbox (badness 10000) in paragraph at lines 573--580
 
  []
 
 [19]
-Overfull \hbox (25.07817pt too wide) in paragraph at lines 628--632
-\OT1/cmr/m/n/12 The zero mean mod-els the as-sump-tion of no trend in the data.
- Here $(\OML/cmm/m/it/12 K\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 X; X\OT1/cmr/m/n/12
- ))[] =
+Overfull \hbox (8.92836pt too wide) in paragraph at lines 643--647
+\OMS/cmsy/m/n/12 f\OML/cmm/m/it/12 y[]\OMS/cmsy/m/n/12 g[]$\OT1/cmr/m/n/12 . He
+re $(\OML/cmm/m/it/12 K\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 X; X\OT1/cmr/m/n/12 ))
+[] = \OML/cmm/m/it/12 cov\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 f\OT1/cmr/m/n/12 ([]
+[])\OML/cmm/m/it/12 ; f\OT1/cmr/m/n/12 ([][]))\OML/cmm/m/it/12 ; K\OT1/cmr/m/n/
+12 (\OML/cmm/m/it/12 X; X[]\OT1/cmr/m/n/12 )[] = \OML/cmm/m/it/12 cov\OT1/cmr/m
+/n/12 (\OML/cmm/m/it/12 f\OT1/cmr/m/n/12 ([][])\OML/cmm/m/it/12 ; f\OT1/cmr/m/n
+/12 ([][]))$
  []
 
-
-Overfull \hbox (24.121pt too wide) detected at line 642
-[][]\OMS/cmsy/m/n/12 j[] ^^X \U/rsfs/m/n/12 N [] \OML/cmm/m/it/12 :
- []
-
-[20]
-Underfull \hbox (badness 10000) in paragraph at lines 694--706
-
- []
-
-[21]
-Underfull \hbox (badness 10000) in paragraph at lines 707--722
+[20] [21] [22]
+Underfull \hbox (badness 10000) in paragraph at lines 792--798
 
  []
 
+<./FigChap2/partitionComparison.jpg, id=91, 1204.5pt x 803.0pt>
+File: ./FigChap2/partitionComparison.jpg Graphic file (type jpg)
 
-Underfull \hbox (badness 10000) in paragraph at lines 733--741
+<use ./FigChap2/partitionComparison.jpg>
+Package pdftex.def Info: ./FigChap2/partitionComparison.jpg used on input line 
+809.
+(pdftex.def)             Requested size: 397.48624pt x 264.99081pt.
+
+Overfull \hbox (7.48624pt too wide) in paragraph at lines 809--810
+ [][]
+ []
+
+[23]
+Underfull \hbox (badness 10000) in paragraph at lines 817--827
 
  []
 
-[22]
-Underfull \hbox (badness 10000) in paragraph at lines 775--779
+
+Underfull \hbox (badness 10000) in paragraph at lines 838--846
 
  []
 
-[23] [24] [25] [26] [27] [28
+[24 <./FigChap2/partitionComparison.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 880--884
+
+ []
+
+[25] [26] [27] [28] [29] [30
 
 ]
 Chapter 3.
-[29] [30] <./FigChap3/solu.jpg, id=118, 562.1pt x 421.575pt>
+[31] [32] <./FigChap3/solu.jpg, id=127, 562.1pt x 421.575pt>
 File: ./FigChap3/solu.jpg Graphic file (type jpg)
 
 <use ./FigChap3/solu.jpg>
-Package pdftex.def Info: ./FigChap3/solu.jpg used on input line 1059.
+Package pdftex.def Info: ./FigChap3/solu.jpg used on input line 1164.
 (pdftex.def)             Requested size: 281.04932pt x 210.78697pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [31]
-[32 <./FigChap3/solu.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 1091--1104
+ [33]
+[34 <./FigChap3/solu.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 1196--1209
 
  []
 
-<./FigChap3/fitted.jpg, id=126, 505.89pt x 505.89pt>
+<./FigChap3/fitted.jpg, id=134, 505.89pt x 505.89pt>
 File: ./FigChap3/fitted.jpg Graphic file (type jpg)
 
 <use ./FigChap3/fitted.jpg>
-Package pdftex.def Info: ./FigChap3/fitted.jpg used on input line 1141.
+Package pdftex.def Info: ./FigChap3/fitted.jpg used on input line 1246.
 (pdftex.def)             Requested size: 354.12057pt x 354.12057pt.
- [33]
-Underfull \hbox (badness 10000) in paragraph at lines 1147--1154
+ [35]
+Underfull \hbox (badness 10000) in paragraph at lines 1252--1259
 
  []
 
-[34 <./FigChap3/fitted.jpg>]
+[36 <./FigChap3/fitted.jpg>]
 
-LaTeX Warning: Reference `tabSymboltable' on page 35 undefined on input line 11
-67.
+LaTeX Warning: Reference `tabSymboltable' on page 37 undefined on input line 12
+72.
 
-<./FigChap3/prior_posterior.jpg, id=133, 505.89pt x 505.89pt>
+<./FigChap3/prior_posterior.jpg, id=141, 505.89pt x 505.89pt>
 File: ./FigChap3/prior_posterior.jpg Graphic file (type jpg)
 
 <use ./FigChap3/prior_posterior.jpg>
-Package pdftex.def Info: ./FigChap3/prior_posterior.jpg used on input line 1244
+Package pdftex.def Info: ./FigChap3/prior_posterior.jpg used on input line 1349
 .
 (pdftex.def)             Requested size: 303.53633pt x 303.53633pt.
 
 Underfull \vbox (badness 6542) has occurred while \output is active []
 
- [35]
-Underfull \hbox (badness 10000) in paragraph at lines 1248--1263
+ [37]
+Underfull \hbox (badness 10000) in paragraph at lines 1353--1368
 
  []
 
-[36 <./FigChap3/prior_posterior.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 1265--1268
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1272--1275
+[38 <./FigChap3/prior_posterior.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 1370--1373
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1275--1279
+Underfull \hbox (badness 10000) in paragraph at lines 1377--1380
 
  []
 
-[37] <./FigChap3/histogram_mcmc.jpg, id=144, 505.89pt x 505.89pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 1380--1384
+
+ []
+
+[39] <./FigChap3/histogram_mcmc.jpg, id=152, 505.89pt x 505.89pt>
 File: ./FigChap3/histogram_mcmc.jpg Graphic file (type jpg)
 
 <use ./FigChap3/histogram_mcmc.jpg>
-Package pdftex.def Info: ./FigChap3/histogram_mcmc.jpg used on input line 1309.
+Package pdftex.def Info: ./FigChap3/histogram_mcmc.jpg used on input line 1414.
 
 (pdftex.def)             Requested size: 252.94437pt x 252.94437pt.
- [38 <./FigChap3/histogram_mcmc.jpg>]
-[39]
-Underfull \hbox (badness 10000) in paragraph at lines 1366--1368
+ [40 <./FigChap3/histogram_mcmc.jpg>]
+[41]
+Underfull \hbox (badness 10000) in paragraph at lines 1471--1473
 
  []
 
-[40] <./FigChap3/posterior_evolution.jpg, id=154, 504.9264pt x 505.4082pt>
+[42] <./FigChap3/posterior_evolution.jpg, id=162, 504.9264pt x 505.4082pt>
 File: ./FigChap3/posterior_evolution.jpg Graphic file (type jpg)
 
 <use ./FigChap3/posterior_evolution.jpg>
 Package pdftex.def Info: ./FigChap3/posterior_evolution.jpg used on input line 
-1411.
+1516.
 (pdftex.def)             Requested size: 353.44608pt x 353.78331pt.
 
 Underfull \vbox (badness 1742) has occurred while \output is active []
 
- [41 <./FigChap3/posterior_evolution.jpg>] (./Tesis.bbl [42] [43
+ [43 <./FigChap3/posterior_evolution.jpg>] (./Tesis.bbl [44] [45
 
 ]
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ™ in font cmr12!
-) [44] (./Tesis.aux)
+) [46] (./Tesis.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 2947 strings out of 495063
- 38975 string characters out of 3182202
- 97632 words of memory out of 3000000
- 6050 multiletter control sequences out of 15000+200000
+ 2959 strings out of 495063
+ 39248 string characters out of 3182202
+ 96684 words of memory out of 3000000
+ 6060 multiletter control sequences out of 15000+200000
  17077 words of font info for 65 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 37i,14n,43p,530b,272s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 37i,14n,43p,530b,278s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/tex
-live/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/t
-exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-d
-ist/fonts/type1/public/rsfs/rsfs10.pfb>
-Output written on Tesis.pdf (44 pages, 1269348 bytes).
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx6.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/rsfs/rsfs10.pfb>
+Output written on Tesis.pdf (46 pages, 1363259 bytes).
 PDF statistics:
- 228 PDF objects out of 1000 (max. 8388607)
- 155 compressed objects within 2 object streams
+ 239 PDF objects out of 1000 (max. 8388607)
+ 162 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 31 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 36 words of extra memory for PDF output out of 10000 (max. 10000000)
 

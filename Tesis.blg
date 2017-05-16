@@ -3,47 +3,48 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: Tesis.aux
 The style file: plain.bst
 Database file #1: Tesis.bib
+Warning--empty year in adlergeometry
 Warning--empty journal in casella2008monte
 Warning--empty journal in rasmussen2006gaussian
-You've used 20 entries,
+You've used 21 entries,
             2118 wiz_defined-function locations,
-            612 strings with 6614 characters,
-and the built_in function-call counts, 5454 in all, are:
-= -- 516
-> -- 229
+            616 strings with 6705 characters,
+and the built_in function-call counts, 5661 in all, are:
+= -- 535
+> -- 236
 < -- 5
-+ -- 94
-- -- 72
-* -- 340
-:= -- 948
-add.period$ -- 60
-call.type$ -- 20
-change.case$ -- 82
++ -- 98
+- -- 74
+* -- 350
+:= -- 986
+add.period$ -- 63
+call.type$ -- 21
+change.case$ -- 86
 chr.to.int$ -- 0
-cite$ -- 22
-duplicate$ -- 229
-empty$ -- 465
-format.name$ -- 72
-if$ -- 1120
+cite$ -- 24
+duplicate$ -- 239
+empty$ -- 482
+format.name$ -- 74
+if$ -- 1160
 int.to.chr$ -- 0
-int.to.str$ -- 20
-missing$ -- 31
-newline$ -- 103
-num.names$ -- 40
-pop$ -- 122
+int.to.str$ -- 21
+missing$ -- 32
+newline$ -- 108
+num.names$ -- 42
+pop$ -- 128
 preamble$ -- 1
-purify$ -- 73
+purify$ -- 76
 quote$ -- 0
-skip$ -- 140
+skip$ -- 146
 stack$ -- 0
-substring$ -- 274
-swap$ -- 23
+substring$ -- 280
+swap$ -- 24
 text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 58
-warning$ -- 2
-while$ -- 54
-width$ -- 22
-write$ -- 212
-(There were 2 warnings)
+type$ -- 62
+warning$ -- 3
+while$ -- 56
+width$ -- 23
+write$ -- 221
+(There were 3 warnings)
