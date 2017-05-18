@@ -5,6 +5,9 @@ This is a list that you need to do in the thesis
 1. Remember to define the notion of conditional probability (Done May 12 2017)
 2. Read sensitiviy analysis to see why uncertainty estimation using classical techniques is not possible (Done May 152017). 
 3. Talk about the properties of the kernels and give the name of the section where this is going to happen
-in line 520 of the tex file.
+in line 520 of the tex file.(done)
 4. Add a reference to the picture you are going to do about GP. This reference should be applied in line 673.
-5. Change P(B) for Z in the first pages.
+5. Change P(B) for Z in the first pages. (done)
+
+###############Chapter 4 #########
+ 1. Add the figure of the control volume.

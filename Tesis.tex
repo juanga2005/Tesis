@@ -51,8 +51,9 @@
 \newcommand{\tvs}{\mathscr{T}} %TVS symbol
 \newcommand{\x}{\textbf{x}}
 \newcommand{\y}{\textbf{y}}
+\newcommand{\vv}{\textbf{v}}
 \newcommand{\argmax}{\mathop{\mathrm{argmax}}}
-
+\newcommand{\dv}{\nabla\cdot}
 
 
 
@@ -95,12 +96,13 @@ Burnaby B.C - May  2017
 
 
 The framework of Bayesian statistics is the foundation of  our approach to estimate parameters and solve 
-inverse problems is. Unlike frequentist statistics, in the Bayesian approach, randomness
-is a measure of uncertainty,  not a matter of frequency . Consider an statement such  as:
+inverse problems. Unlike frequentist statistics, in the Bayesian approach, randomness
+is a measure of uncertainty,  not a matter of frequency. Consider an statement such  as:
 the probability of having life in the universe is 0.01. In the frequentist
 perspective, this number is interpreted as: for every hundred planets, on average, one planet shelters life.
  In the Bayesian
-perspective the number 0.01 is interpreted as a measure of how certain we are about life in the universe. 
+perspective the number 0.01 is interpreted as a measure of how certain we are about life in the universe
+given the current state of knowledge about the outer space. 
 Clearly there is a big philosophical
 difference between these two approaches that has a direct impact in how far reaching is each point of view  \cite{jaynes2003probability}.
 
@@ -110,17 +112,18 @@ At this point we mention that when we talk about uncertainty we are talking abou
 source of randomness  or  lack of information. That is, the use of the word uncertainty in this work
 is related to either epistemic (A phenomenon might not be random but the complete lack of 
 understanding of it makes us see it as random) or aleatory (Inherent to the nature of phenomenon, for 
-example this is the kind of randomness physicists believe is happening in quantum mechanics
-\cite{kennedy2001bayesian}). In real life the uncertainty associated with a  measurement or  quantity 
-of interest is usually connected  with the uncertainty  of other variables involved in the problem of interest. 
+example this is the kind of randomness physicists believe is happening in quantum mechanics)
+\cite{kennedy2001bayesian}. In real life the uncertainty associated with a  measurement or  quantity 
+of interest is usually connected  with the uncertainty  of other variables involved in the problem under study. 
 The Bayesian framework provides a rigorous framework to study these uncertainties, 
 using whatever information is available for the problem. The cornerstone of this framework
-in the mathematical language is the  Bayes' formula 
+in the mathematical language is known as   Bayes' formula given by
+
 \begin{equation}\label{eqnBayes}
 \post(A|B)=\frac{1}{Z}\like(B|A)\prior(A).
 \end{equation}
 Intuitively, Bayes' rule says that the probability of the event $A$ to happen given that $B$ was observed is
-proportinal to the probability of $B$ to happen given $A$ was observed. This value is weghted by the
+proportional to the probability of $B$ to happen given $A$ was observed. This value is weighted by 
 the probability of $A$ to happen. Finally, $Z$ is a normalization constant.
 
 Let us make sense of  equation \ref{eqnBayes} in a more rigorous setting. 
@@ -150,6 +153,7 @@ The map $\p:\mathscr{F}\rightarrow [0,1]$ is called a probability measure and sa
 \begin{definition}
 Given a probability space $(\Omega,\mathscr{F},\p)$ and two events $A,B\in\mathscr{F}$, with $\p(B)\neq 0$. 
 We define the conditional probability of $A$ given $B$ by
+
 \begin{equation*}
 \p(A|B)=\frac{\p(A\cap B)}{\p(B)}.
 \end{equation*}
@@ -165,11 +169,14 @@ are elements of the associated $\sigma-$algebra $\mathscr{F}$. The  notation
  the term $\like(B|A)$ is called the \textit{likelihood} of $B$ given $A$. The term $\prior(A)$ is called the 
 \textit{prior} probability for $A$. The prior probability expresses how much we believe the event $A$ 
 to happen without assuming
-anything about  $B$. The term $\p(B)$ is a \textit{normalization constant} defined as 
+anything about  $B$. The reciprocal of $Z$ is a \textit{normalization constant} defined as 
+
 \begin{equation}\label{eqnNormalizationConstant}
 Z=\int_{\Omega} \like(B|A)d\prior.
 \end{equation}
-The term $\post(A|B)$ is  the \textit{posterior} probability of $A$ given $B$. 
+
+The term $\post(A|B)$ is  the \textit{posterior} probability of $A$ given $B$. The integral
+is understood in the  Lebesgue sense as the  integral with respect to the measure $\prior$ \cite{lerner2014course}. 
 The posterior contains  the information 
 that we gained by comparing our beliefs (decoded in the prior probability) with experimental data 
 (decoded in the likelihood). 
@@ -180,13 +187,13 @@ that we gained by comparing our beliefs (decoded in the prior probability) with 
 %Ilustratory example
 Now we look at the connection between Bayesian statistics and  the field of inverse problems. 
 Inverse problems are  often concerned with finding the cause of an effect. Whereas a forward
-problem is concerend with finding the effect of a cause. If we have information about the 
+problem is concerned with finding the effect of a cause. If we have information about the 
 forward problem, then we can use it to get information about the inverse problem. Bayes rule
 puts in a mathematical language the connection between inverse and forward problem. 
 If we consider the cause to be the
 event $A$ and the effect the event $B$, then the information of the forward problem
 is encoded in $\like(B|A)$. The information of the inverse problem is contained in 
-$\post(A|B)$. This is why in the Bayesian framework, the posterior probability
+$\post(A|B)$. That is why in the Bayesian framework, the posterior probability
 is the $\textit{solution to an inverse problem}$.
 
 Often, inverse problems
@@ -198,31 +205,35 @@ that these problems might  not satisfy one or more of the following properties \
 \item Uniqueness: The problem has a unique solution.
 \item Stability: Small changes in inputs result in small changes in outputs.
 \end{itemize}
-This is a serious issue. For example, if the problem under study has at least one solution but  is not stable, 
-then we have no way to assess the accuracy of the results obtained. 
+This is a serious issue. For example, if the problem under study has at least one solution
+but is unstable to small perturbations, how can we assess the accuracy of the solution to 
+the problem. 
 Therefore an statistical or non-deterministic approach is called for . As explained before, the Bayesian framework 
 is useful in this context. Bayes'rule connects the inverse problem  of finding the cause
 of an effect through the posterior with the forward problem of finding the effect of a cause
-through the likelihood.
+through the likelihood in a way that is possible to quantify the uncertainty about the solution
+of the problem. Let us  clarify with an example of how the Bayesian framework can be used to solve inverse problems. 
+\newline
 
-Let us be clarify with an example how the Bayesian framework can be used to solve inverse problems. 
-Consider the problem of finding the location where a rock that impacted (and cracked) a window was launched. 
+Consider the problem of finding the launch location of a rock that impacted (and cracked) a window. 
 We can start by considering the following events
-\begin{center}
-$A$= Coordinates of the launching location.\\
-$B$= Coordinates of the impact location.
-\end{center}
-Here we know $B$, but $A$ is unknown. We can use Bayes' rule to estimate $A$. In this case
-we need to find the connection with the forward problem, i.e. finding the likelihood $\like(B|A)$,
-and we need to set the prior probability for $A$. 
+\begin{align*}
+& A=\text{Coordinates of the launching location}.\\
+& B= \text{Coordinates of the  location impact in the window}.
+\end{align*}
+Here we assume we know $B$, but $A$ is unknown. We can use Bayes' rule to estimate $A$ through
+the posterior $\post(A|B)$. In this case
+we need to find the connection with the forward problem, i.e. given 
+the launch coordinates find the location impact. This connection is encoded in the likelihood $\like(B|A)$.
+In addition we also need to set the prior probability for $A$. 
 \newline
 
 
 
-Let us evaluate how we could estimate the different probabilities mentioned in the previous paragraph. 
+Let us explain how we could estimate the different probabilities mentioned in the previous paragraph. 
 First, to find the likelihood
-we need to know how the rock's impact position  in the window  is related to the launch location 
-. If we treat air resistance as a source of uncertainty  we can use
+we need to know how the rock's impact position  in the window  is related to the launch location. 
+If we treat air resistance as a source of uncertainty  we can use
 the kinematics equations  for parabolic trajectories to get \cite{arnol2013mathematical}
 \begin{equation}\label{eqnKinematics}
 \textbf{r}=\textbf{r}_{0}+\textbf{v}_{0}t+\frac{1}{2}\textbf{g}t^{2},
@@ -230,7 +241,7 @@ the kinematics equations  for parabolic trajectories to get \cite{arnol2013mathe
 where $\textbf{r}$ and $\textbf{r}_{0}$ are the final and initial position of the rock, 
 $\textbf{v}_{0}$ is 
 the initial velocity of it,  and $\textbf{g}$ is  a vector that points to the center of the earth and has a 
-magnitude equal to the value of the gravity acceleration. The scalar $t$ represents time.
+magnitude equal to the value of the acceleration of gravity. The scalar $t$ represents time.
 In a more physical language, to compute the likelihood it is necessary to estimate $\textbf{r}$ (where the 
 rock hit the window) assuming we know $\textbf{r}_{0}$ (where it was thrown), and the initial velocity 
 of the rock $\textbf{v}_{0}$. 
@@ -243,11 +254,11 @@ for the discrepancy of our model with reality. We propose
 \textbf{r}=\textbf{r}_{0}+\textbf{v}_{0}t+\frac{1}{2}\textbf{g}t^{2}+\mathbf{\epsilon},
 \end{equation} 
 where $\mathbf{\epsilon}$ is a \textit{random vector} distributed as \textit{multivariate Gaussian}. 
-Before we proceed it is necessary to define more terminology and mathematical entities  that are going 
+Before we proceed it is necessary to define more terminology and mathematical objects  that are going 
 to be used throughout the rest of the text. 
 
 \begin{definition}
-Given a set $\Omega$. For any subset $T\subset\Omega$, we define the $\sigma-$algebra generated by $T$ as
+Given a set $\Omega$, for any subset $T\subset\Omega$, we define the $\sigma-$algebra generated by $T$ as
 the smallest $\sigma-$algebra in $\Omega$ that contains $T$.
 \end{definition}
 
@@ -266,10 +277,11 @@ if $X^{-1}(C)\in\mathscr{F}$ for all $C\in\mathcal{B}$.
 \begin{definition}
  An $n$-dimensional random vector $\textbf{X}=(X_{1},\ldots,X_{n})$ in $(\Omega,\mathscr{F},\p)$ 
 is a function $\textbf{X}:\Omega\rightarrow\mathbb{R}^{n}$, such that each component is a random variable. 
+Note that a random variable can be considered as a one dimensional random vector.
 \end{definition}
 
 \begin{definition}
-Given a probability space $(\Omega,\mathscr{F},\p)$ and an $n$ dimensional  random vector 
+Given a probability space $(\Omega,\mathscr{F},\p)$ and an $n$-dimensional  random vector 
 $\mathbf{X}:\Omega\rightarrow\mathbb{R}^{n}$.
 Its distribution  is the probability measure
 \begin{equation*}
@@ -280,6 +292,16 @@ where  $\mu$ defined by
 \mu:=\p\circ \textbf{X}^{-1}.
 \end{equation*}
 \end{definition}
+\begin{definition}
+Given a random vector $\textbf{X}:\Omega\rightarrow\mathbb{R}^{n}$ with
+probability distribution $\mu$. We say that $\mathbf{X}$ is absolutely 
+continuous with respect to the Lebesgue measure if there exists a real valued, integrable function $\rho$
+such that for all $C\in\mathcal{B}^{n}$ we have
+\begin{equation*}
+\mu(C)=\int_{C}\rho(x)dx.
+\end{equation*}
+We say that $\rho$ is the density function for $\mathbf{X}$.
+\end{definition}
 \begin{definition}\label{dfnrandonvariables}
 Given an $n$ dimensional random vector $\mathbf{X}$ such that for any 
 $C\in\mathcal{B}^{n}$ we have
@@ -289,8 +311,9 @@ $C\in\mathcal{B}^{n}$ we have
 (\textbf{x}-\textbf{x}^{*}))d\textbf{x},
 \end{equation}
 then we say
-that $\textbf{X}$ has multivariate normal distribution with mean $\textbf{x}^{*}\in\mathbb{R}^{n}$
-and covariance matrix $\Sigma$, where $\Sigma$ is symmetric positive definite matrix. We shall write
+that $\textbf{X}$ has multivariate Gaussian distribution or just Gaussian, 
+with mean $\textbf{x}^{*}\in\mathbb{R}^{n}$
+and covariance matrix $\Sigma$. The matrix $\Sigma$ is symmetric and positive definite. We shall write
 \begin{equation}\label{eqnMultivariate}
 \textbf{X}\sim \mathcal{N}(\textbf{x}^{*},\Sigma).
 \end{equation}
@@ -315,7 +338,7 @@ we can cast equation (\ref{eqnBayes}) into  (assuming independence between $\tex
 Since $\mathbf{\epsilon}$ is Gaussian we can readily obtain \cite{Somersalo}
 \begin{equation*}
 \textbf{r}|\textbf{r}_{0},\textbf{v}_{0}\sim \mathscr{N}(\textbf{r}_{0}+\textbf{v}_{0}t+\frac{1}{2}\textbf{g}t^{2}
-,\sigma^{2} I),
+,\sigma^{2} I).
 \end{equation*}
 This last equation gives an explicit density for the likelihood. 
 
@@ -326,7 +349,7 @@ Suppose that we suspect that the rock was thrown from the bedroom of one of our 
 \textbf{r}_{0}\sim\mathscr{N}(\textbf{w},\lambda^{2} I),
 \end{equation*}
 where $\textbf{w}$ is the coordinate vector of the center of mass of our neighbor's room and $\lambda$ represents 
-the variance of the launch location around the point $\textbf{w}$. We note that  this is one way to model 
+One belief the launch location is at the point $\textbf{w}$. We note that  this is one way to model 
  prior knowledge and other priors are also possible for our problem. Finally the normalization constant $Z$
 is given by the expression in equation (\ref{eqnNormalizationConstant}). Explictly we have
 %probabilities  are normalized, if we integrate over the whole space equation (\ref{eqnpostrock}), we get
@@ -348,7 +371,8 @@ Z&=\int_{\mathbb{R}^{3}}\like(\textbf{r}|\textbf{r}_{0},\textbf{v}_{0})
 
 
 Having the likelihood, prior and normalization constant allow us to compute the posterior using
-Bayes rule. With this we can obtain different kind of estimates for the value $\textbf{r}$.  
+Bayes rule. With these probabilities calculated 
+we can obtain different kind of estimates for the value $\textbf{r}_{0}$.  
 Common choices of pointwise estimates include
 
 %
@@ -358,44 +382,50 @@ Common choices of pointwise estimates include
 %pointwise estimates of the parameters of interest. Common choices of pointwise estimates
 %include
 \begin{eqnarray}\label{eqnpointestimates}
-\textbf{r}_{MAP}=argmax_{\textbf{r}_{0}}\post(\textbf{r}_{0}|\textbf{r},\textbf{v}_{0}). 
-\qquad\text{(Maximum a posteriori)}\\
+\textbf{r}_{MAP}=argmax_{\textbf{r}_{0}}\post(\textbf{r}_{0}|\textbf{r},\textbf{v}_{0}) 
+\qquad\text{(Maximum a posteriori),}\\
 \textbf{r}_{CM}=\int_{\mathbb{R}^{3}}\textbf{r}_{0}\post(\textbf{r}_{0}|\textbf{r},\textbf{v}_{0})d\textbf{r}_{0}.
-\qquad\text{(Conditional mean)}. \\
+\qquad\text{(Conditional mean)}, \\
 \textbf{r}_{ML}=argmax_{\textbf{r}_{0}}\post(\textbf{r}_{0}|\textbf{r},\textbf{v}_{0}).
-\qquad\text{(Maximum likelihood)}
+\qquad\text{(Maximum likelihood).}
 \end{eqnarray}
 
 Each  of these estimates have strengths and weaknesses. If the posterior is bimodal, then the conditional
 mean might point at a value with very low probability, whereas the maximum a posteriori might be more 
 reliable. If the posterior has no critical points then the mean might be use as a point estimate. We can 
 also assess how confident we are about the point estimate. For example, if $\textbf{r}^{*}$ is our point
-estimate we can calculate $\alpha>0$ such that
+estimate we can calculate a number $\alpha>0$ such that
+
 \begin{equation*}
 \int_{B(\textbf{r}^{*},\alpha)}\post(\textbf{r}_{0}|\textbf{r},\textbf{v}_{0})d\textbf{r}_{0}=0.95,
 \end{equation*}
-where $B(\textbf{r}^{*},\alpha)$ is a ball centered at $\textbf{r}$ and radius $\alpha$. This 
+
+where $B(\textbf{r}^{*},\alpha)$ is the ball centered at $\textbf{r}^{*}$ and radius $\alpha$. This 
 value of $\alpha$ can be thought of as  the Bayesian version 
 of the frequentist's $95\%$ confidence interval.
 Another way to estimate the uncertainty is by calculating the covariance matrix of $\textbf{r}$
-around $\textbf{r}_{0}$.
+around $\textbf{r}_{0}$ as
 \begin{equation*}
-\int_{\mathbb{R}^{3}}(\textbf{r}_{0}-\textbf{r}^{*})\otimes(\textbf{r}_{0}-\textbf{r}^{*})d\post,
+\int_{\mathbb{R}^{3}}(\textbf{r}_{0}-\textbf{r}^{*})\otimes(\textbf{r}_{0}-\textbf{r}^{*})d\post.
 \end{equation*}
 \newline
-and then the diagonal of this matrix will  contain the variance of each of the coordinates of $\textbf{r}^{*}$.
-To this end, we have a way to estimate where the rock was thrown from and a way to measure how
-confident we are about this estimate. 
+The diagonal of this matrix will  contain the variance of each of the coordinates of $\textbf{r}^{*}$.
+
 Note that the posterior is a probability density and it does not necessarily have a closed form. This
-makes difficult to calculate the uncertainties we mentioned abouve.
-Hence we need a way of extracting information from posterior. One approach is to generate independent samples
-from it and use them to obtain the different uncertainty estimates. How to sample from a probability 
-density is going to be explained in Chapter 3.  
+makes difficult to calculate the uncertainties we mentioned above.
+Hence we need a way of extracting information from the posterior. One approach is to generate 
+independent samples
+from it and do a Monte Carlo integration   to obtain the different uncertainty estimates. 
+How to sample from a probability 
+density and do a Monte Carlo integration are going to be explained in Chapter 3. For the moment
+assume it is possible to evaluate any of the point estimates and the uncertainty measures. With 
+this we obtained a way to estimate the launch location of the rock and how confident we are
+about that estimate. 
 \newline
 
 
 %Caveats of computing complex models
-Practical problems are often substantially more challenging than the above example. Often times we have to 
+Practical problems are often substantially more challenging than in the above example. Often times we have to 
 deal with several issues such as 
 
 \begin{enumerate}
@@ -406,10 +436,10 @@ deal with several issues such as
 hard to sample from.
 \item Evaluating any of the possible point estimates for the quantity of interest might be very hard.
 \end{enumerate}
-In the problem that we oulined in  Chapter 1, we have to deal with all of  the above mentioned issues.
+In the problem that we outlined in  Chapter 1, we have to deal with all of  the above mentioned issues.
 In this chapter we are going to discuss our approach to deal with issues 3, 4 and 5 above. We 
-omit 1 and 2, since these  are intrinsic in the physics of the problem and   the methodology used 
-to obtain the experimental data, and so are out of our hands.
+omit 1 and 2, since these  are intrinsic to the physics of the problem and   the methodology used 
+to obtain the experimental data, and so, are out of our hands.
 
 
 %%%%Dealing with computational complexity
@@ -420,7 +450,7 @@ Following O'Hagan  \cite{o2006bayesian}, we think of our  mathematical model of 
  as a function
 $M(\cdot)$ so that $y=M(\x)$ where $\x\in\mathbb{R}^{n}$   and $y\in\mathbb{R}$.
 Mathematical models are approximations to physical processes and as such there are discrepancies between
-models and reality. It is then necessary to address to validity  of the model. One way to do
+models and reality. It is then necessary to address the validity  of the model. One way to do
 this is by performing a sensitivity analysis on the parameters the model depend on. Roughly, we choose a
 combination of different values of the parameters and then we assess the importance of each one in
 the output of the model. This means that we need to run the model $M(\cdot)$ for a large set 
@@ -460,18 +490,18 @@ $\widehat{M}(\cdot)$.
 %Talking about Gaussian processes
 
 A very popular  method to construct an emulator with the desired
-extrapolation/interpolation properties is what is known as a Gaussian process emulation.  
+extrapolation/interpolation properties is what is known as a Gaussian process regression.  
 
 \subsection{Gaussian Processes}
 The conditions on the emulator $\widehat{M}(\cdot)$, imply that we need
 to work with a probability distribution for each point $\textbf{x}$ in the domain of the model $M(\cdot)$.
 This means that  we need to work with 
- a random variables set with high cardinality. 
+ a set of random variables  with high cardinality. 
 When dealing with 
 several random variables there is one probability density that is computationally tractable and
 easy to work with: the multivariate Gaussian distribution (see Definition \ref{dfnrandonvariables}). 
-The computational tractability  of the multivariate Gaussian distribution, serves as a justification
-to define Gaussian processes.
+The computational tractability  of the multivariate Gaussian distribution, can be used as a justification
+to define what a Gaussian process is.
 \begin{definition}\label{dfnGP}
 A Gaussian process (GP) is a collection of random variables $\{g(x)\}_{x\in A}$, for some set $A$, 
 possibly uncountable,
@@ -481,7 +511,7 @@ $\{x_{k}\}_{k=1}^{N}\subset A$ are jointly Gaussian
 \cite{rasmussen2006gaussian}. 
 \end{definition}
 
-A GP is specified by a mean function and a covariance operator or kernel. 
+A GP is specified by a mean function and a covariance operator or covariance kernel. 
 Following  Rasmussen \cite{rasmussen2006gaussian} we define
 \begin{align*}
 & m(x):=\E(g(x)),&&\qquad\text{(Mean)}\\
@@ -508,19 +538,21 @@ of the  index set $A$ of Definition \ref{dfnGP} as a subset of $\mathbb{R}^{n}$ 
 \newline
 
 The reason why  Gaussian processes are useful in practice is that  they are 
-completely characterized by the mean $m(x)$ and the kernel $k(x,x')$\cite{lifshits2012lectures}. 
+completely characterized by the mean $m(x)$ and the covariance kernel $k(x,x')$\cite{lifshits2012lectures}. 
  For example a  common covariance or kernel is the
- squared exponential (SE) function, we choose to use the name squared exponential instead of 
-Gaussian is to avoid confusion with
-the probability distribution.
+ squared exponential (SE) function given by  
 \begin{equation}\label{eqnsquareexponential}
 k(x,x')=e^{-\frac{1}{2}\|x-x'\|_{2}^{2}}.
 \end{equation}
+We choose to use the name squared exponential instead of 
+Gaussian to avoid confusion with
+the probability distribution.
 This  covariance function tells us that if $\x,\x'$ are close in the Euclidean metric 
-are highly correlated whereas far away points have a correlation that decays exponentially fast.
+then they are highly correlated whereas far away points have a correlation that decays exponentially fast.
 How to choose the covariance function depends on the kind
-of regularity we want for the realizations of the GP. 
-Some of the most common kernels are \cite{rasmussen2006gaussian} (setting $r=\|x-x'\|_{2}$)
+of regularity we want for the realizations of the GP. We will discuss this topic in
+more detail later in the chapter. For the moment for reference purposes, we show 
+some of the most common kernels used in practice \cite{rasmussen2006gaussian} (setting $r=\|x-x'\|_{2}$)
 
 \begin{itemize}
 \item Squared-Exponential: $k(r;\theta)=e^{-\frac{1}{2}(\frac{r}{\theta})^{2}}$
@@ -530,7 +562,6 @@ Some of the most common kernels are \cite{rasmussen2006gaussian} (setting $r=\|x
 (\frac{r}{\theta})^{2})e^{-\frac{\sqrt{5}r}{\theta}}$.
 \item Power-Exponential: $k(r;\theta,p)=e^{-(\frac{r}{\theta})^{p}}$.
 \end{itemize}
-We will discuss in more detail about kernel in section bla.
 
 
 
@@ -543,7 +574,7 @@ context following the approach of \cite{lifshits2012lectures}.
 \newline
 Interesting function spaces (e.g. $L^{p}$ spaces, Sobolev spaces, etc...) are 
 normed vector spaces, with a topology inherited from the metric induced by the norm, and so 
-, function spaces are topological vector spaces (TVS). 
+, interesting function spaces are topological vector spaces (TVS). 
 
 Let $\mathscr{T}$ be a TVS and  let $\mathscr{T}^{*}$ be its topological dual. 
 We will denote the action of an 
@@ -555,7 +586,7 @@ X:(\Omega,\mathscr{F},P)\longrightarrow\tvs,
 that is measurable with respect to the $\sigma$-algebra generated by the open sets
 of $\tvs$. This $\sigma$-algebra is known as the Borel $\sigma$-algebra for $\tvs$.
 The triple $(\Omega,\mathscr{F},P)$ is a probability space as in Definition \ref{dfnprobabilitytriple}. 
-We use the shorthand notation  $X\in\tvs$ whenever the random variable $X$ takes vales in $\tvs$. 
+We use the shorthand notation  $X\in\tvs$ whenever the random variable $X$ takes values in $\tvs$. 
 For example if $\tvs=L^{2}(\mathbb{R})$,  then  $X\in L^{2}(\mathbb{R})$ means that $X$ is a measurable
 map from the probability space $(\Omega,\mathscr{F},P)$ into $L^{2}(\mathbb{R})$.
 
@@ -617,13 +648,14 @@ precisely how it is connected to Gaussian measures in function spaces. Now we
 explain how to use GPs in a practice.
 
 Assume  we have some  data $\{(\textbf{x}_{i},y_{i})\}_{i=1}^{m}\subset\mathbb{R}^{n}\times\mathbb{R}$ 
-(training inputs) from an expensive function  $M(\cdot)$, 
-, where $M(\textbf{x}_{i})=y_{i}$. For
-simplicity we assume no trend in the training outputs $\{y_{i}\}_{i=1}^{m}$. Given the training data
+ from an expensive function  $M(\cdot)$, 
+, where $M(\textbf{x}_{i})=y_{i}$. The set $\{(\textbf{x}_{i},y_{i})\}_{i=1}^{m}$ is called
+\textit{training set}. For
+simplicity we assume no trend in the \textit{training outputs} $\{y_{i}\}_{i=1}^{m}$. Given the training set
 we would like to infer  possible values of $M(\cdot)$ on another set of points 
-$\{\textbf{x}_{j}^{*}\}_{j=1}^{k}$ (test inputs).
-For this purpose we construct an emulator $\hat{M}(\cdot)$ (see introduction to section 2.1).
-To construct $\hat{M}(\cdot)$  we  start considering the GP denoted by $\{f(\textbf{x})\}_{\x\in dom(M)}$
+$\{\textbf{x}_{j}^{*}\}_{j=1}^{k}$. This set of points  is known as \textit{test set}.
+For this purpose we construct an emulator $\widehat{M}(\cdot)$ (see introduction to section 2.1).
+To construct $\widehat{M}(\cdot)$  we  start considering the GP denoted by $\{f(\textbf{x})\}_{\x\in dom(M)}$
  where $dom(M)$ 
 is  the domain of $M(\cdot)$.
  By
@@ -641,7 +673,7 @@ are  jointly Gaussian, i.e.
 						    K(X^{*},X) & K(X^{*},X^{*}) \end{bmatrix}
 \right),
 \end{equation}	
-The zero mean models the assumption of no trend in the training output $\{y_{i}\}_{i=1}^{m}$.
+where the zero mean models the assumption of no trend in the training output $\{y_{i}\}_{i=1}^{m}$.
 Here
 $(K(X,X))_{ij}=cov(f(\x_{i}),f(\x_{j})), K(X,X^{*})_{ij}=cov(f(\textbf{x}_{i}),f(\x_{j}^{*}))$ and so on.
 
@@ -660,21 +692,18 @@ where
 &\Sigma=K(X^{*},X^{*})-K(X^{*},X)K(X,X)^{-1}K(X,X^{*}).
 \end{align*}
 Note that  if in the above equations, we only consider just one  test point, $\x^{*}$ and
-we take the limit as $\x^{*}$ approaches  the training input $\x_{j}$,
+we take the limit as $\x^{*}$ approaches  to the training input $\x_{j}$,
  the matrix
 $K(\x^{*},X)$ is now a vector and  converges to  $K(\x_{j},X)$. In this case, it is not hard 
 to see that the mean
-would be 
+would be given by 
 \begin{equation}\label{eqnExactPrediction}
-K(\x_{j},X)^{-1}K(X,X)\textbf{f}=y_{j}.
+K(\x_{j},X)K(X,X)^{-1}\textbf{f}=y_{j}.
 \end{equation} 
-In this case,  the covariance matrix would 
-be an scalar that tends to zero as $\x^{*}\rightarrow \x$. The interpretation is that 
+The covariance matrix would 
+be an scalar  that tends to zero as $\x^{*}\rightarrow \x$. The interpretation is that 
 at a training input $\x_{j}$ the prediction is exactly the  corresponding training output $y_{j}$. 
-
-
 For a point $\textbf{x}^{*}$ that is not part of the training set, with $95\%$ of confidence we have
-(see Figure bla)
 \begin{equation}\label{eqnConfidence}
 M(\x^{*})\in [\langle f \rangle(\x^{*})-2\sigma,\langle f\rangle(\x^{*})+2\sigma],
 \end{equation}
@@ -685,23 +714,32 @@ where
 K(\textbf{x}^{*},X)K(X,X)^{-1}K(X,\textbf{x}^{*}) &&\text{(Variance at point $\x^{*}$)}.
 \end{align*}
 Equations (\ref{eqnExactPrediction}) and (\ref{eqnConfidence})  show that if we define 
-$\widehat{M}(\x^{*}):=\langle f\rangle(\x^{*})$ then $\widehat{M}(\cdot)$ satisfies the 
-conditions for an emulator as in Definition (\ref{dfnEmulator}).
+\begin{equation}\label{eqnDefEmulator}
+\widehat{M}(\x^{*}):=\langle f\rangle(\x^{*}), 
+\end{equation}
+then $\widehat{M}(\cdot)$ satisfies the 
+conditions for an emulator as in Definition \ref{dfnEmulator}.
 
+In Figure \ref{figChp2}, it is shown an example that summarizes the discussion above.
+We consider the problem of emulating the model $M(x)=\cos(2\pi x)$ (dashed-dotted line)
+having five training points (black dots). The 95\% confidence region (dashed lines)
+shows that in the training input $\x_{j}$  the variance is zero  and $\widehat{M}(\x_{j})=y_{i}$, 
+as predicted by equation (\ref{eqnExactPrediction}).
+\newline
 
 The covariance kernel is the quantity that defines the mean and covariance for
 the Gaussian distribution obtained when we look at finitely many random variables in 
 a Gaussian Process. Therefore choosing it
 is a crucial step in the fitting process. We now proceed to briefly talk about the properties
-of kernels and how to choose them depending the smooth properties we are looking
-for in the interpolation process. 
+of kernels and how to choose them depending on the data and the smooth properties we are looking
+for in the emulation process. 
 
 \subsubsection*{Covariance Kernels}
 The covariance kernel cannot be any arbitrary function $k(\x,\x^{*})$. To see why, consider  the
 matrix in  equation (\ref{eqnconditional}) given by
 \begin{equation*}
 C:=\begin{bmatrix} K(X,X) & K(X,X^{*}) \\
-						    K(X^{*},X) & K(X^{*},X^{*}) \end{bmatrix}.
+ K(X^{*},X) & K(X^{*},X^{*}) \end{bmatrix}.
 \end{equation*}
 
 
@@ -710,23 +748,29 @@ the covariance kernel at different points. The matrix $C$ has to be  symmetric a
 for any set of training and test inputs. This implies that the covariance kernel has to be symmetric,
 that is, for all $\x,\x'$ in its domain we have
 \begin{equation*}
-k(\x,\x')=k(\x,\x').
+k(\x,\x')=k(\x',\x).
 \end{equation*}
 We also need that, for  any set of inputs $\{\x_{i}\}_{i=1}^{n}$  the Gram  matrix defined by 
 $K_{jk}:=k(\x_{j},\x_{k})$, to be positive definite. If also $k$ is just a function of $\x-\x'$,
 then $k(\cdot,\cdot)$ is said to be $\textit{stationary}$.
 
-To understand the role of the covariance kernel in the continuity of the mean function, let us
-define some concepts first. ,
+To understand the role of the covariance kernel in the continuity and differentiability
+ of the mean function, let us
+define some concepts first. 
 \begin{definition}
 Let $\y,\x_{1},\x_{2},\ldots$ be a sequence of points in $\mathbb{R}^{n}$, such that 
 \begin{equation*}
-\|\x_{n}-\y\|\rightarrow 0\qquad\text{as }n\rightarrow\infty.
+\|\x_{n}-\y\|_{2}\rightarrow 0\qquad\text{as }n\rightarrow\infty.
 \end{equation*}
-Then the collection of real valued random variables $\{f(\x)\}$ are say to be continuous in the mean
+Then the collection of real valued random variables $\{f(\x)\}$ defined in a probability space
+$(\Omega,\mathscr{F},\p)$ are say to be continuous in the mean
 square at the point $\y$ if 
 \begin{equation*}
-\E(|f(\x_{n})-f(\y)|^{2})\rightarrow 0\qquad\text{as } n\rightarrow\infty.
+\E(|f(\x_{n})-f(\y)|^{2})\rightarrow 0\qquad\text{as } n\rightarrow\infty,
+\end{equation*}
+where
+\begin{equation*}
+\E(f(x)):=\int_{\Omega}f(x)d\p.
 \end{equation*}
 \end{definition}
 We also have a definition for differentiability
@@ -753,7 +797,7 @@ Also the kernel function for the $n$-th derivative is given by \cite{adlergeomet
 \begin{equation*}
 \frac{\partial^{2n}k(\x,\x')}{\partial^{2}x_{1}\ldots\partial^{2}x_{m}'}.
 \end{equation*}
-Therefore the continuity and differentibility properties of the mean function in a Gaussian process
+Therefore the continuity and differentiability properties of the mean function in a Gaussian process
 depends exclusively in the continuity and differentiability properties of the covariance kernel.
 
 
@@ -763,14 +807,14 @@ we are analyzing. To see how this works, let us return to the problem of of appr
 by $\widehat{M}(\cdot)$ using Gaussian processes. Let   $k(x,x';\theta)$ be the covariance
 kernel for the GP that depends on the parameter $\theta$ 
 ($\theta$ could be a scalar, vector, etc.). In this case to predict the output
-$\y^{*}=\{M(\x_{1}^{*}),\ldots M(\x_{m}^{*})\}$ given the training data $\{(\x_{i},y_{i})\}_{i=1}^{m}$, 
+$\y^{*}=\{M(\x_{1}^{*}),\ldots M(\x_{m}^{*})\}$ given the training set $\{(\x_{i},y_{i})\}_{i=1}^{m}$, 
 we can try different approaches. On of the most common is maximum likelihood optimization (MLE). 
 Mathematically, we pick a parameter $\hat{\theta}$ such that
 \begin{equation*}
 \hat{\theta}=\argmax_{\theta}\p(\y^{*}|\{(\x_{i},y_{i})\}_{i=1}^{m},\theta).
 \end{equation*}
-By Definition \ref{dfnGP} we know that the conditional probability has to be distributed as
-a multivariate normal distribution. More precisely
+By Definition \ref{dfnGP} we know that the conditional probability for $\y^{*}$ has to be distributed as
+a multivariate Gaussian distribution. More precisely
 
 \begin{equation}\label{eqnlikelihoodExponential}
 p(\y^{*}|\{(\x_{i},y_{i})\}_{i=1}^{m},\theta)=\frac{1}{(2\pi)^{\frac{m}{2}}det(K_{\y^{*}}(\theta))^{\frac{1}{2}}}
@@ -797,8 +841,8 @@ reader is referred to \cite{murphy2012machine} for details.
 \newline
 
 So far we have not discussed  how to choose the training inputs $\{\x_{i}\}_{i=1}^{m}$. 
-Clearly this choice has a profound impact impact in the quality of the emulator.
-Let us assume that the function $M(\cdot)$ is supported in $[0,1]$ and we  have
+Clearly this choice has a profound  impact in the quality of the accuracy of the emulator.
+To see this, let us assume that the function $M(\cdot)$ is supported in $[0,1]$ and we  have
 computational resources to calculate the output of only five training
 points. If we pick the points $\{0,0.1,0.2,0.3,1\}$ the interpolation error of the emulator
 $\widehat{M}(\cdot)$  for points between $0.3$ and $1$, 
@@ -807,26 +851,29 @@ shown below
 \begin{figure}[H]
 \raggedleft
 \includegraphics[scale=0.33]{./FigChap2/partitionComparison}
-\caption{bla}
+\caption{Comparison between the approximation quality of the emulator $\widehat{M}$ for 
+for the model $M(x):=\cos(2\pi x)$ in the interval $[0,1]$ for two different partitions. 
+On the left, the emulation is performed in the partition $\{0,0.25,0.5,0.75,1\}$. On
+the right in the partition $\{0,0.1,0.2,0.3,1\}$.}
+\label{figChp2}
 \end{figure}
  
 
 
 
 
-Ideally 
-we would like to pick as many training points as possible to make the fitting better, but picking too many points
-to create the training set, might result in a very high computational demand if the function $M(\cdot)$ is expensive
-to calculate. On the other hand if we pick up
- few points to create the training set, then we  might end up with unreliable predictions for the test
-set. Thus we need a systematic way to choose  the training points. One strategy is to  
+Ideally we would like to pick as many training points as possible to make the fitting better, 
+but picking too many points
+to create the training set, might result in a very high computational demand. On the other hand if we pick up
+just few points to create the training set, then it is possible to end up with unreliable predictions. 
+Thus we need a systematic way to choose  the training points. One strategy is to  
  fill as much of the space as possible given a fix number (possibly small) of  training points. 
 This can be accomplish
 through    space filling designs which we will now discuss. 
 \newline
 
 %%%Sensitivity. The first paragraph should be relocated
-\subsection{Experimental Design }
+\subsection{Design of Experiments }
 
 %Besides uncertainty there is another very important concept: sensitivity. When looking at a  model's performance
 %it is critical to assess how changes or uncertainties 
@@ -835,44 +882,56 @@ through    space filling designs which we will now discuss.
 %a sensitivity analysis is to detect what variables are relevant and what variables are not, allowing to reduce
 %the dimensionality of the problem .
 
- To interpolate the data obtained from evaluating the computationally expensive function
-$M(\cdot)$ using GPs, we need to decide in how many different points are we going to evaluate $M(\cdot)$. 
-As mentioned in the previous section this is a very delicate issue since we need to find 
-the right balance between
-the number of possible evaluations of $M(\cdot)$ given time, computational budget 
- and a good spread of data points in the space to get a good
-fit to the model.
+% To interpolate the data obtained from evaluating the computationally expensive function
+%$M(\cdot)$ using GPs, we need to decide in how many different points are we going to evaluate $M(\cdot)$. 
+%As mentioned in the previous section this is a very delicate issue since we need to find 
+%the right balance between
+%the number of possible evaluations of $M(\cdot)$ given time, computational budget 
+% and a good spread of data points in the space to get a good
+%fit to the model.
+
+We assume there is a fixed computational budget. In this case we need to decide how
+to choose the training inputs $\{\x_{j}\}_{j=1}^{m}$ to obtain reliable predictions 
+of the emulator for points
+different than the training points. As shown in Figure \ref{figChp2}, the quality
+of the emulation depends heavily on the distribution of the training inputs. 
+Intuitively we want to spread the training inputs as much as possible in the
+parameter space while covering  as much space as possible. 
+Distributions of points that achieve this are called \textit{space filling designs}.
 \newline
  
-Given an set $T\subset\mathbb{R}^{n}$, there are several ways to create space filling designs 
-\cite{pronzato2012design}. In this work we are going to focus on maximin designs
-\cite{johnson1990minimax}. Consider a metric space $(T,d)$ (e.g.
+Given an set $T\subset\mathbb{R}^{n}$, there are several ways to create space filling designs. 
+In this work we are going to focus on maximin designs
+\cite{johnson1990minimax}. We note that there are other ways to obtain space filling
+designs and we refer to the reader to  \cite{pronzato2012design}. Consider a metric space $(T,d)$ (e.g.
 $T\subset\mathbb{R}^{n}$, compact and $d$ the Euclidean distance) and a subset $S$ of $T$, 
 with finite (fixed) cardinality, say $|S|=n$.
-A maximin distance design $S^{o}$ is a collection of points of  $T$  such that
+A maximin distance design $S^{o}$ is a collection of points of $T$  such that
 \begin{equation*}
 \max_{S\subset T,\text{ }|S|=n}\min_{s,s'\in S}d(s,s')=\min_{s,s'\in S^{o}}d(s,s')=d^{o}.
 \end{equation*}
-That is, we are looking for the set $S^{o}$ of cardinality $n$ that maximizes the minimum distance among 
+That is, we are looking for a set $S^{o}$ of cardinality $n$ that maximizes the minimum distance among 
 its elements. As an example consider $T=[0,1]^{3}$, the unit cube in $\mathbb{R}^{3}$ and $n=8$. In 
 this case the design that maximizes the minimum distance among its elements is given by choosing
- the 8 vertices of the cube. The problem of finding
-the optimal  maximin design is difficult to solve, therefore in practice we use computational tools
-to find approximate solutions.  Different kind of algorithms can be used for the optimization
-of the design, like genetic algorithms, simulated annealing, particle swarm, etc. A survey
-on the optimization methods for computer experimental designs  can be found in 
-\cite{viana2010algorithm}. In Chapter 4 we will see how  these computational tools can be used to 
-create an experimental maximin design.
+ the 8 vertices of the cube. Or as shown if Figure \ref{figChp2}, right, if $T=[0,1]$ and $n=5$, 
+the maximin design is given by a uniform partition  of the set $T$.
 
-We now discuss the connection between maximin experimental designs with GPs. Consider a
+
+The problem of finding
+the optimal  maximin design is difficult to solve. In practice we use computational tools
+to find a design that is close to optimal.  Different kind of algorithms can be used for the optimization
+of the design, such as genetic algorithms, simulated annealing, particle swarm, etc. A survey
+on the subject  can be found in 
+\cite{viana2010algorithm}. In Chapter 4 we will see how  the particle swarm algorithm can be used to 
+create a maximin design in a five dimensional parameter space.
+
+To conclude this section, we note that there is a conection between maximin designs and Gaussian processes. 
+Consider a
 GP $\{f(x)\}_{x\in T}$. If we fix $S=\{s_{1},\ldots,s_{n}\}\subset T$  and consider the random vector
 \begin{equation*}
 \textbf{f}=[f(s_{1}),\ldots,f(s_{n})],
 \end{equation*}
-
-
-
-and let $K_{s}$ to be 
+where $\textbf{f}$ is assumed to be jointly Gaussian. Let $K_{s}$ be 
 the correlation matrix for the probability distribution of $\textbf{f}$. Then it can be shown
 that the minimax design minimizes the quantity 
 \begin{equation*}
@@ -890,73 +949,87 @@ A survey on the theory behind maximin distance designs can be found in \cite{joh
 
 
 \subsection{Sensitivity Analysis}
- 
-If we have a good space filling design, we can construct a good GP, in the sense that 
-the uncertainty in the interpolation is less compared to the interpolation error when
-using other space filling design. 
+
+
+In general having an space filling design for the training input, permits to create an
+emulator $\widehat{M}(\cdot)$ that closely approximates $M(\cdot)$  over its whole domain. 
+By closely we mean a tolerable uncertainty in the output of the emulator 
+for all points in the domain (see Figure \ref{figChp2}).
+%Let us suppose that we have a good space filling design, we can construct a good GP, in the sense that 
+%the uncertainty in the interpolation is less compared to the interpolation error when
+%using other space filling design. 
 %then we have a good fit when using gps to interpolate  the 
 %points we want to get information about. 
-If we have a reliable fitting we can confidently assess what dimensions of the model are relevant.
-This allows to reduce the dimensionality of the problem by considering just these dimensions.
-For 
-example if the function $M(\cdot)$ we want to approximate is given  
-by $M(x_{1},x_{2},x_{3})=x_{1}+x_{2}+10^{-8}x_{3}$ 
-on $T=[0,1]^{3}$. Clearly this model can be reduced to   2 dimensions from 3. 
-The question  now is: how to quantify the 
-dependence  of $M$ on $x_{1},x_{2},x_{3}$? One way to achieve this is by doing a 
-sensitivity analysis . In summary, the goal of 
-sensitivity analysis is to assess, either qualitatively or quantitative, how
-the output of a function $M(\cdot)$ depends on variations of its arguments. There are plenty of 
-methods to perform a sensitivity analysis, a very good reference on this topic is
-\cite{saltelli2000sensitivity}.
-
-
-
-
-In this work we  focus in
-the method  described in \cite{sobol1993sensitivity}. This  is a variance-based Monte Carlo method (VBMCM).
+If we have a reliable fitting we can confidently assess what arguments in the model $M(\cdot)$
+are relevant and which ones are not.
+This allows to approximate  the model  with a simpler one.
+For example, if our model is given by 
+\begin{equation*}
+M(x_{1},x_{2},x_{3})=x_{1}+x_{2}+10^{-8}x_{3},\qquad(x_{1},x_{2},x_{3})\in  T=[0,1]^{3}.
+\end{equation*}
+Clearly the variable $x_{3}$ is not as relevant as $x_{1}$and $x_{2}$. We need to
+formalize in what sense $x_{3}$ is irrelevant. One way to achieve this is by doing a 
+sensitivity analysis. In summary, the goal of 
+sensitivity analysis is to assess how
+the output of a function $M(\cdot)$ depends on variations of its arguments. There is
+a great number of methods to do a sensitivity analysis, such as adjoint methods, local
+methods, variance based methods, etc. to name a few. The difference of each of these
+methods is how they measure the importance of each variable. For example in local methods,
+the sensitivity at a point in a given direction is the slope of the function, whereas in
+variance based method what matters is how large is the area under the curve when
+fixing all parameters but one.
+For a survey of techniques in sensitivity analysis, 
+the reader is referred to \cite{saltelli2000sensitivity}. In this work we  use 
+variance-based Monte Carlo methods (VBMCM) described in \cite{sobol1993sensitivity}.
 The idea of  VBMCMs is to use the variance produced by  the inputs of a function as an indicator of 
-their importance.
-Our description of the method described in \cite{sobol1993sensitivity} 
-follows that of \cite{saltelli2000sensitivity}.
+their importance. More precisely we are going to use the method of Sobol'. We now explain
+the main ideas behind this method.
 
 
-Without lost of generality we may assume that we have a function 
-$\varphi: \Omega^{n}\subset\mathbb{R}^{n}\longrightarrow \mathbb{R}$ where $\Omega^{n}$ is the $n-$dimensional
-unit cube. Since the goal of this work is to study the behaviour of a function that is obtained by the output
-of some physical experiment or simulation of it, we may assume that the functions of interest 
- have  compact domain, hence by  rescaling we can always assume that the domain of the function
-under study can be mapped bijectively into the unit hypercube. We decompose $\varphi$ as 
+The functions of interest in this work have compact support. This implies that
+without loss of generality we may assume that  the domain of these functions 
+is the $n$-dimensional unit cube $\Omega^{n}$. Let us consider a generic
+square integrable function
+\begin{equation*}
+\varphi:\Omega^{n}\rightarrow\mathbb{R}.
+\end{equation*}
+We start by decomposing $\varphi$ as 
 \begin{equation*}
 \varphi(x_{1},\ldots,x_{n})=\varphi_{0}+\sum_{k=1}^{n}\varphi_{k}(x_{k})+
 \sum_{1\leq k< l\leq n}\varphi_{kl}(x_{k},x_{l})+\ldots+
 \varphi_{1,2,\ldots,n}(x_{1},\ldots,x_{n}).
 \end{equation*}
-Here $\varphi_{0}$ is a constant and for all  indices $i_{1},\ldots,i_{j}$ the functions
-$\varphi_{i_{1},\ldots,i_{j}}$ satisfy
+This decomposition is not unique, but it can be shown that if each term $\varphi_{i_{1},\ldots,i_{j}}$
+in the expansion satisfy
 
 \begin{equation}\label{eqnSobolCond1}
-\int_{[0,1]}\varphi_{i_{1},\ldots,i_{j}}dx_{i_{k}}=0\qquad\text{if }  i_{k}\in \{i_{1},\ldots,i_{j}\}
-\end{equation} 
-Therefore by Fubinni's theorem \cite{lerner2014course} we may conclude that functions with different subindices are 
- pairwise orthogonal in $\Omega^{n}$ with the standard inner product of $\mathbb{R}^{n}$\cite{bressan1900lecture}. 
-To see this, without loss of generality
+\int_{[0,1]}\varphi_{i_{1},\ldots,i_{j}}dx_{i_{k}}=0\qquad\text{if }  i_{k}\in \{i_{1},\ldots,i_{j}\},
+\end{equation}
+then the decomposition is unique and all terms in the expansion are orthogonal in $L^{2}(\Omega^{k})$. To 
+see the orthogonality property, 
 we may  consider the functions $g=\varphi_{i_{1},\ldots,i_{j}}$ and $h=\varphi_{l_{1},\ldots,l_{k}}$ 
-with $(i_{1},\ldots,i_{j})\neq(l_{i},\ldots,l_{k})$, with $i_{1}\neq l_{1}$. In this case we have
+with arbitrary indices $(i_{1},\ldots,i_{j})\neq(l_{i},\ldots,l_{k})$. Without 
+loss of generality we may  assume $i_{1}\neq l_{1}$. In this case we have
+%by Fubinni's theorem \cite{lerner2014course} we may conclude that functions with different subindices are 
+% pairwise orthogonal in $\Omega^{n}$ with the standard inner product of $\mathbb{R}^{n}$\cite{bressan1900lecture}. 
+%To see this, without loss of generality
+%we may  consider the functions $g=\varphi_{i_{1},\ldots,i_{j}}$ and $h=\varphi_{l_{1},\ldots,l_{k}}$ 
+%with $(i_{1},\ldots,i_{j})\neq(l_{i},\ldots,l_{k})$, with $i_{1}\neq l_{1}$. In this case we have
 \begin{equation*}
 \langle g,h\rangle=\int_{[0,1]}\ldots\int_{[0,1]}\underbrace{\left(\int_{[0,1]}\varphi_{i_{1},
 \ldots,i_{j}}dx_{i_{1}}\right)}_{\text{$=0$ by (\ref{eqnSobolCond1})}}
-\left(\int_{[0,1]}\varphi_{l_{1},\ldots,l_{k}}dx_{l_{1}}\right)dx_{\sim i_{1},l_{1}}=0.
+\left(\int_{[0,1]}\varphi_{l_{1},\ldots,l_{k}}dx_{l_{1}}\right)dx_{\sim i_{1},l_{1}}=0,
 \end{equation*}
-where the symbols to the right of $\sim$ represent the variables omitted in the integration.
+where we used Fubinni's theorem to split the integrals \cite{lerner2014course}. The symbols to the right of $\sim$ 
+represent the variables omitted in the integration.
 
-A second consequence of the equation (\ref{eqnSobolCond1}) is 
+Another consequence of  (\ref{eqnSobolCond1}) is 
 \begin{eqnarray*}
-\int_{\Omega^{n}}\varphi dx=\varphi_{0}+\int_{\Omega^{n}}\sum_{k=1}^{n}\varphi_{k}(x_{k})dx+\\
-\int_{\Omega^{n}}\sum_{1\leq k< l\leq n}\varphi_{kl}(x_{k},x_{l})dx+\ldots+
-\int_{\Omega^{n}}\varphi_{1,2,\ldots,n}(x_{1},\ldots,x_{n})dx=\varphi_{0}.
+\int_{\Omega^{n}}\varphi dx=\varphi_{0}.
 \end{eqnarray*}
-Thus given $\varphi_{0}$ we can find the other functions in the decomposition recursively. For example 
+
+This allows us to find  the other functions in the decomposition recursively,
+given $\varphi_{0}$. For example 
 for $i\in \{1,\ldots,n\}$ we have
 \begin{equation*}
 \varphi_{i}(x_{i})=-\varphi_{0}+\int_{[0,1]^{n-1}}\varphi(x)dx_{\sim i}.
@@ -967,92 +1040,93 @@ Having $\varphi_{i}(x_{i})$ we can proceed to find $\varphi_{ij}(x_{i},x_{j})$ u
 \int_{\Omega^{n-2}}\varphi(x)dx_{\sim ij}.
 \end{equation*}
 
-By knowing all
-the functions in the decomposition of $\varphi$ we are able  to assess the effect of each variable 
-in the output of $\varphi$. We know proceed to explain how to achieve that.
- 
-The total variance $D$ of $\varphi$ is defined as
+By knowing all of
+the functions in the decomposition of $\varphi$ we are able  to assess how each variable 
+affects the output of $\varphi$ in the following way: the total variance $D$ of $\varphi$ is defined as
 \begin{equation*}
 D=\int_{\Omega^{n}}\varphi^{2}(x)dx-\varphi_{0}^{2}.
 \end{equation*}
 Similarly we can compute the partial variances as
 \begin{equation*}
-D_{i_{1},\ldots,i_{s}}=\int_{[0,1]^{n-1}}f^{2}_{i_{1},\ldots,i_{s}}dx_{i_{1}}\ldots dx_{i_{s}}.
+D_{i_{1},\ldots,i_{s}}=\int_{[0,1]^{n-1}}\varphi^{2}_{i_{1},\ldots,i_{s}}dx_{i_{1}}\ldots dx_{i_{s}}.
 \end{equation*}
-With these variances we define the $s-th$ order  Sobol index  
+With these variances we define the $s$-th order  Sobol index  
 \begin{equation*} 
-S_{i_{1},\ldots,i_{s}}=\frac{D_{i_{1},\ldots,i_{s}}}{D}.
+S_{i_{1},\ldots,i_{s}}=\frac{D_{i_{1},\ldots,i_{s}}}{D}\qquad\text{(Sobol' Index of Order s)},
 \end{equation*}
-This quantity is a measure of the effect in the output from the interaction of the 
-variables $x_{i_{1}},x_{i_{2}},\ldots,x_{i_{s}}$ that cannot be explained by 
-the sum of the effect of each variable. If 
-we want to know the separate effect  of the variables 
-$x_{1},\ldots,x_{n}$ in the output, we have to study
+which is a measure of the contribution of the variables $x_{i_{1}},\ldots,x_{i_{s}}$ to the total variance $D$.
+If we want to know the separate effect  of each variable
+$x_{1},\ldots,x_{n}$ in the total variance $D$, we look at
 the first order Sobol indices $S_{1},\ldots,S_{n}$ given by
 \begin{equation*}
 S_{i}=\frac{D_{i}}{D},\qquad\text{for }i=1,\ldots,n.
 \end{equation*}
 
-Finally if we want to assess the full effect of a  variable  on the output, we calculate a quantity known 
-as the total effect index. If for example we want to calculate the total effect index
+Finally if we want to assess the full effect of a  variable  in the total variance $D$, 
+we calculate a quantity known 
+as the total effect index. For example if we want to calculate the total effect index
 for the variable $x_{i}$ we would do so by calculating
 \begin{equation*}
 S_{i}+S_{i1}+S_{i2}+\ldots+S_{i12}+S_{i13}+\ldots+S_{12\ldots,i,\ldots, n}.
 \end{equation*}
 
+Note that  to calculate each of the Sobol indices, it is necessary to do 
+high dimensional integrals. Therefore integration using quadratures is not possible.
+It is necessary to resort to other numerical integration techniques. A common
+tool to perform high dimensional integrals is known as Monte Carlo integration. We will not
+go into details of Monte Carlo integration in this chapter, we postpone them for Chapter 3.
+What is important at this time is that to apply Monte Carlo integration, it is necessary to 
+evaluate the integrand a high number of times at different points in its domain. If the 
+integrand is the expensive model $M(\cdot)$, then the computational cost of estimating
+the Sobol' indices is prohibitive. If instead we calculate the Sobol' indices 
+of the emulator $\widehat{M}(\cdot)$, we can use them as an approximation for the Sobol'
+indices of $M(\cdot)$. In this way we can estimate what arguments of the model are 
+relevant and what arguments are not. This will allow us to reduce the complexity of the
+model.
 
-Estimating Sobol indices for a function $M(\cdot)$ after being interpolated by the emulator $\hat{M}(\cdot)$
-we need to calculate high dimensional integrals. This is computationally challenging.
-We need to  write a routine that
-interpolates $M(\cdot)$ to test points by knowing its output on the training points  
-using GPs. After that we need to   calculate 
-
-Sobol indices via computing high dimensional integrals in a accurate way.  
-This is  time consuming.
-That is why as  we will see
-in chapter three and  four we used R packages to assist us with this kind of calculations so
-we get computationally efficient and accurate results. An overview of the R packages using 
-in this work can be found in Appendix A. 
-
-
-%Talking about R packages
-\newpage
-\subsection{R packages}
-In this work we used two different R packages. One to do the fitting with GPs (DiceKriging) and the other to do 
-a sensitivity analysis using Sobol Indices (Sensitivity). We are going to briefly describe both of this packages.
-
-\subsubsection{Package: DiceKriging}
-According the description of the package (http://dice.emse.fr/) it is used for Estimation, validation and 
-prediction of GP models.
-
-The way this package works is as follows. First it creates an element of the class `km' by receiving 
-as an input a trending formula, the set of training points $(x_{i},f_{i})$ and a choice 
-of a covariance kernel. The kernels available are: Gauss, Exponential, Matern $\frac{3}{2}$
-,Matern $\frac{5}{2}$ and power exponential. It is also possible to work with tailored covariance
-kernels but we won't explore that possibility. Once the `km' object is created we can do 
-predictions on test points $x^{*}$ 
-by using the function predict. Predict takes as an input a km object, the set of test points and 
-some other optional parameters. Gives as an output an R list that contains the estimation of $f(x^{*})$
-using the mean of the $GP$ and the lower and upper 95\% confidence interval using the 
-covariance matrix (see equation (\ref{eqnformulameancovariance})).
-One of the nice feature that the DiceKriging package has is that once you choose a kernel, you don't
-have to set the parameters of the kernel chosen. Using an optimization routine the function
-predict chooses the best combination
-of parameters through a Maximum Likelihood Optimization \cite{dupuy2015dicedesign} (see \ref{eqnloglikelihood}).
+In the next chapter we are going to show how to the theory explained in  this chapter
+can be used in a practical setting using a toy problem. In Chapter 4 we 
+proceed to apply the tools developed here to the problem explained in Chapter 1.
 
 
-\subsubsection{Package: Sensitivity}
-The main function we used was the function SobolGP. This function takes as its main   input an object 
-from the class `km' A matrix representing a sample of random points in the domain of the function $f$
-we want to calculate its sensitivity (this function $f$ was previously 'fitted' by the function
-km in package DiceKriging) and the main output are two lists. One lists that contains 
-all the results for the GP-based sensitivity analysis for the main effect and one list with the 
-results for the GP-based sensitivity analysis for the total effects.
-
- 
-
-For the next chapter we are going to explain how to use in a toy problem all of this tools explained in this 
-chapter, so for chapter four we can focus on the results instead on how we applied what was explained here. 
+%%Talking about R packages
+%\newpage
+%\subsection{R packages}
+%In this work we used two different R packages. One to do the fitting with GPs (DiceKriging) and the other to do 
+%a sensitivity analysis using Sobol Indices (Sensitivity). We are going to briefly describe both of this packages.
+%
+%\subsubsection{Package: DiceKriging}
+%According the description of the package (http://dice.emse.fr/) it is used for Estimation, validation and 
+%prediction of GP models.
+%
+%The way this package works is as follows. First it creates an element of the class `km' by receiving 
+%as an input a trending formula, the set of training points $(x_{i},f_{i})$ and a choice 
+%of a covariance kernel. The kernels available are: Gauss, Exponential, Matern $\frac{3}{2}$
+%,Matern $\frac{5}{2}$ and power exponential. It is also possible to work with tailored covariance
+%kernels but we won't explore that possibility. Once the `km' object is created we can do 
+%predictions on test points $x^{*}$ 
+%by using the function predict. Predict takes as an input a km object, the set of test points and 
+%some other optional parameters. Gives as an output an R list that contains the estimation of $f(x^{*})$
+%using the mean of the $GP$ and the lower and upper 95\% confidence interval using the 
+%covariance matrix (see equation (\ref{eqnformulameancovariance})).
+%One of the nice feature that the DiceKriging package has is that once you choose a kernel, you don't
+%have to set the parameters of the kernel chosen. Using an optimization routine the function
+%predict chooses the best combination
+%of parameters through a Maximum Likelihood Optimization \cite{dupuy2015dicedesign} (see \ref{eqnloglikelihood}).
+%
+%
+%\subsubsection{Package: Sensitivity}
+%The main function we used was the function SobolGP. This function takes as its main   input an object 
+%from the class `km' A matrix representing a sample of random points in the domain of the function $f$
+%we want to calculate its sensitivity (this function $f$ was previously 'fitted' by the function
+%km in package DiceKriging) and the main output are two lists. One lists that contains 
+%all the results for the GP-based sensitivity analysis for the main effect and one list with the 
+%results for the GP-based sensitivity analysis for the total effects.
+%
+% 
+%
+%For the next chapter we are going to explain how to use in a toy problem all of this tools explained in this 
+%chapter, so for chapter four we can focus on the results instead on how we applied what was explained here. 
 
 
 
@@ -1533,10 +1607,104 @@ is not realistic, inference may not be reliable and a big amount of data is need
 to correct for the bias included in the prior distribution. We can summarize this with the following analogy: if you really believe
 in Santa you will need significant  evidence that he does not exist to stop believing in his existence.
 
+\chapter{Industrial Case Problem}
 
+Some introduction: relate the need to find the forward map in order to solve the problem
+of finding the parameters. 
 
+\section{A Mathematical Model for Pollutant Dispersion}
+Our starting point is the conservation of mass. In particular conservation of mass for
+particulated zinc in the atmosphere. Consider a volume of space $V$ with a mass
+amount $m$ of zinc in it. Assume
+that within $V$ there is  a source of  zinc. Further assume that zinc is flowing inside the volume 
+and leaving the volume at the same time due to the presence of wind (see Figure bla).
+If $\textbf{v}$ represents the wind velocity it can be shown that net amount
+per unit time of zinc that is flowing through the surface is given by the expression
+\cite{seinfeld1998atmospheric}
+\begin{equation*}
+\oint_{\partial V}c(\x,t)\textbf{v}\cdot\textbf{n}dA,
+\end{equation*}
+where $\partial V$ is the boundary of $V$ and $c(\x,t)$ is the concentration of zinc at a point $\x$
+at time $t$.
+The units of $c$ are given in units of mass per units of volume. On the other hand
+the rate of change total mass at a time $t$ inside $V$  can be calculated as
+\begin{equation*}
+\frac{dm(t)}{dt}=\frac{d}{dt}\int_{V}c(\x,t)dV.
+\end{equation*}
+Finally if the amount of zinc that comes from the source at a time $t$ is given by
+\begin{equation*}
+\int_{V}s(\x,t)dV,
+\end{equation*}
+where $s(\x,t)$ is the source density. Its units are mass per unit volume per unit time.
+Conservation of mass states that the total mass inside $V$ should be conserved. Therefore
+for all time the rate of change of the mass inside $m$ should equal all source of variation of it.
+Mathematically we can write
+\begin{equation*}
+\frac{d}{dt}\int_{V}c(\x,t)dV=-\oint_{\partial V}c(\x,t)\textbf{v}\cdot\textbf{n}dA+\int_{V}s(\x,t)dV.
+\end{equation*}
+Since we picked the orientation of $\partial V$ with the normal pointing outwards, it is
+necessary to put a minus in front of the surface integral for consistency. Assuming
+the concentration and the velocity field are continuous functions of time and space, an 
+straight forward application of the divergence theorem and Leibniz rule for integral gives
+\begin{equation}\label{eqnDeterministic}
+\frac{\partial c(\x,t)}{\partial t}+\nabla\cdot(c\textbf{v})=s(\x,t).
+\end{equation}
+If we apply this equation to estimate the concentration of zinc using real wind data, we 
+will find that the prediction is not completely accurate. The reason is that at small scales, there
+are random fluctuations in the wind velocity. To model this we follow \cite{seinfeld1998atmospheric}
+and write the wind velocity as
+\begin{equation}\label{eqnNewV}
+\vv=\bar{\vv}+\vv',
+\end{equation}
+where $\bar{\vv}$ is the measured wind velocity and $\vv'$ is a random variable with zero mean.
+If we replace $\vv$ in equation (\ref{eqnDeterministic}) with the expression for velocity
+in equation (\ref{eqnNewV}) we get
+\begin{equation}\label{eqnNewRandom}
+\frac{\partial c(\x,t)}{\partial t}+\nabla\cdot(c(\bar{\textbf{v}}+\vv'))=s(\x,t).
+\end{equation}
+The presence of the random variable $\vv'$ transforms the solution $c$ into a random 
+variable as well. In this case we describe $c$ as the contribution of two terms
+\begin{equation*}
+c=\E(c)+c',
+\end{equation*}
+where $c'$ satisfies $\E(c')=0$. The intuition behind this definition is that if we experimentally
+measure the concentration repeating the same experiment a high number of times. We expect the 
+concentration to have an underlying average behavior $\E(c)$ plus some  noise represented by $c'$.
+Plugging in this new representation of $c$ into equation (\ref{eqnNewRandom}) we obtain
+\begin{equation}\label{eqnInconsistent}
+\frac{\partial\E(c)}{\partial t}+\dv(\bar{\vv}\E(c))+\dv(\E(c'\vv'))=s(\x,t).
+\end{equation}
+The problem with this new equation is that we have the extra variable $\E(c'\vv')$.
+This means we have  more unknowns than equations. 
+One way to overcome this issue is given by the so-called mixing-length theory. The
+theory uses the constitutive equation
+\begin{equation*}
+\E(c'\vv')=D\nabla(\E(c)),
+\end{equation*}
+the term D is  a rank two tensor called the eddy diffusivity tensor. This tensor is assumed 
+to be symmetric, hence is always diagonalizable. We may assume that we are working
+in the principal axis of $D$. Note that  In general we do not have enough information to believe the tensor
+to be non-diagonal \cite{seinfeld1998atmospheric}, hence 
 
-
+\begin{equation*}
+D=\begin{bmatrix}
+D_{xx}& 0 & 0\\
+0 & D_{yy} & 0\\
+0 & 0 & D_{zz}
+\end{bmatrix}.
+\end{equation*}
+Under the mixing-length theory the equation (\ref{eqnInconsistent}) reads as
+\begin{equation*}
+\frac{\partial\E(c)}{\partial t}+\dv(\bar{\vv}\E(c)+D\nabla\E(c))=s(\x,t).
+\end{equation*}
+The variable $\E(c)$ is a deterministic function of space and time. So to make
+notation lighter we set $C(\x,t):=\E(c)$. Hence our forward equations
+reads as
+\begin{equation*}
+\frac{\partial C(\x,t)}{\partial t}+\dv(\bar{\vv}C(\x,t)+D\nabla C(\x,t))=s(\x,t).
+\end{equation*}
+\textbf{To do know is to tell how to deal with the fact that we don't know the velocity
+closed form nor the fucking components of D, use Bamdad's paper for that}
 \bibliography{Tesis}
 \bibliographystyle{plain}
 \end{document}

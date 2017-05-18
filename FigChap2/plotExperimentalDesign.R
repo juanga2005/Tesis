@@ -29,14 +29,14 @@ lines(Xtest,ytrue,lty=4,col='red',lwd=3)
 lines(Xtest,pGood$lower95,lty=2,col='blue',lwd=2)
 legend('topleft',c('Training Set',approx,exact,'95% Confidence Region'),pch=c(16,NA,NA,NA),
 lty=c(NA,1,4,2),col=c('black','black','red','blue'),cex=1.5,lwd=2)
-title(main='Interpolation with Optimal Partition',xlab='x',ylab='y',cex.lab=1.5,cex.main=2)
+title(main='Interpolation Using a Maximin Design',xlab='x',ylab='y',cex.lab=1.5,cex.main=2)
 #Bad Plots
-plot(xtrainBad,ytrainBad,pch=15, ylim=c(-1.7,2.1),lwd=2,cex=2,xlab='',ylab='')
+plot(xtrainBad,ytrainBad,pch=16, ylim=c(-1.7,2.1),lwd=2,cex=2,xlab='',ylab='')
 lines(Xtest,pBad$mean,lwd=2)
 lines(Xtest,pBad$upper95,lty=2,col='blue',lwd=2)
 lines(Xtest,ytrue,lty=4,col='red',lwd=3)
 lines(Xtest,pBad$lower95,lty=2,col='blue',lwd=2)
-legend('topleft',c('Training Set',approx,exact,'95% Confidence Region'),pch=c(15,NA,NA,NA),
+legend('topleft',c('Training Set',approx,exact,'95% Confidence Region'),pch=c(16,NA,NA,NA),
 lty=c(NA,1,4,2),col=c('black','black','red','blue'),cex=1.5,lwd=2)
-title(main='Interpolation with Sub-Optimal Partition',xlab='x',ylab='y',cex.lab=1.5,cex.main=2)
+title(main='Interpolation Using an Arbitrary Partition',xlab='x',ylab='y',cex.lab=1.5,cex.main=2)
 dev.off()
