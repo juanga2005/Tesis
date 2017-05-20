@@ -1133,20 +1133,16 @@ proceed to apply the tools developed here to the problem explained in Chapter 1.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Chapter 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Toy Problem: How Theory Works in Practice}
 
-In the previous chapter we reviewed some  of the theoretical and computational tools needed obtain
-the solution to Bayesian inverse problems. In this chapter
-we are going to work on a toy problem to illustrate how the theory explained can be applied, so
-in Chapter 4 we can focus mainly on  results for the  solution of the problem described in Chapter 1.
-
-To talk about an inverse problem  we  need to specify  the forward problem. 
-We define the forward problem as the solution of the  following
-partial differential equation (PDE)
+In the previous chapter we reviewed some  of the theoretical and computational tools needed to solve
+a Bayesian inverse problem. In this chapter
+we are going to present  a toy problem to illustrate how the theory  can be applied in practice.
+We begin by considering the forward problem, given by the following partial differential equation (PDE).
 
 \begin{equation}\label{eqntoyproblem}
 \left\{
 	\begin{array}{ll}
-		\Delta u=e^{-b\|\x\|_{2}} &\mbox{for } x\in\Omega=[0,1]\times [0,1]\subset\mathbb{R}^{2} \\
-		u=0 & \mbox{for } x\in\partial\Omega
+		\Delta u=e^{-b\|\x\|_{2}}, &\mbox{for } x\in\Omega=[0,1]\times [0,1]\subset\mathbb{R}^{2}, \\
+		u=0, & \mbox{for } x\in\partial\Omega,
 	\end{array}
 \right.
 \end{equation} 
@@ -1154,29 +1150,56 @@ where $b$ is some real positive parameter. The
 function $u$ represents the mathematical approximation of  a quantity with a physical interpretation  $\tilde{u}$. The  behavior
 of $\tilde{u}$ is assumed to be    modeled by equation (\ref{eqntoyproblem}).
 
-In Chapter 2 we explained how to build an emulator $\hat{M}(\cdot)$  that approximates
+In Chapter 2 Section 2.1, we explained how to build an emulator $\hat{M}(\cdot)$  that approximates
 the output $y$  of a computationally expensive function  $M(\cdot)$ at a point  in its domain. 
-In the context of this chapter, the function $M(\cdot)$ takes as input a point  $(\textbf{x},b)\in\Omega\times [0,1]$. The
+In  this chapter, the function $M(\cdot)$ takes as input a point  $(\textbf{x},b)\in\Omega\times(0,\infty)$. The
 output is the value of the solution $u$ at that 
 point, i.e. $u(\textbf{x};b)=M(\textbf{x},b)$. Now we proceed to explain the associated inverse problem and  how we are going to construct $\hat{M}(\cdot)$.  
 
 Assume that we have ten experimental measurements 
-of $\tilde{u}$. This measurements were taken  at the points $P:=\{\x_{1},\x_{2},\ldots,\x_{10}\}\subset\Omega$. 
+of $\tilde{u}$. These measurements were taken  at the points $P:=\{\x_{1},\x_{2},\ldots,\x_{10}\}\subset\Omega$. 
 That is, we know the vector of measurements 
 $\textbf{y}=(\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b))$.
-We want to estimate the value of $b$ that explains the best the experimental data $\textbf{y}$. To estimate $b$ is the inverse problem. 
-The obvious approach to achieve this
-would be to solve equation (\ref{eqntoyproblem}) for a big number of values $b$ in the interval $[0,L]$ where $L$ 
-is large enough to guarantee that there exists a $b^{*}\in [0,L]$ such that the set $\{u(\x_{1};b^{*}),\ldots,u(\x_{10};b^{*})\}$
-has `small' discrepancy with the experimental data $\y$. For the sake of the example we assume that solving
-equation (\ref{eqntoyproblem}) is computationally expensive and solving it for a big range of different values of $b$
-is not feasible. Therefore the need to construct an emulator $\hat{M}(\cdot)$ that approximates $M(\cdot)$ as
-explained in  Chapter 2.  Then solve equation (\ref{eqntoyproblem}) for a number of 
-different values of  $b$
-that makes the cost of solving (\ref{eqntoyproblem})  acceptable. Finally use the emulator
-$\hat{M}(\cdot)$ to predict the output of $M(\cdot)$ for as many different values of $b$ as possible. 
-The value of the emulator at the point $(\x,b)$  is going to be denoted by $\hat{u}(\x;b)$. The following
-table summarizes the notation that is going to be used from now on in this Chapter.
+We want to estimate the value of $b$ that explains  the experimental data $\textbf{y}$ the best. 
+This is our inverse problem. 
+A simple approach to estimate $b$ 
+would be to solve equation (\ref{eqntoyproblem}) for a big number of values $b$ in the interval $(0,L]$ where $L$ 
+is chosen in a manner that there exists a $b^{*}\in (0,L]$ such that the set 
+$\{u(\x_{1};b^{*}),\ldots,u(\x_{10};b^{*})\}$
+has `small' discrepancy with the experimental data $\y$. 
+
+Let us assume that solving
+equation (\ref{eqntoyproblem}) is computationally expensive and repeating the calculation for a big range of 
+different values of $b$
+is not feasible. Therefore we need to construct an emulator $\widehat{u}(\cdot)$ that approximates $u(\cdot)$. 
+The way we are going to construct $\widehat{u}(\cdot)$ is as follows: for a fixed $\x$ we solve equation 
+(\ref{eqntoyproblem}) for   number $n$ of different values of  $b$. We pick the value of $n$ in a way
+that the computational cost of computing (\ref{eqntoyproblem}) $n$ times, does not exceed our
+computational and time budget. Then use the data $\{b_{j},u(\x,b_{j})\}_{j=1}^{n}$  as a 
+training set to create a Gaussian process, as explained in Chapter 2, Section 2.1.1. Finally
+for any value $\tilde{b}$ we use the mean of the Gaussian process at that point as $\widehat{u}(\x,\tilde{b})$.
+An sketch of the result for approximating a model $u(\x;\cdot)$ with an emulator is shown
+in Figure \ref{figGPCreation}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.55]{./FigChap3/emulatorApproximation}
+\caption{Approximation of a model $u(\x;\cdot)$ by the mean of a Gaussian process trained
+with six  different  outputs from it. The mean of the Gaussian process at a point $\tilde{b}$ is taken
+as the value $\widehat{u}(\x;\tilde{b})$.}
+\label{figGPCreation}
+\end{figure}
+
+For clarity in the exposition of the material, in the table below we summarize the notation 
+we are going to use throughout the rest of the chapter.
+
+
+
+
+%Finally use the emulator
+%$\hat{M}(\cdot)$ to predict the output of $M(\cdot)$ for as many different values of $b$ as possible. 
+%The value of the emulator at the point $(\x,b)$  is going to be denoted by $\hat{u}(\x;b)$. The following
+%table summarizes the notation that is going to be used from now on in this Chapter.
 
 %\begin{table}[H]
 %\centering
