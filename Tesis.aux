@@ -55,6 +55,7 @@
 \citation{pronzato2012design}
 \citation{viana2010algorithm}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1.2}Design of Experiments }{26}}
+\newlabel{secDesignofExperiments}{{2.1.2}{26}}
 \citation{johnson1990minimax}
 \citation{saltelli2000sensitivity}
 \citation{sobol1993sensitivity}
@@ -65,61 +66,80 @@
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \newlabel{eqntoyproblem}{{3.1}{31}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Approximation of a model $u(\textbf  {x};\cdot )$ by the mean of a Gaussian process trained with six different outputs from it. The mean of the Gaussian process at a point $\mathaccentV {tilde}07E{b}$ is taken as the value $\setbox \z@ \hbox {\frozen@everymath \@emptytoks \mathsurround \z@ $\textstyle u$}\mathaccent "0362{u}(\textbf  {x};\mathaccentV {tilde}07E{b})$.}}{32}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Approximation of a model $u(\textbf  {x};\cdot )$ by the mean of a Gaussian process trained with six different outputs from the model. The mean of the Gaussian process at a point $\mathaccentV {tilde}07E{b}$ is taken as the value $\setbox \z@ \hbox {\frozen@everymath \@emptytoks \mathsurround \z@ $\textstyle u$}\mathaccent "0362{u}(\textbf  {x};\mathaccentV {tilde}07E{b})$ of the emulator.}}{32}}
 \newlabel{figGPCreation}{{3.1}{32}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Numerical solution of the system (3.1\hbox {}) using a five points stencil finite difference approximation for the Laplacian. The mesh size used in $x$ and $y$ was $0.01$. The value of the parameter $b$ was set at $0.925$. The black dots in the plot represent the points used to generate the experimental data $\textbf  {y}=\{\mathaccentV {tilde}07E{u}(\textbf  {x}_{1};b),\ldots  ,\mathaccentV {tilde}07E{u}(\textbf  {x}_{10};b)\}$}}{33}}
+\newlabel{figsolU}{{3.2}{33}}
+\citation{logan2014applied}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Calculating the Posterior}{34}}
 \newlabel{eqnpropto}{{3.2}{34}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Numerical solution of the system (3.1\hbox {}) using a five points stencil finite difference approximation for the Laplacian. The mesh size used in $x$ and $y$ was $0.01$. The value of the parameter $b$ was set at $0.925$. The black dots in the plot represent the points used to generate the experimental data $(\mathaccentV {tilde}07E{u}(\textbf  {x}_{1};b),\ldots  ,\mathaccentV {tilde}07E{u}(\textbf  {x}_{10};b))$}}{35}}
-\newlabel{figsolU}{{3.2}{35}}
-\newlabel{eqnpriortoyproblem}{{3.3}{35}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Training points, GP regression, true value of $b$ and experimental measures for each one of the ten sites labeled from 1 to 10 in Figure 3.2\hbox {}}}{37}}
-\newlabel{fignofitted}{{3.3}{37}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}Choosing the Prior}{34}}
+\newlabel{eqnpriortoyproblem}{{3.3}{34}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}Finding the Likelihood}{34}}
+\newlabel{eqnIntegrals}{{3.4}{35}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Training points, GP regression, true value of $b$ and experimental measures for each one of the ten sites labeled from 1 to 10 in Figure 3.2\hbox {}}}{36}}
+\newlabel{fignofitted}{{3.3}{36}}
 \citation{Somersalo}
-\newlabel{eqnreal2interp}{{3.4}{38}}
-\newlabel{eqnvector2interp}{{3.5}{38}}
-\newlabel{eqnlikelihoodtoyproblem}{{3.6}{38}}
-\newlabel{eqnposteriorforb}{{3.7}{38}}
+\newlabel{eqnreal2interp}{{3.5}{37}}
+\newlabel{eqnvector2interp}{{3.6}{37}}
+\newlabel{eqnlikelihoodtoyproblem}{{3.7}{37}}
+\newlabel{eqnposteriorforb}{{3.8}{37}}
 \citation{Somersalo}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces Plots for the prior distribution, posterior distribution and true value of the parameter $b$.}}{39}}
-\newlabel{figlikeprior}{{3.4}{39}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces Plots for the prior distribution, posterior distribution and true value of the parameter $b$.}}{38}}
+\newlabel{figlikeprior}{{3.4}{38}}
 \citation{casella2008monte}
 \citation{casella2008monte}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces Histogram obtained for the posterior distribution (3.2\hbox {}) from $5000$ samples from MH algorithm with step size $\alpha =0.23$. The solid line is the graph for the posterior $\mathbb  {P}_{post}(b|D)$.}}{41}}
-\newlabel{eqnbcmMC}{{3.8}{41}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces Histogram obtained for the posterior distribution (3.2\hbox {}) from $5000$ samples from MH algorithm with step size $\alpha =0.23$. The solid line is the graph for the posterior $\mathbb  {P}_{post}(b|D)$.}}{40}}
+\newlabel{eqnbcmMC}{{3.9}{40}}
 \citation{dudley2002real}
-\newlabel{eqnmontecarlo}{{3.9}{42}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces Evolution of the posterior distribution when more experimental data is taken into account}}{44}}
-\newlabel{figpostevolution}{{3.6}{44}}
+\newlabel{eqnmontecarlo}{{3.10}{41}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces Evolution of the posterior distribution when more experimental data is taken into account}}{43}}
+\newlabel{figpostevolution}{{3.6}{43}}
 \citation{seinfeld1998atmospheric}
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Industrial Case Problem}{47}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Industrial Case Problem}{45}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}A Mathematical Model for Pollutant Dispersion}{47}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}A Mathematical Model for Pollutant Dispersion}{45}}
 \citation{seinfeld1998atmospheric}
-\newlabel{eqnDeterministic}{{4.1}{48}}
-\newlabel{eqnNewV}{{4.2}{48}}
-\newlabel{eqnNewRandom}{{4.3}{48}}
+\newlabel{eqnDeterministic}{{4.1}{46}}
+\newlabel{eqnNewV}{{4.2}{46}}
+\newlabel{eqnNewRandom}{{4.3}{46}}
 \citation{seinfeld1998atmospheric}
+\citation{hosseini2016airborne}
+\newlabel{eqnInconsistent}{{4.4}{47}}
+\newlabel{eqnDifussivityFinalForm}{{4.5}{47}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}Assumptions on the Wind Velocity}{47}}
+\citation{seinfeld1998atmospheric}
+\citation{monin1954basic}
+\citation{monin1954basic}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2}Assumptions on the Diffusivity Tensor}{48}}
+\newlabel{eqnEddyVertical}{{4.6}{48}}
 \bibdata{Tesis}
-\newlabel{eqnInconsistent}{{4.4}{49}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Industrial Case Study.}{49}}
+\newlabel{figAereal}{{4.2}{49}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Aereal photograph of the lead-zinc smelter in Trail, British Columbia, Canada. The points $Q_{1}$ to $Q_{4}$ represent the sources of zinc. The green triangles $R_{1}$ to $R_{9}$ represent the location of the measurement devices.}}{49}}
 \bibcite{adlergeometry}{1}
 \bibcite{arnol2013mathematical}{2}
 \bibcite{bressan1900lecture}{3}
 \bibcite{casella2008monte}{4}
 \bibcite{dudley2002real}{5}
-\bibcite{jaynes2003probability}{6}
-\bibcite{johnson1990minimax}{7}
-\bibcite{kennedy2001bayesian}{8}
-\bibcite{lebedev2012functional}{9}
-\bibcite{lerner2014course}{10}
-\bibcite{lifshits2012lectures}{11}
-\bibcite{lifshits2013gaussian}{12}
-\bibcite{murphy2012machine}{13}
-\bibcite{o2006bayesian}{14}
-\bibcite{pronzato2012design}{15}
-\bibcite{rasmussen2006gaussian}{16}
-\bibcite{saltelli2000sensitivity}{17}
-\bibcite{seinfeld1998atmospheric}{18}
-\bibcite{sobol1993sensitivity}{19}
-\bibcite{Somersalo}{20}
-\bibcite{viana2010algorithm}{21}
+\bibcite{hosseini2016airborne}{6}
+\bibcite{jaynes2003probability}{7}
+\bibcite{johnson1990minimax}{8}
+\bibcite{kennedy2001bayesian}{9}
+\bibcite{lebedev2012functional}{10}
+\bibcite{lerner2014course}{11}
+\bibcite{lifshits2012lectures}{12}
+\bibcite{lifshits2013gaussian}{13}
+\bibcite{logan2014applied}{14}
+\bibcite{monin1954basic}{15}
+\bibcite{murphy2012machine}{16}
+\bibcite{o2006bayesian}{17}
+\bibcite{pronzato2012design}{18}
+\bibcite{rasmussen2006gaussian}{19}
+\bibcite{saltelli2000sensitivity}{20}
+\bibcite{seinfeld1998atmospheric}{21}
+\bibcite{sobol1993sensitivity}{22}
+\bibcite{Somersalo}{23}
+\bibcite{viana2010algorithm}{24}
 \bibstyle{plain}

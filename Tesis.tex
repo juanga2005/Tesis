@@ -873,7 +873,7 @@ through    space filling designs which we will now discuss.
 \newline
 
 %%%Sensitivity. The first paragraph should be relocated
-\subsection{Design of Experiments }
+\subsection{Design of Experiments }\label{secDesignofExperiments}
 
 %Besides uncertainty there is another very important concept: sensitivity. When looking at a  model's performance
 %it is critical to assess how changes or uncertainties 
@@ -1166,8 +1166,8 @@ A simple approach to estimate $b$
 would be to solve equation (\ref{eqntoyproblem}) for a big number of values $b$ in the interval $(0,L]$ where $L$ 
 is chosen in a manner that there exists a $b^{*}\in (0,L]$ such that the set 
 $\{u(\x_{1};b^{*}),\ldots,u(\x_{10};b^{*})\}$
-has `small' discrepancy with the experimental data $\y$. 
-
+has `small' discrepancy with the experimental data $\y$.
+ 
 Let us assume that solving
 equation (\ref{eqntoyproblem}) is computationally expensive and repeating the calculation for a big range of 
 different values of $b$
@@ -1178,19 +1178,20 @@ that the computational cost of computing (\ref{eqntoyproblem}) $n$ times, does n
 computational and time budget. Then use the data $\{b_{j},u(\x,b_{j})\}_{j=1}^{n}$  as a 
 training set to create a Gaussian process, as explained in Chapter 2, Section 2.1.1. Finally
 for any value $\tilde{b}$ we use the mean of the Gaussian process at that point as $\widehat{u}(\x,\tilde{b})$.
-An sketch of the result for approximating a model $u(\x;\cdot)$ with an emulator is shown
+An sketch of the result for approximating a model $u(\x;\cdot)$ with an emulator
+$\widehat{u}(\x;\cdot)$ is shown
 in Figure \ref{figGPCreation}.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.55]{./FigChap3/emulatorApproximation}
+\includegraphics[scale=0.50]{./FigChap3/emulatorApproximation}
 \caption{Approximation of a model $u(\x;\cdot)$ by the mean of a Gaussian process trained
-with six  different  outputs from it. The mean of the Gaussian process at a point $\tilde{b}$ is taken
-as the value $\widehat{u}(\x;\tilde{b})$.}
+with six  different  outputs from the model. The mean of the Gaussian process at a point $\tilde{b}$ is taken
+as the value $\widehat{u}(\x;\tilde{b})$ of the emulator.}
 \label{figGPCreation}
 \end{figure}
 
-For clarity in the exposition of the material, in the table below we summarize the notation 
+For clarity in the exposition, the table below we summarize the notation 
 we are going to use throughout the rest of the chapter.
 
 
@@ -1231,30 +1232,20 @@ we are going to use throughout the rest of the chapter.
 %\caption{Summary of symbols used in Chapter 3.}
 %\label{tabSymboltable}
 %\end{table}
-\newpage
-We want to estimate the value of $b$ that explains the best the experimental data $\y$. 
-To incorporate $\y$ into the inference, 
-we can use Bayes rule and estimate the posterior distribution for $b$ as
-
-\begin{equation} \label{eqnpropto}
-\post(b|\y)=\frac{\like(\y|b)\prior(b)}{\p(\y)}.
-\end{equation}
-
-Having the posterior we can estimate $b$ using any of the point estimates given in equation (\ref{eqnpointestimates}) along
-with the  uncertainty associated with the chosen estimate.
-
-Before we proceed  to find the posterior distribution for $b$, let us explain how we are going to generate the experimental measurements $\y$. 
-Assume that the true value of $b$ is $0,925$. Then we solve equation (\ref{eqntoyproblem})
-using this value of $b$. Next we pick  ten points at random  and save the value of the numerical 
+Let us return to our original goal  to estimate the value of $b$ that explains  the experimental data 
+$\y$ as best as possible. To create the experimental data $\y$ we 
+assume that the true value of $b$ is $0,925$. Then, for this value of $b$,  we solve equation (\ref{eqntoyproblem})
+using a finite difference five point  stencil approximation for the Laplacian. 
+Next we pick  ten points at random in $\Omega$ and save the value of the numerical 
 solution $u$ at those location (see Figure \ref{figsolU}).  Finally we add  noise from
-a normal distribution with mean $0$ and $\sigma=0.01$ to each  of the ten values. The resulting numbers obtained are what we use
-as the experimental data $\y=(\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b))$. The noise added to the data obtained from the
+a normal distribution with mean zero and standard deviation $0.01$ to each  of the ten values. 
+The resulting numbers  are what we use
+as the experimental data $\y={\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)}$. 
+Note that the noise added to the data obtained from the
 numerical  solution of equation
-(\ref{eqntoyproblem}) plays the role of possible  errors in the experimental measurements plus inaccuracies of the 
-model to describe the true behavior of $\tilde{u}$.
-
-
-
+(\ref{eqntoyproblem}) plays the role of possible  
+errors in the experimental measurements plus inaccuracies of the 
+model to describe the true behavior of the physical variable $\tilde{u}$.
 
 \begin{figure}[H]
 \centering
@@ -1263,21 +1254,38 @@ model to describe the true behavior of $\tilde{u}$.
 approximation for the Laplacian. The mesh
 size used in $x$ and $y$ was $0.01$. The value of the parameter $b$ was set at $0.925$. The black dots
 in the plot represent the points used to generate the experimental data 
-$(\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b))$}
+$\y=\{\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)\}$}
 \label{figsolU}
 \end{figure}
-Now that we explained how to generate the data $\y$, we  continue with how to estimate $b$   using Bayes formula (\ref{eqnpropto}).
-First we need to choose a prior distribution for $b$. For the sake of the example, let us assume that 
+
+To obtain a point estimate value of $b$ (see equation (\ref{eqnpointestimates})) given the data $\y$, it is necessary
+to compute the posterior distribution. 
+
+\section{Calculating the Posterior}
+To calculate the posterior we use Bayes rule to get
+
+\begin{equation} \label{eqnpropto}
+\post(b|\y)=\frac{\like(\y|b)\prior(b)}{Z(\y)}.
+\end{equation}
+Note that finding the posterior enables us to estimate the uncertainty associated with any point
+estimate and the uncertainty associated with that estimate.
+To compute $\post(b|\y)$ we need to choose
+a prior distribution and the likelihood for $b$. Let us start with the prior. 
+
+\subsection{Choosing the Prior}
+
+For the sake of
+the example let us assume that 
 equation (\ref{eqntoyproblem}) describes a well known physical process and it is known that
 the parameter $b$ cannot be greater than $2$. In this case one way to choose a prior distribution
 for $b$ that does not assume any other knowledge than $b\in (0,2]$ is the \textit{uniform distribution}. 
-With this distribution, given a Borel measurable set $A\subset(0,2]$, the probability that $b$ belongs to $A$ is given by
-\begin{equation*}
-\frac{1}{2}\int_{A}dx.
-\end{equation*}
+%With this distribution, given a Borel measurable set $A\subset(0,2]$, the probability that $b$ belongs to $A$ is given by
+%\begin{equation*}
+%\frac{1}{2}\int_{A}dx.
+%\end{equation*}
 In this case we have 
 \begin{equation}\label{eqnpriortoyproblem}
-\prior(b)=\frac{1}{2}\textbf{1}_{(0,2]}(b),
+\prior(b)=\frac{1}{2}\textbf{1}_{(0,2]}(b),\qquad\text{for all $b\in\mathbb{R}$},
 \end{equation}
 where $\textbf{1}_{(0,2]}$ is the indicator function of the set $(0,2]$. The indicator function for a Borel measurable set $C$ is
 defined as
@@ -1285,35 +1293,64 @@ defined as
 \textbf{1}_{C}(y)=\left\{
 	\begin{array}{ll}
 		1 & \mbox{if }	y\in C\\
-		0 & \mbox{if }   y\in C^{c}
+		0 & \mbox{if }   y\in C^{c}.
 	\end{array}
 \right.
 \end{equation*}
 
-To calculate the likelihood we need to know how $b$ is connected with the data $\y$. The connection is given by 
-equation (\ref{eqntoyproblem}). By solving explicitly this equation we can find a functional relation
+\subsection{Finding the Likelihood}
+To calculate the likelihood,first we need to know how the set of measurements 
+$\y=\{ \tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)\}$ is related to $b$ when
+we let $b$ to vary. To obtain such relation we need to solve
+equation (\ref{eqntoyproblem}). By solving  this equation explicitly we can find a functional relation
 between $u$ and $b$ for each one of the ten locations depicted in Figure \ref{figsolU}.
-It is possible to explicitly solve equation (\ref{eqntoyproblem}). However
-the relation between $u$ and $b$ is  given by an infinite Fourier series. Having a functional relation given
-by an infinite series is often not very useful. Hence, the  approach we are going to use is the following: 
-by assumption,
-solving equation (\ref{eqntoyproblem}) is computationally expensive. Assume that given time and computational budget
-we can solve the PDE for no more than 10 different values of $b$ (Having ten values of $b$ and ten points
-where we measured $\tilde{u}$ is just coincidence). The idea is to use GPs as described
-in Chapter 2 to interpolate for the values of $b\in (0,2]$ where we did not  solve equation (\ref{eqntoyproblem}). The value
-of the interpolation done by the GP at a point is going to play the role of the output of the   emulator $\hat{M}(\cdot)$ at that point.
-\newline
+It is possible to formally solve equation (\ref{eqntoyproblem}). However
+the relation between $u$ and $b$ is  given by an infinite series.  Indeed equation 
+(\ref{eqntoyproblem}) is the Poisson's equation with homogeneous boundary conditions. This
+equation can be solve using an eigenfunction expansion (\cite{logan2014applied}). The
+eigenfunctions of the Laplacian in the unit square are given by
+\begin{equation*}
+\phi_{mn}=\sin(n\pi x)\sin(m\pi y),\qquad\text{for }m,n\in\mathbb{N},\
+\end{equation*}
+with eigenvalue
+\begin{equation*}
+\lambda_{mn}=(n\pi)^{2}+(m\pi)^{2}.
+\end{equation*}
+The eigenfunction expansion  for $u$ in equation (\ref{eqntoyproblem}) is calculated as
+\begin{equation*}
+u=\sum_{n=1}^{\infty}\sum_{m=1}^{\infty} a_{mn}\phi_{mn}
+\end{equation*}
+where
+\begin{equation}\label{eqnIntegrals}
+a_{mn}\lambda_{nm}=-\frac{\int_{\Omega}e^{-b\|x\|^{2}}\phi_{mn}d\x}{\int_{\Omega}\phi_{mn}^{2}d\x}=
+-\frac{\langle e^{-b\|x\|^{2}},\phi_{mn}\rangle}{\|\phi_{mn}\|_{L^{2}(\Omega)}^{2}}.
+\end{equation}
+The symbol $\langle\cdot,\cdot\rangle$ is the standard inner product in $L^{2}(\Omega)$.
 
-We need to choose ten values of $b$  to solve the PDE (\ref{eqntoyproblem}) in a way that the interpolation error for 
-the other values of $b$ in the set $(0,2]$ is small compared to the error in the interpolation if we were to choose
-a different set of ten values for $b$. We shall denote the points as $\{b_{1},\dots,b_{10}\}$. To choose the ten points 
-we use a maximin design as explained in Chapter 2. In this case
-it is straightforward to check that the way to choose the points that maximizes the minimum distance among the points
-is by locating them in an equidistant manner i.e.
+
+Having a functional relation given
+by an infinite series is often not very useful. For example in equation (\ref{eqnIntegrals})
+the integral on the numerator does not have a closed form.
+Hence we need a different approach. The  approach  we will use the same as the one depicted
+in Figure \ref{figGPCreation}.  First we solve equation (\ref{eqntoyproblem}) for
+$n$ different values of $b$. For the sake of the example assume $n=10$. Then use the
+set $\{b_{j},u(\x;b_{j})\}_{j=1}^{10}$ to train a Gaussian process
+and finally for any $\tilde{b}$ use the mean of the Gaussian process at that point as
+the value $\widehat{u}(\x;\tilde{b})$. For any fixed $\x$ computing the emulator $\widehat{u}(\x;\cdot)$
+gives a cheap way to approximate the functional relation for the set 
+$\y=\{ \tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)\}$ when we let 
+$b$ to vary.
+
+The next step is to choose  the values of $b$  for which the  PDE (\ref{eqntoyproblem}) is solved in a 
+way the uncertainty associated with to the emulator is as small as possible. 
+We shall denote the points we choose as $\{b_{1},\dots,b_{10}\}$. To choose the points 
+we use a maximin design as explained in Chapter 2 Section \ref{secDesignofExperiments}. In this case
+it is straightforward to check that the maximin design is the set of equidistant points
 \begin{equation*}
 \{b_{1}=0.2,b_{2}=0.4,\ldots,b_{10}=2\}.
 \end{equation*}
-This set gives the maximin design for our problem.
+\textbf{Aca terminaste}
+\textbf{Ahora hablas de como usar esos puntos para entrenar los GPs}
 \newline 
 Having the design, it is now possible to  create the set of training points for the GP as 
 $\{b_{i},u(\x_{k},b_{i})\}_{i=1}^{10}$ for each of the 
@@ -1702,15 +1739,15 @@ This means we have  more unknowns than equations.
 One way to overcome this issue is given by the so-called mixing-length theory. The
 theory uses the constitutive equation
 \begin{equation*}
-\E(c'\vv')=D\nabla(\E(c)),
+\E(c'\vv')=\textbf{D}\nabla(\E(c)),
 \end{equation*}
-the term D is  a rank two tensor called the eddy diffusivity tensor. This tensor is assumed 
+the term $\textbf{D}$ is  a rank two tensor called the eddy diffusivity tensor. This tensor is assumed 
 to be symmetric, hence is always diagonalizable. We may assume that we are working
-in the principal axis of $D$. Note that  In general we do not have enough information to believe the tensor
+in the principal axis of $\textbf{D}$. Note that  In general we do not have enough information to believe the tensor
 to be non-diagonal \cite{seinfeld1998atmospheric}, hence 
 
 \begin{equation*}
-D=\begin{bmatrix}
+\textbf{D}=\begin{bmatrix}
 D_{xx}& 0 & 0\\
 0 & D_{yy} & 0\\
 0 & 0 & D_{zz}
@@ -1718,16 +1755,87 @@ D_{xx}& 0 & 0\\
 \end{equation*}
 Under the mixing-length theory the equation (\ref{eqnInconsistent}) reads as
 \begin{equation*}
-\frac{\partial\E(c)}{\partial t}+\dv(\bar{\vv}\E(c)+D\nabla\E(c))=s(\x,t).
+\frac{\partial\E(c)}{\partial t}+\dv(\bar{\vv}\E(c)+\textbf{D}\nabla\E(c))=s(\x,t).
 \end{equation*}
 The variable $\E(c)$ is a deterministic function of space and time. So to make
 notation lighter we set $C(\x,t):=\E(c)$. Hence our forward equations
 reads as
+\begin{equation}\label{eqnDifussivityFinalForm}
+\frac{\partial C(\x,t)}{\partial t}+\dv(\bar{\vv}C(\x,t)+\textbf{D}\nabla C(\x,t))=s(\x,t).
+\end{equation}
+To use this equation it is necessary to make extra assumptions about the behavior of
+the wind velocity and the diffusivity tensor. We are now going to explain in detail
+the assumptions on these quantities.
+
+
+\subsection{Assumptions on the Wind Velocity}
+In practice, the way we measure the wind velocity is by using anemometers that are capable to 
+measure a two dimensional projection of the   velocity vector field at just one point. Therefore
+it is necessary to make assumptions on the three dimensional and global behavior of this vector field.
+Following \cite{hosseini2016airborne}, we assume a velocity vector field of the form 
 \begin{equation*}
-\frac{\partial C(\x,t)}{\partial t}+\dv(\bar{\vv}C(\x,t)+D\nabla C(\x,t))=s(\x,t).
+\vv=(v_{x}(z,t),v_{y}(z,t),v_{set}),
 \end{equation*}
-\textbf{To do know is to tell how to deal with the fact that we don't know the velocity
-closed form nor the fucking components of D, use Bamdad's paper for that}
+where $v_{set}$ is a constant given by  the settling velocity of the zinc particles. By Stoke's law,
+this velocity is given by
+\begin{equation*}
+v_{set}=\frac{\rho g d^{2}}{18\mu},
+\end{equation*}
+where $\rho$ is the particle density, $g$ the acceleration of gravity,  $d$ its diameter, and
+$\mu$ is the air viscosity. For the $x,y$ components of $\vv$ a power law relation of the form
+\begin{equation*}
+\|(v_{x}(z,t),v_{y}(z,t))\|_{2}=v_{r}(t)\left(\frac{z}{z_{r}}\right)^{p},
+\end{equation*}
+where $v_{r}(t)$  is the wind speed at a reference height $z_{r}$. The exponent $p$ depends on 
+factors such as the surface roughness and atmosphere stability. For more details in the power
+law model for the wind velocity the reader is referred to \cite{seinfeld1998atmospheric}.
+
+\subsection{Assumptions on the Diffusivity Tensor}
+Following \cite{monin1954basic},  the vertical diffusivity coefficient $D_{zz}$ is approximated by
+\begin{equation}\label{eqnEddyVertical}
+D_{zz}=\frac{\kappa v_{*} z}{\phi(z/L)},
+\end{equation}
+
+Where $\kappa$ is the \textit{Von-Karman} constant whose value in practice is set as $0.4$. The denominator
+is defined as the piece-wise continuous function
+\begin{equation*}
+\phi\left(\frac{z}{L}\right)=\left\{
+			\begin{array}{ll}				
+				1+4.7\frac{z}{L} &\mbox{for }\frac{z}{L}>0 \\
+				1 &\mbox{for }\frac{z}{L}=0\\
+				(1-15\frac{z}{L})^{-\frac{1}{2}}&\mbox{for }\frac{z}{L}<0
+			\end{array}.
+		\right.
+\end{equation*}
+Here $L$ is referred as the \textit{Monin-Obukhov length}. Finally the parameter $v_{*}$ is known as 
+the \textit{friction velocity}. This parameter is a  function of a third variable known as 
+the roughness length $z_{0}$. 
+
+For the elements $D_{xx}$ and $D_{yy}$, we assume $D_{xx}=D_{yy}$ and independence of height 
+\cite{monin1954basic}. A common used equation
+to approximate this variables is given by
+\begin{equation*}
+D_{xx}=D_{yy}\approx \frac{v_{*}z_{i}^{\frac{3}{4}}(-\kappa L)^{-\frac{1}{3}}}{10}.
+\end{equation*}
+The variable $z_{i}$ is known as the mixing layer height.
+
+\section{Industrial Case Study.}
+As mentioned in the introduction of this chapter, we are interested
+in the dispersion of zinc from a lead-zinc smelter in Trail, British Columbia, Canada
+operated by Teck Industries Ltd. Figure \ref{figAereal} is an aereal photograph of the region
+of interest.
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{FigChap4/AerealView}
+\label{figAereal}
+\caption{Aereal photograph of the lead-zinc smelter in Trail, British Columbia, Canada. The points
+$Q_{1}$ to $Q_{4}$ represent the sources of zinc. The green triangles $R_{1}$ to $R_{9}$ represent
+the location of the measurement devices.}
+\end{figure}
+
+\textbf{Think of what to do, in what order to present the results. First the forward model then 
+the inverse model? Explain in detail the industrial case problem before}
+
 \bibliography{Tesis}
 \bibliographystyle{plain}
 \end{document}

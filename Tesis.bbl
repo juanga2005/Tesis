@@ -25,6 +25,12 @@ Richard~M Dudley.
 \newblock {\em Real analysis and probability}, volume~74.
 \newblock Cambridge University Press, 2002.
 
+\bibitem{hosseini2016airborne}
+Bamdad Hosseini and John~M Stockie.
+\newblock Airborne contaminant source estimation using a finite-volume forward
+  solver coupled with a bayesian inversion approach.
+\newblock {\em arXiv preprint arXiv:1607.03518}, 2016.
+
 \bibitem{jaynes2003probability}
 Edwin~T Jaynes.
 \newblock {\em Probability theory: The logic of science}.
@@ -62,6 +68,17 @@ Mikhail Lifshits.
 Mikhail~Anatolevich Lifshits.
 \newblock {\em Gaussian random functions}, volume 322.
 \newblock Springer Science \& Business Media, 2013.
+
+\bibitem{logan2014applied}
+J~David Logan.
+\newblock {\em Applied partial differential equations}.
+\newblock Springer, 2014.
+
+\bibitem{monin1954basic}
+AS~Monin and AMF Obukhov.
+\newblock Basic laws of turbulent mixing in the surface layer of the
+  atmosphere.
+\newblock {\em Contrib. Geophys. Inst. Acad. Sci. USSR}, 151(163):e187, 1954.
 
 \bibitem{murphy2012machine}
 Kevin~P Murphy.

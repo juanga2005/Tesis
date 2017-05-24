@@ -10,4 +10,6 @@ in line 520 of the tex file.(done)
 5. Change P(B) for Z in the first pages. (done)
 
 ###############Chapter 4 #########
- 1. Add the figure of the control volume.
+1. Add the figure of the control volume.
+2. Ask Bamdad about the cut-off length in page 4 of his paper and add that into section 4.2.2 of your
+Thesis.
