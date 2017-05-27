@@ -10,7 +10,6 @@
 \contentsline {subsection}{\numberline {3.1.1}Choosing the Prior}{34}
 \contentsline {subsection}{\numberline {3.1.2}Finding the Likelihood}{34}
 \contentsline {chapter}{\numberline {4}Industrial Case Problem}{45}
-\contentsline {section}{\numberline {4.1}A Mathematical Model for Pollutant Dispersion}{45}
-\contentsline {subsection}{\numberline {4.1.1}Assumptions on the Wind Velocity}{47}
-\contentsline {subsection}{\numberline {4.1.2}Assumptions on the Diffusivity Tensor}{48}
-\contentsline {section}{\numberline {4.2}Industrial Case Study.}{49}
+\contentsline {section}{\numberline {4.1}A Mathematical Model for Pollutant Dispersion}{46}
+\contentsline {subsection}{\numberline {4.1.1}Assumptions on the Wind Velocity}{48}
+\contentsline {subsection}{\numberline {4.1.2}Assumptions on the Diffusivity Tensor}{49}

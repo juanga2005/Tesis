@@ -1666,16 +1666,55 @@ problem, reliable inference could be done with small amount of data. On the cont
 is not realistic, inference may not be reliable and a big amount of data is needed
 to correct for the bias included in the prior distribution. We can summarize this with the following analogy: if you really believe
 in Santa you will need significant  evidence that he does not exist to stop believing in his existence.
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Chapter 4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
 \chapter{Industrial Case Problem}
 
-Some introduction: relate the need to find the forward map in order to solve the problem
-of finding the parameters. 
+
+
+As mentioned in the introduction, we are interested to study
+the dispersion of zinc from a lead-zinc smelter in Trail, British Columbia, Canada
+operated by Teck Industries Ltd.  The smelter has four sources of pollutant and our goal
+is to estimate how much is each source contributing to the total amount of zinc
+that is being released by the smelter.
+To estimate this we count on experimental
+measures of the zinc deposition in nine different locations and wind velocity data 
+of the surrounding area. An aerial photograph of the region  of interest with 
+the location of the sources and the measurement devices is shown 
+in Figure \ref{figAereal}. 
+
+ 
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.35]{FigChap4/AerealView}
+\label{figAereal}
+\caption{Aereal photograph of the lead-zinc smelter in Trail, British Columbia, Canada. The points
+$Q_{1}$ to $Q_{4}$ represent the sources of zinc. The green triangles $R_{1}$ to $R_{9}$ represent
+the location of the measurement devices.}
+\end{figure}
+
+The first step in order to estimate the contribution of each source in the total
+input of zinc into the atmosphere is to formulate a mathematical model that approximates
+the physics behind the pollutant dispersion.
+%To estimate the contribution of the sources we are going to proceed in the same
+%manner as in the previous chapter. First we formulate the mathematical model
+%that describes the physics of interest. With the model we proceed to find
+%the likelihood. Next we use any given information about the source to choose
+%a prior
+
+
+
 
 \section{A Mathematical Model for Pollutant Dispersion}
-Our starting point is the conservation of mass. In particular conservation of mass for
+Our starting point  is the conservation of mass. In particular conservation of mass for
 particulated zinc in the atmosphere. Consider a volume of space $V$ with a mass
-amount $m$ of zinc in it. Assume
+amount $m$ of zinc in it. 
+Assume
 that within $V$ there is  a source of  zinc. Further assume that zinc is flowing inside the volume 
 and leaving the volume at the same time due to the presence of wind (see Figure bla).
 If $\textbf{v}$ represents the wind velocity it can be shown that net amount
@@ -1758,11 +1797,17 @@ Under the mixing-length theory the equation (\ref{eqnInconsistent}) reads as
 \frac{\partial\E(c)}{\partial t}+\dv(\bar{\vv}\E(c)+\textbf{D}\nabla\E(c))=s(\x,t).
 \end{equation*}
 The variable $\E(c)$ is a deterministic function of space and time. So to make
-notation lighter we set $C(\x,t):=\E(c)$. Hence our forward equations
-reads as
+notation lighter  we set $C(\x,t):=\E(c)$. Note that $C$ has the same units
+as $c$. We interpret $C(\x,t)$ as the expected concentration we would measure
+ at the point $\x$ at time $t$ if we were to repeat a pollutant dispersion
+experiment a large number of times under identical initial conditions.
+The final form of the mathematical model for pollutant dispersion is
+
 \begin{equation}\label{eqnDifussivityFinalForm}
 \frac{\partial C(\x,t)}{\partial t}+\dv(\bar{\vv}C(\x,t)+\textbf{D}\nabla C(\x,t))=s(\x,t).
 \end{equation}
+
+
 To use this equation it is necessary to make extra assumptions about the behavior of
 the wind velocity and the diffusivity tensor. We are now going to explain in detail
 the assumptions on these quantities.
@@ -1783,9 +1828,9 @@ v_{set}=\frac{\rho g d^{2}}{18\mu},
 \end{equation*}
 where $\rho$ is the particle density, $g$ the acceleration of gravity,  $d$ its diameter, and
 $\mu$ is the air viscosity. For the $x,y$ components of $\vv$ a power law relation of the form
-\begin{equation*}
+\begin{equation}\label{eqnPowerLaw}
 \|(v_{x}(z,t),v_{y}(z,t))\|_{2}=v_{r}(t)\left(\frac{z}{z_{r}}\right)^{p},
-\end{equation*}
+\end{equation}
 where $v_{r}(t)$  is the wind speed at a reference height $z_{r}$. The exponent $p$ depends on 
 factors such as the surface roughness and atmosphere stability. For more details in the power
 law model for the wind velocity the reader is referred to \cite{seinfeld1998atmospheric}.
@@ -1809,7 +1854,7 @@ is defined as the piece-wise continuous function
 \end{equation*}
 Here $L$ is referred as the \textit{Monin-Obukhov length}. Finally the parameter $v_{*}$ is known as 
 the \textit{friction velocity}. This parameter is a  function of a third variable known as 
-the roughness length $z_{0}$. 
+the \textit{roughness length} $z_{0}$. 
 
 For the elements $D_{xx}$ and $D_{yy}$, we assume $D_{xx}=D_{yy}$ and independence of height 
 \cite{monin1954basic}. A common used equation
@@ -1817,24 +1862,33 @@ to approximate this variables is given by
 \begin{equation*}
 D_{xx}=D_{yy}\approx \frac{v_{*}z_{i}^{\frac{3}{4}}(-\kappa L)^{-\frac{1}{3}}}{10}.
 \end{equation*}
-The variable $z_{i}$ is known as the mixing layer height.
+The variable $z_{i}$ is known as the \textit{mixing layer height}.
 
-\section{Industrial Case Study.}
-As mentioned in the introduction of this chapter, we are interested
-in the dispersion of zinc from a lead-zinc smelter in Trail, British Columbia, Canada
-operated by Teck Industries Ltd. Figure \ref{figAereal} is an aereal photograph of the region
-of interest.
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.5]{FigChap4/AerealView}
-\label{figAereal}
-\caption{Aereal photograph of the lead-zinc smelter in Trail, British Columbia, Canada. The points
-$Q_{1}$ to $Q_{4}$ represent the sources of zinc. The green triangles $R_{1}$ to $R_{9}$ represent
-the location of the measurement devices.}
-\end{figure}
 
-\textbf{Think of what to do, in what order to present the results. First the forward model then 
-the inverse model? Explain in detail the industrial case problem before}
+Assuming an specific form of the functional form of the wind velocity and the  
+diffusivity tensor, introduces new parameters whose value needs to be decided. In our model
+there are five parameters we need to assign a value before we can use equation (\ref{eqnDifussivityFinalForm}).
+These parameters are
+\begin{itemize}
+\item $p$: the fitting parameter for the wind velocity power law (equation (\ref{eqnPowerLaw})
+\item $z_{0}$: roughness length
+\item $z_{i}$: mixing layer height.
+\item $L$: Monin-Obukhov length.
+\item $z_{cut}$ cutting height (equation (bla)).
+\end{itemize}
+In practice we set a value for these parameters from a given interval of numbers
+that empirically has shown to work \cite{seinfeld1998atmospheric,hosseini2016airborne}.
+The caveat with this approach is that there is no good reason to choose one value
+over a different one. In this work we are going to use the Bayesian framework
+to decide the values of this parameters and the sources as well.
+
+
+\textbf{What to do and in what order}
+\item 
+
+
+With the mathematical model formulated we are ready to formulate the inverse problem.
+
 
 \bibliography{Tesis}
 \bibliographystyle{plain}
