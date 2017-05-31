@@ -9,7 +9,7 @@
 \usepackage{setspace}
 \usepackage{mathrsfs}
 \usepackage{float}
-%\usepackage{pbox}
+\usepackage{pbox}
 
 
 
@@ -23,7 +23,7 @@
 \lfoot{}
 \cfoot{\thepage}
 \rfoot{}
- %\usepackage{fancyhdr,floatpag}
+%\usepackage{fancyhdr,floatpag}
 
 %\pagestyle{fancy}
 %\fancyhf{}% Clear page header/footer
@@ -1147,7 +1147,7 @@ We begin by considering the forward problem, given by the following partial diff
 \right.
 \end{equation} 
 where $b$ is some real positive parameter. The 
-function $u$ represents the mathematical approximation of  a quantity with a physical interpretation  $\tilde{u}$. The  behavior
+function $u$ represents the mathematical approximation of  a quantity $\tilde{u}$ that has a physical interpretation. The  behavior
 of $\tilde{u}$ is assumed to be    modeled by equation (\ref{eqntoyproblem}).
 
 In Chapter 2 Section 2.1, we explained how to build an emulator $\hat{M}(\cdot)$  that approximates
@@ -1164,8 +1164,8 @@ We want to estimate the value of $b$ that explains  the experimental data $\text
 This is our inverse problem. 
 A simple approach to estimate $b$ 
 would be to solve equation (\ref{eqntoyproblem}) for a big number of values $b$ in the interval $(0,L]$ where $L$ 
-is chosen in a manner that there exists a $b^{*}\in (0,L]$ such that the set 
-$\{u(\x_{1};b^{*}),\ldots,u(\x_{10};b^{*})\}$
+is chosen in a manner that there exists a $b^{*}\in (0,L]$ such that the vector 
+$(u(\x_{1};b^{*}),\ldots,u(\x_{10};b^{*}))$
 has `small' discrepancy with the experimental data $\y$.
  
 Let us assume that solving
@@ -1173,18 +1173,18 @@ equation (\ref{eqntoyproblem}) is computationally expensive and repeating the ca
 different values of $b$
 is not feasible. Therefore we need to construct an emulator $\widehat{u}(\cdot)$ that approximates $u(\cdot)$. 
 The way we are going to construct $\widehat{u}(\cdot)$ is as follows: for a fixed $\x$ we solve equation 
-(\ref{eqntoyproblem}) for   number $n$ of different values of  $b$. We pick the value of $n$ in a way
+(\ref{eqntoyproblem}) for   $n$  different values of  $b$. We pick the value of $n$ in a way
 that the computational cost of computing (\ref{eqntoyproblem}) $n$ times, does not exceed our
 computational and time budget. Then use the data $\{b_{j},u(\x,b_{j})\}_{j=1}^{n}$  as a 
 training set to create a Gaussian process, as explained in Chapter 2, Section 2.1.1. Finally
 for any value $\tilde{b}$ we use the mean of the Gaussian process at that point as $\widehat{u}(\x,\tilde{b})$.
-An sketch of the result for approximating a model $u(\x;\cdot)$ with an emulator
+An sketch from the result for approximating a model $u(\x;\cdot)$ with an emulator
 $\widehat{u}(\x;\cdot)$ is shown
 in Figure \ref{figGPCreation}.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.50]{./FigChap3/emulatorApproximation}
+\includegraphics[scale=0.55]{./FigChap3/emulatorApproximation}
 \caption{Approximation of a model $u(\x;\cdot)$ by the mean of a Gaussian process trained
 with six  different  outputs from the model. The mean of the Gaussian process at a point $\tilde{b}$ is taken
 as the value $\widehat{u}(\x;\tilde{b})$ of the emulator.}
@@ -1202,37 +1202,37 @@ we are going to use throughout the rest of the chapter.
 %The value of the emulator at the point $(\x,b)$  is going to be denoted by $\hat{u}(\x;b)$. The following
 %table summarizes the notation that is going to be used from now on in this Chapter.
 
-%\begin{table}[H]
-%\centering
-%\begin{tabular}{|c|c|}
-%\hline 
-%Symbol & Meaning \tabularnewline 
-%\hline 
-%\hline
-%\hline 
-%$\tilde{u}(\x;b)$ & \pbox{7cm}{Value of the physical variable at the point $\x$
-%with parameter $b$.\\} \tabularnewline 
-%\hline 
-%\hline
-%$u(\x;b)$ & \pbox{7cm}{Numerical solution of equation (\ref{eqntoyproblem})
-%at $\x$ with parameter $b$.\\} \tabularnewline
-%\hline
-%\hline 
-%$\hat{u}(\x;b)$ & \pbox{7cm}{Value of the interpolation of the emulator $\hat{M}(\cdot)$ at the point $\x$ with parameter
-%$b$\\}.  \tabularnewline
-%\hline
-%\hline 
-%$P:=\{\x_{1},\ldots,\x_{10}\}$ & \pbox{7cm}{Points where the experimental measurements were taken\\}.  \tabularnewline
-%\hline
-%\hline 
-%$\y:=(\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b))$ & \pbox{7cm}{Values of the experimental measurements for the variable $\tilde{u}$\\}.  \tabularnewline
-%\hline
-%\end{tabular}
-%
-%\caption{Summary of symbols used in Chapter 3.}
-%\label{tabSymboltable}
-%\end{table}
-Let us return to our original goal  to estimate the value of $b$ that explains  the experimental data 
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline 
+Symbol & Meaning \tabularnewline 
+\hline 
+\hline
+\hline 
+$\tilde{u}(\x;b)$ & \pbox{7cm}{Value of the physical variable at the point $\x$
+with parameter $b$.\\} \tabularnewline 
+\hline 
+\hline
+$u(\x;b)$ & \pbox{7cm}{Numerical solution of equation (\ref{eqntoyproblem})
+at $\x$ with parameter $b$.\\} \tabularnewline
+\hline
+\hline 
+$\hat{u}(\x;b)$ & \pbox{7cm}{Value of the interpolation of the emulator $\hat{M}(\cdot)$ at the point $\x$ with parameter
+$b$\\}.  \tabularnewline
+\hline
+\hline 
+$P:=\{\x_{1},\ldots,\x_{10}\}$ & \pbox{7cm}{Points where the experimental measurements were taken\\}.  \tabularnewline
+\hline
+\hline 
+$\y:=(\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b))$ & \pbox{7cm}{Values of the experimental measurements for the variable $\tilde{u}$\\}.  \tabularnewline
+\hline
+\end{tabular}
+
+\caption{Summary of symbols used in Chapter 3.}
+\label{tabSymboltable}
+\end{table}
+Let us return to our original goal,  to estimate the value of $b$ that explains  the experimental data 
 $\y$ as best as possible. To create the experimental data $\y$ we 
 assume that the true value of $b$ is $0,925$. Then, for this value of $b$,  we solve equation (\ref{eqntoyproblem})
 using a finite difference five point  stencil approximation for the Laplacian. 
@@ -1267,8 +1267,8 @@ To calculate the posterior we use Bayes rule to get
 \begin{equation} \label{eqnpropto}
 \post(b|\y)=\frac{\like(\y|b)\prior(b)}{Z(\y)}.
 \end{equation}
-Note that finding the posterior enables us to estimate the uncertainty associated with any point
-estimate and the uncertainty associated with that estimate.
+Note that finding the posterior enables us to   any point
+estimate from equation (\ref{eqnpointestimates}) and the uncertainty associated with that estimate.
 To compute $\post(b|\y)$ we need to choose
 a prior distribution and the likelihood for $b$. Let us start with the prior. 
 
@@ -1349,20 +1349,26 @@ it is straightforward to check that the maximin design is the set of equidistant
 \begin{equation*}
 \{b_{1}=0.2,b_{2}=0.4,\ldots,b_{10}=2\}.
 \end{equation*}
-\textbf{Aca terminaste}
-\textbf{Ahora hablas de como usar esos puntos para entrenar los GPs}
 \newline 
-Having the design, it is now possible to  create the set of training points for the GP as 
-$\{b_{i},u(\x_{k},b_{i})\}_{i=1}^{10}$ for each of the 
-$k=10$ sites where we obtained the experimental measurements $(\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b))$.
- Using the training
-points, we create the GP for each of the ten sites. For the interpolation we use as a test set
+Recall that we know the value of $u$ at ten points $P=\{\x_{1},\ldots,\x_{10}\}$.
+%We  use  the set of equidistant  points to train a GP for each of the ten sites in $P$. 
+Therefore is  necessary to create ten GPs, hence we have
+\begin{equation*}
+G_{k}:(0,2]\rightarrow\mathbb{R}\qquad\text{for }k=1,2,\ldots 10.
+\end{equation*}
+such that  each $k$ and $b$,  the value of the mean of the GP is going to be given by $G_{k}(b)$. 
+This value is the approximation of $u(\x_{k},b)$. Note that to train the GPs we
+ have a training set for each point in $P$.
+For example, for the point $\x_{k}$, the training set is $\{b_{i},u(\x_{k},b_{i})\}_{i=1}^{10}$.
+For the interpolation points, we use the same set for all GPs:
 \begin{equation*}
 \{0.01,0.02,\ldots,1.99,2\}.
-\end{equation*} 
+\end{equation*}
+
+ 
 In Figure \ref{fignofitted} are plotted the training points, 
-the GP regression over the test points, along with the true value of $b$
-and the experimental measure $\tilde{u}(\x_{k};b)$ for each of the ten sites.
+the GP regression over the test points,  the true value of $b$,
+and the experimental measurements $\tilde{u}(\x_{k};b)$ for each of the ten sites.
 
 
 
@@ -1383,6 +1389,7 @@ from 1 to 10 in Figure \ref{figsolU}}
 \label{fignofitted}
 \end{figure}
 
+\textbf{After improving the graph, now you keep moving}
 The intersection of the blue dotted line with the black dotted line in Figure \ref{fignofitted} represents, 
 the value the numerical 
 solution $u$  would attain  if it were to  perfectly model the physical variable $\tilde{u}$. 
@@ -1883,8 +1890,6 @@ over a different one. In this work we are going to use the Bayesian framework
 to decide the values of this parameters and the sources as well.
 
 
-\textbf{What to do and in what order}
-\item 
 
 
 With the mathematical model formulated we are ready to formulate the inverse problem.
