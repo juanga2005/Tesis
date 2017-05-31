@@ -1258,16 +1258,16 @@ $\y=\{\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)\}$}
 \label{figsolU}
 \end{figure}
 
-To obtain a point estimate value of $b$ (see equation (\ref{eqnpointestimates})) given the data $\y$, it is necessary
-to compute the posterior distribution. 
+Once we have created the experimental data $\y$, to obtain a point estimate value of $b$, it is necessary
+to compute the posterior distribution. We are going to explain step by step how to obtain such distribution.
 
-\section{Calculating the Posterior}
+\section{Computing the Posterior}
 To calculate the posterior we use Bayes rule to get
 
 \begin{equation} \label{eqnpropto}
 \post(b|\y)=\frac{\like(\y|b)\prior(b)}{Z(\y)}.
 \end{equation}
-Note that finding the posterior enables us to   any point
+Note that finding the posterior enables us to obtain   any of point
 estimate from equation (\ref{eqnpointestimates}) and the uncertainty associated with that estimate.
 To compute $\post(b|\y)$ we need to choose
 a prior distribution and the likelihood for $b$. Let us start with the prior. 
@@ -1275,10 +1275,9 @@ a prior distribution and the likelihood for $b$. Let us start with the prior.
 \subsection{Choosing the Prior}
 
 For the sake of
-the example let us assume that 
-equation (\ref{eqntoyproblem}) describes a well known physical process and it is known that
+the example let us assume that  it is known that
 the parameter $b$ cannot be greater than $2$. In this case one way to choose a prior distribution
-for $b$ that does not assume any other knowledge than $b\in (0,2]$ is the \textit{uniform distribution}. 
+for $b$ that does not assume any other knowledge than $b\in (0,2]$, is the \textit{uniform distribution}. 
 %With this distribution, given a Borel measurable set $A\subset(0,2]$, the probability that $b$ belongs to $A$ is given by
 %\begin{equation*}
 %\frac{1}{2}\int_{A}dx.
@@ -1307,12 +1306,12 @@ between $u$ and $b$ for each one of the ten locations depicted in Figure \ref{fi
 It is possible to formally solve equation (\ref{eqntoyproblem}). However
 the relation between $u$ and $b$ is  given by an infinite series.  Indeed equation 
 (\ref{eqntoyproblem}) is the Poisson's equation with homogeneous boundary conditions. This
-equation can be solve using an eigenfunction expansion (\cite{logan2014applied}). The
+equation can be solve using an eigenfunction expansion \cite{logan2014applied}. The
 eigenfunctions of the Laplacian in the unit square are given by
 \begin{equation*}
 \phi_{mn}=\sin(n\pi x)\sin(m\pi y),\qquad\text{for }m,n\in\mathbb{N},\
 \end{equation*}
-with eigenvalue
+with eigenvalues
 \begin{equation*}
 \lambda_{mn}=(n\pi)^{2}+(m\pi)^{2}.
 \end{equation*}
@@ -1331,13 +1330,15 @@ The symbol $\langle\cdot,\cdot\rangle$ is the standard inner product in $L^{2}(\
 Having a functional relation given
 by an infinite series is often not very useful. For example in equation (\ref{eqnIntegrals})
 the integral on the numerator does not have a closed form.
-Hence we need a different approach. The  approach  we will use the same as the one depicted
-in Figure \ref{figGPCreation}.  First we solve equation (\ref{eqntoyproblem}) for
-$n$ different values of $b$. For the sake of the example assume $n=10$. Then use the
-set $\{b_{j},u(\x;b_{j})\}_{j=1}^{10}$ to train a Gaussian process
-and finally for any $\tilde{b}$ use the mean of the Gaussian process at that point as
-the value $\widehat{u}(\x;\tilde{b})$. For any fixed $\x$ computing the emulator $\widehat{u}(\x;\cdot)$
-gives a cheap way to approximate the functional relation for the set 
+Hence we need a different approach to gain insight into the relation between $\y$ and $b$. 
+The  approach  we will use is the  same as the one that allowed us to obtain
+Figure \ref{figGPCreation}.  First we solve equation (\ref{eqntoyproblem}) for
+$n$ different values of $b$. For the sake of the example assume $n=10$. Then 
+for each $\x$ in $P=\{\x_{1},\ldots,\x_{10}\}$ use the
+set $\{b_{j},u(\x_{k};b_{j})\}_{j=1}^{10}$ to train a Gaussian process for each $k=1,2,\ldots,10$.
+Finally for any $\tilde{b}\in (0,2]$ use the mean of the Gaussian process at that point as
+the value $\widehat{u}(\x_{k};\tilde{b})$. By proceeding in this manner we obtain 
+a cheap method to approximate  the behavior   of the set 
 $\y=\{ \tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)\}$ when we let 
 $b$ to vary.
 
@@ -1356,19 +1357,22 @@ Therefore is  necessary to create ten GPs, hence we have
 \begin{equation*}
 G_{k}:(0,2]\rightarrow\mathbb{R}\qquad\text{for }k=1,2,\ldots 10.
 \end{equation*}
-such that  each $k$ and $b$,  the value of the mean of the GP is going to be given by $G_{k}(b)$. 
-This value is the approximation of $u(\x_{k},b)$. Note that to train the GPs we
- have a training set for each point in $P$.
-For example, for the point $\x_{k}$, the training set is $\{b_{i},u(\x_{k},b_{i})\}_{i=1}^{10}$.
+such that  for each $k$ and $b$,  the value of the mean of the GP is going to be given by $G_{k}(b)$.
+That is, $G_{k}(\cdot)$ is the emulator for $u(\x_{k},\cdot)$. More precisely
+\begin{equation*}
+G_{k}(b):=\hat{u}(\x_{k};b).
+\end{equation*} 
+
+
 For the interpolation points, we use the same set for all GPs:
 \begin{equation*}
 \{0.01,0.02,\ldots,1.99,2\}.
 \end{equation*}
 
  
-In Figure \ref{fignofitted} are plotted the training points, 
-the GP regression over the test points,  the true value of $b$,
-and the experimental measurements $\tilde{u}(\x_{k};b)$ for each of the ten sites.
+In Figure \ref{fignofitted} are plotted  
+the GP regression,  the true value of $b$, the value of $\tilde{u}(\x_{k};b)$ 
+and the training data $\tilde{u}(\x_{k};b)$ for each of the ten sites.
 
 
 
@@ -1389,53 +1393,52 @@ from 1 to 10 in Figure \ref{figsolU}}
 \label{fignofitted}
 \end{figure}
 
-\textbf{After improving the graph, now you keep moving}
-The intersection of the blue dotted line with the black dotted line in Figure \ref{fignofitted} represents, 
-the value the numerical 
-solution $u$  would attain  if it were to  perfectly model the physical variable $\tilde{u}$. 
-Since we added noise to the values
-$\{u(\x_{1};0.925),\ldots,u(\x_{10};0.925)\}$ we know that the value of $\tilde{u}$ has to be different 
-from the value of $u$.
-\newline
 
-The solid line in Figure \ref{fignofitted} gives a functional relation between $\hat{u}$ and $b$ for each of the 
-ten sites.
-Let us denote $G_{k}(b):=\hat{u}(\x_{k};b)$ and $y_{k}=\tilde{u}(\x_{k};b)$ for $k=1,\ldots,10$. A possible 
-functional relation
-that connects these quantities is
+
+The solid line in Figure \ref{fignofitted} depicts the dependence of  $\hat{u}$ on $b$ for each of the 
+ten sites. 
+
+
+We are now ready to make the mathematical connection between $\tilde{u},u$ and $\hat{u}$. Recall
+that $u$ is the mathematical approximation of the physical variable $\tilde{u}$ and $\hat{u}$
+is the emulator for $u$. Hence if $\hat{u}$ approximates well $u$, we would expect that 
+$\hat{u}$ approximates $\tilde{u}$. For any point $x_{k}\in P$ we don't know exactly
+how  $\hat{u}(\x_{k},\cdot)=G_{k}(\cdot)$ differs from $\tilde{u}(\x_{k},\cdot)$.
+If we define $y_{k}(b):=\tilde{u}(\x_{k},b)$, then, a possible 
+relation
+that connects these quantities is given by the following Gaussian additive model (\textbf{cite a reference here})
 \begin{equation}\label{eqnreal2interp}
-y_{k}=G_{k}(b)+\epsilon_{k},\qquad\text{where } \epsilon_{k}\sim\mathcal{N}(0,\lambda^{2}),
+y_{k}(b)=G_{k}(b)+\epsilon_{k},\qquad\text{with } \epsilon_{k}\sim\mathcal{N}(0,\lambda^{2}),
 \end{equation}
-with $\lambda$ a positive number that models how much we believe the value of $\tilde{u}$ differs from the GP prediction $\hat{u}$. 
-We chose the value $\lambda=5.4\times 10^{-3}$ to get a signal to noise ratio with $\y$ of 1:10.
-If we define the vector  
-$\textbf{G}(b)=(\hat{u}(\x_{1};b),\ldots,\hat{u}(\x_{10};b))$ and recalling the definition of $\y$ 
-(see table \ref{tabSymboltable}), equation (\ref{eqnreal2interp}) can we written more compactly as
+where $\lambda$ is  a positive number that models how much we believe  the emulator prediction differs from $\tilde{u}$. 
+We chose the value $\lambda=5.4\times 10^{-3}$ to get a signal to noise ratio  of 1:10.
+By defining the vector  
+$\textbf{G}(b)=(\hat{u}(\x_{1};b),\ldots,\hat{u}(\x_{10};b))$ and  the definition of $\y$ 
+(see table \ref{tabSymboltable}). Then equation (\ref{eqnreal2interp}) can we written more compactly as
 \begin{equation}\label{eqnvector2interp}
-\textbf{y}=\textbf{G}(b)+\epsilon,\qquad\text{where }\epsilon\sim\mathcal{N}(0,\lambda^{2} I_{10\times 10}).
+\textbf{y}=\textbf{G}(b)+\epsilon,\qquad\text{with }\epsilon\sim\mathcal{N}(0,\lambda^{2} I_{10\times 10}).
 \end{equation}
 
 
-Since the random vector $\epsilon$ has multivariate Gaussian distribution, we can use equation (\ref{eqnvector2interp})
-to conclude \cite{Somersalo}
+Since the random vector $\epsilon$ has a Gaussian distribution, we can use equation (\ref{eqnvector2interp})
+to conclude 
 \begin{equation*}
 \textbf{y}|b\sim \mathcal{N}(\textbf{G}(b),\lambda^{2} I_{10\times 10}),
 \end{equation*}
-Explicitly
+i.e.
 \begin{equation}\label{eqnlikelihoodtoyproblem}
 \p(\textbf{y}|b)\propto e^{-\frac{1}{2\lambda^{2}}\|\textbf{G}(b)-\textbf{y}\|_{2}^{2}},
 \end{equation}
 where the proportionality constant normalizes the distribution on the right hand side to one. Since
-the denominator in Bayes rule in equation (\ref{eqnpropto}) is independent of $b$ and serves only 
-as a normalization constant we can use equations (\ref{eqnpriortoyproblem}) and (\ref{eqnlikelihoodtoyproblem})  
+the denominator in Bayes' rule (\ref{eqnpropto}) is independent of $b$, 
+we can use equations (\ref{eqnpriortoyproblem}) and (\ref{eqnlikelihoodtoyproblem})  
 to write 
 \begin{equation}\label{eqnposteriorforb}
 \post(b|\y)\propto\like(\y|b)\prior(b)\propto \textbf{1}_{(0,2]}(b)e^{-\frac{1}{2\lambda^{2}}\|\textbf{G}(b)-\textbf{y}\|_{2}^{2}}.
 \end{equation}
-An interpretation of this result is that before taking experimental measurements all we knew about the parameter $b$ was
-that $b\in (0,2]$ after weighting this prior believe with the data $\y$ our current state of knowledge about the
-parameter $b$ is encoded in the posterior distribution. Figure \ref{figlikeprior} plots this update in our knowledge about $b$.
-
+An interpretation of this result is that before taking experimental measurements  we only knew 
+that $b\in (0,2]$. After weighting this prior belief with the data $\y$, our current state of knowledge about the
+parameter $b$ is encoded in the posterior distribution. Figure \ref{figlikeprior} shows this updated distribution.
 %
 %As we can see in Figure \ref{fignofitted}, the emulator sometimes overestimates the value of $b$ and sometimes
 %underestimates it, this behaviour is expected. The hope is that this inaccuracies oscilate around the true
@@ -1488,7 +1491,7 @@ parameter $b$ is encoded in the posterior distribution. Figure \ref{figlikeprior
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.6]{./FigChap3/prior_posterior.jpg}
-\caption{Plots for the prior distribution, posterior distribution and true value of the parameter $b$.}
+\caption{Plots of the prior distribution, posterior distribution and true value of the parameter $b$.}
 \label{figlikeprior}
 \end{figure} 
 Having a visual representation of the posterior distribution is useful, but, in order to obtain statistics

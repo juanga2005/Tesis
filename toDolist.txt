@@ -9,6 +9,12 @@ in line 520 of the tex file.(done)
 4. Add a reference to the picture you are going to do about GP. This reference should be applied in line 673.
 5. Change P(B) for Z in the first pages. (done)
 
+
+#############Chapter 3 ############
+1. Add a reference for Gaussian additive models in line 1409.
+
+
+
 ###############Chapter 4 #########
 1. Add the figure of the control volume.
 2. Ask Bamdad about the cut-off length in page 4 of his paper and add that into section 4.2.2 of your
