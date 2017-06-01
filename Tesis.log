@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.7.20)  31 MAY 2017 08:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.7.20)  31 MAY 2017 18:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -178,47 +178,71 @@ Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 )
 \pb@xlen=\skip52
 )
-(/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
-\fancy@headwidth=\skip53
-\f@ncyO@elh=\skip54
-\f@ncyO@erh=\skip55
-\f@ncyO@olh=\skip56
-\f@ncyO@orh=\skip57
-\f@ncyO@elf=\skip58
-\f@ncyO@erf=\skip59
-\f@ncyO@olf=\skip60
-\f@ncyO@orf=\skip61
+(/usr/share/texlive/texmf-dist/tex/latex/algorithms/algorithm.sty
+Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
+nment
+\@float@every@algorithm=\toks29
+\c@algorithm=\count105
 )
-\c@definition=\count105
+(/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
+Package: algpseudocode 
+
+(/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
+Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
+
+Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
+\c@ALG@line=\count106
+\c@ALG@rem=\count107
+\c@ALG@nested=\count108
+\ALG@tlm=\skip53
+\ALG@thistlm=\skip54
+\c@ALG@Lnr=\count109
+\c@ALG@blocknr=\count110
+\c@ALG@storecount=\count111
+\c@ALG@tmpcounter=\count112
+\ALG@tmplength=\skip55
+)
+Document Style - pseudocode environments for use with the `algorithmicx' style
+) (/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+\fancy@headwidth=\skip56
+\f@ncyO@elh=\skip57
+\f@ncyO@erh=\skip58
+\f@ncyO@olh=\skip59
+\f@ncyO@orh=\skip60
+\f@ncyO@elf=\skip61
+\f@ncyO@erf=\skip62
+\f@ncyO@olf=\skip63
+\f@ncyO@orf=\skip64
+)
+\c@definition=\count113
  (./Tesis.aux)
 \openout1 = `Tesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count106
+\scratchcounter=\count114
 \scratchdimen=\dimen116
 \scratchbox=\box30
-\nofMPsegments=\count107
-\nofMParguments=\count108
-\everyMPshowfont=\toks29
-\MPscratchCnt=\count109
+\nofMPsegments=\count115
+\nofMParguments=\count116
+\everyMPshowfont=\toks30
+\MPscratchCnt=\count117
 \MPscratchDim=\dimen117
-\MPnumerator=\count110
-\makeMPintoPDFobject=\count111
-\everyMPtoPDFconversion=\toks30
+\MPnumerator=\count118
+\makeMPintoPDFobject=\count119
+\everyMPtoPDFconversion=\toks31
 ) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -270,7 +294,7 @@ e
 <log.png, id=1, 319.1925pt x 421.575pt>
 File: log.png Graphic file (type png)
  <use log.png>
-Package pdftex.def Info: log.png used on input line 66.
+Package pdftex.def Info: log.png used on input line 67.
 (pdftex.def)             Requested size: 159.59586pt x 210.78697pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -310,29 +334,29 @@ Chapter 1.
 ]
 Chapter 2.
 [9] [10]
-Underfull \hbox (badness 10000) in paragraph at lines 178--184
+Underfull \hbox (badness 10000) in paragraph at lines 179--185
 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 204.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 205.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 204.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 205.
 
-Underfull \hbox (badness 10000) in paragraph at lines 208--217
+Underfull \hbox (badness 10000) in paragraph at lines 209--218
 
  []
 
 [11]
-Underfull \hbox (badness 10000) in paragraph at lines 223--230
+Underfull \hbox (badness 10000) in paragraph at lines 224--231
 
  []
 
 [12]
-Overfull \hbox (10.0724pt too wide) in paragraph at lines 278--281
+Overfull \hbox (10.0724pt too wide) in paragraph at lines 279--282
 \OT1/cmr/bx/n/12 Definition 6. \OT1/cmr/m/it/12 An $\OML/cmm/m/it/12 n$\OT1/cmr
 /m/it/12 -dimensional ran-dom vec-tor $[] \OT1/cmr/m/n/12 = (\OML/cmm/m/it/12 X
 []; [] ; X[]\OT1/cmr/m/n/12 )$ \OT1/cmr/m/it/12 in $\OT1/cmr/m/n/12 (
@@ -341,35 +365,35 @@ Overfull \hbox (10.0724pt too wide) in paragraph at lines 278--281
  []
 
 [13]
-Overfull \hbox (9.14026pt too wide) in paragraph at lines 370--370
+Overfull \hbox (9.14026pt too wide) in paragraph at lines 371--371
 [] 
  []
 
 [14]
-Underfull \hbox (badness 10000) in paragraph at lines 414--425
+Underfull \hbox (badness 10000) in paragraph at lines 415--426
 
  []
 
 [15] [16]
 LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 476.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 477.
  [17]
-Underfull \hbox (badness 10000) in paragraph at lines 535--539
+Underfull \hbox (badness 10000) in paragraph at lines 536--540
 
  []
 
 [18]
-Underfull \hbox (badness 10000) in paragraph at lines 559--560
+Underfull \hbox (badness 10000) in paragraph at lines 560--561
 
  []
 
 [19]
-Underfull \hbox (badness 10000) in paragraph at lines 604--611
+Underfull \hbox (badness 10000) in paragraph at lines 605--612
 
  []
 
 [20]
-Overfull \hbox (8.92836pt too wide) in paragraph at lines 675--679
+Overfull \hbox (8.92836pt too wide) in paragraph at lines 676--680
 \OMS/cmsy/m/n/12 f\OML/cmm/m/it/12 y[]\OMS/cmsy/m/n/12 g[]$\OT1/cmr/m/n/12 . He
 re $(\OML/cmm/m/it/12 K\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 X; X\OT1/cmr/m/n/12 ))
 [] = \OML/cmm/m/it/12 cov\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 f\OT1/cmr/m/n/12 ([]
@@ -380,12 +404,12 @@ re $(\OML/cmm/m/it/12 K\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 X; X\OT1/cmr/m/n/12 ))
  []
 
 [21]
-Underfull \hbox (badness 10000) in paragraph at lines 723--729
+Underfull \hbox (badness 10000) in paragraph at lines 724--730
 
  []
 
 [22] [23]
-Underfull \hbox (badness 10000) in paragraph at lines 836--842
+Underfull \hbox (badness 10000) in paragraph at lines 837--843
 
  []
 
@@ -394,25 +418,25 @@ File: ./FigChap2/partitionComparison.jpg Graphic file (type jpg)
 
 <use ./FigChap2/partitionComparison.jpg>
 Package pdftex.def Info: ./FigChap2/partitionComparison.jpg used on input line 
-853.
+854.
 (pdftex.def)             Requested size: 397.48624pt x 264.99081pt.
 
-Overfull \hbox (7.48624pt too wide) in paragraph at lines 853--857
+Overfull \hbox (7.48624pt too wide) in paragraph at lines 854--858
  [][]
  []
 
 [24]
-Underfull \hbox (badness 10000) in paragraph at lines 865--874
+Underfull \hbox (badness 10000) in paragraph at lines 866--875
 
  []
 
 [25 <./FigChap2/partitionComparison.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 893--902
+Underfull \hbox (badness 10000) in paragraph at lines 894--903
 
  []
 
 [26]
-Underfull \hbox (badness 10000) in paragraph at lines 939--943
+Underfull \hbox (badness 10000) in paragraph at lines 940--944
 
  []
 
@@ -425,42 +449,42 @@ File: ./FigChap3/emulatorApproximation.jpg Graphic file (type jpg)
 
 <use ./FigChap3/emulatorApproximation.jpg>
 Package pdftex.def Info: ./FigChap3/emulatorApproximation.jpg used on input lin
-e 1187.
+e 1188.
 (pdftex.def)             Requested size: 264.99081pt x 264.99081pt.
  [32 <./FigChap3/emulatorApproximation.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 1214--1214
+Underfull \hbox (badness 10000) in paragraph at lines 1215--1215
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1218--1218
+Underfull \hbox (badness 10000) in paragraph at lines 1219--1219
 
  []
 
 
-Underfull \hbox (badness 3954) in paragraph at lines 1222--1222
+Underfull \hbox (badness 3954) in paragraph at lines 1223--1223
 []\OT1/cmr/m/n/12 Value of the in-ter-po-la-tion of the
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1222--1222
+Underfull \hbox (badness 10000) in paragraph at lines 1223--1223
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1225--1225
+Underfull \hbox (badness 10000) in paragraph at lines 1226--1226
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1228--1228
+Underfull \hbox (badness 10000) in paragraph at lines 1229--1229
 
  []
 
 <./FigChap3/solu.jpg, id=128, 562.1pt x 421.575pt>
 File: ./FigChap3/solu.jpg Graphic file (type jpg)
  <use ./FigChap3/solu.jpg>
-Package pdftex.def Info: ./FigChap3/solu.jpg used on input line 1252.
+Package pdftex.def Info: ./FigChap3/solu.jpg used on input line 1253.
 (pdftex.def)             Requested size: 281.04932pt x 210.78697pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -471,7 +495,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 File: ./FigChap3/fitted.jpg Graphic file (type jpg)
 
 <use ./FigChap3/fitted.jpg>
-Package pdftex.def Info: ./FigChap3/fitted.jpg used on input line 1390.
+Package pdftex.def Info: ./FigChap3/fitted.jpg used on input line 1391.
 (pdftex.def)             Requested size: 354.12057pt x 354.12057pt.
  [36]
 Underfull \vbox (badness 5652) has occurred while \output is active []
@@ -481,51 +505,44 @@ Underfull \vbox (badness 5652) has occurred while \output is active []
 File: ./FigChap3/prior_posterior.jpg Graphic file (type jpg)
 
 <use ./FigChap3/prior_posterior.jpg>
-Package pdftex.def Info: ./FigChap3/prior_posterior.jpg used on input line 1493
+Package pdftex.def Info: ./FigChap3/prior_posterior.jpg used on input line 1494
 .
 (pdftex.def)             Requested size: 303.53633pt x 303.53633pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [38]
-Underfull \hbox (badness 10000) in paragraph at lines 1497--1512
+Underfull \hbox (badness 10000) in paragraph at lines 1499--1517
 
  []
 
 [39 <./FigChap3/prior_posterior.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 1514--1517
+Underfull \hbox (badness 10000) in paragraph at lines 1552--1563
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 1521--1524
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1524--1528
-
- []
-
-[40] <./FigChap3/histogram_mcmc.jpg, id=156, 505.89pt x 505.89pt>
+<./FigChap3/histogram_mcmc.jpg, id=153, 505.89pt x 505.89pt>
 File: ./FigChap3/histogram_mcmc.jpg Graphic file (type jpg)
 
 <use ./FigChap3/histogram_mcmc.jpg>
-Package pdftex.def Info: ./FigChap3/histogram_mcmc.jpg used on input line 1558.
+Package pdftex.def Info: ./FigChap3/histogram_mcmc.jpg used on input line 1577.
 
 (pdftex.def)             Requested size: 252.94437pt x 252.94437pt.
- [41 <./FigChap3/histogram_mcmc.jpg>]
-[42]
-Underfull \hbox (badness 10000) in paragraph at lines 1615--1617
+
+Underfull \vbox (badness 7851) has occurred while \output is active []
+
+ [40]
+[41 <./FigChap3/histogram_mcmc.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 1634--1636
 
  []
 
-<./FigChap3/posterior_evolution.jpg, id=163, 504.9264pt x 505.4082pt>
+[42] <./FigChap3/posterior_evolution.jpg, id=163, 504.9264pt x 505.4082pt>
 File: ./FigChap3/posterior_evolution.jpg Graphic file (type jpg)
 
 <use ./FigChap3/posterior_evolution.jpg>
 Package pdftex.def Info: ./FigChap3/posterior_evolution.jpg used on input line 
-1660.
+1675.
 (pdftex.def)             Requested size: 353.44608pt x 353.78331pt.
  [43] [44 <./FigChap3/posterior_evolution.jpg>] [45] [46
 
@@ -535,7 +552,7 @@ Chapter 4.
 File: FigChap4/AerealView.png Graphic file (type png)
 
 <use FigChap4/AerealView.png>
-Package pdftex.def Info: FigChap4/AerealView.png used on input line 1704.
+Package pdftex.def Info: FigChap4/AerealView.png used on input line 1719.
 (pdftex.def)             Requested size: 170.74043pt x 161.51833pt.
  [47 <./FigChap4/AerealView.png (PNG copy)>]
 [48] [49] [50] [51] (./Tesis.bbl [52] [53
@@ -546,13 +563,13 @@ Missing character: There is no € in font cmr12!
 Missing character: There is no ™ in font cmr12!
 ) [54] (./Tesis.aux) ) 
 Here is how much of TeX's memory you used:
- 3134 strings out of 494977
- 41787 string characters out of 6180183
- 99850 words of memory out of 5000000
- 6260 multiletter control sequences out of 15000+600000
+ 3653 strings out of 494977
+ 49407 string characters out of 6180183
+ 107660 words of memory out of 5000000
+ 6768 multiletter control sequences out of 15000+600000
  17077 words of font info for 65 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 37i,18n,43p,545b,287s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,18n,43p,545b,295s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
 mbx6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pf
@@ -571,7 +588,7 @@ amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/t
 exlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/public/rsfs/rsfs10.pfb>
-Output written on Tesis.pdf (54 pages, 2195757 bytes).
+Output written on Tesis.pdf (54 pages, 2197550 bytes).
 PDF statistics:
  266 PDF objects out of 1000 (max. 8388607)
  179 compressed objects within 2 object streams

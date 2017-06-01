@@ -10,8 +10,9 @@
 \usepackage{mathrsfs}
 \usepackage{float}
 \usepackage{pbox}
-
-
+%\usepackage[linesnumbered,ruled]{algorithm2e}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 
 
 
@@ -1494,58 +1495,76 @@ parameter $b$ is encoded in the posterior distribution. Figure \ref{figlikeprior
 \caption{Plots of the prior distribution, posterior distribution and true value of the parameter $b$.}
 \label{figlikeprior}
 \end{figure} 
-Having a visual representation of the posterior distribution is useful, but, in order to obtain statistics
-for the possible value of $b$ we need to sample from the posterior. A family of methods that allow to sample
-from fairly arbitrary distributions are known as Markov Chain Monte Carlo (MCMC). In this work we are going to 
-focus in a particular algorithm known as Metropolis-Hastings  (MH). We now proceed  to explain
+
+It is not always possible to visualize a probability density so it is necessary to sample from it
+in order to obtain statistics about the parameters of interest.
+A family of methods for this purpose
+are known as Markov Chain Monte Carlo (MCMC). In this work we 
+focus on a particular algorithm known as Metropolis-Hastings  (MH). We now proceed  to explain
 how MH works in practice using the posterior for $b$ in equation (\ref{eqnposteriorforb}) as an example. 
 \newline
 \newline
-Consider the posterior distribution $\post(b|\y)$. The idea is to wander around the support of the distribution
-in a way that points in the support with high probability are visited more often than those with low 
-probability. For example, if we are at a point $q_{1}$ and we want to move to a point $q_{2}$ we will accept 
+Consider the posterior density $\post(b|\y)$. The idea is to construct a markov chain that wanders 
+around the support of the posterior
+in a way that the chain spends more time in regions with high probability.
+One way to achive that is as follows: if we are at a point $q_{1}$ and we want to move to a point $q_{2}$ 
+we will accept 
 that move with probability one if $\post(q_{1}|\y)\leq\post(q_{2}|\y)$ and with probability 
-$\frac{\post(q_{2}|\y)}{\post(q_{1}|\y)}$ otherwise. On the other hand if we are at a point $q_{1}$, we choose
+$\frac{\post(q_{2}|\y)}{\post(q_{1}|\y)}$.  We choose
 in what direction to move, randomly, using some probability distribution that is easy to sample from.
-In this and the next Chapter we choose the uniform distribution to decide in what  direction to move.
+For simplicity, In this and the next Chapter we chose the uniform distribution to decide in what  direction to move.
 The pseudocode  for the MH algorithm as described above is \cite{Somersalo}
 
-\begin{enumerate}
-\item pick a point $q_{1}$ in the support of the distribution\\
-\\
-\textbf{for} j=2:N
-\item $\qquad$Draw $u\sim U([0,\alpha])$
-\item $\qquad q_{j}\leftarrow q_{j-1}+u$
-\item $\qquad$Compute $\post(q_{j}|D)$
-\item $\qquad\beta\leftarrow\min(1,\frac{\post(q_{j}|D)}{\post(q_{j-1}|D)})$
-\item $\qquad$Draw $w\sim U([0,1])$\\
-\\
-$\qquad\qquad\qquad$\textbf{if} $w<\beta$ 
-\item $\qquad\qquad q_{j-1}=q_{j}$\qquad(Accept move)\\
-\\
-$\qquad\qquad$\textbf{else}
-\item
-	$\qquad\qquad q_{j-1}=q_{j-1}$\\
-\textbf{end}\\
-\textbf{end}
-\end{enumerate}
+\begin{algorithm}
+\caption{Metropolis-Hastings Algorithm}
+\begin{algorithmic}[1]\label{algMH}
+\State pick a point $q_{1}$ in the support of the distribution
+\For{j=2:N}
+\State Draw $u\sim U([0,\alpha])$
+\State $q_{j}\leftarrow q_{j-1}+u$
+\State $\beta\leftarrow\min(1,\frac{\post(q_{j}|D)}{\post(q_{j-1}|\y)})$
+\State Draw $w\sim U([0,1])$
+\If{$w<\beta$}
+\State $q_{j-1}=q_{j}\qquad$ (Accept the move)
+\Else
+\State $q_{j-1}=q_{j-1}\qquad$ (Reject the move)
+\EndIf
+\EndFor
+%\\
+%\textbf{for} j=2:N
+%\item $\qquad$Draw $u\sim U([0,\alpha])$
+%\item $$
+%\item $\qquad$Compute $\post(q_{j}|D)$
+%\item $\qquad$
+%\item $\qquad$\\
+%\\
+%$\qquad\qquad\qquad$\textbf{if} $w<\beta$ 
+%\item $\qquad\qquad q_{j-1}=q_{j}$\qquad(Accept move)\\
+%\\
+%$\qquad\qquad$\textbf{else}
+%\item
+%	$\qquad\qquad q_{j-1}=q_{j-1}$\\
+%\textbf{end}\\
+%\textbf{end}
+\end{algorithmic}
+\end{algorithm}
 
 The rule of thumb for choosing the parameter $\alpha$ in the scheme above is that   the proportion of times we accept
 a move 
 is about $0.25$ \cite{casella2008monte}. It can be shown that the sequence $q_{1},q_{2},\ldots,q_{N}$
-are realizations of a Markov chain that in the limit as $N\rightarrow\infty$ the samples come from
-$\post(b|\y)$ and are independent. This convergence result works under mild conditions over the distribution that is being sampled.
+are realizations of a Markov chain that in the limit as $N\rightarrow\infty$ are distributed according to the distribution
+$\post(b|\y)$. This convergence result works under mild conditions over the distribution that is being sampled from.
 For more details about the theory behind MCMC methods we refer the reader to \cite{casella2008monte}. 
-Since we do not have the computational power to let $N\rightarrow\infty$
-to achieve independence from the samples, what is done in practice is to consider a number $N$ as big as possible given computational and time constraints. 
-Then consider only 
-a fraction of the last  samples obtained. For example we may choose the last $N/2$ samples obtained from the MH scheme and 
-discard the rest of the samples. The iterations where we obtain samples that we discard later is know as 
-the \textit{burning period}.
+Since we do not have the computational power to let $N\rightarrow\infty$. We let the chain run for a large number of steps
+until it converges. Then, we throw away the \textit{burn-in} portion of the chain and compute statistics using 
+the remaining samples.  The burn-in portion of the chain are the samples obtained before the chain is close 
+to converge. A common choice is to discard the first $\frac{N}{2}$ samples.
 \newline
-Using the MH scheme to sample from the posterior distribution $\post(b|\y)$ with $\alpha=0.23$
-and $N=10000$. We set the burning period to be the set  of the first $5000$ samples. Below is shown the result obtained
-from sampling the posterior in equation (\ref{eqnposteriorforb}).
+
+
+Using Algorithm 1, we sample from the posterior distribution $\post(b|\y)$ setting the values $\alpha=0.23$
+and $N=10000$. The  burn-in  period is set to be  the first $5000$ samples. An histogram of the last $5000$
+is shown below.
 
 %Returning to the problem of sampling the posterior distribution for $b$. We are going to use the Metropolis Hastings algorithm
 %using an step size of $\delta=0.23$, $10000$ samples and we chose the first $5000$ to be the burning period. The results 
@@ -1561,19 +1580,19 @@ from $5000$ samples from MH algorithm with step size $\alpha=0.23$. The solid li
 is the  graph for the posterior $\post(b|D)$.}
 \end{figure}
 
-With the samples obtained we readily obtain useful statistics for $b$. For example we can estimate
- the conditional mean  by using Monte Carlo integration
+With the samples obtained we readily obtain useful statistics for $b$. For example, we can estimate
+the conditional mean using \cite{casella2008monte}
 
 \begin{equation}\label{eqnbcmMC}
 b_{cm}=\int_{(0,2]}b\post(b|D)db\approx\frac{1}{5000}\sum_{j=1}^{5000}b_{j}=0.9247042,
 \end{equation}
-where the summands $b_{j}$ are the samples obtained after the burn period of $5000$ samples. We can 
-also estimate the variance of this estimate as 
+where the summands $b_{j}$ are the samples obtained after the burn-in period of $5000$ samples. We can 
+also estimate the variance of the samples as
 \begin{equation*}
 \int_{(0,2]}(b-b_{cm})^{2}\post(b|D)db\approx\frac{1}{5000}\sum_{j=1}^{5000}(b_{j}-b_{cm})^{2}=0.01427.
 \end{equation*}
-With these values we can say that with $95\%$ of probability, the true value of $b$ belongs to the
-interval
+With these values we can compute a $95\%$ confidence interval for $b$. In this
+case the interval is given by 
 \begin{equation*}
 [0.9247042-2\sqrt{0.01427},0.92470422+2\sqrt{0.01427}]=[0.68579,1.163618].
 \end{equation*}
@@ -1618,42 +1637,38 @@ where
 To conclude this Chapter we are going to turn our attention into the subjective part of Bayesian statistics.  We are 
 going to talk about  the role the  prior probability has in the inference process. 
 
+\textbf{You need to check this part. It looks rush you have to be more careful in the explanations.}
 
 
-
-\subsection*{How important is the prior to make inferences?}
-It is constructive to  explore how relevant is the choice  of the prior distribution
-in making inferences about a parameter of interest. Let us consider the same problem,
-we want to estimate
-the value of the parameter $b$. For demonstration purposes, let us assume two things: the parameter
-$b$ can be any real number (not just $0<b\leq 2$ as before) and we assume a prior distribution for $b$ as
+\section{The Importance of the Prior}
+Once again  consider  problem of estimating
+the value of the parameter $b$, whose real value is, as before, $0.925$. This time we assume the parameter
+$b$ can be any real number (not just $0<b\leq 2$ as before) and the  prior distribution for $b$ is
 \begin{equation*}
 b\sim\mathscr{N}(b^{*},\sigma_{b}^{2}),
 \end{equation*}
 where $b^{*}$ and $\sigma_{b}$ are parameters to be set later.  With this new prior the formula
-for the posterior is calculated as 
+for the posterior is 
 \begin{equation*}
 \post(b|\textbf{y})\propto\underbrace{\exp\left(-\frac{\|\textbf{y}-\textbf{G}(b)\|_{2}^{2}}{2\sigma^{2}}\right)}_{\text{Likelihood}}\underbrace{\exp\left(-\frac{(b-b^{*})^{2}}{2\sigma_{b}^{2}}\right)}_{\text{Prior}}.
 \end{equation*}
-As before, assume that the true
-value of $b$ is $0.925$. To illustrate the role that the prior has in the inference of the value
+To illustrate the role that the prior has in the inference of the value
 of the parameter given the data $\textbf{y}$, suppose that 
 \begin{equation*}
 b\sim\mathscr{N}(4,2.5).
 \end{equation*}
 This prior assumes that, with $95\%$ of confidence, the value of
-$b$ is in the interval $[1.8,8.2]$. Clearly there is a mismatch between
+$b$ is in the interval $[1.8,8.2]$. Clearly, there is a mismatch between
 the true value of $b$ and the range of values that the prior distribution
-assign with high probability. Let us evaluate how the posterior
+assigns high probability. Let us evaluate how the posterior
 distribution for $b$ evolves as we consider more and more experimental
-data from the measurements of $\tilde{u}$.  In Figure \ref{figpostevolution} it is shown
+data from the measurements of $\tilde{u}$. Figure \ref{figpostevolution} shows
 how the posterior evolves when we calculate the likelihood with more 
 and more data. The first frame shows the result when only the measurement
 $\tilde{u}(\x_{1};b)$ is taken into account. The second frame
 when the measurements $\tilde{u}(\x_{1};b),\tilde{u}(\x_{2};b)$ are taken
-into account. In each frame we proceed adding one more measurement 
-at a time and in the tenth frame we calculate the posterior
-using the data obtained from all ten points.
+into account and so on. In each frame we proceed adding one more measurement 
+at a time.
 
 \begin{figure}[H]
 \centering
@@ -1664,18 +1679,18 @@ using the data obtained from all ten points.
 
 The sequence of plots in Figure \ref{figpostevolution} shows that the experimental data creates a new mode
 in the posterior distribution that is close to the true value of $b$. In the end of the sequence where we consider
-all 10 experimental measurements, the mode that is close to the true value of $b$ is bigger than the mode originate
-by the prior at the point $b=4$. The reason for this final posterior distribution is that the prior gives a large
-probability to values around $b=4$, whereas give a close to zero probability for values around $b=0.925$.
-When the experimental data is used, the likelihood distribution points to values close to $b=0.925$. The more data
-we use the stronger the weight that the likelihood has compared to the prior distribution. However since
-the prior distribution gives negligible probability to the true value of $b$, when all data are used there
-is an equilibrium between the likelihood and prior that is expressed as a bimodal distribution. This result
-is a cautionary tale. If we know how to choose the prior distribution in a way that is meaningful to the
-problem, reliable inference could be done with small amount of data. On the contrary if the prior distribution
-is not realistic, inference may not be reliable and a big amount of data is needed
-to correct for the bias included in the prior distribution. We can summarize this with the following analogy: if you really believe
-in Santa you will need significant  evidence that he does not exist to stop believing in his existence.
+all 10 experimental measurements, the mode that is close to the true value of $b$ is bigger than the mode originated
+by the prior at the point $b=4$. The explanation for this behavior  is that the prior  has a high value near $b=4$, 
+but it is close to zero for values around $b=0.925$.
+Then, when the experimental data is used, the likelihood distribution has a higher  value for points  close to $b=0.925$
+than points close to $b=4$. The more data, the higher the value of the likelihood around $b=0.925$ and closer to zero
+away from it. However since
+the prior distribution gives negligible probability to values close to the true value of $b$, when all data are used the 
+product $\prior(\y|b)\p(b)$ will be noneglibible only in regions close to $b=4$ or $b=0.925$.
+
+The above example is a warning example. If we know how to choose the prior distribution in a way that is meaningful to the
+problem, reliable inference could be done even with small amount of data. On the contrary if the prior distribution
+is not realistic, inference could not be done or  may not be reliable even with a large amount of data.  
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Chapter 4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

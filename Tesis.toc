@@ -9,6 +9,7 @@
 \contentsline {section}{\numberline {3.1}Computing the Posterior}{34}
 \contentsline {subsection}{\numberline {3.1.1}Choosing the Prior}{35}
 \contentsline {subsection}{\numberline {3.1.2}Finding the Likelihood}{35}
+\contentsline {section}{\numberline {3.2}The Importance of the Prior}{43}
 \contentsline {chapter}{\numberline {4}Industrial Case Problem}{47}
 \contentsline {section}{\numberline {4.1}A Mathematical Model for Pollutant Dispersion}{48}
 \contentsline {subsection}{\numberline {4.1.1}Assumptions on the Wind Velocity}{50}
