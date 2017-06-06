@@ -18,4 +18,7 @@ in line 520 of the tex file.(done)
 ###############Chapter 4 #########
 1. Add the figure of the control volume.
 2. Ask Bamdad about the cut-off length in page 4 of his paper and add that into section 4.2.2 of your
-Thesis.
+Thesis. (done)
+3. Double check the units please. Because I think we have only the monthly deposition and we are doing everything on 
+a yearly basis.
+4. Ask about if there is a way  to improve plots with multiple windows.

@@ -12,5 +12,9 @@
 \contentsline {section}{\numberline {3.2}The Importance of the Prior}{43}
 \contentsline {chapter}{\numberline {4}Industrial Case Problem}{47}
 \contentsline {section}{\numberline {4.1}A Mathematical Model for Pollutant Dispersion}{48}
-\contentsline {subsection}{\numberline {4.1.1}Assumptions on the Wind Velocity}{50}
+\contentsline {subsection}{\numberline {4.1.1}Assumptions on the Wind Velocity and Source Density}{50}
 \contentsline {subsection}{\numberline {4.1.2}Assumptions on the Diffusivity Tensor}{51}
+\contentsline {section}{\numberline {4.2}Sensitivity Analysis}{53}
+\contentsline {section}{\numberline {4.3}Design of Experiments and Emulator for $B$}{55}
+\contentsline {section}{\numberline {4.4}Choosing a Prior}{56}
+\contentsline {section}{\numberline {4.5}Inferring the Parameters and the sources}{57}

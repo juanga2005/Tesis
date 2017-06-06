@@ -45,8 +45,8 @@
 \newcommand{\like}{\mathbb{P}_{like}}
 \newcommand{\prior}{\mathbb{P}_{prior}}
 \newcommand{\p}{\mathbb{P}}
-
-
+\newcommand{\q}{\textbf{q}}
+\newcommand{\pars}{p,z_{0},L}
 %Other commands
 \newcommand{\E}{\mathbb{E}} %Expectation
 \newcommand{\tvs}{\mathscr{T}} %TVS symbol
@@ -1701,10 +1701,10 @@ is not realistic, inference could not be done or  may not be reliable even with 
 
 
 
-As mentioned in the introduction, we are interested to study
+As mentioned in the introduction, our interested is to study
 the dispersion of zinc from a lead-zinc smelter in Trail, British Columbia, Canada
 operated by Teck Industries Ltd.  The smelter has four sources of pollutant and our goal
-is to estimate how much is each source contributing to the total amount of zinc
+is to estimate how much  each source is contributing to the total amount of zinc
 that is being released by the smelter.
 To estimate this we count on experimental
 measures of the zinc deposition in nine different locations and wind velocity data 
@@ -1737,21 +1737,21 @@ the physics behind the pollutant dispersion.
 
 \section{A Mathematical Model for Pollutant Dispersion}
 Our starting point  is the conservation of mass. In particular conservation of mass for
-particulated zinc in the atmosphere. Consider a volume of space $V$ with a mass
-amount $m$ of zinc in it. 
+particulated zinc in the atmosphere. Consider a region of space  $V$ with $m$ units of   mass
+of zinc within it. 
 Assume
-that within $V$ there is  a source of  zinc. Further assume that zinc is flowing inside the volume 
-and leaving the volume at the same time due to the presence of wind (see Figure bla).
-If $\textbf{v}$ represents the wind velocity it can be shown that net amount
-per unit time of zinc that is flowing through the surface is given by the expression
+that in the interior of $V$ there is  a source of  zinc. Further assume that zinc is flowing throughout 
+the boundary $\partial V$ of $V$  due to  wind (see Figure bla).
+If $\vv(\x,t)$ represents the wind velocity at a point $\x$ at time $t$, it can be shown that net amount
+per unit time of zinc that is flowing through the boundary is given by the expression
 \cite{seinfeld1998atmospheric}
 \begin{equation*}
-\oint_{\partial V}c(\x,t)\textbf{v}\cdot\textbf{n}dA,
+\oint_{\partial V}c(\x,t)\vv(\x,t)\cdot\textbf{n}dA,
 \end{equation*}
-where $\partial V$ is the boundary of $V$ and $c(\x,t)$ is the concentration of zinc at a point $\x$
+where  $c(\x,t)$ is the concentration of zinc at a point $\x$
 at time $t$.
 The units of $c$ are given in units of mass per units of volume. On the other hand
-the rate of change total mass at a time $t$ inside $V$  can be calculated as
+the rate of change total mass $m$ at a time $t$ inside $V$  can be calculated as
 \begin{equation*}
 \frac{dm(t)}{dt}=\frac{d}{dt}\int_{V}c(\x,t)dV.
 \end{equation*}
@@ -1761,7 +1761,7 @@ Finally if the amount of zinc that comes from the source at a time $t$ is given 
 \end{equation*}
 where $s(\x,t)$ is the source density. Its units are mass per unit volume per unit time.
 Conservation of mass states that the total mass inside $V$ should be conserved. Therefore
-for all time the rate of change of the mass inside $m$ should equal all source of variation of it.
+for all times the rate of change of the mass inside $m$ should equal all source of variation of it.
 Mathematically we can write
 \begin{equation*}
 \frac{d}{dt}\int_{V}c(\x,t)dV=-\oint_{\partial V}c(\x,t)\textbf{v}\cdot\textbf{n}dA+\int_{V}s(\x,t)dV.
@@ -1798,18 +1798,17 @@ Plugging in this new representation of $c$ into equation (\ref{eqnNewRandom}) we
 \begin{equation}\label{eqnInconsistent}
 \frac{\partial\E(c)}{\partial t}+\dv(\bar{\vv}\E(c))+\dv(\E(c'\vv'))=s(\x,t).
 \end{equation}
-The problem with this new equation is that we have the extra variable $\E(c'\vv')$.
-This means we have  more unknowns than equations. 
+The problem with this new equation is  the extra variable $\E(c'\vv')$.
+In this case we have two unknowns and one equation. 
 One way to overcome this issue is given by the so-called mixing-length theory. The
 theory uses the constitutive equation
 \begin{equation*}
-\E(c'\vv')=\textbf{D}\nabla(\E(c)),
+\E(c'\vv')=\textbf{D}\nabla(\E(c)).
 \end{equation*}
-the term $\textbf{D}$ is  a rank two tensor called the eddy diffusivity tensor. This tensor is assumed 
+The term $\textbf{D}$ is  a rank two tensor called the eddy diffusivity tensor. This tensor is assumed 
 to be symmetric, hence is always diagonalizable. We may assume that we are working
 in the principal axis of $\textbf{D}$. Note that  In general we do not have enough information to believe the tensor
 to be non-diagonal \cite{seinfeld1998atmospheric}, hence 
-
 \begin{equation*}
 \textbf{D}=\begin{bmatrix}
 D_{xx}& 0 & 0\\
@@ -1817,7 +1816,7 @@ D_{xx}& 0 & 0\\
 0 & 0 & D_{zz}
 \end{bmatrix}.
 \end{equation*}
-Under the mixing-length theory the equation (\ref{eqnInconsistent}) reads as
+Under the mixing-length theory, equation (\ref{eqnInconsistent}) reads as
 \begin{equation*}
 \frac{\partial\E(c)}{\partial t}+\dv(\bar{\vv}\E(c)+\textbf{D}\nabla\E(c))=s(\x,t).
 \end{equation*}
@@ -1825,22 +1824,23 @@ The variable $\E(c)$ is a deterministic function of space and time. So to make
 notation lighter  we set $C(\x,t):=\E(c)$. Note that $C$ has the same units
 as $c$. We interpret $C(\x,t)$ as the expected concentration we would measure
  at the point $\x$ at time $t$ if we were to repeat a pollutant dispersion
-experiment a large number of times under identical initial conditions.
+experiment a large number of times under identical initial and boundary conditions.
 The final form of the mathematical model for pollutant dispersion is
 
 \begin{equation}\label{eqnDifussivityFinalForm}
 \frac{\partial C(\x,t)}{\partial t}+\dv(\bar{\vv}C(\x,t)+\textbf{D}\nabla C(\x,t))=s(\x,t).
 \end{equation}
+Due to the presence of the diffusivity tensor, it is necessary to make assumptions about
+the behavior of the diagonal elements of $\textbf{D}$. Also the measurements of the wind velocity
+are given only at one point in space, hence is necessary to make further assumption in 
+the wind speed distribution as well. 
 
 
-To use this equation it is necessary to make extra assumptions about the behavior of
-the wind velocity and the diffusivity tensor. We are now going to explain in detail
-the assumptions on these quantities.
 
-
-\subsection{Assumptions on the Wind Velocity}
+\subsection{Assumptions on the Wind Velocity and Source Density}
 In practice, the way we measure the wind velocity is by using anemometers that are capable to 
-measure a two dimensional projection of the   velocity vector field at just one point. Therefore
+measure a two dimensional projection of the   velocity vector field.
+Therefore
 it is necessary to make assumptions on the three dimensional and global behavior of this vector field.
 Following \cite{hosseini2016airborne}, we assume a velocity vector field of the form 
 \begin{equation*}
@@ -1859,6 +1859,15 @@ $\mu$ is the air viscosity. For the $x,y$ components of $\vv$ a power law relati
 where $v_{r}(t)$  is the wind speed at a reference height $z_{r}$. The exponent $p$ depends on 
 factors such as the surface roughness and atmosphere stability. For more details in the power
 law model for the wind velocity the reader is referred to \cite{seinfeld1998atmospheric}.
+
+For the source density we assume point-wise sources. If there are $n$ sources inside $\Omega$
+located at the point $\x_{1},x_{2},\ldots,\x_{n}$,
+then we assume a source density of the form
+\begin{equation}\label{eqnSourceDensity}
+s(\x,t)=\sum_{j=1}^{n}q_{j}(t)\delta(\x-\x_{j}).
+\end{equation}
+Here $q_{j}$ is referred as the  strength of the $j$-th source and has units of mass per unit time. 
+The function $\delta(\cdot)$ is the Dirac delta function.
 
 \subsection{Assumptions on the Diffusivity Tensor}
 Following \cite{monin1954basic},  the vertical diffusivity coefficient $D_{zz}$ is approximated by
@@ -1895,7 +1904,7 @@ diffusivity tensor, introduces new parameters whose value needs to be decided. I
 there are five parameters we need to assign a value before we can use equation (\ref{eqnDifussivityFinalForm}).
 These parameters are
 \begin{itemize}
-\item $p$: the fitting parameter for the wind velocity power law (equation (\ref{eqnPowerLaw})
+\item $p$: the fitting parameter for the wind velocity power law (equation (\ref{eqnPowerLaw}))
 \item $z_{0}$: roughness length
 \item $z_{i}$: mixing layer height.
 \item $L$: Monin-Obukhov length.
@@ -1907,10 +1916,102 @@ The caveat with this approach is that there is no good reason to choose one valu
 over a different one. In this work we are going to use the Bayesian framework
 to decide the values of this parameters and the sources as well.
 
+Let us summarize what we have done so far. Our model is given by the solution
+of equation (\ref{eqnDifussivityFinalForm}). The solution depends on the
+parameters $p$,$z_{0}$,$z_{i}$,$L$,$z_{cut}$ and four sources $Q_{1},
+Q_{2},Q_{3},Q_{4}$ (see Figure \ref{figAereal}). Symbolically we can 
+write the solution $C$ in equation (\ref{eqnDifussivityFinalForm}) as
+\begin{equation*}
+C(\x,t;p,z_{0},z_{i},L,z_{cut},Q_{1},Q_{2},Q_{3},Q_{4}).
+\end{equation*}
+We have nine mesurements of the total deposition of zinc at the points $\{R_{1},\ldots, R_{9}\}$
+of the total deposition per year. at the nine locations 
+\begin{equation}
+\y=\{M(R_{1}),\ldots,M(R_{9})\}.
+\end{equation}
+The relation between these two sets is given by
+\begin{equation}\label{eqnSourceToMeasurements}
+M(R_{j})=C(R_{j},t;allparameters)\Delta A.
+\end{equation}
+where $Delta A$ is the sectional area of the jars. It is well known that for equation (\ref{eqnDifussivityFinalForm}) the behavior of $C$ 
+with respect to the source is linear, we can split relation (\ref{eqnSourceToMeasurements}) as
+\begin{equation*}
+\y= B(p,z_{0},z_{i},L,z_{cut})\textbf{q}\Delta A,
+\end{equation*}
+where $\textbf{q}:=[Q_{1},Q_{2},Q_{3},Q_{4}]^{T}$. The term $B(p,z_{0},z_{i},L,z_{cut})$ is a $4\times 9$ matrix. We have made explicit
+the dependence of the entries of this matrix with the parameters $p,z_{0},z_{i},L,z_{cut}$. Having to calculate 36 elements 
+that depend on $5$ parameters is expensive. Therefore we may ask if there is a way to reduce the size of the parameter space.
+As explained in Chapter 2 we can perform a sensitivity analysis to assess the importance of each parameter
+
+\section{Sensitivity Analysis}
+We do a sensitivity analysis on the 5 space parameters as explained in Chapter 2. Using the sobol index technique we
+got the following result
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{./FigChap4/sensitivityPlot}
+\caption{The sensitivity plot}
+\end{figure}
+As we can see we only need to worry about the parameters $p,z_{0},L$.
+Now we can write the matrix $B$ as $B(p,z_{0},L)$. Evualating $36$ elements
+is expensive hence we need to use GPs
+
+\section{Design of Experiments and Emulator for $B$}
+We need to create 36 GPs to approximate $B$, first we need to decide where to evaluate the model in order
+to find the points where to run the model (\ref{eqnDifussivityFinalForm}). We do a maximin design
+as explained in Chapter 2. To do the optimization we used particle swarm. With $N=64$ the design looks as follows.
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.6]{./FigChap4/experimentalDesign64}
+\caption{the experimental design plot}
+\end{figure}
+We now run the finite element code on the points chosen by the experimental design. With this
+values we build the emulator for $B$. We denote this emulator by $\widehat{B}$. As
+in Chapter 3 we now assume a model of the form
+\begin{equation}\label{eqnEpsilonApproxChp4}
+\y=\widehat{B}\textbf{q}\Delta A+\epsilon,
+\end{equation}
+with $\epsilon$ multivariate Gaussian. No we have all the ingredients to use 
+the Bayesian framework to estiamte the parameters and the sources. 
+\begin{equation*}
+\post(p,z_{0},L,\q|\y)=\frac{\like(\y|p,z_{0},L,\q)\prior(p,z_{0},L,\q)}{Z(\y)}.
+\end{equation*}
+As in Chapter 3, from equation (\ref{eqnEpsilonApproxChp4}) we conclude that
+\begin{equation*}
+\y|\pars,\q\sim\mathcal{N}(0,\lambda I).
+\end{equation*}
+Hence the only thing that is left to calculate is the prior
+\section{Choosing a Prior}
+First it is resonable to assume
+\begin{equation*} 
+\prior(\pars,\q)=\prior(\pars)\prior(\q).
+\end{equation*}
+So we need to take care about $\pars$ and $\q$ separately. For the values of $\pars$ we follow \cite{hosseini2016airborne}
+and assume that the parameters belong to the following ranges
+\begin{center}
+\textbf{Here you put the table with the range of the acceptable values}
+\end{center}
+Since we don't have any other information than that we assume an uniform distribution.
+For $\q$ we have more information according to \cite{hosseini2016airborne}, engineerings have estimate
+the following values for the components of $\q$
+\begin{center}
+\textbf{Here you put a table with the estimates from the engineers}
+\end{center}
+Using this data we may pose that $\q$ is disributed as $G(\alpha,\beta)$,\textbf{You have to explain
+how to determine the values of the parameters of the distribution}
+Having these two quantities, our posterior now looks like
+\begin{equation*}
+\post(\pars,\q|\y)\propto\mathcal{N}(0,\lambda I)U(a,b)G(\alpha,\beta)
+\end{equation*}
+
+Having an explicit expression of the posterior allows us to sample from it to 
+obtain useful statistics.
+
+\section{Inferring the Parameters and the sources}
+Here you put the results from using MH on the posterior
+and then calculate all the useful statistics.
 
 
 
-With the mathematical model formulated we are ready to formulate the inverse problem.
 
 
 \bibliography{Tesis}
