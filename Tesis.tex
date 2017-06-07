@@ -1147,9 +1147,11 @@ We begin by considering the forward problem, given by the following partial diff
 	\end{array}
 \right.
 \end{equation} 
-where $b$ is some real positive parameter. The 
-function $u$ represents the mathematical approximation of  a quantity $\tilde{u}$ that has a physical interpretation. The  behavior
-of $\tilde{u}$ is assumed to be    modeled by equation (\ref{eqntoyproblem}).
+where $b$ is some real positive parameter. For us, the 
+function $u$ represents the mathematical approximation of  a quantity $\tilde{u}$ that has a physical realization. 
+For example we may think of $\tilde{u}$ as the actual difference in  electric potential in $\Omega$ relative to a reference point
+and $u$ as the mathematical approximation to it. Since mathematical models of the physical world are  simplification
+of  reality, it is convenient to make a clear distinction between physics (e.g. $\tilde{u}$) and mathematics (e.g $u$).
 
 In Chapter 2 Section 2.1, we explained how to build an emulator $\hat{M}(\cdot)$  that approximates
 the output $y$  of a computationally expensive function  $M(\cdot)$ at a point  in its domain. 
@@ -1167,32 +1169,34 @@ A simple approach to estimate $b$
 would be to solve equation (\ref{eqntoyproblem}) for a big number of values $b$ in the interval $(0,L]$ where $L$ 
 is chosen in a manner that there exists a $b^{*}\in (0,L]$ such that the vector 
 $(u(\x_{1};b^{*}),\ldots,u(\x_{10};b^{*}))$
-has `small' discrepancy with the experimental data $\y$.
+has `small' discrepancy with the experimental data $\y$. This approach is not feasible if solving the forward
+model is computationally expensive. 
  
 Let us assume that solving
 equation (\ref{eqntoyproblem}) is computationally expensive and repeating the calculation for a big range of 
 different values of $b$
-is not feasible. Therefore we need to construct an emulator $\widehat{u}(\cdot)$ that approximates $u(\cdot)$. 
-The way we are going to construct $\widehat{u}(\cdot)$ is as follows: for a fixed $\x$ we solve equation 
+is not feasible. One way to get around that is by constructing an emulator $\widehat{u}(\cdot)$ that approximates $u(\cdot)$
+and is cheap to compute. 
+The way we are going to construct $\widehat{u}(\cdot)$ is as follows: for a fixed $\x\in\mathbb{R}^{2}$ we solve equation 
 (\ref{eqntoyproblem}) for   $n$  different values of  $b$. We pick the value of $n$ in a way
 that the computational cost of computing (\ref{eqntoyproblem}) $n$ times, does not exceed our
 computational and time budget. Then use the data $\{b_{j},u(\x,b_{j})\}_{j=1}^{n}$  as a 
 training set to create a Gaussian process, as explained in Chapter 2, Section 2.1.1. Finally
 for any value $\tilde{b}$ we use the mean of the Gaussian process at that point as $\widehat{u}(\x,\tilde{b})$.
-An sketch from the result for approximating a model $u(\x;\cdot)$ with an emulator
+An sketch from the result for approximating an arbitrary model $u(\x;\cdot)$ with an emulator
 $\widehat{u}(\x;\cdot)$ is shown
 in Figure \ref{figGPCreation}.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.55]{./FigChap3/emulatorApproximation}
+\includegraphics[scale=0.45]{./FigChap3/emulatorApproximation}
 \caption{Approximation of a model $u(\x;\cdot)$ by the mean of a Gaussian process trained
 with six  different  outputs from the model. The mean of the Gaussian process at a point $\tilde{b}$ is taken
 as the value $\widehat{u}(\x;\tilde{b})$ of the emulator.}
 \label{figGPCreation}
 \end{figure}
 
-For clarity in the exposition, the table below we summarize the notation 
+For clarity in the exposition, the table below  summarizes the notation 
 we are going to use throughout the rest of the chapter.
 
 
@@ -1233,7 +1237,7 @@ $\y:=(\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b))$ & \pbox{7cm}{Values of t
 \caption{Summary of symbols used in Chapter 3.}
 \label{tabSymboltable}
 \end{table}
-Let us return to our original goal,  to estimate the value of $b$ that explains  the experimental data 
+Let us return to our original goal:  to estimate the value of $b$ that explains  the experimental data 
 $\y$ as best as possible. To create the experimental data $\y$ we 
 assume that the true value of $b$ is $0,925$. Then, for this value of $b$,  we solve equation (\ref{eqntoyproblem})
 using a finite difference five point  stencil approximation for the Laplacian. 
@@ -1241,7 +1245,7 @@ Next we pick  ten points at random in $\Omega$ and save the value of the numeric
 solution $u$ at those location (see Figure \ref{figsolU}).  Finally we add  noise from
 a normal distribution with mean zero and standard deviation $0.01$ to each  of the ten values. 
 The resulting numbers  are what we use
-as the experimental data $\y={\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)}$. 
+as the experimental data $\y=(\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b))$. 
 Note that the noise added to the data obtained from the
 numerical  solution of equation
 (\ref{eqntoyproblem}) plays the role of possible  
@@ -1255,15 +1259,16 @@ model to describe the true behavior of the physical variable $\tilde{u}$.
 approximation for the Laplacian. The mesh
 size used in $x$ and $y$ was $0.01$. The value of the parameter $b$ was set at $0.925$. The black dots
 in the plot represent the points used to generate the experimental data 
-$\y=\{\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)\}$}
+$\y=(\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b))$}
 \label{figsolU}
 \end{figure}
 
-Once we have created the experimental data $\y$, to obtain a point estimate value of $b$, it is necessary
-to compute the posterior distribution. We are going to explain step by step how to obtain such distribution.
+With the experimental data $\y$ created, we now proceed to obtain a point estimate value of $b$ that produced that data. 
+To that end
+we first compute the posterior distribution. We are going to explain step by step how to obtain such distribution.
 
 \section{Computing the Posterior}
-To calculate the posterior we use Bayes rule to get
+To calculate the posterior we use Bayes' rule to get
 
 \begin{equation} \label{eqnpropto}
 \post(b|\y)=\frac{\like(\y|b)\prior(b)}{Z(\y)}.
@@ -1299,14 +1304,17 @@ defined as
 \end{equation*}
 
 \subsection{Finding the Likelihood}
-To calculate the likelihood,first we need to know how the set of measurements 
-$\y=\{ \tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)\}$ is related to $b$ when
-we let $b$ to vary. To obtain such relation we need to solve
+To calculate the likelihood,first we need to know how the set of possible measurements 
+$\y=(\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b))$ is related to $b$ when
+we let $b$ to vary. Since we don't know the experimental values of the physical variable $\tilde{u}$
+for different values of $b$, it is necessary to approximate the relation between $\tilde{u}$ and $b$
+by the relation between $u$ and $b$.
+To obtain such relation we need to solve
 equation (\ref{eqntoyproblem}). By solving  this equation explicitly we can find a functional relation
 between $u$ and $b$ for each one of the ten locations depicted in Figure \ref{figsolU}.
-It is possible to formally solve equation (\ref{eqntoyproblem}). However
+It is possible to  solve analytically  equation (\ref{eqntoyproblem}). However
 the relation between $u$ and $b$ is  given by an infinite series.  Indeed equation 
-(\ref{eqntoyproblem}) is the Poisson's equation with homogeneous boundary conditions. This
+(\ref{eqntoyproblem}) is  Poisson's equation with homogeneous boundary conditions. This
 equation can be solve using an eigenfunction expansion \cite{logan2014applied}. The
 eigenfunctions of the Laplacian in the unit square are given by
 \begin{equation*}
@@ -1316,7 +1324,7 @@ with eigenvalues
 \begin{equation*}
 \lambda_{mn}=(n\pi)^{2}+(m\pi)^{2}.
 \end{equation*}
-The eigenfunction expansion  for $u$ in equation (\ref{eqntoyproblem}) is calculated as
+The eigenfunction expansion  for $u$ in equation (\ref{eqntoyproblem}) is 
 \begin{equation*}
 u=\sum_{n=1}^{\infty}\sum_{m=1}^{\infty} a_{mn}\phi_{mn}
 \end{equation*}
@@ -1335,12 +1343,12 @@ Hence we need a different approach to gain insight into the relation between $\y
 The  approach  we will use is the  same as the one that allowed us to obtain
 Figure \ref{figGPCreation}.  First we solve equation (\ref{eqntoyproblem}) for
 $n$ different values of $b$. For the sake of the example assume $n=10$. Then 
-for each $\x$ in $P=\{\x_{1},\ldots,\x_{10}\}$ use the
+for each $\x$ in $P=\{\x_{1},\ldots,\x_{10}\}$ we use the
 set $\{b_{j},u(\x_{k};b_{j})\}_{j=1}^{10}$ to train a Gaussian process for each $k=1,2,\ldots,10$.
-Finally for any $\tilde{b}\in (0,2]$ use the mean of the Gaussian process at that point as
+Finally for any $\tilde{b}\in (0,2]$ we use the mean of the Gaussian process at that point as
 the value $\widehat{u}(\x_{k};\tilde{b})$. By proceeding in this manner we obtain 
-a cheap method to approximate  the behavior   of the set 
-$\y=\{ \tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b)\}$ when we let 
+a cheap method to approximate  the behavior   of 
+$\y=( \tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b))$ when we let 
 $b$ to vary.
 
 The next step is to choose  the values of $b$  for which the  PDE (\ref{eqntoyproblem}) is solved in a 
@@ -1352,28 +1360,34 @@ it is straightforward to check that the maximin design is the set of equidistant
 \{b_{1}=0.2,b_{2}=0.4,\ldots,b_{10}=2\}.
 \end{equation*}
 \newline 
-Recall that we know the value of $u$ at ten points $P=\{\x_{1},\ldots,\x_{10}\}$.
+By solving equation (\ref{eqntoyproblem}) for these values of $b$ and for 
+each $\x$ in $P$, we know the values in the set $\{u(b_{j},\x_{k})\}_{j,k=1}^{10}$.
 %We  use  the set of equidistant  points to train a GP for each of the ten sites in $P$. 
-Therefore is  necessary to create ten GPs, hence we have
+We use this set  to train ten Gaussian Process. With these processes we define the functions 
 \begin{equation*}
 G_{k}:(0,2]\rightarrow\mathbb{R}\qquad\text{for }k=1,2,\ldots 10.
 \end{equation*}
-such that  for each $k$ and $b$,  the value of the mean of the GP is going to be given by $G_{k}(b)$.
+such that  for each $k$ and $b$,  the value of the mean of the $k$-th GP is going to be given by $G_{k}(b)$.
 That is, $G_{k}(\cdot)$ is the emulator for $u(\x_{k},\cdot)$. More precisely
 \begin{equation*}
-G_{k}(b):=\hat{u}(\x_{k};b).
+G_{k}(b)=\hat{u}(\x_{k};b).
 \end{equation*} 
 
-
-For the interpolation points, we use the same set for all GPs:
+The functions $G_{k}(\cdot)$ are cheap to evaluate and are a good 
+approximation of $\tilde{u}(\x_{k},\cdot)$. Now it is possible
+to approximate the value of $b$ that explains $\y=(\tilde{u}(\x_{1},b),
+\ldots,\tilde{u}(\x_{10},b))$ by trying a big number of different values
+of $b$ and then compare with the experimental data, to see what choice
+of $b$ gives the smallest discrepancy. To this end, we calculate
+the values of $G_{k}(\cdot)$, for $k=1,\ldots,10$ in the set
 \begin{equation*}
 \{0.01,0.02,\ldots,1.99,2\}.
 \end{equation*}
 
  
 In Figure \ref{fignofitted} are plotted  
-the GP regression,  the true value of $b$, the value of $\tilde{u}(\x_{k};b)$ 
-and the training data $\tilde{u}(\x_{k};b)$ for each of the ten sites.
+the emulator at these points,  the true value of $b$, the experimental measurements $\tilde{u}(\x_{k};b)$
+and the training data $\{u(\x_{k};b_{j})\}_{j=1}^{10}$ for each of the ten sites.
 
 
 
@@ -1396,18 +1410,16 @@ from 1 to 10 in Figure \ref{figsolU}}
 
 
 
-The solid line in Figure \ref{fignofitted} depicts the dependence of  $\hat{u}$ on $b$ for each of the 
-ten sites. 
 
 
 We are now ready to make the mathematical connection between $\tilde{u},u$ and $\hat{u}$. Recall
 that $u$ is the mathematical approximation of the physical variable $\tilde{u}$ and $\hat{u}$
-is the emulator for $u$. Hence if $\hat{u}$ approximates well $u$, we would expect that 
-$\hat{u}$ approximates $\tilde{u}$. For any point $x_{k}\in P$ we don't know exactly
+is an emulator for $u$. Hence if $\hat{u}$ approximates well $u$, we would expect that 
+$\hat{u}$ approximates $\tilde{u}$. For any point $\x_{k}\in P$ we do not know exactly
 how  $\hat{u}(\x_{k},\cdot)=G_{k}(\cdot)$ differs from $\tilde{u}(\x_{k},\cdot)$.
 If we define $y_{k}(b):=\tilde{u}(\x_{k},b)$, then, a possible 
 relation
-that connects these quantities is given by the following Gaussian additive model (\textbf{cite a reference here})
+that connects these quantities is given by the following Gaussian additive model \cite{Somersalo}
 \begin{equation}\label{eqnreal2interp}
 y_{k}(b)=G_{k}(b)+\epsilon_{k},\qquad\text{with } \epsilon_{k}\sim\mathcal{N}(0,\lambda^{2}),
 \end{equation}
@@ -1428,9 +1440,14 @@ to conclude
 \end{equation*}
 i.e.
 \begin{equation}\label{eqnlikelihoodtoyproblem}
-\p(\textbf{y}|b)\propto e^{-\frac{1}{2\lambda^{2}}\|\textbf{G}(b)-\textbf{y}\|_{2}^{2}},
+\like(\textbf{y}|b)\propto e^{-\frac{1}{2\lambda^{2}}\|\textbf{G}(b)-\textbf{y}\|_{2}^{2}},
 \end{equation}
-where the proportionality constant normalizes the distribution on the right hand side to one. Since
+where the proportionality constant normalizes the distribution on the right hand side to one. 
+\newline
+
+Now that we have explicit expressions for the prior and likelihood distributions, we
+can compute the posterior probability for $b$.
+Since
 the denominator in Bayes' rule (\ref{eqnpropto}) is independent of $b$, 
 we can use equations (\ref{eqnpriortoyproblem}) and (\ref{eqnlikelihoodtoyproblem})  
 to write 
@@ -1553,7 +1570,7 @@ The rule of thumb for choosing the parameter $\alpha$ in the scheme above is tha
 a move 
 is about $0.25$ \cite{casella2008monte}. It can be shown that the sequence $q_{1},q_{2},\ldots,q_{N}$
 are realizations of a Markov chain that in the limit as $N\rightarrow\infty$ are distributed according to the distribution
-$\post(b|\y)$. This convergence result works under mild conditions over the distribution that is being sampled from.
+$\post(b|\y)$. This convergence result works under mild conditions over the distribution that is being sampled.
 For more details about the theory behind MCMC methods we refer the reader to \cite{casella2008monte}. 
 Since we do not have the computational power to let $N\rightarrow\infty$. We let the chain run for a large number of steps
 until it converges. Then, we throw away the \textit{burn-in} portion of the chain and compute statistics using 
@@ -1643,7 +1660,7 @@ going to talk about  the role the  prior probability has in the inference proces
 \section{The Importance of the Prior}
 Once again  consider  problem of estimating
 the value of the parameter $b$, whose real value is, as before, $0.925$. This time we assume the parameter
-$b$ can be any real number (not just $0<b\leq 2$ as before) and the  prior distribution for $b$ is
+$b$ can be any real number (not just $0<b\leq 2$ as before) and the  prior distribution for $b$ to be
 \begin{equation*}
 b\sim\mathscr{N}(b^{*},\sigma_{b}^{2}),
 \end{equation*}
@@ -1667,8 +1684,8 @@ how the posterior evolves when we calculate the likelihood with more
 and more data. The first frame shows the result when only the measurement
 $\tilde{u}(\x_{1};b)$ is taken into account. The second frame
 when the measurements $\tilde{u}(\x_{1};b),\tilde{u}(\x_{2};b)$ are taken
-into account and so on. In each frame we proceed adding one more measurement 
-at a time.
+into account. In each new frame we proceed adding one more measurement 
+to calculate the likelihood.
 
 \begin{figure}[H]
 \centering
@@ -1825,19 +1842,33 @@ notation lighter  we set $C(\x,t):=\E(c)$. Note that $C$ has the same units
 as $c$. We interpret $C(\x,t)$ as the expected concentration we would measure
  at the point $\x$ at time $t$ if we were to repeat a pollutant dispersion
 experiment a large number of times under identical initial and boundary conditions.
-The final form of the mathematical model for pollutant dispersion is
 
-\begin{equation}\label{eqnDifussivityFinalForm}
-\frac{\partial C(\x,t)}{\partial t}+\dv(\bar{\vv}C(\x,t)+\textbf{D}\nabla C(\x,t))=s(\x,t).
+For the source density we assume point-wise sources. If there are $n$ sources inside $\Omega$
+located at the point $\x_{1},x_{2},\ldots,\x_{n}$,
+then we assume a source density of the form
+\begin{equation}\label{eqnSourceDensity}
+s(\x,t)=\sum_{j=1}^{n}q_{j}(t)\delta(\x-\x_{j}).
 \end{equation}
+Here $q_{j}$ is referred as the  strength of the $j$-th source and has units of mass per unit time. 
+The function $\delta(\cdot)$ is the Dirac delta function. For our model we have $n=4$ sources 
+(see Figure \ref{figAereal}).
+With the observations
+made in the above  paragraphs, the mathematical model of interest
+is given by 
+\begin{equation}\label{eqnDifussivityFinalForm}
+\frac{\partial C(\x,t)}{\partial t}+\dv(\bar{\vv}C(\x,t)+\textbf{D}\nabla C(\x,t))=\sum_{j=1}^{4}q_{j}(t)\delta(\x-\x_{j}).
+\end{equation}
+
+
+
 Due to the presence of the diffusivity tensor, it is necessary to make assumptions about
 the behavior of the diagonal elements of $\textbf{D}$. Also the measurements of the wind velocity
-are given only at one point in space, hence is necessary to make further assumption in 
-the wind speed distribution as well. 
+are given only at one point in space, hence it is also necessary to make further assumption in 
+the wind speed distribution. 
 
 
 
-\subsection{Assumptions on the Wind Velocity and Source Density}
+\subsection{Assumptions on the Wind Velocity Distribution}
 In practice, the way we measure the wind velocity is by using anemometers that are capable to 
 measure a two dimensional projection of the   velocity vector field.
 Therefore
@@ -1860,14 +1891,6 @@ where $v_{r}(t)$  is the wind speed at a reference height $z_{r}$. The exponent 
 factors such as the surface roughness and atmosphere stability. For more details in the power
 law model for the wind velocity the reader is referred to \cite{seinfeld1998atmospheric}.
 
-For the source density we assume point-wise sources. If there are $n$ sources inside $\Omega$
-located at the point $\x_{1},x_{2},\ldots,\x_{n}$,
-then we assume a source density of the form
-\begin{equation}\label{eqnSourceDensity}
-s(\x,t)=\sum_{j=1}^{n}q_{j}(t)\delta(\x-\x_{j}).
-\end{equation}
-Here $q_{j}$ is referred as the  strength of the $j$-th source and has units of mass per unit time. 
-The function $\delta(\cdot)$ is the Dirac delta function.
 
 \subsection{Assumptions on the Diffusivity Tensor}
 Following \cite{monin1954basic},  the vertical diffusivity coefficient $D_{zz}$ is approximated by
@@ -1915,17 +1938,42 @@ that empirically has shown to work \cite{seinfeld1998atmospheric,hosseini2016air
 The caveat with this approach is that there is no good reason to choose one value
 over a different one. In this work we are going to use the Bayesian framework
 to decide the values of this parameters and the sources as well.
+Now that the mathematical model has been fully specified, we now proceed to explain
+the problem of interest as in the introduction of Chapter 3.
+\newline
 
-Let us summarize what we have done so far. Our model is given by the solution
-of equation (\ref{eqnDifussivityFinalForm}). The solution depends on the
+For the problem under study, we don't have experimental measurements of the concentration.
+Instead we have experimental measurements of the deposition at the sites $R_{1},\ldots,R_{9}$.
+It is necessary to make the connection between the solution $C$ of equation (\ref{eqnDifussivityFinalForm})
+and the deposition we would obtain given $C$. If $v_{set}$ is the settling velocity of zinc particles,
+it is not hard to see that the deposition per unit area at a point $(x,y,0)\in\Omega$ during the interval of time $(0,T]$ is given by
+\begin{equation*}
+w(x,y,T)=\int_{0}^{T}C(x,y,0,t)v_{set}dt.
+\end{equation*}
+
+Since the measurements were obtained by the placement of dust-fall jar collectors with non-zero, but small 
+cross-sectional area
+we can readily approximate the total deposition during the interval $(0,T]$ by
+\begin{equation*}
+W(T)=\int_{dust-fall}w(x,y,T)dxdy\approx w(x,y,T)\Delta A,
+\end{equation*}
+where $\Delta A$ is the cross-sectional area of the dust-falapproximate
+
+
+
+
+
+The solution of equation (\ref{eqnDifussivityFinalForm}) depends on the
 parameters $p$,$z_{0}$,$z_{i}$,$L$,$z_{cut}$ and four sources $Q_{1},
-Q_{2},Q_{3},Q_{4}$ (see Figure \ref{figAereal}). Symbolically we can 
-write the solution $C$ in equation (\ref{eqnDifussivityFinalForm}) as
+Q_{2},Q_{3},Q_{4}$ (see Figure \ref{figAereal}).  Symbolically we may
+write the solution as
 \begin{equation*}
 C(\x,t;p,z_{0},z_{i},L,z_{cut},Q_{1},Q_{2},Q_{3},Q_{4}).
 \end{equation*}
-We have nine mesurements of the total deposition of zinc at the points $\{R_{1},\ldots, R_{9}\}$
-of the total deposition per year. at the nine locations 
+We also have nine measurements of the total deposition of zinc at the points $\{R_{1},\ldots, R_{9}\}$.
+The connection between the concentration $C$ and the deposition is given by 
+
+
 \begin{equation}
 \y=\{M(R_{1}),\ldots,M(R_{9})\}.
 \end{equation}

@@ -6,13 +6,13 @@
 \contentsline {subsection}{\numberline {2.1.2}Design of Experiments }{26}
 \contentsline {subsection}{\numberline {2.1.3}Sensitivity Analysis}{27}
 \contentsline {chapter}{\numberline {3}Toy Problem: How Theory Works in Practice}{31}
-\contentsline {section}{\numberline {3.1}Computing the Posterior}{34}
-\contentsline {subsection}{\numberline {3.1.1}Choosing the Prior}{35}
-\contentsline {subsection}{\numberline {3.1.2}Finding the Likelihood}{35}
-\contentsline {section}{\numberline {3.2}The Importance of the Prior}{43}
+\contentsline {section}{\numberline {3.1}Computing the Posterior}{35}
+\contentsline {subsection}{\numberline {3.1.1}Choosing the Prior}{36}
+\contentsline {subsection}{\numberline {3.1.2}Finding the Likelihood}{36}
+\contentsline {section}{\numberline {3.2}The Importance of the Prior}{44}
 \contentsline {chapter}{\numberline {4}Industrial Case Problem}{47}
 \contentsline {section}{\numberline {4.1}A Mathematical Model for Pollutant Dispersion}{48}
-\contentsline {subsection}{\numberline {4.1.1}Assumptions on the Wind Velocity and Source Density}{50}
+\contentsline {subsection}{\numberline {4.1.1}Assumptions on the Wind Velocity Distribution}{50}
 \contentsline {subsection}{\numberline {4.1.2}Assumptions on the Diffusivity Tensor}{51}
 \contentsline {section}{\numberline {4.2}Sensitivity Analysis}{53}
 \contentsline {section}{\numberline {4.3}Design of Experiments and Emulator for $B$}{55}
