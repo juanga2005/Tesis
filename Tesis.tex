@@ -1171,6 +1171,17 @@ is chosen in a manner that there exists a $b^{*}\in (0,L]$ such that the vector
 $(u(\x_{1};b^{*}),\ldots,u(\x_{10};b^{*}))$
 has `small' discrepancy with the experimental data $\y$. This approach is not feasible if solving the forward
 model is computationally expensive. 
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.55]{./FigChap3/emulatorApproximation}
+\caption{Approximation of a model $u(\x;\cdot)$ by the mean of a Gaussian process trained
+with six  different  outputs from the model. The mean of the Gaussian process at a point $\tilde{b}$ is taken
+as the value $\widehat{u}(\x;\tilde{b})$ of the emulator.}
+\label{figGPCreation}
+\end{figure}
+
  
 Let us assume that solving
 equation (\ref{eqntoyproblem}) is computationally expensive and repeating the calculation for a big range of 
@@ -1187,14 +1198,6 @@ An sketch from the result for approximating an arbitrary model $u(\x;\cdot)$ wit
 $\widehat{u}(\x;\cdot)$ is shown
 in Figure \ref{figGPCreation}.
 
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.45]{./FigChap3/emulatorApproximation}
-\caption{Approximation of a model $u(\x;\cdot)$ by the mean of a Gaussian process trained
-with six  different  outputs from the model. The mean of the Gaussian process at a point $\tilde{b}$ is taken
-as the value $\widehat{u}(\x;\tilde{b})$ of the emulator.}
-\label{figGPCreation}
-\end{figure}
 
 For clarity in the exposition, the table below  summarizes the notation 
 we are going to use throughout the rest of the chapter.
@@ -1333,7 +1336,7 @@ where
 a_{mn}\lambda_{nm}=-\frac{\int_{\Omega}e^{-b\|x\|^{2}}\phi_{mn}d\x}{\int_{\Omega}\phi_{mn}^{2}d\x}=
 -\frac{\langle e^{-b\|x\|^{2}},\phi_{mn}\rangle}{\|\phi_{mn}\|_{L^{2}(\Omega)}^{2}}.
 \end{equation}
-The symbol $\langle\cdot,\cdot\rangle$ is the standard inner product in $L^{2}(\Omega)$.
+The symbol $\langle\cdot,\cdot\rangle$ represents the standard inner product in $L^{2}(\Omega)$.
 
 
 Having a functional relation given
@@ -1386,7 +1389,7 @@ the values of $G_{k}(\cdot)$, for $k=1,\ldots,10$ in the set
 
  
 In Figure \ref{fignofitted} are plotted  
-the emulator at these points,  the true value of $b$, the experimental measurements $\tilde{u}(\x_{k};b)$
+the emulator at these points,  the true value of $b$, the experimental measurement $\tilde{u}(\x_{k};b)$
 and the training data $\{u(\x_{k};b_{j})\}_{j=1}^{10}$ for each of the ten sites.
 
 
@@ -1400,13 +1403,6 @@ and the training data $\{u(\x_{k};b_{j})\}_{j=1}^{10}$ for each of the ten sites
 %In Figure \ref{fignofitted} we can see the results from running the emulator (black dots) compared
 %with the experimental measurement for each of the 10 sites (black line).
 
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.7]{./FigChap3/fitted}
-\caption{Training points, GP regression, true value of $b$ and experimental measures for each one of the ten sites labeled
-from 1 to 10 in Figure \ref{figsolU}}
-\label{fignofitted}
-\end{figure}
 
 
 
@@ -1444,6 +1440,14 @@ i.e.
 \end{equation}
 where the proportionality constant normalizes the distribution on the right hand side to one. 
 \newline
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.7]{./FigChap3/fitted}
+\caption{Training points, GP regression, true value of $b$ and experimental measures for each one of the ten sites labeled
+from 1 to 10 in Figure \ref{figsolU}}
+\label{fignofitted}
+\end{figure}
 
 Now that we have explicit expressions for the prior and likelihood distributions, we
 can compute the posterior probability for $b$.
@@ -1542,7 +1546,7 @@ The pseudocode  for the MH algorithm as described above is \cite{Somersalo}
 \State $\beta\leftarrow\min(1,\frac{\post(q_{j}|D)}{\post(q_{j-1}|\y)})$
 \State Draw $w\sim U([0,1])$
 \If{$w<\beta$}
-\State $q_{j-1}=q_{j}\qquad$ (Accept the move)
+\State $q_{j-1}=q_{j}\qquad$   (Accept the move)
 \Else
 \State $q_{j-1}=q_{j-1}\qquad$ (Reject the move)
 \EndIf
@@ -1591,7 +1595,7 @@ is shown below.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.50]{./FigChap3/histogram_mcmc.jpg}
+\includegraphics[scale=0.60]{./FigChap3/histogram_mcmc.jpg}
 \caption{Histogram obtained for the posterior distribution (\ref{eqnpropto}) 
 from $5000$ samples from MH algorithm with step size $\alpha=0.23$. The solid line
 is the  graph for the posterior $\post(b|D)$.}
@@ -1615,7 +1619,8 @@ case the interval is given by
 \end{equation*}
 
 
-Let us digress about the idea behind Monte Carlo integration. Consider the generic problem of evaluating the $n$-dimensional
+Let us do a short digression about the idea behind Monte Carlo integration. 
+Consider the generic problem of evaluating the $n$-dimensional
 integral
 \begin{equation}\label{eqnmontecarlo}
 \int_{\mathbb{R}^{n}}h(x)\rho(x)dx,
@@ -1641,22 +1646,13 @@ where
 \sigma_{n}=\frac{1}{n}\sum_{k=1}^{n}(h(X_{k})-h_{n})^{2}.
 \end{equation*}
 This means that the uncertainty in the approximation $h_{n}$ for $\mathbb{E}[h]$ goes to $0$ as $\mathcal{O}(\frac{1}{\sqrt{n}})$.
-In practice, to estimate the quality of the result from the Monte Carlo integration we use the approximation
-\begin{equation*}
-\p\left(\frac{h_{n}-\mathbb{E}[h]}{\sqrt{\sigma_{n}}}\leq x\right)\approx\Phi(x),
-\end{equation*}
-where 
-\begin{equation*}
-\Phi(x)=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{x}\exp(-\frac{x^{2}}{2})dx.
-\end{equation*}
-\newline
+Note that the convergence rate is independent of the dimension of the problem. That is the reason why Monte Carlo integration
+is used in high dimensional problems, where quadrature methods are prohibitively  expensive to implement. In Chapter 4 we are going to apply 
+this method to calculate integrals of real valued functions supported in a seven dimensional space.
 
-To conclude this Chapter we are going to turn our attention into the subjective part of Bayesian statistics.  We are 
-going to talk about  the role the  prior probability has in the inference process. 
-
-\textbf{You need to check this part. It looks rush you have to be more careful in the explanations.}
-
-
+The estimate for $b$ in equation (\ref{eqnbcmMC}), depends on the choice of the prior. At this point it is unclear
+how choosing a different prior would give a different estimate for $b$.
+To close this chapter we discuss  the role that the prior has in inference in the Bayesian Framework.
 \section{The Importance of the Prior}
 Once again  consider  problem of estimating
 the value of the parameter $b$, whose real value is, as before, $0.925$. This time we assume the parameter
