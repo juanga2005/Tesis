@@ -1151,7 +1151,7 @@ where $b$ is some real positive parameter. For us, the
 function $u$ represents the mathematical approximation of  a quantity $\tilde{u}$ that has a physical realization. 
 For example we may think of $\tilde{u}$ as the actual difference in  electric potential in $\Omega$ relative to a reference point
 and $u$ as the mathematical approximation to it. Since mathematical models of the physical world are  simplification
-of  reality, it is convenient to make a clear distinction between physics (e.g. $\tilde{u}$) and mathematics (e.g $u$).
+of  reality, it is convenient to make a clear distinction between physics (e.g. $\tilde{u}$) and mathematics (e.g. $u$).
 
 In Chapter 2 Section 2.1, we explained how to build an emulator $\hat{M}(\cdot)$  that approximates
 the output $y$  of a computationally expensive function  $M(\cdot)$ at a point  in its domain. 
@@ -1525,7 +1525,7 @@ focus on a particular algorithm known as Metropolis-Hastings  (MH). We now proce
 how MH works in practice using the posterior for $b$ in equation (\ref{eqnposteriorforb}) as an example. 
 \newline
 \newline
-Consider the posterior density $\post(b|\y)$. The idea is to construct a markov chain that wanders 
+Consider the posterior density $\post(b|\y)$. The idea is to construct a Markov chain that wanders 
 around the support of the posterior
 in a way that the chain spends more time in regions with high probability.
 One way to achive that is as follows: if we are at a point $q_{1}$ and we want to move to a point $q_{2}$ 
@@ -1699,7 +1699,7 @@ Then, when the experimental data is used, the likelihood distribution has a high
 than points close to $b=4$. The more data, the higher the value of the likelihood around $b=0.925$ and closer to zero
 away from it. However since
 the prior distribution gives negligible probability to values close to the true value of $b$, when all data are used the 
-product $\prior(\y|b)\p(b)$ will be noneglibible only in regions close to $b=4$ or $b=0.925$.
+product $\prior(\y|b)\p(b)$ will be non-negligible only in regions close to $b=4$ or $b=0.925$.
 
 The above example is a warning example. If we know how to choose the prior distribution in a way that is meaningful to the
 problem, reliable inference could be done even with small amount of data. On the contrary if the prior distribution
@@ -1720,7 +1720,7 @@ operated by Teck Industries Ltd.  The smelter has four sources of pollutant and 
 is to estimate how much  each source is contributing to the total amount of zinc
 that is being released by the smelter.
 To estimate this we count on experimental
-measures of the zinc deposition in nine different locations and wind velocity data 
+measures of the zinc deposition at nine different locations and wind velocity data 
 of the surrounding area. An aerial photograph of the region  of interest with 
 the location of the sources and the measurement devices is shown 
 in Figure \ref{figAereal}. 
@@ -1730,10 +1730,10 @@ in Figure \ref{figAereal}.
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.35]{FigChap4/AerealView}
-\label{figAereal}
 \caption{Aereal photograph of the lead-zinc smelter in Trail, British Columbia, Canada. The points
 $Q_{1}$ to $Q_{4}$ represent the sources of zinc. The green triangles $R_{1}$ to $R_{9}$ represent
 the location of the measurement devices.}
+\label{figAereal}
 \end{figure}
 
 The first step in order to estimate the contribution of each source in the total
@@ -1789,7 +1789,7 @@ straight forward application of the divergence theorem and Leibniz rule for inte
 If we apply this equation to estimate the concentration of zinc using real wind data, we 
 will find that the prediction is not completely accurate. The reason is that at small scales, there
 are random fluctuations in the wind velocity. To model this we follow \cite{seinfeld1998atmospheric}
-and write the wind velocity as
+and write the wind velocity field as
 \begin{equation}\label{eqnNewV}
 \vv=\bar{\vv}+\vv',
 \end{equation}
@@ -1800,14 +1800,15 @@ in equation (\ref{eqnNewV}) we get
 \frac{\partial c(\x,t)}{\partial t}+\nabla\cdot(c(\bar{\textbf{v}}+\vv'))=s(\x,t).
 \end{equation}
 The presence of the random variable $\vv'$ transforms the solution $c$ into a random 
-variable as well. In this case we describe $c$ as the contribution of two terms
-\begin{equation*}
-c=\E(c)+c',
-\end{equation*}
-where $c'$ satisfies $\E(c')=0$. The intuition behind this definition is that if we experimentally
-measure the concentration repeating the same experiment a high number of times. We expect the 
+variable as well. In this case we describe $c$ as the contribution of two terms as 
+\begin{equation}\label{eqnNewC}
+c:=\E(c)+c',
+\end{equation}
+where $c'$ satisfies $\E(c')=0$. The intuition behind this definition is that if we repeat the same experiment a 
+high number of times and in each experiment we 
+measure the concentration, then, we expect the 
 concentration to have an underlying average behavior $\E(c)$ plus some  noise represented by $c'$.
-Plugging in this new representation of $c$ into equation (\ref{eqnNewRandom}) we obtain
+Plugging in  equation (\ref{eqnNewC}) into equation (\ref{eqnNewRandom}) we obtain
 \begin{equation}\label{eqnInconsistent}
 \frac{\partial\E(c)}{\partial t}+\dv(\bar{\vv}\E(c))+\dv(\E(c'\vv'))=s(\x,t).
 \end{equation}
@@ -1820,8 +1821,7 @@ theory uses the constitutive equation
 \end{equation*}
 The term $\textbf{D}$ is  a rank two tensor called the eddy diffusivity tensor. This tensor is assumed 
 to be symmetric, hence is always diagonalizable. We may assume that we are working
-in the principal axis of $\textbf{D}$. Note that  In general we do not have enough information to believe the tensor
-to be non-diagonal \cite{seinfeld1998atmospheric}, hence 
+in the principal axis of $\textbf{D}$ \cite{seinfeld1998atmospheric}, hence 
 \begin{equation*}
 \textbf{D}=\begin{bmatrix}
 D_{xx}& 0 & 0\\
@@ -1839,18 +1839,16 @@ as $c$. We interpret $C(\x,t)$ as the expected concentration we would measure
  at the point $\x$ at time $t$ if we were to repeat a pollutant dispersion
 experiment a large number of times under identical initial and boundary conditions.
 
-For the source density we assume point-wise sources. If there are $n$ sources inside $\Omega$
-located at the point $\x_{1},x_{2},\ldots,\x_{n}$,
+For the source density we assume point-wise sources. If there are $n$ sources 
+ at the points $\x_{1},\x_{2},\ldots,\x_{n}$, located inside $\Omega$,
 then we assume a source density of the form
 \begin{equation}\label{eqnSourceDensity}
 s(\x,t)=\sum_{j=1}^{n}q_{j}(t)\delta(\x-\x_{j}).
 \end{equation}
 Here $q_{j}$ is referred as the  strength of the $j$-th source and has units of mass per unit time. 
 The function $\delta(\cdot)$ is the Dirac delta function. For our model we have $n=4$ sources 
-(see Figure \ref{figAereal}).
-With the observations
-made in the above  paragraphs, the mathematical model of interest
-is given by 
+(see Figure \ref{figAereal}). Taking into account the observations made in the 
+previous paragraph, we finally state the mathematical model for zinc disperssion as
 \begin{equation}\label{eqnDifussivityFinalForm}
 \frac{\partial C(\x,t)}{\partial t}+\dv(\bar{\vv}C(\x,t)+\textbf{D}\nabla C(\x,t))=\sum_{j=1}^{4}q_{j}(t)\delta(\x-\x_{j}).
 \end{equation}
@@ -1858,34 +1856,10 @@ is given by
 
 
 Due to the presence of the diffusivity tensor, it is necessary to make assumptions about
-the behavior of the diagonal elements of $\textbf{D}$. Also the measurements of the wind velocity
-are given only at one point in space, hence it is also necessary to make further assumption in 
+the behavior of the diagonal elements of $\textbf{D}$. Also the measurements of the wind velocity 
+are given by one 2-axis anemometer. This means we count with just one measurement at
+ one point in space, hence it is also necessary to make further assumption about
 the wind speed distribution. 
-
-
-
-\subsection{Assumptions on the Wind Velocity Distribution}
-In practice, the way we measure the wind velocity is by using anemometers that are capable to 
-measure a two dimensional projection of the   velocity vector field.
-Therefore
-it is necessary to make assumptions on the three dimensional and global behavior of this vector field.
-Following \cite{hosseini2016airborne}, we assume a velocity vector field of the form 
-\begin{equation*}
-\vv=(v_{x}(z,t),v_{y}(z,t),v_{set}),
-\end{equation*}
-where $v_{set}$ is a constant given by  the settling velocity of the zinc particles. By Stoke's law,
-this velocity is given by
-\begin{equation*}
-v_{set}=\frac{\rho g d^{2}}{18\mu},
-\end{equation*}
-where $\rho$ is the particle density, $g$ the acceleration of gravity,  $d$ its diameter, and
-$\mu$ is the air viscosity. For the $x,y$ components of $\vv$ a power law relation of the form
-\begin{equation}\label{eqnPowerLaw}
-\|(v_{x}(z,t),v_{y}(z,t))\|_{2}=v_{r}(t)\left(\frac{z}{z_{r}}\right)^{p},
-\end{equation}
-where $v_{r}(t)$  is the wind speed at a reference height $z_{r}$. The exponent $p$ depends on 
-factors such as the surface roughness and atmosphere stability. For more details in the power
-law model for the wind velocity the reader is referred to \cite{seinfeld1998atmospheric}.
 
 
 \subsection{Assumptions on the Diffusivity Tensor}
@@ -1911,15 +1885,42 @@ the \textit{roughness length} $z_{0}$.
 
 For the elements $D_{xx}$ and $D_{yy}$, we assume $D_{xx}=D_{yy}$ and independence of height 
 \cite{monin1954basic}. A common used equation
-to approximate this variables is given by
+to approximate these variables is given by
 \begin{equation*}
 D_{xx}=D_{yy}\approx \frac{v_{*}z_{i}^{\frac{3}{4}}(-\kappa L)^{-\frac{1}{3}}}{10}.
 \end{equation*}
 The variable $z_{i}$ is known as the \textit{mixing layer height}.
 
+\subsection{Assumptions on the Wind Velocity Distribution}
+In practice, the way we measure the wind velocity is by using anemometers that are capable to 
+measure a two dimensional projection of the   velocity vector field.
+Therefore
+it is necessary to make assumptions on the three dimensional and global behavior of this vector field.
+Following \cite{hosseini2016airborne}, we assume a velocity vector field of the form 
+\begin{equation}\label{eqn2Dvel}
+\vv=(v_{x}(z,t),v_{y}(z,t),v_{set}).
+\end{equation}
+Observe that we assume that the $x$ and $y$ components of the wind velocity field are constant in
+the $xy$ plane.
+In equation \ref{eqn2Dvel}, $v_{set}$ is a constant given by  the settling velocity of the zinc particles. By Stoke's law,
+this velocity is given by
+\begin{equation*}
+v_{set}=\frac{\rho g d^{2}}{18\mu},
+\end{equation*}
+where $\rho$ is the particle density, $g$ the acceleration of gravity,  $d$ its diameter, and
+$\mu$ is the air viscosity. For the $x,y$ components of $\vv$ we assume a power law relation of the form
+\begin{equation}\label{eqnPowerLaw}
+\|(v_{x}(z,t),v_{y}(z,t))\|_{2}=v_{r}(t)\left(\frac{z}{z_{r}}\right)^{p},
+\end{equation}
+where $v_{r}(t)$  is the wind speed at a reference height $z_{r}$. The exponent $p$ depends on 
+factors such as the surface roughness and atmosphere stability. For more details in the power
+law model for the wind velocity the reader is referred to \cite{seinfeld1998atmospheric}.
+\newline
+
+
 
 Assuming an specific form of the functional form of the wind velocity and the  
-diffusivity tensor, introduces new parameters whose value needs to be decided. In our model
+diffusivity tensor, introduces new parameters whose values need to be decided. In our model
 there are five parameters we need to assign a value before we can use equation (\ref{eqnDifussivityFinalForm}).
 These parameters are
 \begin{itemize}
@@ -1933,66 +1934,109 @@ In practice we set a value for these parameters from a given interval of numbers
 that empirically has shown to work \cite{seinfeld1998atmospheric,hosseini2016airborne}.
 The caveat with this approach is that there is no good reason to choose one value
 over a different one. In this work we are going to use the Bayesian framework
-to decide the values of this parameters and the sources as well.
+to decide the values of these parameters and the sources as well.
 Now that the mathematical model has been fully specified, we now proceed to explain
-the problem of interest as in the introduction of Chapter 3.
+the inverse problem.
 \newline
 
-For the problem under study, we don't have experimental measurements of the concentration.
-Instead we have experimental measurements of the deposition at the sites $R_{1},\ldots,R_{9}$.
-It is necessary to make the connection between the solution $C$ of equation (\ref{eqnDifussivityFinalForm})
-and the deposition we would obtain given $C$. If $v_{set}$ is the settling velocity of zinc particles,
+To estimate the parameters and sources we obtained  experimental measurements of the zinc deposition at the sites 
+$R_{1},\ldots,R_{9}$ (see Figure \ref{figAereal}) over one month period. our mathematical model describes the 
+concetration, thus is necessary to make the connection between the solution $C$ of equation (\ref{eqnDifussivityFinalForm})
+and the deposition. If $v_{set}$ is the settling velocity of zinc particles,
 it is not hard to see that the deposition per unit area at a point $(x,y,0)\in\Omega$ during the interval of time $(0,T]$ is given by
-\begin{equation*}
+\begin{equation}\label{eqnw}
 w(x,y,T)=\int_{0}^{T}C(x,y,0,t)v_{set}dt.
-\end{equation*}
-
-Since the measurements were obtained by the placement of dust-fall jar collectors with non-zero, but small 
-cross-sectional area
-we can readily approximate the total deposition during the interval $(0,T]$ by
-\begin{equation*}
-W(T)=\int_{dust-fall}w(x,y,T)dxdy\approx w(x,y,T)\Delta A,
-\end{equation*}
-where $\Delta A$ is the cross-sectional area of the dust-falapproximate
-
-
-
-
-
-The solution of equation (\ref{eqnDifussivityFinalForm}) depends on the
-parameters $p$,$z_{0}$,$z_{i}$,$L$,$z_{cut}$ and four sources $Q_{1},
-Q_{2},Q_{3},Q_{4}$ (see Figure \ref{figAereal}).  Symbolically we may
-write the solution as
-\begin{equation*}
-C(\x,t;p,z_{0},z_{i},L,z_{cut},Q_{1},Q_{2},Q_{3},Q_{4}).
-\end{equation*}
-We also have nine measurements of the total deposition of zinc at the points $\{R_{1},\ldots, R_{9}\}$.
-The connection between the concentration $C$ and the deposition is given by 
-
-
-\begin{equation}
-\y=\{M(R_{1}),\ldots,M(R_{9})\}.
 \end{equation}
-The relation between these two sets is given by
-\begin{equation}\label{eqnSourceToMeasurements}
-M(R_{j})=C(R_{j},t;allparameters)\Delta A.
-\end{equation}
-where $Delta A$ is the sectional area of the jars. It is well known that for equation (\ref{eqnDifussivityFinalForm}) the behavior of $C$ 
-with respect to the source is linear, we can split relation (\ref{eqnSourceToMeasurements}) as
+
+Since the nine measurements $R_{1},\ldots,R_{9}$ were obtained by the placement of identical dust-fall jar collectors with non-zero, but small 
+cross-sectional area,
+we can readily approximate the total deposition during the interval $(0,T]$ at the $i-th$ site as
 \begin{equation*}
-\y= B(p,z_{0},z_{i},L,z_{cut})\textbf{q}\Delta A,
+W(x_{i},y_{i},T)=\int_{dust-fall}w(x,y,T)dxdy\approx w(x_{i},y_{i},T)\Delta A,
 \end{equation*}
-where $\textbf{q}:=[Q_{1},Q_{2},Q_{3},Q_{4}]^{T}$. The term $B(p,z_{0},z_{i},L,z_{cut})$ is a $4\times 9$ matrix. We have made explicit
-the dependence of the entries of this matrix with the parameters $p,z_{0},z_{i},L,z_{cut}$. Having to calculate 36 elements 
-that depend on $5$ parameters is expensive. Therefore we may ask if there is a way to reduce the size of the parameter space.
-As explained in Chapter 2 we can perform a sensitivity analysis to assess the importance of each parameter
+where $\Delta A$ is the cross-sectional area of the dust-fall jar. To make notation lighter we define
+\begin{equation}\label{eqnW}
+M_{i}=W(x_{i},y_{i},T)\qquad\text{ for }i=1,\ldots,9.
+\end{equation}
+The scalar $M_{i}$ is the zinc deposition at the site $R_{i}$. From equations (\ref{eqnw}) and (\ref{eqnW}),
+we infer that the map that takes concetration into deposition is linear. Also from equation
+(\ref{eqnDifussivityFinalForm}) it is straightforward to check that the concentration $C$
+is related to the source $s(\x,t)$ by a linear partial differential operator. Since composition
+of linear maps is linear, we conclude that the map that takes sources to deposition is linear.
+Since we have four different sources, which we denote by $q_{1},q_{2},q_{3},q_{4}$, we may write
+\begin{equation}\label{eqnLinComb}
+M_{i}=\sum_{j=1}^{4}a_{ij}(p,z_{0},z_{i},L,z_{cut})q_{j}\qquad\text{for }i=1,\ldots, 9.
+\end{equation}
+The coefficients $a_{ij}$ capture the dependence of the deposition with respect to the
+parameters $p,z_{0},z_{i},L,z_{cut}$, which in general is non-linear. if 
+we define the vectors
+\begin{eqnarray*}
+\y& = &\begin{bmatrix}
+M_{1}&\ldots & M_{9}
+\end{bmatrix}^{T}, \\
+\textbf{q}&=&\begin{bmatrix}
+q{1}&q_{2}&q_{2}&q_{4}
+\end{bmatrix}^{T},
+\end{eqnarray*}
+we can write equation (\ref{eqnLinComb}) more compactly as
+\begin{equation}\label{eqnLinRel}
+\y=A(p,z_{0},z_{i},L,z_{cut})\textbf{q}.
+\end{equation}
+Here $A$ is a $9\times 4$ matrix whose coefficients are $a_{ij}(p,z_{0},z_{i},L,z_{cut})$.
+\newline
+
+Equation (\ref{eqnLinRel}) models the relation between deposition and all
+parameters involved in equation (\ref{eqnDifussivityFinalForm}). However we do not 
+know an expression for the 36 coefficients $a_{ij}$ as a function of
+$(p,z_{0},z_{i},L,z_{cut})$. To find such expression it is necessary
+to solve equation (\ref{eqnDifussivityFinalForm}). There is no known closed
+form of this equation, hence a numerical approximation is necessary. If we
+had unlimited computational or time budget we could solve equation 
+(\ref{eqnDifussivityFinalForm}) for as many different configurations
+of the parameters $(p,z_{0},z_{i},L,z_{cut})$ as we want and use these
+results to approximate the coefficients $a_{ij}$. Clearly this 
+is not feasible. A more realistic approach is to solve equation (\ref{eqnDifussivityFinalForm})
+for a number of different configurations of $(p,z_{0},z_{i},L,z_{cut})$ that does not
+exceed our computational and time budget. Then use Gaussian processes
+to interpolate at the configurations we did not solve. We can improve upon
+this idea if we  reduce the dimensionality of the parameter space. This
+reduction can be achieved through a sensitivity analysis to determine
+what parameters are not relevant.
+
+%The solution of equation (\ref{eqnDifussivityFinalForm}) depends on the
+%parameters $p$,$z_{0}$,$z_{i}$,$L$,$z_{cut}$ and four sources $Q_{1},
+%Q_{2},Q_{3},Q_{4}$ (see Figure \ref{figAereal}).  Symbolically we may
+%write the solution as
+%\begin{equation*}
+%C(\x,t;p,z_{0},z_{i},L,z_{cut},Q_{1},Q_{2},Q_{3},Q_{4}).
+%\end{equation*}
+%We also have nine measurements of the total deposition of zinc at the points $\{R_{1},\ldots, R_{9}\}$.
+%The connection between the concentration $C$ and the deposition is given by 
+%
+%
+%\begin{equation}
+%\y=\{M(R_{1}),\ldots,M(R_{9})\}.
+%\end{equation}
+%The relation between these two sets is given by
+%\begin{equation}\label{eqnSourceToMeasurements}
+%M(R_{j})=C(R_{j},t;allparameters)\Delta A.
+%\end{equation}
+%where $Delta A$ is the sectional area of the jars. It is well known that for equation (\ref{eqnDifussivityFinalForm}) the behavior of $C$ 
+%with respect to the source is linear, we can split relation (\ref{eqnSourceToMeasurements}) as
+%\begin{equation*}
+%\y= B(p,z_{0},z_{i},L,z_{cut})\textbf{q}\Delta A,
+%\end{equation*}
+%where $\textbf{q}:=[Q_{1},Q_{2},Q_{3},Q_{4}]^{T}$. The term $B(p,z_{0},z_{i},L,z_{cut})$ is a $4\times 9$ matrix. We have made explicit
+%the dependence of the entries of this matrix with the parameters $p,z_{0},z_{i},L,z_{cut}$. Having to calculate 36 elements 
+%that depend on $5$ parameters is expensive. Therefore we may ask if there is a way to reduce the size of the parameter space.
+%As explained in Chapter 2 we can perform a sensitivity analysis to assess the importance of each parameter
 
 \section{Sensitivity Analysis}
 We do a sensitivity analysis on the 5 space parameters as explained in Chapter 2. Using the sobol index technique we
 got the following result
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{./FigChap4/sensitivityPlot}
+\includegraphics[scale=0.2]{./FigChap4/sensitivityPlot}
 \caption{The sensitivity plot}
 \end{figure}
 As we can see we only need to worry about the parameters $p,z_{0},L$.
