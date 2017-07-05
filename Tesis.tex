@@ -493,7 +493,7 @@ $\widehat{M}(\cdot)$.
 A very popular  method to construct an emulator with the desired
 extrapolation/interpolation properties is what is known as a Gaussian process regression.  
 
-\subsection{Gaussian Processes}
+\subsection{Gaussian Processes}\label{secGPs}
 The conditions on the emulator $\widehat{M}(\cdot)$, imply that we need
 to work with a probability distribution for each point $\textbf{x}$ in the domain of the model $M(\cdot)$.
 This means that  we need to work with 
@@ -949,7 +949,7 @@ A survey on the theory behind maximin distance designs can be found in \cite{joh
 %are orthogonal. 
 
 
-\subsection{Sensitivity Analysis}
+\subsection{Sensitivity Analysis}\label{subsecSensitivity}
 
 
 In general having an space filling design for the training input, permits to create an
@@ -2032,16 +2032,71 @@ what parameters are not relevant.
 %As explained in Chapter 2 we can perform a sensitivity analysis to assess the importance of each parameter
 
 \section{Sensitivity Analysis}
-We do a sensitivity analysis on the 5 space parameters as explained in Chapter 2. Using the sobol index technique we
-got the following result
+Our starting point is to consider the map $\varphi$ that takes  a set of parameters $(p,z_{0},z_{i},L,z_{cut})$
+as inputs and gives a deposition value as output. Following \cite{seinfeld1998atmospheric}, the accepted
+range of values for the set of parameters is shown in Table \ref{tabRanges}.
+
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline 
+Parameter (units) & Symbol & Range\tabularnewline
+\hline 
+\hline 
+Velocity exponent  & $p$ & ${[}0.1,0.4{]}$\tabularnewline
+\hline 
+Roughness length (m) & $z_{0}$ & ${[}10^{-3} ,2{]}$\tabularnewline
+\hline 
+Height of mixing layer (m) & $z_{i}$ & ${[}10^{2},3\times 10^{3}{]}$\tabularnewline
+\hline 
+Monin-Obukhov length (m) & $L$ & ${[}-500,-1{]}$\tabularnewline
+\hline 
+Cut-off length (m) & $z_{cut}$ & ${[}1,5{]}$\tabularnewline
+\hline 
+\end{tabular}
+\caption{Parameters under study and their accepted ranges}
+\label{tabRanges}
+\end{table}
+
+We perform a sensitivity analysis on the map $\phi$ 
+as explained in Chapter 2, Section \ref{subsecSensitivity}. To make computations
+easier we map bijectively the set of ranges of the parameters into the five-dimensional
+unit hypercube $[0,1]^{5}$. Thus we may equivalently perform the sensitivity analysis
+on the parameter to deposition map
+\begin{equation*}
+\varphi:[0,1]^{5}\subset\mathbb{R}^{5}\rightarrow\mathbb{R}.
+\end{equation*} 
+
+Recall from  Chapter 2, Section \ref{subsecSensitivity}, that in order to estimate
+Sobol indices is necessary to perform numerical integrations over the integrand $\varphi$.
+These integrals are five-dimensional, hence a quadrature method is not feasible. It is
+necessary to use Monte Carlo integration. In order to implement it, is necessary
+to know the output of $\varphi$ at any point in its domain. In general we don't
+know the function beyond a very limited number of points. To extrapolate $\varphi$
+at unknown points we use an emulator using Gaussian processes as
+explained in Chapter 2, Section \ref{secGPs}.
+
+Implementing the routines to  emulate $\varphi$ and estimate
+the Sobol indices is a time consuming task. In order to optimize our time budget, we used
+the R packages DiceKriging and Sensitivity \cite{DiceKriging,sensitivity} for the 
+emulator and to  estimate the total
+effect Sobol index for each of the variables.  
+
+The DiceKriging package allows us to use five different kernels for the emulation.
+In order to minimize the influence of the kernel on the estimation of the Sobol
+indices, we calculate them five times, one for each kernel. 
+The results obtained are shown in the box plots in Figure \ref{figSensitivityPlot}.
+
+
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.2]{./FigChap4/sensitivityPlot}
 \caption{The sensitivity plot}
+\label{figSensitivityPlot}
 \end{figure}
-As we can see we only need to worry about the parameters $p,z_{0},L$.
-Now we can write the matrix $B$ as $B(p,z_{0},L)$. Evualating $36$ elements
-is expensive hence we need to use GPs
+
+
 
 \section{Design of Experiments and Emulator for $B$}
 We need to create 36 GPs to approximate $B$, first we need to decide where to evaluate the model in order

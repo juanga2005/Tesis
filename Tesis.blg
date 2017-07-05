@@ -6,45 +6,45 @@ Database file #1: Tesis.bib
 Warning--empty year in adlergeometry
 Warning--empty journal in casella2008monte
 Warning--empty journal in rasmussen2006gaussian
-You've used 24 entries,
+You've used 26 entries,
             2118 wiz_defined-function locations,
-            628 strings with 7042 characters,
-and the built_in function-call counts, 6308 in all, are:
-= -- 591
-> -- 264
+            639 strings with 7642 characters,
+and the built_in function-call counts, 7188 in all, are:
+= -- 667
+> -- 345
 < -- 5
-+ -- 109
-- -- 82
-* -- 376
-:= -- 1100
-add.period$ -- 71
-call.type$ -- 24
-change.case$ -- 99
++ -- 141
+- -- 112
+* -- 457
+:= -- 1259
+add.period$ -- 77
+call.type$ -- 26
+change.case$ -- 119
 chr.to.int$ -- 0
-cite$ -- 27
-duplicate$ -- 268
-empty$ -- 543
-format.name$ -- 82
-if$ -- 1297
+cite$ -- 29
+duplicate$ -- 288
+empty$ -- 585
+format.name$ -- 112
+if$ -- 1461
 int.to.chr$ -- 0
-int.to.str$ -- 24
-missing$ -- 35
-newline$ -- 122
-num.names$ -- 48
-pop$ -- 151
+int.to.str$ -- 26
+missing$ -- 36
+newline$ -- 132
+num.names$ -- 52
+pop$ -- 170
 preamble$ -- 1
-purify$ -- 87
+purify$ -- 106
 quote$ -- 0
-skip$ -- 168
+skip$ -- 182
 stack$ -- 0
-substring$ -- 291
-swap$ -- 27
+substring$ -- 317
+swap$ -- 30
 text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 72
+type$ -- 80
 warning$ -- 3
-while$ -- 61
-width$ -- 26
-write$ -- 249
+while$ -- 67
+width$ -- 28
+write$ -- 270
 (There were 3 warnings)

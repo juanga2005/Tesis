@@ -96,10 +96,25 @@ Luc Pronzato and Werner~G M{\"u}ller.
 \newblock Design of computer experiments: space filling and beyond.
 \newblock {\em Statistics and Computing}, 22(3):681--701, 2012.
 
+\bibitem{sensitivity}
+Gilles Pujol, Bertrand Iooss, Alexandre~Janon with contributions~from
+  Khalid~Boumhaout, Sebastien~Da Veiga, Jana Fruth, Laurent Gilquin, Joseph
+  Guillaume, Loic~Le Gratiet, Paul Lemaitre, Bernardo Ramos, Taieb Touati, and
+  Frank Weber.
+\newblock {\em sensitivity: Global Sensitivity Analysis of Model Outputs},
+  2016.
+\newblock R package version 1.12.1.
+
 \bibitem{rasmussen2006gaussian}
 Carl~Edward Rasmussen.
 \newblock Gaussian processes for machine learning.
 \newblock 2006.
+
+\bibitem{DiceKriging}
+Olivier Roustant, David Ginsbourger, and Yves Deville.
+\newblock {DiceKriging}, {DiceOptim}: Two {R} packages for the analysis of
+  computer experiments by kriging-based metamodeling and optimization.
+\newblock {\em Journal of Statistical Software}, 51(1):1--55, 2012.
 
 \bibitem{saltelli2000sensitivity}
 Andrea Saltelli, Karen Chan, E~Marian Scott, et~al.
