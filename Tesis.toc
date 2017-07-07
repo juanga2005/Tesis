@@ -15,6 +15,6 @@
 \contentsline {subsection}{\numberline {4.1.1}Assumptions on the Diffusivity Tensor}{51}
 \contentsline {subsection}{\numberline {4.1.2}Assumptions on the Wind Velocity Distribution}{51}
 \contentsline {section}{\numberline {4.2}Sensitivity Analysis}{54}
-\contentsline {section}{\numberline {4.3}Design of Experiments and Emulator for $B$}{56}
-\contentsline {section}{\numberline {4.4}Choosing a Prior}{57}
-\contentsline {section}{\numberline {4.5}Inferring the Parameters and the sources}{58}
+\contentsline {section}{\numberline {4.3}Building the Emulator for $A(p,L,z_{0})$}{57}
+\contentsline {section}{\numberline {4.4}Choosing a Prior}{60}
+\contentsline {section}{\numberline {4.5}Inferring the Parameters and the sources}{60}

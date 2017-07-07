@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.7.20)  5 JUL 2017 12:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.7.20)  7 JUL 2017 15:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -556,67 +556,93 @@ Underfull \hbox (badness 10000) in paragraph at lines 1914--1919
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1933--1941
-
- []
+LaTeX Warning: Reference `hosseini2016airborne' on page 52 undefined on input l
+ine 1945.
 
 [52]
-Underfull \hbox (badness 10000) in paragraph at lines 1984--1987
+Underfull \hbox (badness 10000) in paragraph at lines 1954--1957
 
  []
 
-[53] [54] <./FigChap4/sensitivityPlot.jpg, id=204, 1606.0pt x 1204.5pt>
+[53]
+Underfull \hbox (badness 10000) in paragraph at lines 2000--2003
+
+ []
+
+
+Underfull \vbox (badness 1577) has occurred while \output is active []
+
+ [54]
+<./FigChap4/sensitivityPlot.jpg, id=204, 481.8pt x 481.8pt>
 File: ./FigChap4/sensitivityPlot.jpg Graphic file (type jpg)
 
 <use ./FigChap4/sensitivityPlot.jpg>
-Package pdftex.def Info: ./FigChap4/sensitivityPlot.jpg used on input line 2094
+Package pdftex.def Info: ./FigChap4/sensitivityPlot.jpg used on input line 2111
 .
-(pdftex.def)             Requested size: 321.19432pt x 240.89574pt.
- [55 <./FigChap4/sensitivityPlot.jpg>]
-<./FigChap4/experimentalDesign64.jpg, id=209, 481.8pt x 481.8pt>
+(pdftex.def)             Requested size: 361.3491pt x 361.3491pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [55]
+
+LaTeX Warning: Reference `hosseini2016airborne' on page 56 undefined on input l
+ine 2123.
+
+[56 <./FigChap4/sensitivityPlot.jpg>]
+<./FigChap4/experimentalDesign64.jpg, id=212, 481.8pt x 481.8pt>
 File: ./FigChap4/experimentalDesign64.jpg Graphic file (type jpg)
 
 <use ./FigChap4/experimentalDesign64.jpg>
 Package pdftex.def Info: ./FigChap4/experimentalDesign64.jpg used on input line
- 2108.
+ 2160.
 (pdftex.def)             Requested size: 289.08221pt x 289.08221pt.
- [56 <./FigChap4/experimentalDesign64.jpg>] (./Tesis.bbl [57] [58] [59
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [57]
+[58 <./FigChap4/experimentalDesign64.jpg>] [59] (./Tesis.bbl [60] [61
 
 ]
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ™ in font cmr12!
- [60]) [61] (./Tesis.aux) ) 
+ [62])
+[63] (./Tesis.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
 Here is how much of TeX's memory you used:
- 3685 strings out of 494977
- 50041 string characters out of 6180183
- 107829 words of memory out of 5000000
- 6797 multiletter control sequences out of 15000+600000
+ 3690 strings out of 494977
+ 50128 string characters out of 6180183
+ 107869 words of memory out of 5000000
+ 6802 multiletter control sequences out of 15000+600000
  18489 words of font info for 71 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  37i,18n,43p,543b,302s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmbx6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmb
-x8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6
-.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/sh
-are/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/public/rsfs/rsfs10.pfb>
-Output written on Tesis.pdf (61 pages, 2223636 bytes).
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx6.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/rsfs/rsfs10.pfb>
+Output written on Tesis.pdf (63 pages, 2153033 bytes).
 PDF statistics:
- 291 PDF objects out of 1000 (max. 8388607)
- 195 compressed objects within 2 object streams
+ 302 PDF objects out of 1000 (max. 8388607)
+ 202 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
  56 words of extra memory for PDF output out of 10000 (max. 10000000)
 

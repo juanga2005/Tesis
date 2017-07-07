@@ -1306,7 +1306,7 @@ defined as
 \right.
 \end{equation*}
 
-\subsection{Finding the Likelihood}
+\subsection{Finding the Likelihood}\label{secFindingLike}
 To calculate the likelihood,first we need to know how the set of possible measurements 
 $\y=(\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b))$ is related to $b$ when
 we let $b$ to vary. Since we don't know the experimental values of the physical variable $\tilde{u}$
@@ -1935,6 +1935,22 @@ that empirically has shown to work \cite{seinfeld1998atmospheric,hosseini2016air
 The caveat with this approach is that there is no good reason to choose one value
 over a different one. In this work we are going to use the Bayesian framework
 to decide the values of these parameters and the sources as well.
+
+Finally for the zinc pollutant dispersion problem it is necessary to specify the domain of interest, 
+the   boundary and initial  conditions in equation (\ref{eqnDifussivityFinalForm}).
+The spatial domain of interest is given by
+\begin{equation*}
+\Pi:=\{(x_{1},x_{2},x_{3})\in\mathbb{R}^{3}|x_{3}\geq 0\}.
+\end{equation*}
+Following (\ref{hosseini2016airborne}), the boundary conditions are given by the far-field condition
+\begin{equation*}
+C(\x,t)\rightarrow 0\qquad\text{as  }\|x\|\rightarrow\infty,
+\end{equation*}
+and at the boundary by a Robin boundary condition
+\begin{equation*}
+\left.\left(v_{set}C+D_{zz}\frac{\partial C}{\partial z}\right)\right\rvert_{z=0}=\left.v_{dep}C\right\rvert_{z=0}.
+\end{equation*}
+
 Now that the mathematical model has been fully specified, we now proceed to explain
 the inverse problem.
 \newline
@@ -2059,7 +2075,7 @@ Cut-off length (m) & $z_{cut}$ & ${[}1,5{]}$\tabularnewline
 \label{tabRanges}
 \end{table}
 
-We perform a sensitivity analysis on the map $\phi$ 
+We perform a sensitivity analysis on the map $\varphi$ 
 as explained in Chapter 2, Section \ref{subsecSensitivity}. To make computations
 easier we map bijectively the set of ranges of the parameters into the five-dimensional
 unit hypercube $[0,1]^{5}$. Thus we may equivalently perform the sensitivity analysis
@@ -2086,39 +2102,136 @@ effect Sobol index for each of the variables.
 The DiceKriging package allows us to use five different kernels for the emulation.
 In order to minimize the influence of the kernel on the estimation of the Sobol
 indices, we calculate them five times, one for each kernel. 
-The results obtained are shown in the box plots in Figure \ref{figSensitivityPlot}.
+The results obtined for the sensitivity analysis
+using each of the five different kernels are shown in the box plots in Figure \ref{figSensitivityPlot}.
 
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.2]{./FigChap4/sensitivityPlot}
-\caption{The sensitivity plot}
+\includegraphics[scale=0.75]{./FigChap4/sensitivityPlot}
+\caption{Boxplots containing the result of the sensitivity analysis performed on each of the nine sensors.
+The dashed line represents the value 0.}
 \label{figSensitivityPlot}
 \end{figure}
+Figure $\ref{figSensitivityPlot}$ shows that two of the five variables do not account for the variance 
+in the deposition, namely, $z_{i}$ and $z_{cut}$. Therefore we can reduce the dimensionality of the parameter
+space from five to three. In this case we can write equation (\ref{eqnLinComb}) as 
+\begin{equation*}
+\y=A(p,L,z_{0})\textbf{q}.
+\end{equation*}  
+From now on we use the convetion that the parameters $z_{i}$ and $z_{cut}$ 
+were held fix at the values 100 and 2 respectively (see \ref{hosseini2016airborne}).  
+Now we turn our attention into approximating the matrix $A$.
 
 
 
-\section{Design of Experiments and Emulator for $B$}
-We need to create 36 GPs to approximate $B$, first we need to decide where to evaluate the model in order
-to find the points where to run the model (\ref{eqnDifussivityFinalForm}). We do a maximin design
-as explained in Chapter 2. To do the optimization we used particle swarm. With $N=64$ the design looks as follows.
+\section{Building the  Emulator for $A(p,L,z_{0})$}
+
+
+In order to obtain a closed expression for the matrix $A$ it is necessary to solve 
+equation (\ref{eqnDifussivityFinalForm}) along with its boundary condition. There is no known close
+form to this equation, hence is necessary to use numerical methods to solve the equation
+and use the results to obtain information about $A$. To solve numerically
+equation (\ref{eqnDifussivityFinalForm}), we used a finite volume code. The details
+of the implementation are given in (\cite{hosseini2016airborne}). Running the final
+volume code on an $30\times 30\times 30$ grid takes about 30 minutes. There is an
+immediate consequence of this running time: is not feasible to obtain
+information of $A$ by solving equation (\ref{eqnDifussivityFinalForm}) for a large
+number of different combination of the parameters $(p,L,z_{0})$. What
+we can do to overcome this problem is  to construct an emulator using Gaussian processes 
+as explained in Chapter 2, Section \ref{secFindingLike}.
+
+To construct the emulator we need a training set. For that end we create an space filling design for 
+the parameter space $(p,L,z_{0})$, as explained
+in Chapter 2, Section \ref{secDesignofExperiments}, in particular a maximin design. 
+Finding a maximin design
+is an optimization problem, that is analytically  challenging to solve, hence is
+necessary to use numerical approximations. For the optimization  we used 
+the particle swarm algorithm. The reader interested in this algorithm
+is referred to \cite{arora2015optimization}.  
+
+Considering our time and computational budget, we  chose to 
+do the experimental design with $n=64$ points. The maximin
+design obtained by using a particle swarm for the 
+optimization is shown in Figure \ref{figParticleSwarm}.
+
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.6]{./FigChap4/experimentalDesign64}
-\caption{the experimental design plot}
+\caption{Maximin design with 64 points in the parameter space $(p,L,z_{0})$.}
+\label{figParticleSwarm}
 \end{figure}
-We now run the finite element code on the points chosen by the experimental design. With this
-values we build the emulator for $B$. We denote this emulator by $\widehat{B}$. As
-in Chapter 3 we now assume a model of the form
-\begin{equation}\label{eqnEpsilonApproxChp4}
-\y=\widehat{B}\textbf{q}\Delta A+\epsilon,
+
+With the experimental design completed, the next step is to run the finite volume code 
+on each of the different 64 configurations of parameters. We repeat this step four
+times. The first time we run the 64 simulations by fixing the first source $q_{1}$ to 1
+and the other three source to zero. The second time we fix the second source $q_{2}$ to 1
+and the other three source to zero. For the third and fourth step we  fix the 
+third and fourth source to one respectively, and the rest of the sources to zero. The reason
+for this implementation is that we need to connect the output of the finite
+volume code, which is the deposition vector $\y$ at the nine sites $R_{1},R_{2},\ldots,R_{9}$
+with the components of the matrix $A(p,L,z_{0})$. Recall that the relation between these two quantities 
+is given by
+\begin{equation}\label{eqnReminder}
+\y=A(p,L,z_{0})\begin{bmatrix}
+q_{1}\\q_{2}\\q_{3}\\q_{4}
+\end{bmatrix}.
 \end{equation}
-with $\epsilon$ multivariate Gaussian. No we have all the ingredients to use 
-the Bayesian framework to estiamte the parameters and the sources. 
+For example if we run the finite volume code with the parameters set at the values
+$p^{*},L^{*},z_{0}^{*}$ with the $i$-th source set to one and the other 
+three to zero, obtaning the output
+\begin{equation*}
+\y^{*}=\begin{bmatrix}
+y_{1}^{*}\\
+\vdots\\
+y_{9}^{*}
+\end{bmatrix}.
+\end{equation*}
+Then from equation (\ref{eqnReminder}) it is easy to see that 
+the following equality holds
+\begin{equation*}
+\begin{bmatrix}
+y_{1}^{*}\\
+\vdots\\
+y_{9}^{*}
+\end{bmatrix}=\begin{bmatrix}
+a_{1i}(p^{*},L^{*},z_{0}^{*})\\
+\vdots\\
+a_{9i}(p^{*},L^{*},z_{0}^{*})
+\end{bmatrix}
+\end{equation*}
+where the RHS is the $i$-th column of $A$. This result justifies why
+it is necessary to run four times each of the 64 simulations to 
+obtain the training set for the emulator of $A$.
+With the training set we create the emulator for $A$, represented by $\widehat{A}$,
+using Gaussian processes as explained in Chapter 2, Section (\ref{secGPs}) and
+exemplified in Chapter 3 Section (\ref{secFindingLike}). By construction
+at the points in the maximin design in Figure \ref{figParticleSwarm} $A$
+and $\widehat{A}$ coincide. To account for the discrepancies outside this
+set of points
+we assume an additive Gaussian noise model between deposition, parameters
+and sources, that is (cf. Chapter 3, Section \ref{secFindingLike})
+\begin{equation}\label{eqnChp4Additive}
+\y=\widehat{A}(p,L,z_{0})\q+\epsilon,
+\end{equation} 
+with $\epsilon\sim\mathcal{N}(0,\lambda I_{9\times 9}$). The value of 
+the parameter $\lambda$ will be set later. In equation (\ref{eqnChp4Additive})
+the vector $\y$ could represent either the output of the finite volume 
+code or the experimental deposition measures from the dustfall jars. Hence
+the random variable $\epsilon$ also accounts for the missing physics
+not captured by the model (\ref{eqnDifussivityFinalForm}) and 
+the discretization of it.
+
+
+We are now ready to apply
+the Bayesian framework to estimate the parameters and the sources. Our goal
+is to find the posterior distribution of the parameters and sources
+given the experimental data $\y$. By Bayes' rule the posterior
+distribution is given by
 \begin{equation*}
 \post(p,z_{0},L,\q|\y)=\frac{\like(\y|p,z_{0},L,\q)\prior(p,z_{0},L,\q)}{Z(\y)}.
 \end{equation*}
-As in Chapter 3, from equation (\ref{eqnEpsilonApproxChp4}) we conclude that
+The likelihood can be calculated as
 \begin{equation*}
 \y|\pars,\q\sim\mathcal{N}(0,\lambda I).
 \end{equation*}
