@@ -1536,7 +1536,7 @@ in what direction to move, randomly, using some probability distribution that is
 For simplicity, In this and the next Chapter we chose the uniform distribution to decide in what  direction to move.
 The pseudocode  for the MH algorithm as described above is \cite{Somersalo}
 
-\begin{algorithm}
+\begin{algorithm}\label{algMH}
 \caption{Metropolis-Hastings Algorithm}
 \begin{algorithmic}[1]\label{algMH}
 \State pick a point $q_{1}$ in the support of the distribution
@@ -2048,8 +2048,9 @@ what parameters are not relevant.
 %As explained in Chapter 2 we can perform a sensitivity analysis to assess the importance of each parameter
 
 \section{Sensitivity Analysis}
-Our starting point is to consider the map $\varphi$ that takes  a set of parameters $(p,z_{0},z_{i},L,z_{cut})$
-as inputs and gives a deposition value as output. Following \cite{seinfeld1998atmospheric}, the accepted
+Our starting point is to consider the set of  map $\varphi_{x,y}$ that takes  a set of parameters $(p,z_{0},z_{i},L,z_{cut})$
+as inputs and gives the deposition value at the point $(x,y)$  as output. 
+Following \cite{seinfeld1998atmospheric}, the accepted
 range of values for the set of parameters is shown in Table \ref{tabRanges}.
 
 
@@ -2074,34 +2075,34 @@ Cut-off length (m) & $z_{cut}$ & ${[}1,5{]}$\tabularnewline
 \caption{Parameters under study and their accepted ranges}
 \label{tabRanges}
 \end{table}
-
-We perform a sensitivity analysis on the map $\varphi$ 
-as explained in Chapter 2, Section \ref{subsecSensitivity}. To make computations
-easier we map bijectively the set of ranges of the parameters into the five-dimensional
-unit hypercube $[0,1]^{5}$. Thus we may equivalently perform the sensitivity analysis
-on the parameter to deposition map
+We perform a sensitivity analysis as explained in Chapter 2, Section \ref{subsecSensitivity},
+on the set of maps $\{\varphi_{x_{i},y_{i}}\}_{i=1}^{9}$ ,
+where $(x_{i},y_{i})$ represent the location $R_{i}$ in Figure \ref{figAereal}.
+To make computations
+simpler we map bijectively the set of ranges of the parameters into the five-dimensional
+unit hypercube $[0,1]^{5}$. Thus, we may assume the deposition maps are of the form 
 \begin{equation*}
-\varphi:[0,1]^{5}\subset\mathbb{R}^{5}\rightarrow\mathbb{R}.
+\varphi_{x_{i},y_{i}}:[0,1]^{5}\subset\mathbb{R}^{5}\rightarrow\mathbb{R}\qquad\text{for }i=1,2,\ldots,9.
 \end{equation*} 
 
 Recall from  Chapter 2, Section \ref{subsecSensitivity}, that in order to estimate
-Sobol indices is necessary to perform numerical integrations over the integrand $\varphi$.
+Sobol indices is necessary to perform numerical integrations over the integrand $\varphi_{x,y}$.
 These integrals are five-dimensional, hence a quadrature method is not feasible. It is
 necessary to use Monte Carlo integration. In order to implement it, is necessary
-to know the output of $\varphi$ at any point in its domain. In general we don't
-know the function beyond a very limited number of points. To extrapolate $\varphi$
-at unknown points we use an emulator using Gaussian processes as
+to know the output of $\varphi_{x,y}$ at any point in its domain. In general we do not
+know the output of the function of interest beyond a very limited number of points. 
+To extrapolate $\varphi_{x,y}$
+at  points in its domain where we do not know the output, we use an emulator using Gaussian processes as
 explained in Chapter 2, Section \ref{secGPs}.
 
-Implementing the routines to  emulate $\varphi$ and estimate
+Implementing the routines to  emulate $\varphi_{x,y}$ and estimate
 the Sobol indices is a time consuming task. In order to optimize our time budget, we used
 the R packages DiceKriging and Sensitivity \cite{DiceKriging,sensitivity} for the 
 emulator and to  estimate the total
-effect Sobol index for each of the variables.  
-
+effect Sobol index for each of the maps  $\{\varphi_{x_{i},y_{i}}\}_{i=1}^{9}$.  
 The DiceKriging package allows us to use five different kernels for the emulation.
 In order to minimize the influence of the kernel on the estimation of the Sobol
-indices, we calculate them five times, one for each kernel. 
+indices, we calculate the indices five times, one for each different kernel. 
 The results obtined for the sensitivity analysis
 using each of the five different kernels are shown in the box plots in Figure \ref{figSensitivityPlot}.
 
@@ -2109,41 +2110,42 @@ using each of the five different kernels are shown in the box plots in Figure \r
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.75]{./FigChap4/sensitivityPlot}
-\caption{Boxplots containing the result of the sensitivity analysis performed on each of the nine sensors.
-The dashed line represents the value 0.}
+\caption{Boxplots containing the result of for the total effect Sobol index performed on each of the nine sensors.
+The dashed line represents the value of zero.}
 \label{figSensitivityPlot}
 \end{figure}
 Figure $\ref{figSensitivityPlot}$ shows that two of the five variables do not account for the variance 
 in the deposition, namely, $z_{i}$ and $z_{cut}$. Therefore we can reduce the dimensionality of the parameter
-space from five to three. In this case we can write equation (\ref{eqnLinComb}) as 
+space from five to three. In this case we can write equation (\ref{eqnLinRel}) as 
 \begin{equation*}
 \y=A(p,L,z_{0})\textbf{q}.
 \end{equation*}  
-From now on we use the convetion that the parameters $z_{i}$ and $z_{cut}$ 
-were held fix at the values 100 and 2 respectively (see \ref{hosseini2016airborne}).  
-Now we turn our attention into approximating the matrix $A$.
+From now on we use the convention that the parameters $z_{i}$ and $z_{cut}$ 
+are held fix at the values 100 and 2 respectively (see \cite{hosseini2016airborne}).  
+
+In order to obtain a closed expression for the matrix $A$ it is necessary to solve 
+equation (\ref{eqnDifussivityFinalForm}) along with its boundary condition. There is no known close
+form to this equation, hence is necessary to use numerical methods to solve the equation
+and use the results to obtain information about $A$. Solving equation (\ref{eqnDifussivityFinalForm})
+is a computationally intensive task. Is not feasible to solve it for a wide range
+of different values of $(p,L,z_{0})$ in order to obtain information about $A$. Instead, to 
+learn about $A$ for a wide range of values of $(p,L,z_{0})$, we will use an emulator.
 
 
 
 \section{Building the  Emulator for $A(p,L,z_{0})$}
 
-
-In order to obtain a closed expression for the matrix $A$ it is necessary to solve 
-equation (\ref{eqnDifussivityFinalForm}) along with its boundary condition. There is no known close
-form to this equation, hence is necessary to use numerical methods to solve the equation
-and use the results to obtain information about $A$. To solve numerically
+To solve numerically
 equation (\ref{eqnDifussivityFinalForm}), we used a finite volume code. The details
-of the implementation are given in (\cite{hosseini2016airborne}). Running the final
-volume code on an $30\times 30\times 30$ grid takes about 30 minutes. There is an
-immediate consequence of this running time: is not feasible to obtain
-information of $A$ by solving equation (\ref{eqnDifussivityFinalForm}) for a large
-number of different combination of the parameters $(p,L,z_{0})$. What
-we can do to overcome this problem is  to construct an emulator using Gaussian processes 
+of the implementation are given in \cite{hosseini2016airborne}. Running the final
+volume code on an $30\times 30\times 30$ grid takes about 30 minutes. Hence the 
+necessity to use Gaussian process regression to create an emulator
 as explained in Chapter 2, Section \ref{secFindingLike}.
 
 To construct the emulator we need a training set. For that end we create an space filling design for 
 the parameter space $(p,L,z_{0})$, as explained
-in Chapter 2, Section \ref{secDesignofExperiments}, in particular a maximin design. 
+in Chapter 2, Section \ref{secDesignofExperiments}. In  particular
+we will use a maximin design. 
 Finding a maximin design
 is an optimization problem, that is analytically  challenging to solve, hence is
 necessary to use numerical approximations. For the optimization  we used 
@@ -2155,13 +2157,6 @@ do the experimental design with $n=64$ points. The maximin
 design obtained by using a particle swarm for the 
 optimization is shown in Figure \ref{figParticleSwarm}.
 
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.6]{./FigChap4/experimentalDesign64}
-\caption{Maximin design with 64 points in the parameter space $(p,L,z_{0})$.}
-\label{figParticleSwarm}
-\end{figure}
-
 With the experimental design completed, the next step is to run the finite volume code 
 on each of the different 64 configurations of parameters. We repeat this step four
 times. The first time we run the 64 simulations by fixing the first source $q_{1}$ to 1
@@ -2171,12 +2166,13 @@ third and fourth source to one respectively, and the rest of the sources to zero
 for this implementation is that we need to connect the output of the finite
 volume code, which is the deposition vector $\y$ at the nine sites $R_{1},R_{2},\ldots,R_{9}$
 with the components of the matrix $A(p,L,z_{0})$. Recall that the relation between these two quantities 
-is given by
+is given by equation (\ref{eqnLinRel}), explicitly 
 \begin{equation}\label{eqnReminder}
-\y=A(p,L,z_{0})\begin{bmatrix}
+\y=A(p,L,z_{0})\underbrace{\begin{bmatrix}
 q_{1}\\q_{2}\\q_{3}\\q_{4}
-\end{bmatrix}.
+\end{bmatrix}}_{\q},
 \end{equation}
+
 For example if we run the finite volume code with the parameters set at the values
 $p^{*},L^{*},z_{0}^{*}$ with the $i$-th source set to one and the other 
 three to zero, obtaning the output
@@ -2200,13 +2196,15 @@ a_{1i}(p^{*},L^{*},z_{0}^{*})\\
 a_{9i}(p^{*},L^{*},z_{0}^{*})
 \end{bmatrix}
 \end{equation*}
+
 where the RHS is the $i$-th column of $A$. This result justifies why
 it is necessary to run four times each of the 64 simulations to 
 obtain the training set for the emulator of $A$.
-With the training set we create the emulator for $A$, represented by $\widehat{A}$,
-using Gaussian processes as explained in Chapter 2, Section (\ref{secGPs}) and
-exemplified in Chapter 3 Section (\ref{secFindingLike}). By construction
-at the points in the maximin design in Figure \ref{figParticleSwarm} $A$
+The emulator for $A$ will be represented by $\widehat{A}$. The
+construction of $\widehat{A}$ is obtained by 
+using Gaussian processes as explained in Chapter 2, Section \ref{secGPs}, and
+exemplified in Chapter 3 Section \ref{secFindingLike}. By construction,
+at the points in the maximin design in Figure \ref{figParticleSwarm}, $A$
 and $\widehat{A}$ coincide. To account for the discrepancies outside this
 set of points
 we assume an additive Gaussian noise model between deposition, parameters
@@ -2214,62 +2212,317 @@ and sources, that is (cf. Chapter 3, Section \ref{secFindingLike})
 \begin{equation}\label{eqnChp4Additive}
 \y=\widehat{A}(p,L,z_{0})\q+\epsilon,
 \end{equation} 
-with $\epsilon\sim\mathcal{N}(0,\lambda I_{9\times 9}$). The value of 
+with $\epsilon\sim\mathcal{N}(0,\lambda I_{9\times 9})$. The value of 
 the parameter $\lambda$ will be set later. In equation (\ref{eqnChp4Additive})
 the vector $\y$ could represent either the output of the finite volume 
-code or the experimental deposition measures from the dustfall jars. Hence
-the random variable $\epsilon$ also accounts for the missing physics
-not captured by the model (\ref{eqnDifussivityFinalForm}) and 
-the discretization of it.
+code at the dustfall jars positions or the experimental deposition measures. 
+This interpretation of $\y$ implies  that the random variable $\epsilon$, also
+accounts for the discrepancy between simulation 
+of equation (\ref{eqnDifussivityFinalForm}) and the physics.
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.6]{./FigChap4/experimentalDesign64}
+\caption{Maximin design with 64 points in the parameter space $(p,L,z_{0})$.}
+\label{figParticleSwarm}
+\end{figure}
 
 
-We are now ready to apply
-the Bayesian framework to estimate the parameters and the sources. Our goal
-is to find the posterior distribution of the parameters and sources
-given the experimental data $\y$. By Bayes' rule the posterior
+By having the emulator, we are now in position to apply
+the Bayesian framework to estimate the values for the parameters and the sources. 
+This is going to be done in the next section.
+
+\section{Bayesian Framework for the Inverse Problem}
+
+Recall that in the Bayesian framework, to solve an inverse problem
+is equivalent to find the posterior distribution of the parameters
+of interest. In our case we want to find the posterior
+of the parameters $\pars$ and sources $\q$ given
+the experimental data $\y$. By Bayes' rule the posterior
 distribution is given by
-\begin{equation*}
+\begin{equation}\label{eqnBayesChp4}
 \post(p,z_{0},L,\q|\y)=\frac{\like(\y|p,z_{0},L,\q)\prior(p,z_{0},L,\q)}{Z(\y)}.
-\end{equation*}
-The likelihood can be calculated as
+\end{equation}
+Given the Gaussian additive noise model in equation (\ref{eqnChp4Additive}), 
+the likelihood can be calculated as
 \begin{equation*}
-\y|\pars,\q\sim\mathcal{N}(0,\lambda I).
+\y|\pars,\q\sim\mathcal{N}(\widehat{A}\q,\lambda I).
 \end{equation*}
-Hence the only thing that is left to calculate is the prior
-\section{Choosing a Prior}
-First it is resonable to assume
+or explicitly
+\begin{equation}\label{eqnFinalLike}
+\like(\y|\pars,\q)=\frac{1}{(2\pi\lambda^{2})^{\frac{9}{2}}}\exp\left(-\frac{1}{2\lambda^{2}}\|\widehat{A}q-\y\|^{2}\right).
+\end{equation}
+
+
+
+
+The constant of proportionality is given by
+\begin{equation}\label{eqnPropConst}
+Z(\y)=\int\like(\y|p,z_{0},L,\q)\prior(p,z_{0},L,\q)dpdz_{0}dLd\q.
+\end{equation}
+To find it, is necessary to choose a prior distribution. We now
+turn our attention into choosing a prior that captures the better the information
+we have about the problem.
+
+
+
+\subsection{Choosing a Prior}
+The values of the  parameters $p,z_{0}.L$ depend on the environmental conditions of the region
+where the lead-zinc smelter is, whereas
+the values of the sources $q_{1},q_{2},q_{3},q_{4}$ are not. Thus, it is reasonable
+to assume that the possible values between these two sets of variables are independent
+of each other. This can be captured by the assumption
 \begin{equation*} 
 \prior(\pars,\q)=\prior(\pars)\prior(\q).
 \end{equation*}
-So we need to take care about $\pars$ and $\q$ separately. For the values of $\pars$ we follow \cite{hosseini2016airborne}
-and assume that the parameters belong to the following ranges
-\begin{center}
-\textbf{Here you put the table with the range of the acceptable values}
-\end{center}
-Since we don't have any other information than that we assume an uniform distribution.
-For $\q$ we have more information according to \cite{hosseini2016airborne}, engineerings have estimate
-the following values for the components of $\q$
-\begin{center}
-\textbf{Here you put a table with the estimates from the engineers}
-\end{center}
-Using this data we may pose that $\q$ is disributed as $G(\alpha,\beta)$,\textbf{You have to explain
-how to determine the values of the parameters of the distribution}
-Having these two quantities, our posterior now looks like
+By writing the prior distribution as the product of two distributions, we 
+simplify the problem by working with two different subsets of variables.
+Let us first work with the prior for the parameters $p,z_{0}.L$. In \cite{seinfeld1998atmospheric}
+it is propose a function relation of the form
 \begin{equation*}
-\post(\pars,\q|\y)\propto\mathcal{N}(0,\lambda I)U(a,b)G(\alpha,\beta)
+L=a+b\ln(z_{0}),
+\end{equation*}
+where $a$ and $b$ are constants. This relation is empiric and its validity is yet to be
+confirmed. Instead we assume that $z_{0}$ and $L$ are independent. Finally
+ there is no known connection between the parameter $p$ and the other two
+parameters. Thus we assume all three parameters are independent to each other.
+This assumption is  modeled by 
+\begin{equation*}
+\prior(p,z_{0},L)=\prior(p)\prior(z_{0})\prior(L).
+\end{equation*}
+As mentioned in Chapter 1, there is no strong reason to pick a value over the other 
+for these parameters.
+Since there is no preference, we assume an uniform
+distribution for each parameter. The allowed range for each parameter is given
+in Table (\ref{tabRanges}). Explicitly we have the  distribution
+density for each parameter as
+\begin{eqnarray}\label{eqnPriorparam}
+\prior(p)=\frac{1}{0.3}\textbf{1}_{[0.1,0.4]}\nonumber\\
+\prior(z_{0})=\frac{1}{2-10^{-3}}\textbf{1}_{[10^{-3},2]},\\
+\prior(L)=\frac{1}{499}\textbf{1}_{[-500,-1]}\nonumber.
+\end{eqnarray}
+Choosing the prior for the sources $q_{1},q_{2},q_{3},q_{4}$ requires more
+analysis since we are not completely ignorant about their possible values. 
+Let us summarize our knowledge about these variables.
+\begin{enumerate}
+\item Each source is unrelated to the other three.
+\item $q_{i}>0$ and $q_{i}<\infty$ for $i=1,2,3,4$.
+\item According to the engineers working at the smelter, the estimated
+output for the sources are
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline 
+Source & Estimated Emission Rate {[}ton/yr{]}\tabularnewline
+\hline 
+\hline 
+$q_{1}$ & 35\tabularnewline
+\hline 
+$q_{2}$ & 80\tabularnewline
+\hline 
+$q_{3}$ & 5\tabularnewline
+\hline 
+$q_{4}$ & 5\tabularnewline
+\hline 
+\end{tabular}
+\caption{Estimated parameters for the four sources.}
+\label{tabSources}
+\end{table}
+\item The engineers estimates are reliable.
+\end{enumerate}
+Mathematically the first condition can be written as
+\begin{equation*}
+\prior(q_{1},q_{2},q_{3},q_{4})=\prior(q_{1})\prior(q_{2})\prior(q_{3})\prior(q_{4}).
+\end{equation*}
+The second condition requires that the probability density for each source has to 
+be supported in the set $[0,\infty)$. The third and fourth conditions can be interpreted
+as follows: the mode of the prior  for each sources has to be at the
+engineers estimated value and $99\%$ of the mass should be contained between 0 and 3
+times that value. A probability distribution that 
+satisfies the above conditions is the gamma distribution. The gamma distribution
+is parametric distribution and will be 
+denoted by $\mathscr{G}(\alpha,\beta)$. The Lebesgue density
+for the gamma distribution is given by
+\begin{equation*}
+f(x|\alpha,\beta)=\frac{\beta^{\alpha}}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x}\textbf{1}_{[0,\infty)},
+\end{equation*}
+where $\alpha$ and $\beta$ are constants. We are going to assume that each source is distributed
+with gamma probability density. In this case we write
+\begin{equation*}
+q_{i}\sim \mathscr{G}(\alpha_{i},\beta_{i})\text{ for }{i=1,2,3,4},
+\end{equation*}
+or equivalently
+\begin{equation}\label{eqnPriorq}
+\prior(q_{i})=\frac{\beta_{i}^{\alpha_{i}}}{\Gamma(\alpha_{i})}q_{i}^{\alpha_{i}-1}e^{-\beta_{i} q_{i}}\textbf{1}_{[0,\infty)}.
+\end{equation}
+We choose the values of $\alpha_{i}$ and $\beta_{i}$  in terms of
+the engineer estimate for the $i$-th source, represented as $q_{eng,i}$.
+More precisely we choose the values of $\alpha_{i}$ and $\beta_{i}$ 
+as the solution of the 
+following system of equations
+\begin{eqnarray*}
+\beta_{i}(\alpha_{i}-1)=q_{eng,i}, \\
+qgamma(0.99,\alpha_{i},\beta_{i})=3q_{eng,i}.
+\end{eqnarray*}
+Here $qgamma$ is the quantile function for the gamma distribution. By choosing the values
+of the parameters for the gamma distribution in this manner, we satisfy
+\begin{equation*}
+\max_{x\in [0,\infty)}f(q|\alpha_{i},\beta_{i})=q_{eng,i}\qquad\text{for }i=1,2,3,4.
+\end{equation*}
+and $99\%$ of the mass of the density is concentrated between 0 and 3 times the
+engineers estimate. 
+Combining the results from equations (\ref{eqnPriorq}) and (\ref{eqnPriorparam})
+we conclude that the prior distribution  is proportional to
+\begin{equation}\label{eqnPriorFinal}
+\prior(p,z_{0},L,\q)\propto \textbf{1}_{[0.1,0.4]}\textbf{1}_{[10^{-3},2]}\textbf{1}_{[-500,-1]}\prod_{i=1}^{4}q_{i}^{\alpha_{i}-1}e^{-\beta_{i} q_{i}}\textbf{1}_{[0,\infty)}.
+\end{equation}
+With the prior and the likelihood, we finally obtain the expression for the posterior by combining equations (\ref{eqnFinalLike}),(\ref{eqnPropConst}) and (\ref{eqnPriorFinal})
+into Bayes' rule in equation (\ref{eqnBayesChp4}). Explicitly,  the posterior $\post(\pars,\q|\y)$ is proportional to
+\begin{equation*}
+\exp\left(-\frac{1}{2\lambda^{2}}\|\widehat{A}\q-\y\|^{2}-\sum_{i=1}^{4}\beta_{i}q_{i}\right)\prod_{j=1}^{4}q_{i}^{\alpha_{i}-1}\textbf{1}_{[0.1,0.4]\times[10^{-3},2]\times[-500,-1]}.
 \end{equation*}
 
-Having an explicit expression of the posterior allows us to sample from it to 
-obtain useful statistics.
+
+The ranges for the values of the parameters in Table (\ref{tabRanges}) are widely accepted in the literature. However there is not
+a technically sounded reason of why these ranges are acceptable. Instead we will expand the possible values the parameters are 
+allowed to take and test the validity of the values in Table (\ref{tabRanges}). The new set of ranges we picked are shown
+in Table \ref{tabNewRanges}.
+
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline 
+Parameter (units) & Symbol & Range\tabularnewline
+\hline 
+\hline 
+Velocity exponent  & $p$ & ${[}0,0.6{]}$\tabularnewline
+\hline 
+Roughness length (m) & $z_{0}$ & ${[}0 ,3{]}$\tabularnewline
+\hline 
+Monin-Obukhov length (m) & $L$ & ${[}-600,0{]}$\tabularnewline
+\hline 
+\end{tabular}
+\caption{Parameters under study and their new allowed ranges.}
+\label{tabNewRanges}
+\end{table}
+Using these new ranges for the parameters the posterior $\post(\pars,\q|\y)$ is now proportional to
+
+\begin{equation}\label{eqnPosteriorFinal}
+\exp\left(-\frac{1}{2\lambda^{2}}\|\widehat{A}\q-\y\|^{2}-\sum_{i=1}^{4}\beta_{i}q_{i}\right)\prod_{j=1}^{4}q_{i}^{\alpha_{i}-1}\textbf{1}_{[0,0.6]\times[0,3]\times[-600,0]}.
+\end{equation}
+This equation is the solution for the inverse problem. However the formula for the posterior is not of much use. It is
+necessary to extract the information contained in it. In order to extract such information we can
+obtain point estimates of the parameters and the uncertainty associated to those estimates. 
+Finding these estimates is the topic of the next section.
+
+
 
 \section{Inferring the Parameters and the sources}
-Here you put the results from using MH on the posterior
-and then calculate all the useful statistics.
+
+To find  point estimates such as those  in equation (\ref{eqnpointestimates}) and its uncertainty associated,  is necessary to perform a high
+dimensional integrals that are not analytically tractable. Thus we resort to use numerical integration techniques. In 
+particular   we will use use 
+the Metropolis-Hastings(MH) algorithm (see Chapter 3, Algorithm 1) to sample from the posterior and then
+use Monte Carlo integration to obtain the quantities of interest. For the MH implementation we
+use one million samples. As a burn in period we discarded the first $500.000$ samples. The size
+of the random step (value of $\alpha$ in step 3 in Algorithm 1) in each dimension was chosen 
+in a way the acceptance rate was around $25\%$.
+Using MH to sample
+from highly dimensional supported probability distributions is challenging. Specially assessing precisely
+when the Markov chain has converged and if the samples obtained after the convergence are indeed from
+the probability distribution of interest. To overcome these difficulties, several heuristics on convergence
+criteria have been develop, such as, graphical methods and non-parametric tests of stationarity. The reader
+interested in this topic is referred to \cite{casella2008monte} and the references within. 
+In this work we are going to use the traces of the Markov chain to assess the convergence of it. 
+A \textit{trace plot} is a graphic display of the motion of the Markov chain in each
+of the dimensions in the support of the probability density we are sampling. 
+
+The probability density we are interested in sampling from, is the  posterior in equation (\ref{eqnPosteriorFinal}). 
+This posterior is supported in a compact subset of $\mathbb{R}^{7}$, thus to obtain the trace plots
+of it, we need to plot the motion of the Markov chain in each dimension. These plots
+are shown in Figure \ref{figTraces}. The trace plots in Figure \ref{figTraces} show that the Markov chain is moving around the whole 
+support of the posterior density. Another observation is every region in the support
+of $\post(\pars,\q|\y)$ is visited by the chain every so often. This means
+that the chain is not getting stuck in a local mode of the distribution. In conclusion the 
+trace plots have the behaviour One would expect of a Markov chain that has converged
+and whose realizations are taken from the probability density that is being sampled from. 
+
+One of the advantages of using the Metropolis-Hastings algorithm is that the samples
+obtained in each dimension are distributed as the marginal distribution
+for that variable. If $X$ and $Y$ are random variables jointly distributed 
+as $\p(X,Y)$, then,
+the \textit{marginal distribution} of the random variable $X$ is given by
+\begin{equation*}
+\p(X)=\int\p(X,Y)dY.
+\end{equation*}
+For example the marginal distribution for the parameter $p$ is given by
+\begin{equation*}
+\p(p|\y)=\int\post(\pars,\q|\y)dz_{0}dLd\q.
+\end{equation*}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.7]{./FigChap4/traces}
+\caption{traces}
+\label{figTraces}
+\end{figure}
+
+The marginal distribution of a random variable contains all the information about
+that variable regardless of any other variable or parameter. The histograms
+for the   marginals  of each of the variables of interest in the posterior are shown
+in Figure \ref{figHistograms}.
+
+With $500.000$ samples from $\post(\pars,\q|\y)$ we are now 
+in position to perform Monte Carlo integration
+in order to obtain point estimates and their associated uncertainty.
+The point estimate we are going to calculate is the mean (see equation (\ref{eqnpointestimates})).
+
+For example, for the parameter $p$, its mean is calculated via the approximation
+
+\begin{equation*}
+\E[p|\y]=\int_{0}^{0.6}p\p(p|\y)dp\approx\frac{1}{500000}\sum_{j=1}^{500000}\p(p_{j}|\y),
+\end{equation*}
+where $\p(p|\y)$ is the marginal distribution for $p$ and $p_{j}$ is the $j$-th sample obtained
+from the MH algorithm. The estimate for the variance for the variable $p$ is calculated as
+\begin{equation*}
+\mathbb{V}[p|\y]=\int_{0}^{0.6}(p-\E[p|\y])^{2}\p(p|\y)dp\approx\frac{1}{500000}\sum_{j=1}^{500000}(p_{j}-\E[p|\y])^{2}.
+\end{equation*}
 
 
+The values for the mean and the variance for each of the variables of interest are shown in Table \ref{tabEstimates}.
 
 
+\begin{table}[H]
+\begin{tabular}{|c|c|c|c|}
+\hline 
+Parameter & Mean & Standard Deviation & Coeff. of Variation\tabularnewline
+\hline 
+\hline 
+$p$ & 0.3058597117 & 0.134048244 & 0.4382670843\tabularnewline
+\hline 
+$z_{0}$ & 0.1337796345 & 0.1935939725 & 1.4471109388\tabularnewline
+\hline 
+$L$ & -345.0048422213 & 130.9004274299 & 0.3794162035\tabularnewline
+\hline 
+$q_{1}$ & 0.003816668 & 0.0037975963 & 0.9950030602\tabularnewline
+\hline 
+$q_{2}$ & 0.0040946827 & 0.0027761492 & 0.6779888475\tabularnewline
+\hline 
+$q_{3}$ & 0.0052248901 & 0.004251651 & 0.8137302262\tabularnewline
+\hline 
+$q_{4}$ & 0.0076034684 & 0.0058865728 & 0.7741957376\tabularnewline
+\hline 
+\end{tabular}
+\caption{Estimates and the uncertainty associated to them.}
+\label{tabEstimates}
+\end{table}
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.2]{./FigChap4/histograms}
+\caption{Histograms}
+\label{figHistograms}
+\end{figure}
 \bibliography{Tesis}
 \bibliographystyle{plain}
 \end{document}
