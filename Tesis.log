@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.7.20)  19 JUL 2017 01:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.7.20)  27 JUL 2017 03:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -218,6 +218,9 @@ Document Style - pseudocode environments for use with the `algorithmicx' style
  (./Tesis.aux
 
 LaTeX Warning: Label `algMH' multiply defined.
+
+
+LaTeX Warning: Label `figHistograms' multiply defined.
 
 )
 \openout1 = `Tesis.aux'.
@@ -551,96 +554,111 @@ Chapter 4.
 File: FigChap4/AerealView.png Graphic file (type png)
 
 <use FigChap4/AerealView.png>
-Package pdftex.def Info: FigChap4/AerealView.png used on input line 1732.
+Package pdftex.def Info: FigChap4/AerealView.png used on input line 1744.
 (pdftex.def)             Requested size: 170.74043pt x 161.51833pt.
- [47 <./FigChap4/AerealView.png (PNG copy)>]
-[48] [49] [50] [51]
-Underfull \hbox (badness 10000) in paragraph at lines 1914--1919
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [47]
+<./FigChap4/controlVolume.jpg, id=181, 663.22781pt x 266.49562pt>
+File: ./FigChap4/controlVolume.jpg Graphic file (type jpg)
+
+<use ./FigChap4/controlVolume.jpg>
+Package pdftex.def Info: ./FigChap4/controlVolume.jpg used on input line 1783.
+(pdftex.def)             Requested size: 331.6131pt x 133.24748pt.
+ [48 <./FigChap4/AerealView.png (PNG copy)>]
+[49 <./FigChap4/controlVolume.jpg>] [50] [51] [52] [53]
+Underfull \hbox (badness 10000) in paragraph at lines 1979--1981
 
  []
 
-
-LaTeX Warning: Reference `hosseini2016airborne' on page 52 undefined on input l
-ine 1945.
-
-[52]
-Underfull \hbox (badness 10000) in paragraph at lines 1954--1957
+[54]
+Underfull \hbox (badness 10000) in paragraph at lines 2029--2032
 
  []
 
-[53]
-Underfull \hbox (badness 10000) in paragraph at lines 2000--2003
-
- []
-
-
-Underfull \vbox (badness 1577) has occurred while \output is active []
-
- [54]
-<./FigChap4/sensitivityPlot.jpg, id=204, 481.8pt x 481.8pt>
+[55] <./FigChap4/sensitivityPlot.jpg, id=209, 481.8pt x 481.8pt>
 File: ./FigChap4/sensitivityPlot.jpg Graphic file (type jpg)
 
 <use ./FigChap4/sensitivityPlot.jpg>
-Package pdftex.def Info: ./FigChap4/sensitivityPlot.jpg used on input line 2112
+Package pdftex.def Info: ./FigChap4/sensitivityPlot.jpg used on input line 2115
 .
 (pdftex.def)             Requested size: 361.3491pt x 361.3491pt.
+ [56]
+Underfull \hbox (badness 10000) in paragraph at lines 2125--2129
 
-Underfull \vbox (badness 5359) has occurred while \output is active []
+ []
 
- [55]
-[56 <./FigChap4/sensitivityPlot.jpg>] [57]
-<./FigChap4/experimentalDesign64.jpg, id=216, 481.8pt x 481.8pt>
+[57 <./FigChap4/sensitivityPlot.jpg>] [58]
+<./FigChap4/experimentalDesign64.jpg, id=220, 481.8pt x 481.8pt>
 File: ./FigChap4/experimentalDesign64.jpg Graphic file (type jpg)
 
 <use ./FigChap4/experimentalDesign64.jpg>
 Package pdftex.def Info: ./FigChap4/experimentalDesign64.jpg used on input line
- 2224.
+ 2232.
 (pdftex.def)             Requested size: 289.08221pt x 289.08221pt.
- [58]
-Overfull \hbox (4.61583pt too wide) in paragraph at lines 2234--2234
+ [59]
+Overfull \hbox (1.23622pt too wide) in paragraph at lines 2238--2241
+\OT1/cmr/m/n/12 Bayesian frame-work to es-ti-mate the val-ues for the pa-ram-e-
+ters and the sources.
+ []
+
+
+Overfull \hbox (4.61583pt too wide) in paragraph at lines 2242--2242
 []\OT1/cmr/bx/n/17.28 Bayesian Frame-work for the In-verse Prob-
  []
 
-[59 <./FigChap4/experimentalDesign64.jpg>] [60] [61] [62] [63]
-<./FigChap4/traces.jpg, id=236, 481.8pt x 481.8pt>
+[60 <./FigChap4/experimentalDesign64.jpg>] [61] [62] [63] [64]
+<./FigChap4/traces.jpg, id=240, 481.8pt x 481.8pt>
 File: ./FigChap4/traces.jpg Graphic file (type jpg)
  <use ./FigChap4/traces.jpg>
-Package pdftex.def Info: ./FigChap4/traces.jpg used on input line 2465.
+Package pdftex.def Info: ./FigChap4/traces.jpg used on input line 2474.
 (pdftex.def)             Requested size: 337.25769pt x 337.25769pt.
 
-[64]
-Underfull \vbox (badness 4779) has occurred while \output is active []
+[65]
+Overfull \hbox (42.87675pt too wide) detected at line 2524
+\OML/cmm/m/it/12 f\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 q[]\OT1/cmr/m/n/12 ) = \OML
+/cmm/m/it/12 q[] []\OT1/cmr/m/n/12 (\OMS/cmsy/m/n/12 ^^@\OML/cmm/m/it/12 ^^Lq[]
+\OT1/cmr/m/n/12 ) [] [] \OML/cmm/m/it/12 q[] []\OT1/cmr/m/n/12 (\OMS/cmsy/m/n/1
+2 ^^@\OML/cmm/m/it/12 ^^L[]q[]\OT1/cmr/m/n/12 ) [] [] \OML/cmm/m/it/12 dpdz[]dL
+d[][];
+ []
 
- [65 <./FigChap4/traces.jpg>] <./FigChap4/histograms.jpg, id=243, 481.8pt x 481
-.8pt>
-File: ./FigChap4/histograms.jpg Graphic file (type jpg)
+[66 <./FigChap4/traces.jpg>]
+<./FigChap4/histogramsI.jpg, id=247, 481.8pt x 481.8pt>
+File: ./FigChap4/histogramsI.jpg Graphic file (type jpg)
 
-<use ./FigChap4/histograms.jpg>
-Package pdftex.def Info: ./FigChap4/histograms.jpg used on input line 2522.
-(pdftex.def)             Requested size: 337.25769pt x 337.25769pt.
- (./Tesis.bbl
-Underfull \vbox (badness 10000) has occurred while \output is active []
+<use ./FigChap4/histogramsI.jpg>
+Package pdftex.def Info: ./FigChap4/histogramsI.jpg used on input line 2562.
+(pdftex.def)             Requested size: 240.8994pt x 240.8994pt.
 
- [66]
-[67 <./FigChap4/histograms.jpg>] [68
+<./FigChap4/histogramsII.jpg, id=248, 481.8pt x 481.8pt>
+File: ./FigChap4/histogramsII.jpg Graphic file (type jpg)
 
-] [69]
+<use ./FigChap4/histogramsII.jpg>
+Package pdftex.def Info: ./FigChap4/histogramsII.jpg used on input line 2569.
+(pdftex.def)             Requested size: 240.8994pt x 240.8994pt.
+
+Underfull \vbox (badness 4913) has occurred while \output is active []
+
+ [67]
+[68 <./FigChap4/histogramsI.jpg> <./FigChap4/histogramsII.jpg>] (./Tesis.bbl
+[69] [70
+
+] [71]
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ™ in font cmr12!
- [70]) [71] (./Tesis.aux)
-
-LaTeX Warning: There were undefined references.
-
+ [72]) [73] (./Tesis.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 3712 strings out of 494977
- 50542 string characters out of 6180183
- 108047 words of memory out of 5000000
- 6822 multiletter control sequences out of 15000+600000
+ 3724 strings out of 494977
+ 50883 string characters out of 6180183
+ 108082 words of memory out of 5000000
+ 6832 multiletter control sequences out of 15000+600000
  18489 words of font info for 71 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  37i,18n,43p,543b,302s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -663,10 +681,10 @@ ist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type
 1/public/rsfs/rsfs10.pfb>
-Output written on Tesis.pdf (71 pages, 2237406 bytes).
+Output written on Tesis.pdf (73 pages, 2306612 bytes).
 PDF statistics:
- 329 PDF objects out of 1000 (max. 8388607)
- 219 compressed objects within 3 object streams
+ 339 PDF objects out of 1000 (max. 8388607)
+ 225 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
- 66 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 76 words of extra memory for PDF output out of 10000 (max. 10000000)
 

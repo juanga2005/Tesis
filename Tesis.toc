@@ -13,9 +13,9 @@
 \contentsline {chapter}{\numberline {4}Industrial Case Problem}{47}
 \contentsline {section}{\numberline {4.1}A Mathematical Model for Pollutant Dispersion}{48}
 \contentsline {subsection}{\numberline {4.1.1}Assumptions on the Diffusivity Tensor}{51}
-\contentsline {subsection}{\numberline {4.1.2}Assumptions on the Wind Velocity Distribution}{51}
-\contentsline {section}{\numberline {4.2}Sensitivity Analysis}{54}
-\contentsline {section}{\numberline {4.3}Building the Emulator for $A(p,L,z_{0})$}{57}
-\contentsline {section}{\numberline {4.4}Bayesian Framework for the Inverse Problem}{59}
-\contentsline {subsection}{\numberline {4.4.1}Choosing a Prior}{60}
-\contentsline {section}{\numberline {4.5}Inferring the Parameters and the sources}{63}
+\contentsline {subsection}{\numberline {4.1.2}Assumptions on the Wind Velocity Distribution}{52}
+\contentsline {section}{\numberline {4.2}Sensitivity Analysis}{55}
+\contentsline {section}{\numberline {4.3}Building an Emulator for $A(p,L,z_{0})$}{58}
+\contentsline {section}{\numberline {4.4}Bayesian Framework for the Inverse Problem}{60}
+\contentsline {subsection}{\numberline {4.4.1}Choosing a Prior}{61}
+\contentsline {section}{\numberline {4.5}Inferring the Parameters and the sources}{64}
