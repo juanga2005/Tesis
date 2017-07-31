@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.7.20)  27 JUL 2017 03:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.7.20)  31 JUL 2017 01:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -225,18 +225,18 @@ LaTeX Warning: Label `figHistograms' multiply defined.
 )
 \openout1 = `Tesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 61.
-LaTeX Font Info:    ... okay on input line 61.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 61.
-LaTeX Font Info:    ... okay on input line 61.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 61.
-LaTeX Font Info:    ... okay on input line 61.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 61.
-LaTeX Font Info:    ... okay on input line 61.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 61.
-LaTeX Font Info:    ... okay on input line 61.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 61.
-LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 63.
+LaTeX Font Info:    ... okay on input line 63.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 63.
+LaTeX Font Info:    ... okay on input line 63.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 63.
+LaTeX Font Info:    ... okay on input line 63.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 63.
+LaTeX Font Info:    ... okay on input line 63.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 63.
+LaTeX Font Info:    ... okay on input line 63.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 63.
+LaTeX Font Info:    ... okay on input line 63.
  (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count114
@@ -301,16 +301,15 @@ e
 <log.png, id=1, 319.1925pt x 421.575pt>
 File: log.png Graphic file (type png)
  <use log.png>
-Package pdftex.def Info: log.png used on input line 67.
+Package pdftex.def Info: log.png used on input line 69.
 (pdftex.def)             Requested size: 159.59586pt x 210.78697pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./log.png>] [2
-
-] (./Tesis.toc
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./log.png>] [2] (./Tesis.t
+oc
 LaTeX Font Info:    Try loading font information for U+msa on input line 3.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
@@ -325,13 +324,15 @@ LaTeX Font Info:    Try loading font information for U+rsfs on input line 3.
 
 (/usr/share/texlive/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
-))
+) [3
+
+])
 \tf@toc=\write3
 \openout3 = `Tesis.toc'.
 
- [3] [4
+ [4] [5
 
-] [5]
+]
 [6
 
 ]
@@ -340,30 +341,39 @@ Chapter 1.
 
 ]
 Chapter 2.
-[9] [10]
-Underfull \hbox (badness 10000) in paragraph at lines 179--185
 
- []
+Underfull \vbox (badness 1043) has occurred while \output is active []
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 205.
+ [9]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 119.
+
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 205.
-
-Underfull \hbox (badness 10000) in paragraph at lines 209--218
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 119.
+ [10]
+Underfull \hbox (badness 10000) in paragraph at lines 182--188
 
  []
 
 [11]
-Underfull \hbox (badness 10000) in paragraph at lines 224--231
+Underfull \hbox (badness 10000) in paragraph at lines 212--221
 
  []
 
 [12]
-Overfull \hbox (10.0724pt too wide) in paragraph at lines 279--282
+Underfull \hbox (badness 10000) in paragraph at lines 227--234
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [13]
+[14]
+Overfull \hbox (10.0724pt too wide) in paragraph at lines 284--287
 \OT1/cmr/bx/n/12 Definition 6. \OT1/cmr/m/it/12 An $\OML/cmm/m/it/12 n$\OT1/cmr
 /m/it/12 -dimensional ran-dom vec-tor $[] \OT1/cmr/m/n/12 = (\OML/cmm/m/it/12 X
 []; [] ; X[]\OT1/cmr/m/n/12 )$ \OT1/cmr/m/it/12 in $\OT1/cmr/m/n/12 (
@@ -371,252 +381,384 @@ Overfull \hbox (10.0724pt too wide) in paragraph at lines 279--282
 /n/12 )$
  []
 
-[13]
-Overfull \hbox (9.14026pt too wide) in paragraph at lines 371--371
+[15]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [16]
+Overfull \hbox (19.23755pt too wide) in paragraph at lines 374--374
 [] 
  []
 
-[14]
-Underfull \hbox (badness 10000) in paragraph at lines 415--426
+[17]
+Underfull \hbox (badness 10000) in paragraph at lines 417--429
 
  []
 
-[15] [16]
-LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 477.
- [17]
-Underfull \hbox (badness 10000) in paragraph at lines 536--540
 
- []
+Underfull \vbox (badness 5147) has occurred while \output is active []
 
-[18]
-Underfull \hbox (badness 10000) in paragraph at lines 560--561
-
- []
-
+ [18]
 [19]
-Underfull \hbox (badness 10000) in paragraph at lines 605--612
+LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 480.
+ [20] [21]
+Underfull \hbox (badness 10000) in paragraph at lines 539--543
 
  []
 
-[20]
-Overfull \hbox (8.92836pt too wide) in paragraph at lines 676--680
-\OMS/cmsy/m/n/12 f\OML/cmm/m/it/12 y[]\OMS/cmsy/m/n/12 g[]$\OT1/cmr/m/n/12 . He
-re $(\OML/cmm/m/it/12 K\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 X; X\OT1/cmr/m/n/12 ))
-[] = \OML/cmm/m/it/12 cov\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 f\OT1/cmr/m/n/12 ([]
-[])\OML/cmm/m/it/12 ; f\OT1/cmr/m/n/12 ([][]))\OML/cmm/m/it/12 ; K\OT1/cmr/m/n/
-12 (\OML/cmm/m/it/12 X; X[]\OT1/cmr/m/n/12 )[] = \OML/cmm/m/it/12 cov\OT1/cmr/m
-/n/12 (\OML/cmm/m/it/12 f\OT1/cmr/m/n/12 ([][])\OML/cmm/m/it/12 ; f\OT1/cmr/m/n
-/12 ([][]))$
- []
 
-[21]
-Underfull \hbox (badness 10000) in paragraph at lines 724--730
+Underfull \vbox (badness 1721) has occurred while \output is active []
+
+ [22]
+Underfull \hbox (badness 10000) in paragraph at lines 563--564
 
  []
 
-[22] [23]
-Underfull \hbox (badness 10000) in paragraph at lines 837--843
+[23]
+Underfull \hbox (badness 10000) in paragraph at lines 607--614
 
  []
 
-<./FigChap2/partitionComparison.jpg, id=94, 1204.5pt x 803.0pt>
+
+Underfull \vbox (badness 1194) has occurred while \output is active []
+
+ [24]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [25]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [26]
+Overfull \hbox (6.89146pt too wide) in paragraph at lines 712--712
+[] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [27]
+Underfull \hbox (badness 10000) in paragraph at lines 720--726
+
+ []
+
+<./FigChap2/partitionComparison.jpg, id=106, 1204.5pt x 803.0pt>
 File: ./FigChap2/partitionComparison.jpg Graphic file (type jpg)
 
 <use ./FigChap2/partitionComparison.jpg>
 Package pdftex.def Info: ./FigChap2/partitionComparison.jpg used on input line 
-854.
+744.
 (pdftex.def)             Requested size: 397.48624pt x 264.99081pt.
 
-Overfull \hbox (7.48624pt too wide) in paragraph at lines 854--858
+Overfull \hbox (7.48624pt too wide) in paragraph at lines 744--749
  [][]
  []
 
-[24]
-Underfull \hbox (badness 10000) in paragraph at lines 866--875
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [28]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [29 <./FigChap2/partitionComparison.jpg>]
+Underfull \vbox (badness 2617) has occurred while \output is active []
+
+ [30]
+Underfull \hbox (badness 10000) in paragraph at lines 806--810
 
  []
 
-[25 <./FigChap2/partitionComparison.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 894--903
+[31]
+Underfull \hbox (badness 10000) in paragraph at lines 843--849
 
  []
 
-[26]
-Underfull \hbox (badness 10000) in paragraph at lines 940--944
+
+Underfull \vbox (badness 1163) has occurred while \output is active []
+
+ [32]
+Underfull \hbox (badness 10000) in paragraph at lines 863--872
 
  []
 
-[27] [28] [29] [30]
+[33] [34]
+Underfull \hbox (badness 10000) in paragraph at lines 936--940
+
+ []
+
+[35]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [36]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [37]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [38]
+[39] [40
+
+]
 Chapter 3.
-[31
 
-] <./FigChap3/emulatorApproximation.jpg, id=124, 481.8pt x 481.8pt>
+Underfull \vbox (badness 1762) has occurred while \output is active []
+
+ [41]
+<./FigChap3/emulatorApproximation.jpg, id=154, 481.8pt x 481.8pt>
 File: ./FigChap3/emulatorApproximation.jpg Graphic file (type jpg)
 
 <use ./FigChap3/emulatorApproximation.jpg>
 Package pdftex.def Info: ./FigChap3/emulatorApproximation.jpg used on input lin
-e 1178.
+e 1173.
 (pdftex.def)             Requested size: 264.99081pt x 264.99081pt.
- [32 <./FigChap3/emulatorApproximation.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 1222--1222
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [42]
+Underfull \vbox (badness 4108) has occurred while \output is active []
+
+ [43 <./FigChap3/emulatorApproximation.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 1217--1217
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1226--1226
+Underfull \hbox (badness 10000) in paragraph at lines 1221--1221
 
  []
 
 
-Underfull \hbox (badness 3954) in paragraph at lines 1230--1230
+Underfull \hbox (badness 3954) in paragraph at lines 1225--1225
 []\OT1/cmr/m/n/12 Value of the in-ter-po-la-tion of the
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1230--1230
+Underfull \hbox (badness 10000) in paragraph at lines 1225--1225
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1233--1233
+Underfull \hbox (badness 10000) in paragraph at lines 1228--1228
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1236--1236
+Underfull \hbox (badness 10000) in paragraph at lines 1231--1231
 
  []
 
-[33] <./FigChap3/solu.jpg, id=131, 562.1pt x 421.575pt>
+[44] <./FigChap3/solu.jpg, id=165, 562.1pt x 421.575pt>
 File: ./FigChap3/solu.jpg Graphic file (type jpg)
 
 <use ./FigChap3/solu.jpg>
-Package pdftex.def Info: ./FigChap3/solu.jpg used on input line 1260.
+Package pdftex.def Info: ./FigChap3/solu.jpg used on input line 1255.
 (pdftex.def)             Requested size: 281.04932pt x 210.78697pt.
- [34 <./FigChap3/solu.jpg>] [35] [36]
-Underfull \hbox (badness 10000) in paragraph at lines 1440--1443
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [45]
+Underfull \vbox (badness 1199) has occurred while \output is active []
+
+ [46 <./FigChap3/solu.jpg>] [47]
+Underfull \vbox (badness 1755) has occurred while \output is active []
+
+ [48]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [49]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [50]
+Underfull \hbox (badness 10000) in paragraph at lines 1435--1438
 
  []
 
-<./FigChap3/fitted.jpg, id=141, 505.89pt x 505.89pt>
+<./FigChap3/fitted.jpg, id=186, 505.89pt x 505.89pt>
 File: ./FigChap3/fitted.jpg Graphic file (type jpg)
 
 <use ./FigChap3/fitted.jpg>
-Package pdftex.def Info: ./FigChap3/fitted.jpg used on input line 1446.
+Package pdftex.def Info: ./FigChap3/fitted.jpg used on input line 1441.
 (pdftex.def)             Requested size: 354.12057pt x 354.12057pt.
- [37]
-<./FigChap3/prior_posterior.jpg, id=146, 505.89pt x 505.89pt>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [51]
+<./FigChap3/prior_posterior.jpg, id=190, 505.89pt x 505.89pt>
 File: ./FigChap3/prior_posterior.jpg Graphic file (type jpg)
 
 <use ./FigChap3/prior_posterior.jpg>
-Package pdftex.def Info: ./FigChap3/prior_posterior.jpg used on input line 1515
+Package pdftex.def Info: ./FigChap3/prior_posterior.jpg used on input line 1510
 .
 (pdftex.def)             Requested size: 303.53633pt x 303.53633pt.
- [38 <./FigChap3/fitted.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 1520--1538
+ [52 <./FigChap3/fitted.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 1515--1533
 
  []
 
-[39 <./FigChap3/prior_posterior.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 1573--1584
+[53 <./FigChap3/prior_posterior.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 1568--1579
 
  []
 
-<./FigChap3/histogram_mcmc.jpg, id=153, 481.8pt x 481.8pt>
+[54] <./FigChap3/histogram_mcmc.jpg, id=200, 481.8pt x 481.8pt>
 File: ./FigChap3/histogram_mcmc.jpg Graphic file (type jpg)
 
 <use ./FigChap3/histogram_mcmc.jpg>
-Package pdftex.def Info: ./FigChap3/histogram_mcmc.jpg used on input line 1598.
+Package pdftex.def Info: ./FigChap3/histogram_mcmc.jpg used on input line 1593.
 
 (pdftex.def)             Requested size: 289.08221pt x 289.08221pt.
 
-Underfull \vbox (badness 7851) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [40]
-[41 <./FigChap3/histogram_mcmc.jpg>] [42]
-<./FigChap3/posterior_evolution.jpg, id=163, 504.9264pt x 505.4082pt>
+ [55]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [56 <./FigChap3/histogram_mcmc.jpg>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [57]
+[58] <./FigChap3/posterior_evolution.jpg, id=214, 504.9264pt x 505.4082pt>
 File: ./FigChap3/posterior_evolution.jpg Graphic file (type jpg)
 
 <use ./FigChap3/posterior_evolution.jpg>
 Package pdftex.def Info: ./FigChap3/posterior_evolution.jpg used on input line 
-1688.
+1683.
 (pdftex.def)             Requested size: 353.44608pt x 353.78331pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [43]
-[44 <./FigChap3/posterior_evolution.jpg>] [45] [46
+ [59]
+[60 <./FigChap3/posterior_evolution.jpg>] [61] [62
 
 ]
 Chapter 4.
-<FigChap4/AerealView.png, id=177, 487.8225pt x 461.47406pt>
+
+Underfull \vbox (badness 1681) has occurred while \output is active []
+
+ [63]
+<FigChap4/AerealView.png, id=231, 487.8225pt x 461.47406pt>
 File: FigChap4/AerealView.png Graphic file (type png)
 
 <use FigChap4/AerealView.png>
-Package pdftex.def Info: FigChap4/AerealView.png used on input line 1744.
+Package pdftex.def Info: FigChap4/AerealView.png used on input line 1739.
 (pdftex.def)             Requested size: 170.74043pt x 161.51833pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [47]
-<./FigChap4/controlVolume.jpg, id=181, 663.22781pt x 266.49562pt>
+ [64 <./FigChap4/AerealView.png (PNG copy)>]
+<./FigChap4/controlVolume.jpg, id=235, 663.22781pt x 266.49562pt>
 File: ./FigChap4/controlVolume.jpg Graphic file (type jpg)
 
 <use ./FigChap4/controlVolume.jpg>
-Package pdftex.def Info: ./FigChap4/controlVolume.jpg used on input line 1783.
+Package pdftex.def Info: ./FigChap4/controlVolume.jpg used on input line 1778.
 (pdftex.def)             Requested size: 331.6131pt x 133.24748pt.
- [48 <./FigChap4/AerealView.png (PNG copy)>]
-[49 <./FigChap4/controlVolume.jpg>] [50] [51] [52] [53]
-Underfull \hbox (badness 10000) in paragraph at lines 1979--1981
+ [65 <./FigChap4/controlVolume.jpg>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [66]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [67]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [68]
+Underfull \vbox (badness 2772) has occurred while \output is active []
+
+ [69]
+Underfull \vbox (badness 5878) has occurred while \output is active []
+
+ [70]
+[71]
+Underfull \hbox (badness 10000) in paragraph at lines 1974--1976
 
  []
 
-[54]
-Underfull \hbox (badness 10000) in paragraph at lines 2029--2032
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [72]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [73]
+Underfull \hbox (badness 10000) in paragraph at lines 2024--2027
 
  []
 
-[55] <./FigChap4/sensitivityPlot.jpg, id=209, 481.8pt x 481.8pt>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [74]
+[75] <./FigChap4/sensitivityPlot.jpg, id=271, 481.8pt x 481.8pt>
 File: ./FigChap4/sensitivityPlot.jpg Graphic file (type jpg)
 
 <use ./FigChap4/sensitivityPlot.jpg>
-Package pdftex.def Info: ./FigChap4/sensitivityPlot.jpg used on input line 2115
+Package pdftex.def Info: ./FigChap4/sensitivityPlot.jpg used on input line 2110
 .
 (pdftex.def)             Requested size: 361.3491pt x 361.3491pt.
- [56]
-Underfull \hbox (badness 10000) in paragraph at lines 2125--2129
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [76]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [77 <./FigChap4/sensitivityPlot.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 2120--2124
 
  []
 
-[57 <./FigChap4/sensitivityPlot.jpg>] [58]
-<./FigChap4/experimentalDesign64.jpg, id=220, 481.8pt x 481.8pt>
+[78]
+Underfull \vbox (badness 8170) has occurred while \output is active []
+
+ [79]
+<./FigChap4/experimentalDesign64.jpg, id=286, 481.8pt x 481.8pt>
 File: ./FigChap4/experimentalDesign64.jpg Graphic file (type jpg)
 
 <use ./FigChap4/experimentalDesign64.jpg>
 Package pdftex.def Info: ./FigChap4/experimentalDesign64.jpg used on input line
- 2232.
+ 2227.
 (pdftex.def)             Requested size: 289.08221pt x 289.08221pt.
- [59]
-Overfull \hbox (1.23622pt too wide) in paragraph at lines 2238--2241
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [80]
+Overfull \hbox (1.23622pt too wide) in paragraph at lines 2233--2236
 \OT1/cmr/m/n/12 Bayesian frame-work to es-ti-mate the val-ues for the pa-ram-e-
 ters and the sources.
  []
 
 
-Overfull \hbox (4.61583pt too wide) in paragraph at lines 2242--2242
+Overfull \hbox (4.61583pt too wide) in paragraph at lines 2237--2237
 []\OT1/cmr/bx/n/17.28 Bayesian Frame-work for the In-verse Prob-
  []
 
-[60 <./FigChap4/experimentalDesign64.jpg>] [61] [62] [63] [64]
-<./FigChap4/traces.jpg, id=240, 481.8pt x 481.8pt>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [81 <./FigChap4/experimentalDesign64.jpg>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [82]
+Underfull \vbox (badness 5008) has occurred while \output is active []
+
+ [83]
+[84]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [85]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [86]
+[87]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [88]
+<./FigChap4/traces.jpg, id=315, 481.8pt x 481.8pt>
 File: ./FigChap4/traces.jpg Graphic file (type jpg)
  <use ./FigChap4/traces.jpg>
-Package pdftex.def Info: ./FigChap4/traces.jpg used on input line 2474.
+Package pdftex.def Info: ./FigChap4/traces.jpg used on input line 2469.
 (pdftex.def)             Requested size: 337.25769pt x 337.25769pt.
 
-[65]
-Overfull \hbox (42.87675pt too wide) detected at line 2524
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [89]
+[90 <./FigChap4/traces.jpg>]
+Overfull \hbox (42.87675pt too wide) detected at line 2502
 \OML/cmm/m/it/12 f\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 q[]\OT1/cmr/m/n/12 ) = \OML
 /cmm/m/it/12 q[] []\OT1/cmr/m/n/12 (\OMS/cmsy/m/n/12 ^^@\OML/cmm/m/it/12 ^^Lq[]
 \OT1/cmr/m/n/12 ) [] [] \OML/cmm/m/it/12 q[] []\OT1/cmr/m/n/12 (\OMS/cmsy/m/n/1
@@ -624,67 +766,74 @@ Overfull \hbox (42.87675pt too wide) detected at line 2524
 d[][];
  []
 
-[66 <./FigChap4/traces.jpg>]
-<./FigChap4/histogramsI.jpg, id=247, 481.8pt x 481.8pt>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [91]
+<./FigChap4/histogramsI.jpg, id=326, 481.8pt x 481.8pt>
 File: ./FigChap4/histogramsI.jpg Graphic file (type jpg)
 
 <use ./FigChap4/histogramsI.jpg>
-Package pdftex.def Info: ./FigChap4/histogramsI.jpg used on input line 2562.
+Package pdftex.def Info: ./FigChap4/histogramsI.jpg used on input line 2541.
 (pdftex.def)             Requested size: 240.8994pt x 240.8994pt.
 
-<./FigChap4/histogramsII.jpg, id=248, 481.8pt x 481.8pt>
+<./FigChap4/histogramsII.jpg, id=327, 481.8pt x 481.8pt>
 File: ./FigChap4/histogramsII.jpg Graphic file (type jpg)
 
 <use ./FigChap4/histogramsII.jpg>
-Package pdftex.def Info: ./FigChap4/histogramsII.jpg used on input line 2569.
+Package pdftex.def Info: ./FigChap4/histogramsII.jpg used on input line 2548.
 (pdftex.def)             Requested size: 240.8994pt x 240.8994pt.
 
-Underfull \vbox (badness 4913) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [67]
-[68 <./FigChap4/histogramsI.jpg> <./FigChap4/histogramsII.jpg>] (./Tesis.bbl
-[69] [70
+ [92]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-] [71]
+ [93 <./FigChap4/histogramsI.jpg>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [94 <./FigChap4/histogramsII.jpg>] (./Tesis.bbl [95] [96
+
+] [97]
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ™ in font cmr12!
- [72]) [73] (./Tesis.aux)
+ [98] [99]) [100]
+(./Tesis.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 3724 strings out of 494977
- 50883 string characters out of 6180183
- 108082 words of memory out of 5000000
- 6832 multiletter control sequences out of 15000+600000
+ 3729 strings out of 494977
+ 50911 string characters out of 6180183
+ 107125 words of memory out of 5000000
+ 6837 multiletter control sequences out of 15000+600000
  18489 words of font info for 71 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 37i,18n,43p,543b,302s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,18n,43p,655b,361s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx6.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/typ
-e1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/rsfs/rsfs10.pfb>
-Output written on Tesis.pdf (73 pages, 2306612 bytes).
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/rsfs/rsfs10.pfb>
+Output written on Tesis.pdf (100 pages, 2311954 bytes).
 PDF statistics:
- 339 PDF objects out of 1000 (max. 8388607)
- 225 compressed objects within 3 object streams
+ 420 PDF objects out of 1000 (max. 8388607)
+ 280 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
  76 words of extra memory for PDF output out of 10000 (max. 10000000)
 
