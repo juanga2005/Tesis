@@ -25,10 +25,22 @@ George Casella.
 \newblock Monte carlo statistical methods.
 \newblock 2008.
 
+\bibitem{chatwin1982use}
+PC~Chatwin.
+\newblock The use of statistics in describing and predicting the effects of
+  dispersing gas clouds.
+\newblock {\em Journal of Hazardous Materials}, 6(1-2):213--230, 1982.
+
 \bibitem{dudley2002real}
 Richard~M Dudley.
 \newblock {\em Real analysis and probability}, volume~74.
 \newblock Cambridge University Press, 2002.
+
+\bibitem{enting1990inverse}
+IG~Enting and GN~Newsam.
+\newblock Inverse problems in atmospheric constituent studies: Ii. sources in
+  the free atmosphere.
+\newblock {\em Inverse Problems}, 6(3):349, 1990.
 
 \bibitem{hosseini2016airborne}
 Bamdad Hosseini and John~M Stockie.
@@ -59,10 +71,22 @@ Leonid~P Lebedev, Iosif~I Vorovich, and Graham Maurice~Leslie Gladwell.
   problems}, volume~41.
 \newblock Springer Science \& Business Media, 2012.
 
+\bibitem{leelHossy2014dispersion}
+{\'A}d{\'a}m Leel{\H{o}}ssy, Ferenc Moln{\'a}r, Ferenc Izs{\'a}k, {\'A}gnes
+  Havasi, Istv{\'a}n Lagzi, and R{\'o}bert M{\'e}sz{\'a}ros.
+\newblock Dispersion modeling of air pollutants in the atmosphere: a review.
+\newblock {\em Open Geosciences}, 6(3):257--278, 2014.
+
 \bibitem{lerner2014course}
 Nicolas Lerner et~al.
 \newblock {\em A Course on Integration Theory}.
 \newblock Springer, 2014.
+
+\bibitem{lewellen1989meteorological}
+WS~Lewellen and RI~Sykes.
+\newblock Meteorological data needs for modeling air quality uncertainties.
+\newblock {\em Journal of Atmospheric and Oceanic Technology}, 6(5):759--768,
+  1989.
 
 \bibitem{lifshits2012lectures}
 Mikhail Lifshits.
@@ -109,6 +133,11 @@ Gilles Pujol, Bertrand Iooss, Alexandre~Janon with contributions~from
 \newblock {\em sensitivity: Global Sensitivity Analysis of Model Outputs},
   2016.
 \newblock R package version 1.12.1.
+
+\bibitem{rao2005uncertainty}
+K~Shankar Rao.
+\newblock Uncertainty analysis in atmospheric dispersion modeling.
+\newblock {\em Pure and applied geophysics}, 162(10):1893--1917, 2005.
 
 \bibitem{rasmussen2006gaussian}
 Carl~Edward Rasmussen.
