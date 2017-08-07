@@ -117,16 +117,25 @@ interested is the advection-diffusion equation
 for the concentration $C$ of particulate zinc. The behavior of $C$
 as a function of space and time is given by 
 the following partial differential equation
-\begin{equation*}
+\begin{equation}\label{eqnModelIntro}
 \frac{\partial C(\x,t)}{\partial t}+\dv(\bar{\vv}C(\x,t)+\textbf{D}\nabla C(\x,t))=s(\x,t).
-\end{equation*}
-Here $\x=(x,y,z)\in\mathbb{R}^{3}$, $t$ is the time variable, $\vv$  is the velocity wind field, $D$
-is the diffusivity tensor and $s(\x,t)$ is the source density. By knowing
-the concentration we can readily calculate
+\end{equation}
+Here $\x=(x,y,z)\in\mathbb{R}^{3}$, $t$ is the time variable, $\bar{\vv}$  is the velocity wind field, $D$
+is the diffusivity tensor and $s(\x,t)$ is the source density. This equation also
+depend on five different parameters, these parameters will be represent by the letter $\Theta$.
+By replacing the linear operator $\dv(\vv+\textbf{D}\nabla)$ on the LHS by $L(\Theta)$ we can write equation \eqref{eqnModelIntro}
+more compactly as
+\begin{equation}\label{eqnParamtric}
+\frac{\partial C(\x,t)}{\partial t}+L(\Theta)C(\x,t)=s(\x,t).
+\end{equation}
+
+ By knowing the concentration we can readily calculate
 \begin{equation*}
-\int_{R}\int_{0}^{1} C(x,y,0,t)v_{set}dtdxdy.
+\int_{R}\int_{0}^{1} C(x,y,0,t)v_{set}dtdxdy,
 \end{equation*}
-This quantity represent the deposition of zinc in the region $R\subset\mathbb{R}^{2}$ over one month.
+where $v_{set}$ is the settling velocity of zinc particles. 
+The integral above represents the deposition of zinc in the region 
+$R\subset\mathbb{R}^{2}$ over one month period.
 
 In this work we are mainly concerned with the problem known as source inversion.
 Our goal is to estimate $s(\x,t)$ given the deposition.
@@ -168,6 +177,26 @@ experiment ``The Muck Urban Setting Test", Keats et. al. \cite{keats2007bayesian
 obtained, using the Bayesian framework, probability distributions for sources strengths
 and location.
 
+In this work we apply the Bayesian approach to estimate source strength
+given a set of experimental measures denote by $\y$. Unlike
+the previous work mentioned above, we are going to estimate and
+quantify the uncertainty in the set of parameters $\Theta$.  More precisely
+we use Bayes rule to obtain the posterior distribution for parameters
+and sources. Formally the posterior can be written as
+\begin{equation*}
+\post(\Theta,s(\x,t)|\y)=\frac{\like(\y|\Theta,s(\x,t))\prior(\Theta,s(\x,t))}{Z(\y)}.
+\end{equation*}
+
+
+
+We also use a computationally expensive finite volume code to simulate
+equation \eqref{eqnModelIntro}  for an small  number of different
+combinations of parameters and sources ,and use an emulator based
+on Gaussian process regression to extrapolate results
+from the simulation to arbitrary points in its domain. To 
+reduce the computational overhead, we performed
+a sensitivity analysis that allowed us to reduce the dimensionality
+of the parameter space from five to three. 
 
 
 
