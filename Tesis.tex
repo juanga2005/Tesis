@@ -93,13 +93,12 @@ Burnaby B.C - May  2017
 
 With the concern for climate change and anthropogenic impact on the environment, 
 the importance of atmospheric dispersion models has grown over the years. Unfortunately
-for these models it is not possible to predict with complete
-accuracy the variables of interest \cite{chatwin1982use,lewellen1989meteorological}. 
+atmospheric disperssion model's predictions cannot be  completely accurate \cite{chatwin1982use,lewellen1989meteorological}. 
 Although the precision of a model can be improved at the expense
 of adding more parameters that explain the missing physics in the model, even
 in this case, there is a limit in how accurate a model can be in its predictions.
 The reason for this limitation comes from the fact that uncertainty sources
-are different and different in nature, following  \cite{rao2005uncertainty}
+are diverse and different in nature, following  \cite{rao2005uncertainty}
 we have 
 
 
@@ -109,29 +108,65 @@ we have
 \item Stochastic uncertainty: unpredictability from the atmosphere.
 \end{itemize}
 
-This impossibility of achieving totally accurate predictions
+This impossibility for achieving totally accurate predictions
 is in contrast with the continuously growing necessity to develop
 more accurate and computationally efficient atmospheric dispersion models \cite{leelHossy2014dispersion}. 
 
-Uncertainty in a model's prediction capabilities gets worst if the problem
-is ill-posed. For example in an ill-posed model, small uncertainty
-in the experimental data or parameters of the model, translates
-as significant uncertainties in the output. In this work we 
-are mainly concerned with the problem known as source inversion problem.
-To understand it, let us first introduce the mathematical model
-we are going to use as an approximation for the physics of
-atmospheric dispersion: the advection-diffusion equation
-for the concentration $C$
-
+The mathematical model for atmospheric dispersion that we are 
+interested is the advection-diffusion equation
+for the concentration $C$ of particulate zinc. The behavior of $C$
+as a function of space and time is given by 
+the following partial differential equation
 \begin{equation*}
 \frac{\partial C(\x,t)}{\partial t}+\dv(\bar{\vv}C(\x,t)+\textbf{D}\nabla C(\x,t))=s(\x,t).
 \end{equation*}
-Here $\x\in\mathbb{R}^{3}$, $t$ is the time variable, \vv is the velocity wind field, $D$
-is the diffusivity tensor and $s(\x,t)$ is the source density.
- This problem is ill-posed\cite{enting1990inverse}
-Here $C$ represents the concentration of a given pullutant at time $t$ at a point $\x\in\mathbb{R}^{3}$, $\vv$
-is the velocity field, $D$ is the diffusivity tensor and the term on the RHS represent the sources. The
-source-inversion problem is ill-posed .
+Here $\x=(x,y,z)\in\mathbb{R}^{3}$, $t$ is the time variable, $\vv$  is the velocity wind field, $D$
+is the diffusivity tensor and $s(\x,t)$ is the source density. By knowing
+the concentration we can readily calculate
+\begin{equation*}
+\int_{R}\int_{0}^{1} C(x,y,0,t)v_{set}dtdxdy.
+\end{equation*}
+This quantity represent the deposition of zinc in the region $R\subset\mathbb{R}^{2}$ over one month.
+
+In this work we are mainly concerned with the problem known as source inversion.
+Our goal is to estimate $s(\x,t)$ given the deposition.
+This problem is ill-posed\cite{enting1990inverse}.
+Uncertainty in a model's prediction capabilities gets worst if the problem
+is ill-posed. For example in an ill-posed model, small uncertainty
+in the experimental data or parameters of the model, translates
+as significant uncertainties in the output.
+
+Despite the ill-posed nature of the problem, different
+approaches have been envisioned to the source inversion
+problem. Lin and Chang \cite{lin2002relative} used an air
+trajectory statistical approach to estimate
+the strength of different source of volatile organic compounds
+from anthropogenic sources. Stockie and Lushi \cite{lushi2010inverse} 
+used a Gaussian plume approach to calculate different distribution
+of zinc deposition in a lead-zinc smelter. With these results
+they used  least-squares to perform the source inversion.
+Skiba \cite{skiba2003method}  solved the adjoint equation
+of the advection-diffusion equation and used least-squares 
+with regularizer to obtain the source inversion. What
+these approaches have in common is that they provide a point
+estimate for the strength of the sources of interest but
+no uncertainty about the estimate.
+
+The Bayesian statistics framework has been used in the source inversion
+problem, to obtain point estimates and the uncertainty associated 
+with them. Sohn et.al \cite{sohn2002rapidly} developed an 
+algorithm to obtain estimates and uncertainties for
+the location and strength of pollutant sources in buildings, using
+Bayes rule, from data obtained through simulation of the
+simulation program COMIS. Hosseini and Stockie \cite{hosseini2016bayesian}
+used a Gaussian plume model coupled with 
+experimental data and  Gaussian processes to estimate
+and quantify the uncertainty of airborne fugitive
+emissions in Trail, British Columbia, Canada. Using
+experimental data from the transport and dispersion 
+experiment ``The Muck Urban Setting Test", Keats et. al. \cite{keats2007bayesian}
+obtained, using the Bayesian framework, probability distributions for sources strengths
+and location.
 
 
 
@@ -144,20 +179,6 @@ source-inversion problem is ill-posed .
 
 
 
-
-
-
-
-\begin{itemize}
-
-\newpage
-\item Next talk about what has been done so far in parameter estimation and uncertainty quantification
-in atmospheric models.
-\item 
-\item Then talk about our approach. Give an overview of the methods, the results obtained
-and how they challenge some of the old views.
-\item Lastly explain the distribution of the thesis chapter by chapter.
-\end{itemize}
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Chapter 2: Theoretical and Computational Framework %%%%%%%%%%%%%%%%

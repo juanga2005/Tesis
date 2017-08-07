@@ -48,6 +48,12 @@ Bamdad Hosseini and John~M Stockie.
   solver coupled with a bayesian inversion approach.
 \newblock {\em arXiv preprint arXiv:1607.03518}, 2016.
 
+\bibitem{hosseini2016bayesian}
+Bamdad Hosseini and John~M Stockie.
+\newblock Bayesian estimation of airborne fugitive emissions using a gaussian
+  plume model.
+\newblock {\em Atmospheric Environment}, 141:122--138, 2016.
+
 \bibitem{jaynes2003probability}
 Edwin~T Jaynes.
 \newblock {\em Probability theory: The logic of science}.
@@ -58,6 +64,12 @@ Mark~E Johnson, Leslie~M Moore, and Donald Ylvisaker.
 \newblock Minimax and maximin distance designs.
 \newblock {\em Journal of statistical planning and inference}, 26(2):131--148,
   1990.
+
+\bibitem{keats2007bayesian}
+Andrew Keats, Eugene Yee, and Fue-Sang Lien.
+\newblock Bayesian inference for source determination with applications to a
+  complex urban environment.
+\newblock {\em Atmospheric environment}, 41(3):465--479, 2007.
 
 \bibitem{kennedy2001bayesian}
 Marc~C Kennedy and Anthony O'Hagan.
@@ -98,10 +110,22 @@ Mikhail~Anatolevich Lifshits.
 \newblock {\em Gaussian random functions}, volume 322.
 \newblock Springer Science \& Business Media, 2013.
 
+\bibitem{lin2002relative}
+Ching-Ho Lin and Len-Fu~W Chang.
+\newblock Relative source contribution analysis using an air trajectory
+  statistical approach.
+\newblock {\em Journal of Geophysical Research: Atmospheres}, 107(D21), 2002.
+
 \bibitem{logan2014applied}
 J~David Logan.
 \newblock {\em Applied partial differential equations}.
 \newblock Springer, 2014.
+
+\bibitem{lushi2010inverse}
+Enkeleida Lushi and John~M Stockie.
+\newblock An inverse gaussian plume approach for estimating atmospheric
+  pollutant emissions from multiple point sources.
+\newblock {\em Atmospheric Environment}, 44(8):1097--1107, 2010.
 
 \bibitem{monin1954basic}
 AS~Monin and AMF Obukhov.
@@ -160,11 +184,23 @@ John~H Seinfeld, Spyros~N Pandis, and Kevin Noone.
 \newblock Atmospheric chemistry and physics: from air pollution to climate
   change, 1998.
 
+\bibitem{skiba2003method}
+Yuri~N Skiba.
+\newblock On a method of detecting the industrial plants which violate
+  prescribed emission rates.
+\newblock {\em Ecological Modelling}, 159(2):125--132, 2003.
+
 \bibitem{sobol1993sensitivity}
 Ilya~M Sobol.
 \newblock Sensitivity estimates for nonlinear mathematical models.
 \newblock {\em Mathematical Modelling and Computational Experiments},
   1(4):407--414, 1993.
+
+\bibitem{sohn2002rapidly}
+Michael~D Sohn, Pamela Reynolds, Navtej Singh, and Ashok~J Gadgil.
+\newblock Rapidly locating and characterizing pollutant releases in buildings.
+\newblock {\em Journal of the Air \& Waste Management Association},
+  52(12):1422--1432, 2002.
 
 \bibitem{Somersalo}
 Somersalo and Kaipio.
