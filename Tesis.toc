@@ -1,21 +1,21 @@
 \contentsline {chapter}{\numberline {1}Introduction}{7}
-\contentsline {chapter}{\numberline {2}Theoretical and Computational Framework}{11}
-\contentsline {section}{\numberline {2.1}Dealing with the computational complexity of the physical model}{21}
-\contentsline {subsection}{\numberline {2.1.1}Gaussian Processes}{23}
-\contentsline {subsubsection}{Gaussian Processes as Distributions Over Function Spaces}{25}
-\contentsline {subsection}{\numberline {2.1.2}Design of Experiments }{35}
-\contentsline {subsection}{\numberline {2.1.3}Sensitivity Analysis}{37}
-\contentsline {chapter}{\numberline {3}Toy Problem: How Theory Works in Practice}{43}
-\contentsline {section}{\numberline {3.1}Computing the Posterior}{48}
-\contentsline {subsection}{\numberline {3.1.1}Choosing the Prior}{49}
-\contentsline {subsection}{\numberline {3.1.2}Finding the Likelihood}{49}
-\contentsline {section}{\numberline {3.2}The Importance of the Prior}{60}
-\contentsline {chapter}{\numberline {4}Industrial Case Problem}{65}
-\contentsline {section}{\numberline {4.1}A Mathematical Model for Pollutant Dispersion}{66}
-\contentsline {subsection}{\numberline {4.1.1}Assumptions on the Diffusivity Tensor}{71}
-\contentsline {subsection}{\numberline {4.1.2}Assumptions on the Wind Velocity Distribution}{72}
-\contentsline {section}{\numberline {4.2}Sensitivity Analysis}{77}
-\contentsline {section}{\numberline {4.3}Building an Emulator for $A(p,L,z_{0})$}{80}
-\contentsline {section}{\numberline {4.4}Bayesian Framework for the Inverse Problem}{84}
-\contentsline {subsection}{\numberline {4.4.1}Choosing a Prior}{85}
-\contentsline {section}{\numberline {4.5}Inferring the Parameters and the sources}{89}
+\contentsline {chapter}{\numberline {2}Theoretical and Computational Framework}{13}
+\contentsline {section}{\numberline {2.1}Dealing with the computational complexity of the physical model}{23}
+\contentsline {subsection}{\numberline {2.1.1}Gaussian Processes}{25}
+\contentsline {subsubsection}{Gaussian Processes as Distributions Over Function Spaces}{27}
+\contentsline {subsection}{\numberline {2.1.2}Design of Experiments }{37}
+\contentsline {subsection}{\numberline {2.1.3}Sensitivity Analysis}{39}
+\contentsline {chapter}{\numberline {3}Toy Problem: How Theory Works in Practice}{45}
+\contentsline {section}{\numberline {3.1}Computing the Posterior}{50}
+\contentsline {subsection}{\numberline {3.1.1}Choosing the Prior}{51}
+\contentsline {subsection}{\numberline {3.1.2}Finding the Likelihood}{51}
+\contentsline {section}{\numberline {3.2}The Importance of the Prior}{62}
+\contentsline {chapter}{\numberline {4}Industrial Case Problem}{67}
+\contentsline {section}{\numberline {4.1}A Mathematical Model for Pollutant Dispersion}{68}
+\contentsline {subsection}{\numberline {4.1.1}Assumptions on the Diffusivity Tensor}{73}
+\contentsline {subsection}{\numberline {4.1.2}Assumptions on the Wind Velocity Distribution}{74}
+\contentsline {section}{\numberline {4.2}Sensitivity Analysis}{79}
+\contentsline {section}{\numberline {4.3}Building an Emulator for $A(p,L,z_{0})$}{82}
+\contentsline {section}{\numberline {4.4}Bayesian Framework for the Inverse Problem}{86}
+\contentsline {subsection}{\numberline {4.4.1}Choosing a Prior}{87}
+\contentsline {section}{\numberline {4.5}Inferring the Parameters and the sources}{91}

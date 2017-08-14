@@ -138,6 +138,12 @@ Kevin~P Murphy.
 \newblock {\em Machine learning: a probabilistic perspective}.
 \newblock MIT press, 2012.
 
+\bibitem{osborne2009gaussian}
+Michael~A Osborne, Roman Garnett, and Stephen~J Roberts.
+\newblock Gaussian processes for global optimization.
+\newblock In {\em 3rd international conference on learning and intelligent
+  optimization (LION3)}, pages 1--15, 2009.
+
 \bibitem{o2006bayesian}
 Anthony O’Hagan.
 \newblock Bayesian analysis of computer code outputs: a tutorial.
@@ -167,6 +173,12 @@ K~Shankar Rao.
 Carl~Edward Rasmussen.
 \newblock Gaussian processes for machine learning.
 \newblock 2006.
+
+\bibitem{roberts2009examples}
+Gareth~O Roberts and Jeffrey~S Rosenthal.
+\newblock Examples of adaptive mcmc.
+\newblock {\em Journal of Computational and Graphical Statistics},
+  18(2):349--367, 2009.
 
 \bibitem{DiceKriging}
 Olivier Roustant, David Ginsbourger, and Yves Deville.
@@ -206,6 +218,12 @@ Michael~D Sohn, Pamela Reynolds, Navtej Singh, and Ashok~J Gadgil.
 Somersalo and Kaipio.
 \newblock {\em Statistical and computational inverse problems}.
 \newblock Springer-Verlag, 2005.
+
+\bibitem{turner1994workbook}
+D~Bruce Turner.
+\newblock {\em Workbook of atmospheric dispersion estimates: an introduction to
+  dispersion modeling}.
+\newblock CRC press, 1994.
 
 \bibitem{viana2010algorithm}
 Felipe~AC Viana, Gerhard Venter, and Vladimir Balabanov.

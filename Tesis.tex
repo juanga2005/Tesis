@@ -54,6 +54,7 @@
 \newcommand{\y}{\textbf{y}}
 \newcommand{\vv}{\textbf{v}}
 \newcommand{\argmax}{\mathop{\mathrm{argmax}}}
+\newcommand{\argmin}{\mathop{\mathrm{argmin}}}
 \newcommand{\dv}{\nabla\cdot}
 \DeclareMathOperator*{\cov}{cov}
 \DeclareMathOperator{\dom}{dom}
@@ -96,18 +97,17 @@ the importance of atmospheric dispersion models has grown over the years. Unfort
 atmospheric disperssion model's predictions cannot be  completely accurate \cite{chatwin1982use,lewellen1989meteorological}. 
 Although the precision of a model can be improved at the expense
 of adding more parameters that explain the missing physics in the model, even
-in this case, there is a limit in how accurate a model can be in its predictions.
-The reason for this limitation comes from the fact that uncertainty sources
+in this case, there is a limit in how accurate a model can be.
+The reason for this, comes from the fact that uncertainty sources
 are diverse and different in nature, following  \cite{rao2005uncertainty}
 we have 
 
 
 \begin{itemize}
 \item Model uncertainty: the model does not capture all the physics.
-\item Data uncertainty: experimental measurements are not completely accurate.
-\item Stochastic uncertainty: unpredictability from the atmosphere.
+\item Data uncertainty: experimental measurements or parameters estimation are not completely accurate.
+\item Stochastic uncertainty: for example, unpredictability from the physics of the atmosphere.
 \end{itemize}
-
 This impossibility for achieving totally accurate predictions
 is in contrast with the continuously growing necessity to develop
 more accurate and computationally efficient atmospheric dispersion models \cite{leelHossy2014dispersion}. 
@@ -118,39 +118,44 @@ for the concentration $C$ of particulate zinc. The behavior of $C$
 as a function of space and time is given by 
 the following partial differential equation
 \begin{equation}\label{eqnModelIntro}
-\frac{\partial C(\x,t)}{\partial t}+\dv(\bar{\vv}C(\x,t)+\textbf{D}\nabla C(\x,t))=s(\x,t).
+\frac{\partial C(\x,t)}{\partial t}+\dv(\bar{\vv}C(\x,t)+\textbf{D}\nabla C(\x,t))=\sum_{j=1}^{4}q_{j}\delta(\x-\x_{j})
 \end{equation}
-Here $\x=(x,y,z)\in\mathbb{R}^{3}$, $t$ is the time variable, $\bar{\vv}$  is the velocity wind field, $D$
-is the diffusivity tensor and $s(\x,t)$ is the source density. This equation also
-depend on five different parameters, these parameters will be represent by the letter $\Theta$.
-By replacing the linear operator $\dv(\vv+\textbf{D}\nabla)$ on the LHS by $L(\Theta)$ we can write equation \eqref{eqnModelIntro}
+Here $\x=(x,y,z)\in\mathbb{R}^{3}$, $t$ is the time variable, $\bar{\vv}$  is the velocity wind field, $\textbf{D}$
+is the diffusivity tensor and the right hand side of the equation is the source density. In the scenario
+we are interested in modeling (see Chapter 4 for details), we have four zinc sources at known locations $\{\x_{j}\}_{j=1}^{4}$ 
+with strengths $\{q_{j}\}_{j=1}^{4}$ respectively. We also mention that equation \eqref{eqnModelIntro}
+depends on five different parameters, these parameters will be represent by $\Theta$.
+By replacing the linear operator $\dv(\vv+\textbf{D}\nabla)$ on the LHS by $L(\Theta)$, to make the dependence explicit, we can write equation \eqref{eqnModelIntro}
 more compactly as
 \begin{equation}\label{eqnParamtric}
-\frac{\partial C(\x,t)}{\partial t}+L(\Theta)C(\x,t)=s(\x,t).
+\frac{\partial C(\x,t)}{\partial t}+L(\Theta)C(\x,t)=\sum_{j=1}^{4}q_{j}\delta(\x-\x_{j}).
 \end{equation}
 
  By knowing the concentration we can readily calculate
 \begin{equation*}
-\int_{R}\int_{0}^{1} C(x,y,0,t)v_{set}dtdxdy,
+\int_{R}\int_{0}^{T} C(x,y,0,t)v_{set}dtdxdy,
 \end{equation*}
 where $v_{set}$ is the settling velocity of zinc particles. 
 The integral above represents the deposition of zinc in the region 
-$R\subset\mathbb{R}^{2}$ over one month period.
-
+$R\subset\mathbb{R}^{2}$ over a $T$ units of time period.
 In this work we are mainly concerned with the problem known as source inversion.
-Our goal is to estimate $s(\x,t)$ given the deposition.
+Our goal is to estimate the source strength vector (or just sources for short)
+\begin{equation*}
+\q:=(q_{1},q_{2},q_{3},q_{4})^{T},
+\end{equation*}
+given the deposition.
 This problem is ill-posed\cite{enting1990inverse}.
 Uncertainty in a model's prediction capabilities gets worst if the problem
-is ill-posed. For example in an ill-posed model, small uncertainty
-in the experimental data or parameters of the model, translates
+is ill-posed. For example in an ill-posed model, small uncertainties
+in the experimental data or parameters of the model, translate
 as significant uncertainties in the output.
 
 Despite the ill-posed nature of the problem, different
-approaches have been envisioned to the source inversion
+approaches have been envisioned for the source inversion
 problem. Lin and Chang \cite{lin2002relative} used an air
 trajectory statistical approach to estimate
-the strength of different source of volatile organic compounds
-from anthropogenic sources. Stockie and Lushi \cite{lushi2010inverse} 
+the strength of different sources of volatile organic compounds
+from anthropogenic origin. Stockie and Lushi \cite{lushi2010inverse} 
 used a Gaussian plume approach to calculate different distribution
 of zinc deposition in a lead-zinc smelter. With these results
 they used  least-squares to perform the source inversion.
@@ -161,54 +166,71 @@ these approaches have in common is that they provide a point
 estimate for the strength of the sources of interest but
 no uncertainty about the estimate.
 
-The Bayesian statistics framework has been used in the source inversion
+The Bayesian  framework has been used in the source inversion
 problem, to obtain point estimates and the uncertainty associated 
 with them. Sohn et.al \cite{sohn2002rapidly} developed an 
 algorithm to obtain estimates and uncertainties for
-the location and strength of pollutant sources in buildings, using
-Bayes rule, from data obtained through simulation of the
-simulation program COMIS. Hosseini and Stockie \cite{hosseini2016bayesian}
+the location and strength of pollutant sources in buildings.To do it,
+they combined Bayes rule with data obtained from a simulation 
+done using the software COMIS. Hosseini and Stockie \cite{hosseini2016bayesian}
 used a Gaussian plume model coupled with 
 experimental data and  Gaussian processes to estimate
 and quantify the uncertainty of airborne fugitive
 emissions in Trail, British Columbia, Canada. Using
 experimental data from the transport and dispersion 
-experiment ``The Muck Urban Setting Test", Keats et. al. \cite{keats2007bayesian}
+experiment ``The Muck Urban Setting Test", Keats \textit{et al}. \cite{keats2007bayesian}
 obtained, using the Bayesian framework, probability distributions for sources strengths
-and location.
+and their locations, and used them to obtain estimates and the uncertainties associated with them.
 
-In this work we apply the Bayesian approach to estimate source strength
+In this work we apply the Bayesian framework  to estimate the source 
+strength vector $\q$
 given a set of experimental measures denote by $\y$. Unlike
-the previous work mentioned above, we are going to estimate and
-quantify the uncertainty in the set of parameters $\Theta$.  More precisely
+the previous work mentioned above, we will also  estimate and
+quantify the uncertainty in the estimates for the set of parameters $\Theta$.
+This will be achieved by obtaining a joint probability
+density for the parameters  and sources.  More precisely
 we use Bayes rule to obtain the posterior distribution for parameters
-and sources. Formally the posterior can be written as
+and sources. Formally the posterior distribution can be written as
 \begin{equation*}
-\post(\Theta,s(\x,t)|\y)=\frac{\like(\y|\Theta,s(\x,t))\prior(\Theta,s(\x,t))}{Z(\y)}.
+\post(\Theta,\q|\y)=\frac{\like(\y|\Theta,\q)\prior(\Theta,\q)}{Z(\y)}.
 \end{equation*}
 
+Traditionally, the process of tuning the parameters in atmospheric dispersion models has been done
+empirically based on Pasquill stability classes \cite{turner1994workbook, seinfeld1998atmospheric}.
+Instead, we propose a novel approach to estimate
+the parameters using the information contained in the posterior probability distribution. 
+The advatange of this method is that we are taking into account the experimental data 
+available, we are letting the data ``speak" about what choices of the parameters
+ought to be, given the observations.
 
-
-We also use a computationally expensive finite volume code to simulate
-equation \eqref{eqnModelIntro}  for an small  number of different
+In this work we also address a method to deal with computationally expensive models.
+To simulate equation \eqref{eqnModelIntro} we use a finite volume code, whose
+computational overhead is high, therefore, using it several times to obtain an approximation for
+the likelihood $\like(\y|\Theta,\q)$ is not feasible. Instead we ran the code 
+for a small  number of different
 combinations of parameters and sources ,and use an emulator based
 on Gaussian process regression to extrapolate results
-from the simulation to arbitrary points in its domain. To 
-reduce the computational overhead, we performed
+from the simulation to arbitrary combinations of parameters and sources. To 
+reduce the computational cost even further, we performed
 a sensitivity analysis that allowed us to reduce the dimensionality
-of the parameter space from five to three. 
+of the parameter space from five to three. This reduction permitted 
+us to approximate the likelihood function  and to use Markov
+Chain Monte Carlo Methods to sample from the posterior faster.
+We then used these samples to obtain point estimates and uncertainties
+for the parameters and sources.
+
+To conclude this chapter, we will explain how this work is organized:
+in Chapter 2 we explain the theory and computations behind the
+Bayesian framework, sensitivity analysis and Gaussian process regression for
+emulation. In Chapter 3 we introduce more theory and combine it with the topics 
+developed in the previous chapter to show how parameter estimation works
+on a toy problem. Finally in 
+Chapter 4 we apply everything from Chapters 2 and 3 to an
+industrial case study and obtain estimates for the parameters
+and the sources through sampling the posterior distribution $\post(\Theta,\q|\y)$.
 
 
 
-
-
-
-
-
-
-
-
-\newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Chapter 2: Theoretical and Computational Framework %%%%%%%%%%%%%%%%
 \chapter{Theoretical and Computational Framework}
@@ -2330,9 +2352,8 @@ and sources, that is (cf. Chapter 3, Section \ref{secFindingLike})
 \y=\widehat{A}(p,L,z_{0})\q+\epsilon,
 \end{equation} 
 with $\epsilon\sim\mathcal{N}(0,\lambda I_{9\times 9})$. The value of 
-the parameter $\lambda$ is fixed in a way to get a signal to noise
-ratio with the experimental data of 1 to 10. The value
-that fulfills this condition is $\lambda=5.68\times 10^{-5}$. In equation (\ref{eqnChp4Additive})
+the parameter $\lambda$ is going to be set later in the chapter. 
+In equation (\ref{eqnChp4Additive})
 the vector $\y$ could represent either the output of the finite volume 
 code at the dustfall jars positions or the experimental deposition measures. 
 This interpretation of $\y$ implies  that the random variable $\epsilon$, also
@@ -2544,10 +2565,71 @@ To find  point estimates such as those  in equation (\ref{eqnpointestimates}) an
 dimensional integrals that are not analytically tractable. Thus we resort to use numerical integration techniques. In 
 particular   we will use use 
 the Metropolis-Hastings(MH) algorithm (see Chapter 3, Algorithm 1) to sample from the posterior and then
-use Monte Carlo integration to obtain the quantities of interest. For the MH implementation we
-use one million samples. As a burn in period we discarded the first $500.000$ samples. The size
-of the random step (value of $\alpha$ in step 3 in Algorithm 1) in each dimension was chosen 
-in a way the acceptance rate was around $25\%$.
+use Monte Carlo integration to obtain the quantities of interest. In order to use MH, the posterior
+in equation (\ref{eqnPosteriorFinal}), has to be fully specified. Up to this point we have not
+set the value of $\lambda$ in the likelihood distribution in equation (\ref{eqnFinalLike}). 
+Fixing a value for $\lambda$ is relevant for the model. To understand why this is so, consider
+the cases when $\lambda$ is very small and $\lambda$ is very large. In the former case the exponential  term in the likelihood
+\begin{equation*}
+\exp\left(-\frac{1}{2\lambda^{2}}\|\widehat{A}\q-\y\|^{2}\right),
+\end{equation*}
+becomes negligible unless $\|\widehat{A}\q-\y\|$ is of the order of $\lambda$. The interpretation
+is that we are giving all the credibility to the model and the data. In this case,
+the posterior behaves like the likelihood.
+In the case when $\lambda$ is large the exponential flattens out. In this scenario
+the likelihood is not giving any weight to different combination of the parameters $\pars$ and $\q$,
+thus we are giving all the credibility to the prior distribution.
+In this case the posterior behaves like the prior. Thus, it is necessary to pick a value of 
+$\lambda$ that weights the importance of the likelihood in the right way. By the ``right" way
+we mean, a value of $\lambda$ that weights the data, the atmospheric model simulation output and
+the prior information equally. To achieve this we propose the value of $\lambda$ that
+ minimizes the functional
+\begin{equation*}
+J(\lambda)=\frac{1}{2}\E_{\post}\left[\|\widehat{A}(p,L,z_{0})\q-\y\|_{2}+\|\q-\q_{est}\|_{2}\right],
+\end{equation*}
+where $\q_{est}=[35,80,5,5]^{T}\frac{Ton}{yr}$. Explicitly,
+\begin{equation}\label{eqnFunctional2Optimize}
+J(\lambda)=\frac{1}{2}\int\left(\|\widehat{A}(p,L,z_{0})\q-\y)\|_{2}+\|\q-\q_{est}\|_{2}\right)\post(\pars,\q|\y)dpdLdz_{0}d\q.
+\end{equation}
+Observe that dependence of $J$ with $\lambda$ comes in the posterior distribution, since different values of $\lambda$
+implies we are taking expectation with respect to different probability densities. The motivation
+to define $J$ as above is the following: consider
+the expression
+\begin{equation}\label{eqnPreFunctional}
+(1-\delta)\|\widehat{A}(p,L,z_{0})\q-\y)\|_{2}+\delta\|\q-\q_{est}\|_{2},\qquad\text{for }\delta\in [0,1].
+\end{equation}
+In this case, depending on the value of $\delta$, we are giving different weights to model's credibility,
+and the prior information about $\q$. There is no reason to believe the model is more powerful than
+the engineers' source strength estimation or vice-versa,  hence by choosing $\delta=\frac{1}{2}$
+we weight both terms equally. Also we want to make the term (\ref{eqnPreFunctional}) as small
+as possible, regardless of the value of $\pars$ and $\q$, and using the information
+contained in the experimental data $\y$. Taking the expectation of \eqref{eqnPreFunctional}
+accomplishes that. 
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.5]{./FigChap4/lambdaEmul}
+\caption{bla}
+\label{figLambdaEmul}
+\end{figure}
+
+Estimating $J(\lambda)$ is expensive, since  it is necessary to evaluate a seven-dimensional
+integral. Thus, to approximate a minimizer for $\lambda$  we will use an emulator for $J$ using Gaussian processes. 
+To create the training set, we evaluate
+$J$ for four different values of $\lambda$ using Markov Chain Monte Carlo integration.
+The results of the emulation are shown in Figure \ref{figLambdaEmul}. The minimum for 
+$J(\lambda)$ is attain approximately at $\lambda=2.80008\times 10^{-5}$. This
+is the value we are going to pick for $\lambda$ to sample from the
+posterior distribution in equation \eqref{eqnPosteriorFinal} and use the samples
+to obtain point estimates for $\pars$ and $\q$. We mention that if more
+accuracy is need in finding the minimizer it is possible to use Gaussian processes
+for optimization, we refer the reader to \cite{osborne2009gaussian} for details in this topic.
+
+
+For the MH implementation we adapt Algorithm 1 in Chapter 3, in a way
+that the sampling of $u$ (line 3 in the Algorithm) is done adaptively as proposed in \cite{roberts2009examples}.
+\textbf{We obtained one million samples. As a burn in period we discarded the first $500.000$ samples. 
+in a way the acceptance rate was around $25\%$ check this part}.
 Using MH to sample
 from highly dimensional supported probability distributions is challenging. Specially assessing precisely
 when the Markov chain has converged and if the samples obtained after the convergence are indeed from
@@ -2557,16 +2639,17 @@ interested in this topic is referred to \cite{casella2008monte} and the referenc
 In this work we are going to use the traces of the Markov chain to assess the convergence of it. 
 A \textit{trace plot} is a graphic display of the motion of the Markov chain in each
 of the dimensions in the support of the probability density we are sampling. 
-
 The probability density we are interested in sampling from, is the  posterior in equation (\ref{eqnPosteriorFinal}). 
-This posterior is supported in a compact subset of $\mathbb{R}^{7}$, thus to obtain the trace plots
+This posterior is supported in a  subset of $\mathbb{R}^{7}$, thus to obtain the trace plots
 of it, we need to plot the motion of the Markov chain in each dimension. These plots
-are shown in Figure \ref{figTraces}. The trace plots in Figure \ref{figTraces} show that the Markov chain is moving around the whole 
-support of the posterior density. Another observation is every region in the support
-of $\post(\pars,\q|\y)$ is visited by the chain every so often. This means
+are shown in Figure \ref{figTraces}. 
+\\
+The trace plots in Figure \ref{figTraces} show that the Markov chain is moving around the whole 
+support of the posterior density. Another observation is different regions in the support
+of $\post(\pars,\q|\y)$ are visited by the chain every so often. This means
 that the chain is not getting stuck in a local mode of the distribution. In conclusion the 
 trace plots have the behaviour One would expect of a Markov chain that has converged
-and whose realizations are taken from the probability density that is being sampled from. 
+and whose realizations are taken from the probability density that is being sampled. 
 
 One of the advantages of using the Metropolis-Hastings algorithm is that the samples
 obtained in each dimension are distributed as the marginal distribution
@@ -2635,7 +2718,7 @@ we will use the fact that the marginal
 posterior for the sources behaves similarly to a gamma distribution. In this case, we 
 fit the gamma distribution that is closer to the marginal posterior and report
 the statistics associated to that distribution. 
-
+\\
 For the parameters $\pars$ the situation is more subtle. For the parameter $p$
 the distribution is unimodal. 
 In this case we can choose the  mode as a point estimate.
@@ -2655,14 +2738,14 @@ and the sources $q_{1}$ to $q_{4}$.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{./FigChap4/histogramsI}
+\includegraphics[scale=0.475]{./FigChap4/histogramsI}
 %\caption{Histograms for the marginal distribution for each of the seven variables
 %in the support of the posterior density.}
 \label{figHistograms}
 \end{figure}
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{./FigChap4/histogramsII}
+\includegraphics[scale=0.47]{./FigChap4/histogramsII}
 \caption{Histograms for the marginal distribution for each of the seven variables
 in the support of the posterior density in equation (\ref{eqnPosteriorFinal}).}
 \label{figHistograms}
@@ -2691,19 +2774,21 @@ $z_{0}$ & Median & 0.0886 & $[0.0024,0.1748]$\tabularnewline
 \hline 
 $L$ & Median & -357.60 & $[-651,11,-64.090]$\tabularnewline
 \hline 
-$q_{1}[ton/year]$ & Mode & 23.405 & $[0,120.27]$\tabularnewline
-\hline 
-$q_{2}[ton/year]$ & Mode & 45.544 & $[4.438,86.649]$\tabularnewline
-\hline 
-$q_{3}[ton/year]$ & Mode & 58.669 & $[0,185.74]$\tabularnewline
-\hline 
-$q_{4}[ton/year]$ & Mode & 53.789 & $[0,250]$\tabularnewline
-\hline 
 \end{tabular}
 \caption{Parameters and their estimates and uncertainties. The sources are given in Tons per year.}
 \label{tabFinalEstimates}
 \end{table}
 
+
+For the sources the results are shown in Figure 
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{./FigChap4/qUncertainty}
+\caption{bla}
+\label{figQUnicertainty}
+\end{figure}
 The results in Table \ref{tabFinalEstimates}, show that sources $3$ and $4$ are understimated by the engineers,
 whereas sources $1$ and $2$ are overstimated. According to the engineer estimates, the smelter produces
 125 tons per year. According to our results, this number is small  compared to the most likely value
