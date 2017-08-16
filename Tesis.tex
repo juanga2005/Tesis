@@ -2562,21 +2562,22 @@ Finding these estimates is the topic of the next section.
 \section{Inferring the Parameters and the sources}
 
 To find  point estimates such as those  in equation (\ref{eqnpointestimates}) and its uncertainty associated,  is necessary to perform  high
-dimensional integrals that are not analytically tractable. Thus we resort to use numerical integration techniques. In 
+dimensional integrals that are not analytically tractable. Thus, we resort to use numerical integration techniques. In 
 particular   we will use use 
 the Metropolis-Hastings(MH) algorithm (see Chapter 3, Algorithm 1) to sample from the posterior and then
 use Monte Carlo integration to obtain the quantities of interest. In order to use MH, the posterior
-in equation (\ref{eqnPosteriorFinal}), has to be fully specified. Up to this point we have not
-set the value of $\lambda$ in the likelihood distribution in equation (\ref{eqnFinalLike}). 
+in equation (\ref{eqnPosteriorFinal}) has to be fully specified. Up to this point we have not
+set the value of $\lambda$ in the likelihood distribution in equation (\ref{eqnFinalLike}).
+\\ 
 Fixing a value for $\lambda$ is relevant for the model. To understand why this is so, consider
-the cases when $\lambda$ is very small and $\lambda$ is very large. In the former case the exponential  term in the likelihood
+the cases when $\lambda$ is very small or $\lambda$ is very large. In the former case the exponential  term 
 \begin{equation*}
 \exp\left(-\frac{1}{2\lambda^{2}}\|\widehat{A}\q-\y\|^{2}\right),
 \end{equation*}
-becomes negligible unless $\|\widehat{A}\q-\y\|$ is of the order of $\lambda$. The interpretation
+in the likelihood becomes negligible unless $\|\widehat{A}\q-\y\|$ is of the order of $\lambda$. The interpretation
 is that we are giving all the credibility to the model and the data. In this case,
 the posterior behaves like the likelihood.
-In the case when $\lambda$ is large the exponential flattens out. In this scenario
+When $\lambda$ is large the exponential flattens out. In this scenario
 the likelihood is not giving any weight to different combination of the parameters $\pars$ and $\q$,
 thus we are giving all the credibility to the prior distribution.
 In this case the posterior behaves like the prior. Thus, it is necessary to pick a value of 
@@ -2585,22 +2586,22 @@ we mean, a value of $\lambda$ that weights the data, the atmospheric model simul
 the prior information equally. To achieve this we propose the value of $\lambda$ that
  minimizes the functional
 \begin{equation*}
-J(\lambda)=\frac{1}{2}\E_{\post}\left[\|\widehat{A}(p,L,z_{0})\q-\y\|_{2}+\|\q-\q_{est}\|_{2}\right],
+J(\lambda)=\frac{1}{2}\E_{\post^{\lambda}}\left[\|\widehat{A}(p,L,z_{0})\q-\y\|_{2}+\|\q-\q_{est}\|_{2}\right],
 \end{equation*}
 where $\q_{est}=[35,80,5,5]^{T}\frac{Ton}{yr}$. Explicitly,
 \begin{equation}\label{eqnFunctional2Optimize}
-J(\lambda)=\frac{1}{2}\int\left(\|\widehat{A}(p,L,z_{0})\q-\y)\|_{2}+\|\q-\q_{est}\|_{2}\right)\post(\pars,\q|\y)dpdLdz_{0}d\q.
+J(\lambda)=\frac{1}{2}\int\left(\|\widehat{A}(p,L,z_{0})\q-\y)\|_{2}+\|\q-\q_{est}\|_{2}\right)d\post^{\lambda}.
 \end{equation}
-Observe that dependence of $J$ with $\lambda$ comes in the posterior distribution, since different values of $\lambda$
-implies we are taking expectation with respect to different probability densities. The motivation
+We use the notation $\post^{\lambda}$ to explicitly show the dependence of the posterior measure $\post$ with the parameter $\lambda$.  The motivation
 to define $J$ as above is the following: consider
 the expression
 \begin{equation}\label{eqnPreFunctional}
 (1-\delta)\|\widehat{A}(p,L,z_{0})\q-\y)\|_{2}+\delta\|\q-\q_{est}\|_{2},\qquad\text{for }\delta\in [0,1].
 \end{equation}
-In this case, depending on the value of $\delta$, we are giving different weights to model's credibility,
-and the prior information about $\q$. There is no reason to believe the model is more powerful than
-the engineers' source strength estimation or vice-versa,  hence by choosing $\delta=\frac{1}{2}$
+In this case, depending on the value of $\delta$, we are giving different weights to the atmospheric 
+disperssion model credibility,
+and the prior information about $\q$. There is no reason to believe the atmospheric model is completely
+accurate so the engineers estimates about the sources can be dismissed. Hence, by choosing $\delta=\frac{1}{2}$
 we weight both terms equally. Also we want to make the term (\ref{eqnPreFunctional}) as small
 as possible, regardless of the value of $\pars$ and $\q$, and using the information
 contained in the experimental data $\y$. Taking the expectation of \eqref{eqnPreFunctional}
@@ -2609,14 +2610,14 @@ accomplishes that.
 \begin{figure}
 \centering
 \includegraphics[scale=0.5]{./FigChap4/lambdaEmul}
-\caption{bla}
+\caption{Emulator for the $J(\lambda)$ in equation (\ref{eqnFunctional2Optimize})}
 \label{figLambdaEmul}
 \end{figure}
 
-Estimating $J(\lambda)$ is expensive, since  it is necessary to evaluate a seven-dimensional
+Estimating $J(\lambda)$ accurately is expensive, since  it is necessary to evaluate a seven-dimensional
 integral. Thus, to approximate a minimizer for $\lambda$  we will use an emulator for $J$ using Gaussian processes. 
 To create the training set, we evaluate
-$J$ for four different values of $\lambda$ using Markov Chain Monte Carlo integration.
+$J$ for six different values of $\lambda$ using Markov Chain Monte Carlo integration.
 The results of the emulation are shown in Figure \ref{figLambdaEmul}. The minimum for 
 $J(\lambda)$ is attain approximately at $\lambda=2.80008\times 10^{-5}$. This
 is the value we are going to pick for $\lambda$ to sample from the
@@ -2628,8 +2629,11 @@ for optimization, we refer the reader to \cite{osborne2009gaussian} for details 
 
 For the MH implementation we adapt Algorithm 1 in Chapter 3, in a way
 that the sampling of $u$ (line 3 in the Algorithm) is done adaptively as proposed in \cite{roberts2009examples}.
-\textbf{We obtained one million samples. As a burn in period we discarded the first $500.000$ samples. 
-in a way the acceptance rate was around $25\%$ check this part}.
+Using the adaptative algorithm we obtained two million samples and  as a burn in period we discarded the first million  samples. 
+Since the acceptance rate was relatively low, around $10\%$, we thined the last million samples
+by picking a sample every hundred samples. In this way we end up with $10.000$ samples that are
+weakly correlated.
+\\
 Using MH to sample
 from highly dimensional supported probability distributions is challenging. Specially assessing precisely
 when the Markov chain has converged and if the samples obtained after the convergence are indeed from
@@ -2639,15 +2643,15 @@ interested in this topic is referred to \cite{casella2008monte} and the referenc
 In this work we are going to use the traces of the Markov chain to assess the convergence of it. 
 A \textit{trace plot} is a graphic display of the motion of the Markov chain in each
 of the dimensions in the support of the probability density we are sampling. 
-The probability density we are interested in sampling from, is the  posterior in equation (\ref{eqnPosteriorFinal}). 
+Recall that the probability density we are interested, is the  posterior in equation (\ref{eqnPosteriorFinal}). 
 This posterior is supported in a  subset of $\mathbb{R}^{7}$, thus to obtain the trace plots
-of it, we need to plot the motion of the Markov chain in each dimension. These plots
+of it, we need to plot the motion of the Markov chain in each of the seven dimensions. These plots
 are shown in Figure \ref{figTraces}. 
 \\
 The trace plots in Figure \ref{figTraces} show that the Markov chain is moving around the whole 
-support of the posterior density. Another observation is different regions in the support
+support of the posterior density. Another observation is that different regions in the support
 of $\post(\pars,\q|\y)$ are visited by the chain every so often. This means
-that the chain is not getting stuck in a local mode of the distribution. In conclusion the 
+that the chain is not getting stuck in a local mode of the distribution and is mixing properly. In conclusion the 
 trace plots have the behaviour One would expect of a Markov chain that has converged
 and whose realizations are taken from the probability density that is being sampled. 
 
@@ -2689,48 +2693,51 @@ in Figure \ref{figHistograms}.
 The next step for estimating the parameters is to decide what of the point estimates from equation (\ref{eqnpointestimates})
 we will choose. By looking at Figure \ref{figHistograms},
 it is clear that the  marginal posterior for the four sources is skewed and with a well-defined mode.
-In this case, finding the maximum marginal posterior estimate is a reasonable choice. 
-To find the  marginal maximum a posteriori estimate for  each of the four sources, it is
-necessary to find
-\begin{equation*}
-\max_{q_{j}\in [0,\infty)}f(q_{j})\qquad\text{for } j=1,2,3,4,
-\end{equation*}
-where
-\begin{equation*}
-f(q_{j})=q_{j}^{\alpha_{j}-1}\exp(-\beta q_{j})\int \prod_{k\neq j}q_{k}^{\alpha_{k}-1}\exp(-\beta_{k}q_{k})
-\exp\left(-\frac{1}{2\lambda^{2}}\|\widehat{A}\q-\y\|^{2}\right)dpdz_{0}dLd\tilde{\q}_{j},
-\end{equation*}
-where $d\tilde{\q}_{j}$ means the $j$-th term in the volume element $\prod_{k=1}^{4}dq_{k}$ has been suppressed.
-Optimizing numerically $f$ is a challenging problem. 
-First, the integral involved is high dimensional,
-hence is necessary to use Monte Carlo integration to estimate it.  
-The exponent in the integrand is a number close to zero
-unless the term $\|\widehat{A}\q-\y\|^{2}=\mathcal{O}(10^{-12})$. 
-Since Monte Carlo integration requires to evaluate the integrand
-at a large and random number of different points in the domain of integration, we are going
-to end up adding numbers that are, in general, smaller than the machine epsilon. 
-Hence, numerically
-the integrand will behave like a very small constant. The problem with this is that
-all the information from the experimental data is contained in the integrand. So,
-if the integrand behaves like a constant due to rounding error, the optimization
-routine will not return an accurate value. Instead of using an optimization scheme, 
-we will use the fact that the marginal 
-posterior for the sources behaves similarly to a gamma distribution. In this case, we 
-fit the gamma distribution that is closer to the marginal posterior and report
-the statistics associated to that distribution. 
+Thus, finding this mode is a reasonable choice for a point estimate. To approximate the 
+value of the mode in the marginal of the sources, we are going to take
+advantage of the fact that the histograms for the marginals have a similar
+shape of a gamma distribution and we are going to fit over them
+the gamma distribution that is closest to the histograms shape. We
+take the point estimate to be the mode of the fit.
+%To find the  marginal maximum a posteriori estimate for  each of the four sources, it is
+%necessary to find
+%\begin{equation*}
+%\max_{q_{j}\in [0,\infty)}f(q_{j})\qquad\text{for } j=1,2,3,4,
+%\end{equation*}
+%where
+%\begin{equation*}
+%f(q_{j})=q_{j}^{\alpha_{j}-1}\exp(-\beta q_{j})\int \prod_{k\neq j}q_{k}^{\alpha_{k}-1}\exp(-\beta_{k}q_{k})
+%\exp\left(-\frac{1}{2\lambda^{2}}\|\widehat{A}\q-\y\|^{2}\right)dpdz_{0}dLd\tilde{\q}_{j},
+%\end{equation*}
+%where $d\tilde{\q}_{j}$ means the $j$-th term in the volume element $\prod_{k=1}^{4}dq_{k}$ has been suppressed.
+%Optimizing numerically $f$ is a challenging problem. 
+%First, the integral involved is high dimensional,
+%hence is necessary to use Monte Carlo integration to estimate it.  
+%The exponent in the integrand is a number close to zero
+%unless the term $\|\widehat{A}\q-\y\|^{2}=\mathcal{O}(10^{-12})$. 
+%Since Monte Carlo integration requires to evaluate the integrand
+%at a large and random number of different points in the domain of integration, we are going
+%to end up adding numbers that are, in general, smaller than the machine epsilon. 
+%Hence, numerically
+%the integrand will behave like a very small constant. The problem with this is that
+%all the information from the experimental data is contained in the integrand. So,
+%if the integrand behaves like a constant due to rounding error, the optimization
+%routine will not return an accurate value. Instead of using an optimization scheme, 
+%we will use the fact that the marginal 
+%posterior for the sources behaves similarly to a gamma distribution. In this case, we 
+%fit the gamma distribution that is closer to the marginal posterior and report
+%the statistics associated to that distribution. 
+%\\
 \\
 For the parameters $\pars$ the situation is more subtle. For the parameter $p$
-the distribution is unimodal. 
-In this case we can choose the  mode as a point estimate.
-The way to find the mode is by fitting a density over the histogram
-of $p$ and pick the maximum of the fitting curve.
-For the parameters $z_{0}$ and $L$, there is no distinctive point in
-their distribution. In this case we pick a non-committal value like 
-the median. The median of a one-dimensional probability density $\rho$ is defined
-as the number $m^{*}$ such that 
-\begin{equation*}
-\int_{-\infty}^{m*}\rho(x)dx=\int_{m^{*}}^{\infty}\rho(x)dx=0.5.
-\end{equation*}
+the distribution has no distinctive points. For  $z_{0}$ and $L$
+there are values that are more distinctive than others, but is not a very sharp
+distinction. To pick a point estimates
+for $\pars$ we fit a density over the histograms using the R built-in 
+function $density$ and then we pick the mode of each histogram to be 
+the chosen point estimate.
+
+
 
 In Figure \ref{figHistograms} it is shown the values of the point
 estimates for each distribution and the fitting curves for the parametes $\pars$
@@ -2738,25 +2745,25 @@ and the sources $q_{1}$ to $q_{4}$.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.475]{./FigChap4/histogramsI}
+\includegraphics[scale=0.45]{./FigChap4/histogramsI}
 %\caption{Histograms for the marginal distribution for each of the seven variables
 %in the support of the posterior density.}
 \label{figHistograms}
 \end{figure}
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.47]{./FigChap4/histogramsII}
+\includegraphics[scale=0.45]{./FigChap4/histogramsII}
 \caption{Histograms for the marginal distribution for each of the seven variables
 in the support of the posterior density in equation (\ref{eqnPosteriorFinal}).}
 \label{figHistograms}
 \end{figure}
 
 For the uncertainty estimate, we pick the $68\%$ Bayesian confidence interval
-for each of the parameters. Given a point estimate $x^{*}$ 
-for a probability density $\rho$, a $68\%$ Bayesian confidence interval of that estimate, 
+for each of the parameters. Given a point estimate $x^{*}$  for a random variable $X$ distributed with
+ probability density $\rho$, a $68\%$ Bayesian confidence interval of that estimate, 
 is defined as the ball of radius $r$ centered at $x^{*}$ such that
 \begin{equation*}
-\int_{B(x^{*},r)}\rho(x)dx=0.68,
+\int_{B(x^{*},r)}\rho(x)dx=0.68.
 \end{equation*} 
 
 The estimates for the parameters and the uncertainties are shown in Table \ref{tabFinalEstimates}.
@@ -2765,38 +2772,63 @@ The estimates for the parameters and the uncertainties are shown in Table \ref{t
 \centering
 \begin{tabular}{|c|c|c|c|}
 \hline 
-Parameter & Point Estimate & Value & $68\%$ Confidence Interval\tabularnewline
+Parameter & Point Estimate & $68\%$ Confidence Interval\tabularnewline
 \hline 
 \hline 
-$p$ & Mode & 0.3775 & $[0.2197,0.5352]$\tabularnewline
+$p$ &  0.3478 & $[0.1498,0.5458]$\tabularnewline
 \hline 
-$z_{0}$ & Median & 0.0886 & $[0.0024,0.1748]$\tabularnewline
+$z_{0}$ & 0.0811 & $[0,1.5781]$\tabularnewline
 \hline 
-$L$ & Median & -357.60 & $[-651,11,-64.090]$\tabularnewline
+$L$  & -379.45 & $[-195,86,-563.04]$\tabularnewline
 \hline 
 \end{tabular}
-\caption{Parameters and their estimates and uncertainties. The sources are given in Tons per year.}
+\caption{Parameters and their estimates and uncertainties}
 \label{tabFinalEstimates}
 \end{table}
 
-
-For the sources the results are shown in Figure 
+The spread of the $68\%$ confidence interval for the distribution
+of the parameters show that the experimental data is not large enough
+so that the posterior marginal distribution for the parameters is 
+not decisively informative about a value or a particular set 
+of values the parameters are likely to be. Despite this, 
+as we can see in the histograms in Figure \ref{figHistograms}, for
+$L$ and $z_{0}$ we can see that there are region in the support
+that are more likely than others. Even though we have
+no prior information about the values of the parameters and only 
+$9$ measurements of zinc deposition, our approach is able
+to distinguish regions with high probability from
+regions with low probability. For the value of $z_{0}$
+the region around the mode agrees with the typical values
+for this parameter in the literature, but for $L$, the high
+probability values does not agree with the typical
+values chosen for this parameter \cite{hosseini2016airborne, seinfeld1998atmospheric}.
+\\
+For the estimates of the sources the situation
+is different due to the prior knowledge we have
+about them. The estimates and uncertainties are shown in 
+Figure \ref{figQUnicertainty}
 
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.5]{./FigChap4/qUncertainty}
-\caption{bla}
+\caption{Comparison between engineers source strength estimation with 
+our point estimate and the uncertainty associated to it.}
 \label{figQUnicertainty}
 \end{figure}
-The results in Table \ref{tabFinalEstimates}, show that sources $3$ and $4$ are understimated by the engineers,
-whereas sources $1$ and $2$ are overstimated. According to the engineer estimates, the smelter produces
-125 tons per year. According to our results, this number is small  compared to the most likely value
-of 181.407 tons per year. Another interesting result is that according to the literature,
-the accepted ranges for the parameters $p$ and $L$ are $[0,0.4]$ and $[-500,1]$, respectively.
-Our results show that these allowed ranges can be stretched in order for the model the explain
-the experimental data available. 
+The results in Figure \ref{figQUnicertainty}, show that sources $1$ and $2$ are most likely overestimated by the engineers.
+Whereas sources $3$ and $4$ are  slightly underestimated. If we take into account the error bars for our estimates and
+the small difference between that estimate and the engineers estimate, we conclude that the experimental data
+is not necessary to make any strong conclusion about sources $3$ and $4$.
+For sources $1$, $3$ and $4$, our results agree
+with \cite{lushi2010inverse} and \cite{hosseini2016airborne}. However for  source $2$ The results
+we obtained  agree with \cite{lushi2010inverse} but in \cite{hosseini2016airborne}, source
+$2$ is severally underestimated. 
 
+
+In conclusion, we have developed a framework that allows us to  do a source inversion and obtain estimates
+of unknown parameters, with the difference that we can quantify the uncertainty in those estimates, as opposed
+to classical approaches to source inversion. \textbf{What to do in the future?}.
 
 
 
