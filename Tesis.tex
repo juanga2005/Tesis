@@ -93,28 +93,34 @@ Burnaby B.C - May  2017
 \chapter{Introduction}
 
 With the concern for climate change and anthropogenic impact on the environment, 
-the importance of atmospheric dispersion models has grown over the years. Unfortunately
-atmospheric disperssion model's predictions cannot be  completely accurate \cite{chatwin1982use,lewellen1989meteorological}. 
+the importance of atmospheric dispersion models has grown over the years. Unfortunately,
+atmospheric dispersion model's are not  completely accurate \cite{chatwin1982use,lewellen1989meteorological}. 
 Although the precision of a model can be improved at the expense
 of adding more parameters that explain the missing physics in the model, even
-in this case, there is a limit in how accurate a model can be.
-The reason for this, comes from the fact that uncertainty sources
+in this case, there is a limit in how accurate a model can be, due to uncertainties
+in measurement of the relevant variables.
+The reason for this, comes from the fact that sources of uncertainty
 are diverse and different in nature, following  \cite{rao2005uncertainty}
 we have 
 
 
 \begin{itemize}
-\item Model uncertainty: the model does not capture all the physics.
-\item Data uncertainty: experimental measurements or parameters estimation are not completely accurate.
-\item Stochastic uncertainty: for example, unpredictability from the physics of the atmosphere.
+\item Model uncertainty: the model does not explain all of the physical processes of interest.
+\item Data uncertainty: experimental measurements or parameter estimation is inaccurate.
+\item Stochastic uncertainty: Physical processes in the atmosphere are inherently unpredictable, e.g. turbulence.
 \end{itemize}
-This impossibility for achieving totally accurate predictions
-is in contrast with the continuously growing necessity to develop
-more accurate and computationally efficient atmospheric dispersion models \cite{leelHossy2014dispersion}. 
+Despite this difficulty in obtaining accurate predictions
+there is a  growing necessity to develop
+more accurate and computationally efficient atmospheric dispersion models in practice \cite{leelHossy2014dispersion}. 
+The reason of computationally efficiency is because atmospheric models are usually expressed as systems
+of partial differential equations, whose simulation is computationally expensive. This situation may hinder
+the model's ability to be used in real situations. One of the goals of this work is to show how to
+use computationally demanding models in a cheap fashion. 
 
 The mathematical model for atmospheric dispersion that we are 
 interested is the advection-diffusion equation
-for the concentration $C$ of particulate zinc. The behavior of $C$
+for the concentration $C$ of particulate matter (particulate zinc is going to be our main focus
+in this work). The behavior of $C$
 as a function of space and time is given by 
 the following partial differential equation
 \begin{equation}\label{eqnModelIntro}
@@ -122,102 +128,102 @@ the following partial differential equation
 \end{equation}
 Here $\x=(x,y,z)\in\mathbb{R}^{3}$, $t$ is the time variable, $\bar{\vv}$  is the velocity wind field, $\textbf{D}$
 is the diffusivity tensor and the right hand side of the equation is the source density. In the scenario
-we are interested in modeling (see Chapter 4 for details), we have four zinc sources at known locations $\{\x_{j}\}_{j=1}^{4}$ 
-with strengths $\{q_{j}\}_{j=1}^{4}$ respectively. We also mention that equation \eqref{eqnModelIntro}
-depends on five different parameters, these parameters will be represent by $\Theta$.
-By replacing the linear operator $\dv(\vv+\textbf{D}\nabla)$ on the LHS by $L(\Theta)$, to make the dependence explicit, we can write equation \eqref{eqnModelIntro}
+we are interested in modeling, we have four zinc sources at known locations $\{\x_{j}\}_{j=1}^{4}$ 
+with strengths $\{q_{j}\}_{j=1}^{4}$ respectively. The values of the wind velocity field $\bar{\vv}$
+and the diffusivity tensor $\textbf{D}$ depend upon five parameters. These parameters are going
+to be explained in detail in Chapter 4. For the moment it is enough to consider these
+parameters to be represented in a five dimensional vector denoted by  $\Theta$.
+By replacing the linear operator $\dv(\vv+\textbf{D}\nabla)$ on the LHS by $L(\Theta)$, to make the dependence on $\Theta$ explicit, we can write equation \eqref{eqnModelIntro}
 more compactly as
 \begin{equation}\label{eqnParamtric}
 \frac{\partial C(\x,t)}{\partial t}+L(\Theta)C(\x,t)=\sum_{j=1}^{4}q_{j}\delta(\x-\x_{j}).
 \end{equation}
 
- By knowing the concentration we can readily calculate
+In practice, the concentration of particulate matter is not measured directly,
+what is measured instead is the deposition in some region after some interval of time. Given the concentration $C$
+we can calculate the deposition  in a region $R\subset\mathbb{R}^{2}$ after $T$ units of time as
 \begin{equation*}
 \int_{R}\int_{0}^{T} C(x,y,0,t)v_{set}dtdxdy,
 \end{equation*}
 where $v_{set}$ is the settling velocity of zinc particles. 
-The integral above represents the deposition of zinc in the region 
-$R\subset\mathbb{R}^{2}$ over a $T$ units of time period.
-In this work we are mainly concerned with the problem known as source inversion.
-Our goal is to estimate the source strength vector (or just sources for short)
+In this work we are mainly concerned  in estimating the sources' strength
+given a finite set of deposition measurement at different locations.
+The problem of estimating the sources' strength from deposition measurements
+is known as source inversion.
+More precisely, in this work, we want to estimate the source strength vector (or just sources for short)
 \begin{equation*}
 \q:=(q_{1},q_{2},q_{3},q_{4})^{T},
 \end{equation*}
-given the deposition.
-This problem is ill-posed\cite{enting1990inverse}.
+given measurements of the deposition.
+This problem is ill-posed\cite{enting1990inverse} in the sense of Hadamard.
 Uncertainty in a model's prediction capabilities gets worst if the problem
 is ill-posed. For example in an ill-posed model, small uncertainties
 in the experimental data or parameters of the model, translate
-as significant uncertainties in the output.
+into significant variations in the output.
 
-Despite the ill-posed nature of the problem, different
-approaches have been envisioned for the source inversion
-problem. Lin and Chang \cite{lin2002relative} used an air
+Despite the ill-posed nature of the source inversion problem, different
+approaches have been envisioned in the literature. Lin and Chang \cite{lin2002relative} used an air
 trajectory statistical approach to estimate
 the strength of different sources of volatile organic compounds
 from anthropogenic origin. Stockie and Lushi \cite{lushi2010inverse} 
 used a Gaussian plume approach to calculate different distribution
-of zinc deposition in a lead-zinc smelter. With these results
-they used  least-squares to perform the source inversion.
+of zinc deposition in a lead-zinc smelter and used  least-squares to perform the source inversion.
 Skiba \cite{skiba2003method}  solved the adjoint equation
 of the advection-diffusion equation and used least-squares 
-with regularizer to obtain the source inversion. What
+with regularization to invert the sources. What
 these approaches have in common is that they provide a point
 estimate for the strength of the sources of interest but
-no uncertainty about the estimate.
+no measure of uncertainty about the estimate.
 
 The Bayesian  framework has been used in the source inversion
-problem, to obtain point estimates and the uncertainty associated 
+problem, to obtain point estimates and the uncertainties associated 
 with them. Sohn et.al \cite{sohn2002rapidly} developed an 
 algorithm to obtain estimates and uncertainties for
-the location and strength of pollutant sources in buildings.To do it,
-they combined Bayes rule with data obtained from a simulation 
-done using the software COMIS. Hosseini and Stockie \cite{hosseini2016bayesian}
+the location and strength of pollutant sources in buildings.
+They combined Bayes' rule with data obtained from a COMIS simulation . 
+Hosseini and Stockie \cite{hosseini2016bayesian}
 used a Gaussian plume model coupled with 
-experimental data and  Gaussian processes to estimate
+experimental data  to estimate
 and quantify the uncertainty of airborne fugitive
-emissions in Trail, British Columbia, Canada. Using
+emissions. Using
 experimental data from the transport and dispersion 
 experiment ``The Muck Urban Setting Test", Keats \textit{et al}. \cite{keats2007bayesian}
-obtained, using the Bayesian framework, probability distributions for sources strengths
-and their locations, and used them to obtain estimates and the uncertainties associated with them.
-
+obtained, using the Bayesian framework, probability distributions for source strengths
+and  locations. 
 In this work we apply the Bayesian framework  to estimate the source 
 strength vector $\q$
-given a set of experimental measures denote by $\y$. Unlike
+given a set of field measurements denoted by $\y$. Unlike
 the previous work mentioned above, we will also  estimate and
-quantify the uncertainty in the estimates for the set of parameters $\Theta$.
+quantify the uncertainties in the estimates for the set of model parameters $\Theta$.
 This will be achieved by obtaining a joint probability
-density for the parameters  and sources.  More precisely
-we use Bayes rule to obtain the posterior distribution for parameters
-and sources. Formally the posterior distribution can be written as
+density for the parameters  and sources.  More precisely,
+we use Bayes' rule to obtain the posterior distribution for parameters
+and sources. 
+Getting ahead of the explanation of Bayes' rule in Chapter 2, we can formally the posterior distribution can be written as
 \begin{equation*}
-\post(\Theta,\q|\y)=\frac{\like(\y|\Theta,\q)\prior(\Theta,\q)}{Z(\y)}.
+\post(\Theta,\q|\y)=\frac{\like(\y|\Theta,\q)\prior(\Theta,\q)}{Z(\y)},
 \end{equation*}
+where $\like$ is called the likelihood distribution, $\prior$ the prior
+distribution and $Z(\y)$ is a normalization constant.
+
 
 Traditionally, the process of tuning the parameters in atmospheric dispersion models has been done
-empirically based on Pasquill stability classes \cite{turner1994workbook, seinfeld1998atmospheric}.
+empirically using Pasquill stability classes \cite{turner1994workbook, seinfeld1998atmospheric}.
 Instead, we propose a novel approach to estimate
 the parameters using the information contained in the posterior probability distribution. 
-The advatange of this method is that we are taking into account the experimental data 
-available, we are letting the data ``speak" about what choices of the parameters
-ought to be, given the observations.
-
-In this work we also address a method to deal with computationally expensive models.
+The advantage of this method is that we are taking into account the experimental data 
+available and we let the data determine the most likely value, given the observations.
+Furthermore we use a method to deal with computationally expensive models.
 To simulate equation \eqref{eqnModelIntro} we use a finite volume code, whose
 computational overhead is high, therefore, using it several times to obtain an approximation for
-the likelihood $\like(\y|\Theta,\q)$ is not feasible. Instead we ran the code 
+the likelihood $\like(\y|\Theta,\q)$ is not feasible. Instead we run the code 
 for a small  number of different
-combinations of parameters and sources ,and use an emulator based
-on Gaussian process regression to extrapolate results
-from the simulation to arbitrary combinations of parameters and sources. To 
-reduce the computational cost even further, we performed
-a sensitivity analysis that allowed us to reduce the dimensionality
-of the parameter space from five to three. This reduction permitted 
-us to approximate the likelihood function  and to use Markov
-Chain Monte Carlo Methods to sample from the posterior faster.
-We then used these samples to obtain point estimates and uncertainties
-for the parameters and sources.
+combinations of parameters and sources, and construct an emulator using
+ Gaussian process regression to extrapolate the results
+of the simulation to other combinations of parameters and sources. We then use
+Markov Chain Monte Carlo Methods to sample  the posterior distribution.
+We  use the samples to obtain point estimates and uncertainties
+for the parameters and emission rates.
 
 To conclude this chapter, we will explain how this work is organized:
 in Chapter 2 we explain the theory and computations behind the
@@ -1848,37 +1854,34 @@ is not realistic, inference could not be done or  may not be reliable even with 
 
 
 
-As mentioned in the introduction, our interested is to study
+In this chapter we study
 the dispersion of zinc from a lead-zinc smelter in Trail, British Columbia, Canada,
-operated by Teck Industries Ltd.  The smelter has four smokestacks. From now
-on the smokestacks are going to be referred as source. Our goal
-is to estimate how much  each source is contributing to the total amount of zinc
-that is being released by the smelter.
-To this end, we count on experimental
-measurements of the zinc deposition at nine different locations and wind velocity data 
-of the surrounding area. We also know prior estimates of the zinc release by the smelter.
-These estimates where calculated by the engineers that work there.
+operated by Teck Industries Ltd.  We consider four smokestacks. Our ultimate goal
+is to estimate the contribution of each stack  to the total amount of zinc
+that is being released by the smelter. We have access to
+measurements of  zinc depositions at nine different locations as well as field wind velocity data 
+at a location near the smelter. We also know prior engineering estimates of the zinc emission 
+provided by the company.
 An aerial photograph of the region  of interest with 
 the location of the sources and the measurement devices is shown 
-in Figure \ref{figAereal}. The sources are represent by the letters
-$Q_{1}$ to $Q_{4}$. The zinc deposition measurement sites are represented
-by the letter $R_{1}$ to $R_{9}$. 
+in Figure \ref{figAereal}. The sources are represented by the letters
+$Q_{1}$ to $Q_{4}$. The  deposition measurement sites are marked
+as $R_{1}$ to $R_{9}$. 
 
-To obtain the estimates mentioned in the previous paragraph, we are going
-to proceed in the same manner as in estimating the parameter $b$ in equation (\ref{eqntoyproblem})
-in Chapter 3. In that Chapter we were given  a mathematical model that approximates
-the physics of interest. For this chapter, it is necessary to develop, from scratch,
-a mathematical model that approximates the physics behind pollutant dispersion in the
-atmosphere. To propose this mathematical model in detail is the topic of the next section.
+In order to  estimate the emission rates, we shall use a similar approach to that of Section 3.1.
+In Chapter 3 we assumed  we had access to  a mathematical model that approximates
+the physics of processes of interest. Here, it is necessary to develop, such
+ model for the pollutant dispersion in the
+atmosphere from scratch.
 
 
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.35]{FigChap4/AerealView}
-\caption{Aereal photograph of the lead-zinc smelter in Trail, British Columbia, Canada. The points
+\caption{Aerial photograph taken from \cite{hosseini2016airborne} of the lead-zinc smelter in Trail, British Columbia, Canada. The points
 $Q_{1}$ to $Q_{4}$ represent the sources of zinc. The green triangles $R_{1}$ to $R_{9}$ represent
-the location of the measurement devices.}
+the location of the measurement devices. }
 \label{figAereal}
 \end{figure}
 
@@ -1892,65 +1895,65 @@ the location of the measurement devices.}
 
 
 \section{A Mathematical Model for Pollutant Dispersion}
-Our starting point  is the conservation of mass. In particular conservation of mass for
-particulate zinc in the atmosphere. Consider a region $\Lambda\subset\mathbb{R}^{3}$ with $m$ units of   mass
+Our starting point  is the conservation of mass for
+particulate zinc in the atmosphere. Consider a closed region  $\Lambda\subset\mathbb{R}^{3}$ with $m$ units of   mass
 of zinc within it. 
 Assume
-that in the interior of $\Lambda$ there is  a source of  zinc. Furthermore assume that zinc is flowing throughout 
-the boundary $\partial\Lambda$ of $\Lambda$  due to a  wind velocity field (see Figure \ref{figControlVolume}).
-If $\vv(\x,t)$ represents the wind velocity at a point $\x$ at time $t$, it can be shown that net mass
+that in the interior of $\Lambda$ there is  a source of  zinc and that zinc is flowing throughout 
+the boundary  of $\Lambda$  (denoted by $\partial\Lambda$) due to an advection field (see Figure \ref{figControlVolume}).
+It can be shown that net mass
 per unit time, of zinc that is flowing through the boundary is given by the expression
 \cite{seinfeld1998atmospheric}
 \begin{equation*}
-\oint_{\partial\Lambda}c(\x,t)\vv(\x,t)\cdot\hat{\textbf{n}}dA,
+\int_{\partial\Lambda}c(\x,t)\vv(\x,t)\cdot\hat{\textbf{n}}dA,
 \end{equation*}
-where  $c(\x,t)$ is the concentration of zinc at a point $\x$
-at time $t$.
-The units of $c$ are given in units of mass per units of volume. On the other hand
-the rate of change total mass $m$ at a time $t$ inside $\Lambda$  can be calculated as
+where  $\vv(\x,t)$ represents the wind velocity at a point $\x$ at time $t$ and $c(\x,t)$ in units of mass per units of volume is the concentration of zinc at a point $\x$
+at time $t$. The vector $\textbf{n}$ is the unit normal vector to $\partial\Lambda$ and $dA$ is an area element of it.
+ On the other hand
+the rate of change of total mass $m$ at a time $t$ inside $\Lambda$  can be written as
 \begin{equation*}
-\frac{dm(t)}{dt}=\frac{d}{dt}\int_{\Lambda}c(\x,t)dV.
+\frac{dm(t)}{dt}=\frac{d}{dt}\int_{\Lambda}c(\x,t)dV,
 \end{equation*}
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.5]{./FigChap4/controlVolume}
-\caption{Schematic representation of a volume region in space containing a source of Zinc.}
+\caption{Schematic representation of the region $\Lambda$ in space containing a source of zinc.}
 \label{figControlVolume}
 \end{figure}
 
-Finally, the amount of zinc that comes from the source at a time $t$ is given by
+where $dV$ is an element of volume in $\Lambda$. Finally, the amount of zinc that comes from the source at a time $t$ is given by
 \begin{equation*}
 \int_{\Lambda}s(\x,t)dV,
 \end{equation*}
-where $s(\x,t)$ is the source density. Its units are mass per unit volume per unit time.
+where $s(\x,t)$ is the source density with units of mass per unit volume per unit time.
 Conservation of mass states that the total mass inside $\Lambda$ should be conserved. Therefore
-for all times the rate of change of the mass inside $m$ should equal all source of variation of it.
-Mathematically we can write
+for all times $t$ the rate of change of the mass inside $m$ should equal all sources of its variation. Thus
+we can write
 \begin{equation*}
 \frac{d}{dt}\int_{\Lambda}c(\x,t)dV=-\oint_{\partial\Lambda}c(\x,t)\textbf{v}\cdot\textbf{n}dA+\int_{\Lambda}s(\x,t)dV.
 \end{equation*}
 Since we picked the orientation of $\partial\Lambda$ with the normal pointing outwards, it is
-necessary to put a minus in front of the surface integral for consistency. Assuming
-the concentration and the velocity field are continuous functions of time and space, an 
-straightforward application of the divergence theorem and Leibniz rule for integral gives
+necessary to put a minus in front of the surface integral for consistency. Assuming that
+the concentration and velocity field are continuous functions of time and space, an 
+straightforward application of the divergence theorem and Leibniz rule for integrals gives
 \begin{equation*}
 \int_{\Lambda}\left(\frac{\partial c(\x,t)}{\partial t}+\nabla\cdot(c\textbf{v})-s(\x,t)\right)dV=0.
 \end{equation*}
-Since the region $\Lambda$ was arbitrary, the previous equality holds if and only if
+Since the region $\Lambda$ was arbitrary, the previous equality holds if and only if \cite{hubbard2015vector}
 \begin{equation}\label{eqnDeterministic}
 \frac{\partial c(\x,t)}{\partial t}+\nabla\cdot(c\textbf{v})=s(\x,t).
 \end{equation}
-If we apply this equation to estimate the concentration of zinc using real wind data, we 
-will find that the prediction for the concentration is not completely accurate. 
-The reason is that at small scales, there
-are random fluctuations in the wind velocity. To model this we follow \cite{seinfeld1998atmospheric}
+If we apply this equation to estimate the concentration of zinc using real wind data measured experimentally, we 
+will find that the prediction for the concentration is not completely accurate, even if the model is completely accurate. 
+One of the reasons for this is that at small scales, there
+are random fluctuations in the wind velocity that are very difficult to measure. To model this we follow \cite{seinfeld1998atmospheric}
 and write the wind velocity field as
 \begin{equation}\label{eqnNewV}
 \vv=\bar{\vv}+\vv',
 \end{equation}
 where $\bar{\vv}$ is the measured wind velocity and $\vv'$ is a random variable with zero mean.
-If we replace $\vv$ in equation (\ref{eqnDeterministic}) with the expression for velocity
+If we replace $\vv$ in equation (\ref{eqnDeterministic}) with the expression for the velocity
 in equation (\ref{eqnNewV}) we get
 \begin{equation}\label{eqnNewRandom}
 \frac{\partial c(\x,t)}{\partial t}+\nabla\cdot(c(\bar{\textbf{v}}+\vv'))=s(\x,t).
@@ -1960,22 +1963,22 @@ variable as well. In this case we describe $c$ as the contribution of two terms 
 \begin{equation}\label{eqnNewC}
 c(\x,t):=\E(c)(\x,t)+c(\x,t)',
 \end{equation}
-where $c'$ satisfies $\E(c(\x,t)')=0$. The intuition behind this definition is the following: if we repeat a large number of times the experiment
-of measuring the concentration at a point $\x$ and at time $t$ under identical initial and boundary condition,  then, we expect the 
+where $c'$ satisfies $\E(c(\x,t)')=0$. The intuition behind this definition is the following: if we 
+ measure the concentration at a point $\x$ and at time $t$ a large number of times under identical initial and boundary conditions,  then, we expect the 
 measurements to have an underlying average behavior $\E(c)(\x,t)$ plus some  noise $c(\x,t)'$.
-Plugging in  equation (\ref{eqnNewC}) into equation (\ref{eqnNewRandom}) we obtain
+By plugging   equation (\ref{eqnNewC}) into equation (\ref{eqnNewRandom}) we obtain
 \begin{equation}\label{eqnInconsistent}
 \frac{\partial\E(c)}{\partial t}+\dv(\bar{\vv}\E(c))+\dv(\E(c'\vv'))=s(\x,t).
 \end{equation}
 This equation includes  the extra variable $\E(c'\vv')$.
 In this case we have two unknowns and one equation. 
-One way to overcome this issue is given by the so-called mixing-length theory. The
-theory uses the constitutive equation
-\begin{equation*}
+One way to overcome this issue is to use the so-called mixing-length theory \cite{seinfeld1998atmospheric}. 
+We use the constitutive equation
+\begin{equation}\label{eqnMixingLengthTheory}
 \E(c'\vv')=\textbf{D}\nabla(\E(c)).
-\end{equation*}
+\end{equation}
 The term $\textbf{D}$ is  a rank two tensor called the eddy diffusivity tensor. This tensor is assumed 
-to be symmetric, hence is always diagonalizable. We may assume that we are working
+to be symmetric, hence is always diagonalizable. For simplicity we assume that we are working
 on the principal axis of $\textbf{D}$ \cite{seinfeld1998atmospheric}, hence 
 \begin{equation*}
 \textbf{D}=\begin{bmatrix}
@@ -1984,124 +1987,106 @@ D_{xx}& 0 & 0\\
 0 & 0 & D_{zz}
 \end{bmatrix}.
 \end{equation*}
-Under the mixing-length theory, equation (\ref{eqnInconsistent}) reads as
+Substituting equation \eqref{eqnMixingLengthTheory} in equation (\ref{eqnInconsistent}) gives
 \begin{equation}\label{eqnfirstDifferentialForm}
 \frac{\partial\E(c)}{\partial t}+\dv(\bar{\vv}\E(c)+\textbf{D}\nabla\E(c))=s(\x,t).
 \end{equation}
-The variable $\E(c)$ is a deterministic function of space and time. So to make
-notation lighter,  we set $C(\x,t):=\E(c)$. Note that $C$ has the same units
-as $c$. We interpret $C(\x,t)$ as the expected concentration we would measure
-at the point $\x$ at time $t$.
+The variable $\E(c)$ is now a  deterministic function of space and time. In order to make the
+notation simpler,  we set $C(\x,t):=\E(c)$. Note that $C$ has the same units
+as $c$. We interpret $C(\x,t)$ as the expected concentration that we would measure
+at a point $\x$ at time $t$.
 
-For the source density we assume point-wise sources. If there are $n$ sources 
- at the points $\x_{1},\x_{2},\ldots,\x_{n}$, located inside the domain of definition 
-of equation (\ref{eqnfirstDifferentialForm}),
-then we assume a source density of the form
+We now turn our attention to the source density. W we assume point-wise emission sources. Suppose there are $n$ sources 
+ at the points $\x_{1},\x_{2},\ldots,\x_{n}$,
+then we assume that $s(\x,t)$ has the following the form
 \begin{equation}\label{eqnSourceDensity}
 s(\x,t)=\sum_{j=1}^{n}q_{j}(t)\delta(\x-\x_{j}).
 \end{equation}
-Here $q_{j}$ is referred as the  strength of the $j$-th source and has units of mass per unit time. 
-The function $\delta(\cdot)$ is the Dirac delta function. For our model we have $n=4$ sources 
-(see Figure \ref{figAereal}). Taking into account the observations made in the 
-previous paragraph, we finally state the mathematical model for zinc disperssion as
+Here $q_{j}$ is  the  rate of emission of the $j$-th source and has units of mass per unit time. 
+The function $\delta(\cdot)$ is the Dirac delta function. For the case study of this chapter, we have $n=4$ sources 
+(see Figure \ref{figAereal}). Putting together equations \eqref{eqnfirstDifferentialForm} and \eqref{eqnSourceDensity}
+we finally state our mathematical model for zinc dispersion as
 \begin{equation}\label{eqnDifussivityFinalForm}
 \frac{\partial C(\x,t)}{\partial t}+\dv(\bar{\vv}C(\x,t)+\textbf{D}\nabla C(\x,t))=\sum_{j=1}^{4}q_{j}(t)\delta(\x-\x_{j}).
 \end{equation}
 
 
+We still need to discuss models for the diffusivity tensor $\textbf{D}$ and wind velocity distribution $\vv$. 
+These quantities are hard to measure so we use empirical models for them. We will discuss in detail
+the assumptions on the diffusivity tensor and the wind velocity field in the next sections. 
 
-Due to the presence of the diffusivity tensor, it is necessary to make assumptions about
-the behavior of the diagonal elements of $\textbf{D}$. Also the measurements of the wind velocity 
-are given by one 2-axis anemometer. This means we count with just one wind velocity measurement at
- one point in space. This means it is also necessary to make assumption about
-the wind velocity distribution. 
+
+%Due to the presence of the diffusivity tensor, it is necessary to make assumptions about
+%the behavior of the diagonal elements of $\textbf{D}$. Also the measurements of the wind velocity 
+%are given by one 2-axis anemometer. This means we count with just one wind velocity measurement at
+% one point in space. This means it is also necessary to make assumption about
+%the wind velocity distribution. 
 
 
 \subsection{Assumptions on the Diffusivity Tensor}
-Following \cite{monin1954basic},  the vertical diffusivity coefficient $D_{zz}$ is approximated by
+Following \cite{monin1954basic},  the vertical diffusivity coefficient (in the $z$ direction) $D_{zz}$ is modelled by the following expression
 \begin{equation}\label{eqnEddyVertical}
 D_{zz}=\frac{\kappa v_{*} z}{\phi(z/L)},
 \end{equation}
 
-Where $\kappa$ is the \textit{Von-Karman} constant whose value in practice is set as $0.4$. The denominator
+where $\kappa$ is the \textit{Von-Karman} constant whose value in practice is set as $0.4$. The denominator
 is defined as the piece-wise continuous function
 \begin{equation*}
 \phi\left(\frac{z}{L}\right)=\left\{
 			\begin{array}{ll}				
-				1+4.7\frac{z}{L} &\mbox{for }\frac{z}{L}>0 \\
-				1 &\mbox{for }\frac{z}{L}=0\\
-				(1-15\frac{z}{L})^{-\frac{1}{2}}&\mbox{for }\frac{z}{L}<0
-			\end{array}.
+				1+4.7\frac{z}{L} &\mbox{for }\frac{z}{L}>0, \\
+				1 &\mbox{for }\frac{z}{L}=0,\\
+				(1-15\frac{z}{L})^{-\frac{1}{2}}&\mbox{for }\frac{z}{L}<0,
+			\end{array}
 		\right.
 \end{equation*}
-Here $L$ is referred as the \textit{Monin-Obukhov length}. Finally the parameter $v_{*}$ is known as 
-the \textit{friction velocity}.  This parameter is calculated as 
+where $L$ is  the \textit{Monin-Obukhov length}. The parameter $v_{*}$ is known as 
+the \textit{friction velocity} and modelled by
 
 \begin{equation*}
 v_{*}(t)=\frac{\kappa v_{r}(t)}{\ln(\frac{z_{r}}{z_{0}})},
 \end{equation*}
 where $v_{r}(t)$ is a reference velocity at a reference height $h_{r}$. The variable $z_{0}$ 
-is called the \textit{roughness length}. 
+is called the \textit{roughness length}, that depends on terrain and surface type.
 
 For the elements $D_{xx}$ and $D_{yy}$, we assume $D_{xx}=D_{yy}$ and independence of height 
-\cite{monin1954basic}. A common used equation
-to approximate these variables is given by
+\cite{monin1954basic}. A commonly used equation for these parameters
+ is
 \begin{equation*}
 D_{xx}=D_{yy}\approx \frac{v_{*}z_{i}^{\frac{3}{4}}(-\kappa L)^{-\frac{1}{3}}}{10}.
 \end{equation*}
 The variable $z_{i}$ is known as the \textit{mixing layer height}.
 
 \subsection{Assumptions on the Wind Velocity Distribution}
-In practice, the wind velocity measurements are done using anemometers that  
-measure a two dimensional projection of the   velocity vector field.
+In practice, the wind velocity measurements are taken using anemometers that  
+measure a two dimensional projection of the   velocity vector field in a horizontal plane.
 Therefore
-it is necessary to make assumptions on the three dimensional and global behavior of this vector field.
-Following \cite{hosseini2016airborne}, we assume a velocity vector field of the form 
+it is necessary to model vertical variations of this vector field.
+Following \cite{hosseini2016airborne}, we consider a velocity vector field of the form 
 \begin{equation}\label{eqn2Dvel}
 \vv=(v_{x}(z,t),v_{y}(z,t),v_{set}).
 \end{equation}
-Observe it is assumed  the wind velocity field is independent of $x$ and $y$.
-In equation \ref{eqn2Dvel}, $v_{set}$ is a constant given by  the settling velocity of the zinc particles. By Stoke's law,
-this velocity is given by
+Observe that we are assuming  the wind velocity field is independent of $x$ and $y$. The reason for this, is
+that the terrain of interest is regular, hence no significant variations of the wind velocity at a given height are 
+expected.
+In equation \eqref{eqn2Dvel}, $v_{set}$ is a constant given by  the settling velocity of the zinc particles. By Stoke's law,
+this velocity for spherical particles is given by
 \begin{equation*}
 v_{set}=\frac{\rho g d^{2}}{18\mu},
 \end{equation*}
-where $\rho$ is the particle density, $g$ the acceleration of gravity,  $d$ its diameter, and
-$\mu$ is the air viscosity. For the $x,y$ components of $\vv$ we assume a power law relation of the form
+where $\rho$ is the particle density, $g$ is the acceleration of gravity,  $d$ is the diameter of the particle, and
+$\mu$ is the viscosity of air. For the $x,y$ components of $\vv$ we assume a power law relation of the form
 \begin{equation}\label{eqnPowerLaw}
 \|(v_{x}(z,t),v_{y}(z,t))\|_{2}=v_{r}(t)\left(\frac{z}{z_{r}}\right)^{p},
 \end{equation}
 where $v_{r}(t)$  is the wind speed at a reference height $z_{r}$. The exponent $p$ depends on 
-factors such as the surface roughness and atmosphere stability. For more details in the power
+factors such as the surface roughness and atmospheric stability class. For more details about the power
 law model for the wind velocity the reader is referred to \cite{seinfeld1998atmospheric}.
-\newline
-Observe that the  diffusivity coefficient in equation (\ref{eqnEddyVertical}) vanishes
-at the ground level. This is inconsistent with the boundary condition in equation (\ref{eqnRobinBoundary}).
-Hence, we assume the diffusivity coefficient to be non-zero below a \textit{cutting height} $z_{cut}$.
 
-
-Assuming an specific form for the wind velocity and the  
-diffusivity tensor, introduces new parameters whose values need to be set. In our model
-there are five parameters we need to assign a value before we can use equation (\ref{eqnDifussivityFinalForm}).
-These parameters are
-\begin{itemize}
-\item $p$: the fitting parameter for the wind velocity power law.
-\item $z_{0}$: roughness length
-\item $z_{i}$: mixing layer height.
-\item $L$: Monin-Obukhov length.
-\item $z_{cut}$ cutting height.
-\end{itemize}
-In practice we set a value for these parameters from a given interval of numbers
-that empirically has shown to work \cite{seinfeld1998atmospheric,hosseini2016airborne}.
-The caveat with this approach is that there is no good reason to choose one value
-over a different one. In this work we will  use the Bayesian framework
-to decide the values of these parameters and the sources as well.
-
-To completely specify the model for the zinc pollutant dispersion, it is necessary to specify the domain of interest, 
-the   boundary and initial  conditions in equation (\ref{eqnDifussivityFinalForm}).
-The spatial domain of interest is given by
+Now we have all the information necessary to completely specify the model for the zinc pollutant dispersion. The domain of interest, 
+the   boundary and initial  conditions in equation (\ref{eqnDifussivityFinalForm}) are given by
 \begin{equation*}
-\Pi:=\{(x,y,z)\in\mathbb{R}^{3}|z\geq 0\}.
+\Pi:=\{(x,y,z)\in\mathbb{R}^{3}|z\geq 0\}\qquad\text{(domain of equation \eqref{eqnDifussivityFinalForm})}.
 \end{equation*}
 Following \cite{hosseini2016airborne}, the boundary conditions are given by the far-field condition
 \begin{equation*}
@@ -2111,7 +2096,30 @@ and the Robin boundary condition
 \begin{equation}\label{eqnRobinBoundary}
 \left.\left(v_{set}C+D_{zz}\frac{\partial C}{\partial z}\right)\right\rvert_{z=0}=\left.v_{dep}C\right\rvert_{z=0}.
 \end{equation} 
-\newline
+\\
+
+Observe that the  diffusivity coefficient in equation (\ref{eqnEddyVertical}) vanishes
+at the ground level. This is inconsistent with the boundary condition in equation (\ref{eqnRobinBoundary}).
+Hence, following \cite{hosseini2016airborne} we assume the diffusivity coefficient to be non-zero below a \textit{cutting height} $z_{cut}$.
+
+
+The models for the wind velocity and the  
+diffusivity tensor, introduce new parameters whose values need to be set. These
+parameters are listed below.
+\begin{itemize}
+\item $p$ - the fitting parameter for the wind velocity power law.
+\item $z_{0}$ - roughness length
+\item $z_{i}$ - mixing layer height.
+\item $L$ - Monin-Obukhov length.
+\item $z_{cut}$ - cutting height.
+\end{itemize}
+In practice we often set a heuristic value for these parameters from a given empirical range \cite{seinfeld1998atmospheric,hosseini2016airborne}.
+The caveat with this approach is that there is no good reason to choose one value
+over a different one or it is necessary years of experience from an expert to make a coherent sound choice. 
+In this work we will  use the Bayesian framework in order 
+to decide the values of these parameters and the emission rates using the experimental data available. We will 
+also quantify the uncertainties that are associated with the values of the parameters.
+
 
 To estimate the parameters $p$, $z_{0}$, $z_{i}$, $L$, $z_{cut}$  and  the four sources sources, we count on  experimental measurements 
 of the zinc deposition at the sites 

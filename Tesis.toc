@@ -15,7 +15,7 @@
 \contentsline {subsection}{\numberline {4.1.1}Assumptions on the Diffusivity Tensor}{73}
 \contentsline {subsection}{\numberline {4.1.2}Assumptions on the Wind Velocity Distribution}{74}
 \contentsline {section}{\numberline {4.2}Sensitivity Analysis}{79}
-\contentsline {section}{\numberline {4.3}Building an Emulator for $A(p,L,z_{0})$}{82}
-\contentsline {section}{\numberline {4.4}Bayesian Framework for the Inverse Problem}{86}
-\contentsline {subsection}{\numberline {4.4.1}Choosing a Prior}{87}
-\contentsline {section}{\numberline {4.5}Inferring the Parameters and the sources}{91}
+\contentsline {section}{\numberline {4.3}Building an Emulator for $A(p,L,z_{0})$}{83}
+\contentsline {section}{\numberline {4.4}Bayesian Framework for the Inverse Problem}{87}
+\contentsline {subsection}{\numberline {4.4.1}Choosing a Prior}{88}
+\contentsline {section}{\numberline {4.5}Inferring the Parameters and the sources}{92}
