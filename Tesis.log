@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.7.20)  10 OCT 2017 20:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.7.20)  11 OCT 2017 20:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -680,11 +680,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 2098--2100
 
  []
 
-[76]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [77]
-Underfull \hbox (badness 10000) in paragraph at lines 2171--2174
+[76] [77]
+Underfull \hbox (badness 10000) in paragraph at lines 2174--2177
 
  []
 
@@ -695,11 +692,14 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [79]
-[80] <./FigChap4/sensitivityPlot.jpg, id=287, 481.8pt x 481.8pt>
+Underfull \vbox (badness 1648) has occurred while \output is active []
+
+ [80]
+<./FigChap4/sensitivityPlot.jpg, id=287, 481.8pt x 481.8pt>
 File: ./FigChap4/sensitivityPlot.jpg Graphic file (type jpg)
 
 <use ./FigChap4/sensitivityPlot.jpg>
-Package pdftex.def Info: ./FigChap4/sensitivityPlot.jpg used on input line 2257
+Package pdftex.def Info: ./FigChap4/sensitivityPlot.jpg used on input line 2258
 .
 (pdftex.def)             Requested size: 361.3491pt x 361.3491pt.
 
@@ -709,12 +709,12 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [82 <./FigChap4/sensitivityPlot.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 2267--2271
+Underfull \hbox (badness 10000) in paragraph at lines 2268--2274
 
  []
 
 [83]
-Underfull \vbox (badness 8170) has occurred while \output is active []
+Underfull \vbox (badness 2503) has occurred while \output is active []
 
  [84]
 <./FigChap4/experimentalDesign64.jpg, id=301, 481.8pt x 481.8pt>
@@ -722,30 +722,21 @@ File: ./FigChap4/experimentalDesign64.jpg Graphic file (type jpg)
 
 <use ./FigChap4/experimentalDesign64.jpg>
 Package pdftex.def Info: ./FigChap4/experimentalDesign64.jpg used on input line
- 2373.
+ 2367.
 (pdftex.def)             Requested size: 289.08221pt x 289.08221pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [85]
-Overfull \hbox (1.23622pt too wide) in paragraph at lines 2379--2382
-\OT1/cmr/m/n/12 Bayesian frame-work to es-ti-mate the val-ues for the pa-ram-e-
-ters and the sources.
- []
-
-
-Overfull \hbox (4.61583pt too wide) in paragraph at lines 2383--2383
+Overfull \hbox (4.61583pt too wide) in paragraph at lines 2374--2374
 []\OT1/cmr/bx/n/17.28 Bayesian Frame-work for the In-verse Prob-
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 1019) has occurred while \output is active []
 
- [86 <./FigChap4/experimentalDesign64.jpg>]
+ [86 <./FigChap4/experimentalDesign64.jpg>] [87]
 Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [87]
-Underfull \vbox (badness 5008) has occurred while \output is active []
 
  [88]
 [89]
@@ -763,37 +754,35 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 File: ./FigChap4/lambdaEmul.jpg Graphic file (type jpg)
 
 <use ./FigChap4/lambdaEmul.jpg>
-Package pdftex.def Info: ./FigChap4/lambdaEmul.jpg used on input line 2620.
+Package pdftex.def Info: ./FigChap4/lambdaEmul.jpg used on input line 2615.
 (pdftex.def)             Requested size: 240.8994pt x 240.8994pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
  [94]
-Underfull \vbox (badness 2564) has occurred while \output is active []
-
- [95 <./FigChap4/lambdaEmul.jpg>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [96]
-<./FigChap4/traces.jpg, id=341, 481.8pt x 481.8pt>
+ [95 <./FigChap4/lambdaEmul.jpg>] <./FigChap4/traces.jpg, id=338, 481.8pt x 481
+.8pt>
 File: ./FigChap4/traces.jpg Graphic file (type jpg)
- <use ./FigChap4/traces.jpg>
-Package pdftex.def Info: ./FigChap4/traces.jpg used on input line 2681.
+
+<use ./FigChap4/traces.jpg>
+Package pdftex.def Info: ./FigChap4/traces.jpg used on input line 2676.
 (pdftex.def)             Requested size: 337.25769pt x 337.25769pt.
 
+Underfull \vbox (badness 7221) has occurred while \output is active []
+
+ [96]
 [97 <./FigChap4/traces.jpg>]
 <./FigChap4/histogramsI.jpg, id=346, 481.8pt x 481.8pt>
 File: ./FigChap4/histogramsI.jpg Graphic file (type jpg)
 
 <use ./FigChap4/histogramsI.jpg>
-Package pdftex.def Info: ./FigChap4/histogramsI.jpg used on input line 2756.
+Package pdftex.def Info: ./FigChap4/histogramsI.jpg used on input line 2751.
 (pdftex.def)             Requested size: 216.80798pt x 216.80798pt.
 
 <./FigChap4/histogramsII.jpg, id=347, 481.8pt x 481.8pt>
 File: ./FigChap4/histogramsII.jpg Graphic file (type jpg)
 
 <use ./FigChap4/histogramsII.jpg>
-Package pdftex.def Info: ./FigChap4/histogramsII.jpg used on input line 2763.
+Package pdftex.def Info: ./FigChap4/histogramsII.jpg used on input line 2758.
 (pdftex.def)             Requested size: 216.80798pt x 216.80798pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -804,7 +793,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 File: ./FigChap4/qUncertainty.jpg Graphic file (type jpg)
 
 <use ./FigChap4/qUncertainty.jpg>
-Package pdftex.def Info: ./FigChap4/qUncertainty.jpg used on input line 2822.
+Package pdftex.def Info: ./FigChap4/qUncertainty.jpg used on input line 2817.
 (pdftex.def)             Requested size: 240.8994pt x 240.8994pt.
  [101 <./FigChap4/qUncertainty.jpg>]
 (./Tesis.bbl [102] [103
@@ -844,7 +833,7 @@ texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fo
 nts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fon
 ts/type1/public/rsfs/rsfs10.pfb>
-Output written on Tesis.pdf (108 pages, 2369406 bytes).
+Output written on Tesis.pdf (108 pages, 2368163 bytes).
 PDF statistics:
  447 PDF objects out of 1000 (max. 8388607)
  297 compressed objects within 3 object streams

@@ -2121,13 +2121,15 @@ to decide the values of these parameters and the emission rates using the experi
 also quantify the uncertainties that are associated with the values of the parameters.
 
 
-To estimate the parameters $p$, $z_{0}$, $z_{i}$, $L$, $z_{cut}$  and  the four sources sources, we count on  experimental measurements 
+To estimate the parameters $p$, $z_{0}$, $z_{i}$, $L$, $z_{cut}$  and  the four sources sources, we use the  experimental measurements 
 of the zinc deposition at the sites 
-$R_{1},\ldots,R_{9}$ (see Figure \ref{figAereal}) over one month period. The mathematical model described so far,
-approximates the physics of the 
-concentration, not the deposition. Thus is necessary to make the connection between the solution $C$ of equation (\ref{eqnDifussivityFinalForm})
-and the deposition of zinc at $z=0$. If $v_{set}$ is the settling velocity of zinc particles,
-it is not hard to see that the deposition per unit area at a point $(x,y,0)\in\Pi$ during the interval of time $(0,T]$ is given by
+$R_{1},\ldots,R_{9}$ (see Figure \ref{figAereal}) over a one month period. 
+
+The mathematical model described so far,
+concerns the dispersion of particles and not the deposition. 
+Thus is necessary to make the connection between the solution $C$ of equation (\ref{eqnDifussivityFinalForm})
+and the deposition of zinc at the ground level. If $v_{set}$ is the settling velocity of zinc particles,
+then the deposition per unit area at a point $(x,y,0)\in\Pi$ during the interval of time $(0,T]$ is given by
 \begin{equation}\label{eqnw}
 w(x,y,T)=\int_{0}^{T}C(x,y,0,t)v_{set}dt.
 \end{equation}
@@ -2136,67 +2138,68 @@ Since the nine measurements $R_{1},\ldots,R_{9}$ were obtained by the placement 
 cross-sectional area,
 we can readily approximate the total deposition during the interval $(0,T]$ at the $i$-th site as
 \begin{equation*}
-W(x_{i},y_{i},T)=\int_{dust-fall}w(x,y,T)dxdy\approx w(x_{i},y_{i},T)\Delta A,
+W(x_{i},y_{i},T)=\int_{dustfall jar}w(x,y,T)dxdy\approx w(x_{i},y_{i},T)\Delta A,
 \end{equation*}
-where $\Delta A$ is the cross-sectional area of the dust-fall jar. To make notation lighter we define
+where $\Delta A$ is the cross-sectional area of the dust-fall jar. Furthermore we define
 \begin{equation}\label{eqnW}
 M_{i}=W(x_{i},y_{i},T)\qquad\text{ for }i=1,\ldots,9.
 \end{equation}
-The scalar $M_{i}$ is the zinc deposition at the site $R_{i}$. From now on we assume $T$ to 
+The scalar $M_{i}$ is a measurement of the  zinc deposition at the site $R_{i}$. From now on we assume $T$ to 
 be one month. 
 
 From equations (\ref{eqnw}) and (\ref{eqnW}),
-we infer that the map that takes concentration into deposition is linear. Also from equation
+we infer that the mapping from concentration to depositions is linear. Also from equation
 (\ref{eqnDifussivityFinalForm}) it is straightforward to check that the concentration $C$
-is related to the source $s(\x,t)$ by a linear partial differential operator. Since composition
-of linear maps is linear, we conclude that the map that takes sources to deposition is linear.
-Since we have four different sources, which we denote by $q_{1},q_{2},q_{3},q_{4}$, we may write
+is related to the source $s(\x,t)$ by the solution operator of the  partial differential equation (\ref{eqnDifussivityFinalForm}),
+which is also linear. Since composition
+of linear maps is linear, we conclude that the mapping from the emission rates $q_{j}$ to the depositions $M_{j}$ is linear .
+Therefore we can write
 \begin{equation}\label{eqnLinComb}
 M_{i}=\sum_{j=1}^{4}a_{ij}(p,z_{0},z_{i},L,z_{cut})q_{j}\qquad\text{for }i=1,\ldots, 9.
 \end{equation}
-The coefficients $a_{ij}$ capture the dependence of the deposition with respect to the
-parameters $p,z_{0},z_{i},L,z_{cut}$, which in general is non-linear. If 
-we define the vectors
+The coefficients $a_{ij}$ capture the dependence of the deposition on the model 
+parameters $p,z_{0},z_{i},L,z_{cut}$, which is non-linear in general. 
+Define the vectors
 \begin{eqnarray*}
 \y& = &\begin{bmatrix}
 M_{1}&\ldots & M_{9}
 \end{bmatrix}^{T}, \\
 \textbf{q}&=&\begin{bmatrix}
-q{1}&q_{2}&q_{2}&q_{4}
+q_{1}&q_{2}&q_{2}&q_{4}
 \end{bmatrix}^{T},
 \end{eqnarray*}
-we can write equation (\ref{eqnLinComb}) more compactly as
+and write equation (\ref{eqnLinComb}) more compactly as
 \begin{equation}\label{eqnLinRel}
 \y=A(p,z_{0},z_{i},L,z_{cut})\textbf{q}.
 \end{equation}
-Here $A$ is a $9\times 4$ matrix whose coefficients are $a_{ij}(p,z_{0},z_{i},L,z_{cut})$.
+Here $A$ is a $9\times 4$ matrix whose coefficients are the $a_{ij}(p,z_{0},z_{i},L,z_{cut})$.
 \newline
 
-Equation (\ref{eqnLinRel}) models the relation between deposition and all
-parameters involved in equation (\ref{eqnDifussivityFinalForm}). However we do not 
+Equation (\ref{eqnLinRel}) models the relationship between deposition values and all other
+parameters  in equation (\ref{eqnDifussivityFinalForm}). However we do not 
 know an expression for the 36 coefficients $a_{ij}$ as a function of
-$(p,z_{0},z_{i},L,z_{cut})$. To find such expression it is necessary
-to solve equation (\ref{eqnDifussivityFinalForm}). There is no known closed
-form of this equation, hence a numerical approximation is necessary. If we
-had unlimited computational or time budget we could solve equation 
+$(p,z_{0},z_{i},L,z_{cut})$. To find such  an expression, we need 
+to solve equation (\ref{eqnDifussivityFinalForm}), but the solution does not have a known closed
+form and  a numerical approximation is needed.
+\\
+If we had unlimited computational  budget we could solve equation 
 (\ref{eqnDifussivityFinalForm}) for as many different configurations
-of the parameters $(p,z_{0},z_{i},L,z_{cut})$ as we want and use these
-results to approximate the coefficients $a_{ij}$. Clearly this 
+of the parameters $(p,z_{0},z_{i},L,z_{cut})$ as we want and get a good
+approximation to the coefficients $a_{ij}$. Clearly this 
 is not feasible. A more realistic approach is to solve equation (\ref{eqnDifussivityFinalForm})
-for a number of different configurations of $(p,z_{0},z_{i},L,z_{cut})$ that does not
-exceed our computational and time budget. Then use Gaussian processes
-to interpolate at the configurations we did not solve. Before we proceed to
-use Gaussian processes for the interpolation let us see if is possible
-to reduce the dimensionality of the parameter space. 
-To this end, we do  sensitivity analysis, as explained in Chapter 2, Section \ref{subsecSensitivity}.
+for a number of different values of $(p,z_{0},z_{i},L,z_{cut})$ and construct and approximation to $a_{ij}$
+using these limited runs. We shall use the use Gaussian processes approach of Section \ref{secGPs}
+to construct such approximation. Before we construct the
+Gaussian processes we perform a sensitivity analysis as described in Section \ref{subsecSensitivity} to see if is possible
+to reduce the dimensionality of the parameter space in order to further reduce to cost of constructing the Gaussian processes. 
 
 
 \section{Sensitivity Analysis}
-Our starting point is to consider the set of  maps $\{\varphi_{x,y}\}_{x,y\in\mathbb{R}^{2}}$. The input
+Our starting point is to define the set of  maps $\{\varphi_{x,y}\}_{x,y\in\mathbb{R}}$. The input
 for each map is a point $(p,z_{0},z_{i},L,z_{cut})$ in the parameter space
-and the output is the deposition value at the point $(x,y)$. The domain
-of each map is the set of allowed values for the parameters. The
-range of allowed values for the set of parameters is shown in Table  \ref{tabRanges}\cite{seinfeld1998atmospheric}.
+and the output is the deposition value at the location $(x,y)$. The domain
+of each map the
+range of allowed values for the set of parameters as shown in Table  \ref{tabRanges}, taken from \cite{seinfeld1998atmospheric}.
 
 
 \begin{table}[H]
@@ -2217,37 +2220,35 @@ Monin-Obukhov length (m) & $L$ & ${[}-500,-1{]}$\tabularnewline
 Cut-off length (m) & $z_{cut}$ & ${[}1,5{]}$\tabularnewline
 \hline 
 \end{tabular}
-\caption{Parameters under study and their accepted ranges}
+\caption{Model of interest to out sensitivity  study and their accepted ranges}
 \label{tabRanges}
 \end{table}
-We perform a sensitivity analysis as explained in Chapter 2, Section \ref{subsecSensitivity},
+We perform a sensitivity analysis as explained in Section \ref{subsecSensitivity},
 on the set of maps $\{\varphi_{x_{i},y_{i}}\}_{i=1}^{9}$ ,
 where $(x_{i},y_{i})$ represent the location $R_{i}$ in Figure \ref{figAereal}.
 To make computations
 simpler we map bijectively the set of ranges of the parameters into the five-dimensional
-unit hypercube $[0,1]^{5}$. Thus, without lost of generality we may assume the deposition maps are of the form 
+unit hypercube. Thus, without lost of generality we may assume the deposition maps are of the form 
 \begin{equation*}
-\varphi_{x_{i},y_{i}}:[0,1]^{5}\subset\mathbb{R}^{5}\rightarrow\mathbb{R}\qquad\text{for }i=1,2,\ldots,9.
+\varphi_{x_{i},y_{i}}:[0,1]^{5}\subset\mathbb{R}^{5}\rightarrow [0,\infty)\qquad\text{for }i=1,2,\ldots,9.
 \end{equation*} 
 
-Recall from  Chapter 2, Section \ref{subsecSensitivity}, that in order to estimate
-Sobol indices is necessary to perform numerical integrations over the integrands $\{\varphi_{x_{i},y_{i}}\}_{i=1}^{9}$.
-These integrals are five-dimensional, hence a quadrature method is not feasible. It is
-necessary to use Monte Carlo integration. In order to implement it, is necessary
-to know the output of $\{\varphi_{x_{i},y_{i}}\}_{i=1}^{9}$ at any point in their domain. In general we do not
-know the output of the function of interest beyond a very limited number of points. 
-To extrapolate any function from the set $\{\varphi_{x_{i},y_{i}}\}_{i=1}^{9}$
-at  points in its domain where we do not know the output, we use an emulator using Gaussian processes as
-explained in Chapter 2, Section \ref{secGPs}.
-
+Recall from  Section \ref{subsecSensitivity}, that in order to estimate the
+Sobol indices it is necessary to perform numerical integrations over the integrands $\{\varphi_{x_{i},y_{i}}\}_{i=1}^{9}$.
+These are five-dimensional integrals, and so, usual  quadrature methods are not suitable. It is
+necessary to use Monte Carlo integration. But Monte Carlo integration requires us to evaluate 
+$\{\varphi_{x_{i},y_{i}}\}_{i=1}^{9}$ at a large number of points, which can be expensive.
+To overcome this issue we use Gaussian process emulation as described in Section \ref{secGPs}.
+\\
 Implementing the routines to  emulate  and estimate
  Sobol indices is a time consuming task. In order to optimize our time budget, we used
-the R packages DiceKriging and Sensitivity \cite{DiceKriging,sensitivity} for the 
+the R packages DiceKriging and Sensitivity \cite{DiceKriging,sensitivity} to construct the
 emulator and to  estimate the total
-effect Sobol index for each of the maps  $\{\varphi_{x_{i},y_{i}}\}_{i=1}^{9}$.  
+effect Sobol indices for each of the maps  $\{\varphi_{x_{i},y_{i}}\}_{i=1}^{9}$.  
 The DiceKriging package allows us to use five different kernels for the emulation.
-In order to consider the influence in using different kernels for the estimation  the Sobol
-indices, we calculate the indices five times, one for each different kernel. 
+In order to consider the influence of different kernels on the Sobol
+indices, we calculate the indices five times, one for each different kernel and summarize
+the results in the box plots in Figure \ref{figSensitivityPlot}. 
 %The results obtined for the sensitivity analysis
 %using each of the five different kernels are shown in the box plots in Figure \ref{figSensitivityPlot}.
 
@@ -2259,59 +2260,51 @@ indices, we calculate the indices five times, one for each different kernel.
 The dashed line represents the value of zero.}
 \label{figSensitivityPlot}
 \end{figure}
-Figure $\ref{figSensitivityPlot}$ shows that two of the five variables do not account for the variance 
-in the deposition, namely, $z_{i}$ and $z_{cut}$. Therefore we can reduce the dimensionality of the parameter
+Figure $\ref{figSensitivityPlot}$ shows that two of the five variables, namely $z_{i}$ and $z_{cut}$, have very little influence on the variance 
+in the deposition. Therefore we ignore these and reduce the dimensionality of the parameter
 space from five to three. In this case we can write equation (\ref{eqnLinRel}) as 
 \begin{equation*}
 \y=A(p,L,z_{0})\textbf{q}.
 \end{equation*}  
 From now on we use the convention that the parameters $z_{i}$ and $z_{cut}$ 
 are  fixed at the values 100 and 2 respectively (see \cite{hosseini2016airborne}).  
+We now turn our attention in how to find an approximation for the 
+matrix $A(p,L,z_{0})$.
 \newline
 
-In order to obtain a closed expression for the matrix $A$ it is necessary to solve 
-equation (\ref{eqnDifussivityFinalForm}) along with its boundary condition. There is no known close
-form to this equation, hence is necessary to use numerical methods to solve it. Then,
-use these results to obtain information about $A$. Solving equation (\ref{eqnDifussivityFinalForm})
-is a computationally intensive task. Is not feasible to solve it for a wide range
-of different values of $(p,L,z_{0})$. Instead, to 
-learn about $A$ we choose an small number of different values of the parameters $(p,L,z_{0})$, and
-for the rest of the points we  will use an emulator.
 
 
 
 \section{Building an  Emulator for $A(p,L,z_{0})$}
 
-To solve numerically
-equation (\ref{eqnDifussivityFinalForm}), we used a finite volume code. The details
-of the implementation are given in \cite{hosseini2016airborne}. Running the 
-volume code on an $30\times 30\times 30$ grid takes about 30 minutes. Hence the 
+To solve 
+equation (\ref{eqnDifussivityFinalForm}) numerically, we use the finite volume solver of \cite{hosseini2016airborne}. The details
+ are given in \cite{hosseini2016airborne}. Running the  finite
+volume code on a $30\times 30\times 30$ grid takes from 30 minutes and up to a few hours. Hence the 
 necessity to use Gaussian process regression to create an emulator
-as explained in Chapter 2, Section \ref{secFindingLike}.
+Section \ref{secGPs}.
 
-To construct the emulator we need a training set. For that end we create an space filling design for 
+To construct the emulator we need a training set. For this purpose we create a space filling design for 
 the parameter space $(p,L,z_{0})$, as explained
-in Chapter 2, Section \ref{secDesignofExperiments}. In  particular
-we will use a maximin design. 
-Finding a maximin design
-is an optimization problem, that is analytically  challenging to solve, hence is
-necessary to use numerical approximations. For the optimization  we used 
-the particle swarm algorithm. The reader interested in this algorithm
-is referred to \cite{arora2015optimization}.  
+in Section \ref{secDesignofExperiments} using  a maximin design. 
+Finding the optimal  maximin design
+is  challenging , hence we
+ use a numerical approximation. We use 
+the particle swarm algorithm for the optimization. See
+ \cite{arora2015optimization} for details.  
 
 Considering our time and computational budget, we  chose to 
 do the experimental design with $n=64$ points. The maximin
 design obtained by using a particle swarm for the 
 optimization is shown in Figure \ref{figParticleSwarm}.
 
-With the experimental design completed, the next step is to run the finite volume code 
-on each of the different 64 configurations of parameters. We repeat this step four
+With the experimental design at hand, we run the finite volume solver 
+for each of the different 64 configurations of parameters. We repeat this step four
 times. The first time we run the 64 simulations by fixing the first source $q_{1}$ to 1
-and the other three sources to zero. The second time we fix the second source $q_{2}$ to 1
-and the other three sources to zero. For the third and fourth step we  fix the 
-third and fourth source to one respectively, and the rest of the sources to zero. The reason
+and the other three sources to zero, the second time we fix the second source $q_{2}$ to 1
+and the other three sources to zero and so on. The reason
 for this implementation is that we need to connect the output of the finite
-volume code, which is the deposition vector $\y$ at the nine sites $R_{1},R_{2},\ldots,R_{9}$
+volume solver, which is the deposition vector $\y$ at the nine sites $R_{1},R_{2},\ldots,R_{9}$
 with the components of the matrix $A(p,L,z_{0})$. Recall that the relation between these two quantities 
 is given by equation (\ref{eqnLinRel}), explicitly 
 \begin{equation}\label{eqnReminder}
@@ -2347,6 +2340,7 @@ a_{9i}(p^{*},L^{*},z_{0}^{*})
 where the RHS is the $i$-th column of $A$. This result shows why
 it is necessary to run four times each of the 64 simulations to 
 obtain the training set for the emulator of $A$.
+
 The emulator for $A$ will be represented by $\widehat{A}$. The
 construction of $\widehat{A}$ is obtained by 
 using Gaussian processes as explained in Chapter 2, Section \ref{secGPs}, and
@@ -2376,12 +2370,13 @@ experimental measurement errors.
 \end{figure}
 
 
-After constructing the emulator, we are now in position to apply
-the Bayesian framework to estimate the values for the parameters and the sources. 
-This is going to be done in the next section.
 
 \section{Bayesian Framework for the Inverse Problem}
 
+With the emulator at hand, we are now in position to apply
+the Bayesian framework to estimate the values of the parameters and the source emission rate. 
+
+%I ended here
 Recall that in the Bayesian framework, to solve an inverse problem
 is equivalent to find the posterior distribution of the parameters
 of interest. In our case we want to find the posterior
