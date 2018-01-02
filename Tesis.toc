@@ -18,4 +18,4 @@
 \contentsline {section}{\numberline {4.3}Building an Emulator for $A(p,L,z_{0})$}{82}
 \contentsline {section}{\numberline {4.4}Bayesian Framework for the Inverse Problem}{85}
 \contentsline {subsection}{\numberline {4.4.1}Choosing a Prior}{86}
-\contentsline {section}{\numberline {4.5}Inferring the Parameters and the sources}{91}
+\contentsline {section}{\numberline {4.5}Inferring the Parameters and the Sources}{91}

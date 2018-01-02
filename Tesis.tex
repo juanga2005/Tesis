@@ -92,14 +92,15 @@ Burnaby B.C - May  2017
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Chapter 1: Introduction %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Introduction}
 
-With the concern for climate change and anthropogenic impact on the environment, 
-the importance of atmospheric dispersion models has grown over the years. Unfortunately,
-atmospheric dispersion model's are not  completely accurate \cite{chatwin1982use,lewellen1989meteorological}. 
+With the concern for climate change and anthropogenic impact on the environment, such as 
+airborne emissions of pollutants from industrial sites, have made
+the importance of atmospheric dispersion models to grown over the years. Unfortunately,
+atmospheric dispersion models are not  completely accurate \cite{chatwin1982use,lewellen1989meteorological}. 
 Although the precision of a model can be improved at the expense
 of adding more parameters that explain the missing physics in the model, even
-in this case, there is a limit in how accurate a model can be, due to uncertainties
+in this case, there is a limit in how accurate a model can be due to uncertainties
 in measurement of the relevant variables.
-The reason for this, comes from the fact that sources of uncertainty
+The reason for this comes from the fact that sources of uncertainty
 are diverse and different in nature, following  \cite{rao2005uncertainty}
 we have 
 
@@ -112,10 +113,10 @@ we have
 Despite this difficulty in obtaining accurate predictions
 there is a  growing necessity to develop
 more accurate and computationally efficient atmospheric dispersion models in practice \cite{leelHossy2014dispersion}. 
-The reason of computationally efficiency is because atmospheric models are usually expressed as systems
+The need for computational efficiency derives mainly from the fact that atmospheric models are usually expressed as systems
 of partial differential equations, whose simulation is computationally expensive. This situation may hinder
 the model's ability to be used in real situations. One of the goals of this work is to show how to
-use computationally demanding models in a cheap fashion. 
+approximate computationally demanding models with computationally cheap surrogates. 
 
 The mathematical model for atmospheric dispersion that we are 
 interested is the advection-diffusion equation
@@ -133,7 +134,7 @@ with strengths $\{q_{j}\}_{j=1}^{4}$ respectively. The values of the wind veloci
 and the diffusivity tensor $\textbf{D}$ depend upon five parameters. These parameters are going
 to be explained in detail in Chapter 4. For the moment it is enough to consider these
 parameters to be represented in a five dimensional vector denoted by  $\Theta$.
-By replacing the linear operator $\dv(\vv+\textbf{D}\nabla)$ on the LHS by $L(\Theta)$, to make the dependence on $\Theta$ explicit, we can write equation \eqref{eqnModelIntro}
+By replacing the linear operator $\dv(\vv+\textbf{D}\nabla)$ on the left hand side by $L(\Theta)$, to make the dependence on $\Theta$ explicit, we can write equation \eqref{eqnModelIntro}
 more compactly as
 \begin{equation}\label{eqnParamtric}
 \frac{\partial C(\x,t)}{\partial t}+L(\Theta)C(\x,t)=\sum_{j=1}^{4}q_{j}\delta(\x-\x_{j}).
@@ -143,12 +144,12 @@ In practice, the concentration of particulate matter is not measured directly,
 what is measured instead is the deposition in some region after some interval of time. Given the concentration $C$
 we can calculate the deposition  in a region $R\subset\mathbb{R}^{2}$ after $T$ units of time as
 \begin{equation*}
-\int_{R}\int_{0}^{T} C(x,y,0,t)v_{set}dtdxdy,
+\int_{R}\int_{0}^{T} C(x,y,0,t)v_{set}dt\,dx\,dy,
 \end{equation*}
 where $v_{set}$ is the settling velocity of zinc particles. 
-In this work we are mainly concerned  in estimating the sources' strength
+In this work we are mainly concerned  in estimating the source strengths
 given a finite set of deposition measurement at different locations.
-The problem of estimating the sources' strength from deposition measurements
+The problem of estimating the source strengths from deposition measurements
 is known as source inversion.
 More precisely, in this work, we want to estimate the source strength vector (or just sources for short)
 \begin{equation*}
@@ -156,13 +157,13 @@ More precisely, in this work, we want to estimate the source strength vector (or
 \end{equation*}
 given measurements of the deposition.
 This problem is ill-posed\cite{enting1990inverse} in the sense of Hadamard.
-Uncertainty in a model's prediction capabilities gets worst if the problem
+Uncertainty in a model's prediction capabilities gets worse if the problem
 is ill-posed. For example in an ill-posed model, small uncertainties
-in the experimental data or parameters of the model, translate
+in the experimental data or parameters of the model translate
 into significant variations in the output.
 
 Despite the ill-posed nature of the source inversion problem, different
-approaches have been envisioned in the literature. Lin and Chang \cite{lin2002relative} used an air
+approaches have been proposed in the literature. Lin and Chang \cite{lin2002relative} used an air
 trajectory statistical approach to estimate
 the strength of different sources of volatile organic compounds
 from anthropogenic origin. Stockie and Lushi \cite{lushi2010inverse} 
@@ -175,12 +176,12 @@ these approaches have in common is that they provide a point
 estimate for the strength of the sources of interest but
 no measure of uncertainty about the estimate.
 
-The Bayesian  framework has been used in the source inversion
+The Bayesian  framework has been applied to solving the source inversion
 problem, to obtain point estimates and the uncertainties associated 
-with them. Sohn et.al \cite{sohn2002rapidly} developed an 
+with them. Sohn et al. \cite{sohn2002rapidly} developed an 
 algorithm to obtain estimates and uncertainties for
 the location and strength of pollutant sources in buildings.
-They combined Bayes' rule with data obtained from a COMIS simulation . 
+They combined Bayes' rule with data obtained from a COMIS simulation. 
 Hosseini and Stockie \cite{hosseini2016bayesian}
 used a Gaussian plume model coupled with 
 experimental data  to estimate
@@ -190,6 +191,7 @@ experimental data from the transport and dispersion
 experiment ``The Muck Urban Setting Test", Keats \textit{et al}. \cite{keats2007bayesian}
 obtained, using the Bayesian framework, probability distributions for source strengths
 and  locations. 
+\\
 In this work we apply the Bayesian framework  to estimate the source 
 strength vector $\q$
 given a set of field measurements denoted by $\y$. Unlike
@@ -215,10 +217,10 @@ The advantage of this method is that we are taking into account the experimental
 available and we let the data determine the most likely value, given the observations.
 Furthermore we use a method to deal with computationally expensive models.
 To simulate equation \eqref{eqnModelIntro} we use a finite volume code, whose
-computational overhead is high, therefore, using it several times to obtain an approximation for
+computational overhead is high, therefore using it several times to obtain an approximation for
 the likelihood $\like(\y|\Theta,\q)$ is not feasible. Instead we run the code 
 for a small  number of different
-combinations of parameters and sources, and construct an emulator using
+combinations of parameters and sources and construct an emulator using
  Gaussian process regression to extrapolate the results
 of the simulation to other combinations of parameters and sources. We then use
 Markov Chain Monte Carlo Methods to sample  the posterior distribution.
@@ -1856,10 +1858,10 @@ is not realistic, inference could not be done or  may not be reliable even with 
 
 In this chapter we study
 the dispersion of zinc from a lead-zinc smelter in Trail, British Columbia, Canada,
-operated by Teck Industries Ltd.  We consider four smokestacks. Our ultimate goal
-is to estimate the contribution of each stack  to the total amount of zinc
+operated by Teck Resources Ltd.  We consider four zinc sources. Our ultimate goal
+is to estimate the contribution of each source  to the total amount of zinc
 that is being released by the smelter. We have access to
-measurements of  zinc depositions at nine different locations as well as field wind velocity data 
+measurements of  zinc depositions at nine different locations as well as wind field velocity data 
 at a location near the smelter. We also know prior engineering estimates of the zinc emission 
 provided by the company.
 An aerial photograph of the region  of interest with 
@@ -1870,7 +1872,7 @@ as $R_{1}$ to $R_{9}$.
 
 In order to  estimate the emission rates, we shall use a similar approach to that of Section 3.1.
 In Chapter 3 we assumed  we had access to  a mathematical model that approximates
-the physics of processes of interest. Here, it is necessary to develop, such
+the physics of processes of interest. Here, it is necessary to develop such
  model for the pollutant dispersion in the
 atmosphere from scratch.
 
@@ -1896,7 +1898,7 @@ the location of the measurement devices. }
 
 \section{A Mathematical Model for Pollutant Dispersion}
 Our starting point  is the conservation of mass for
-particulate zinc in the atmosphere. Consider a closed region  $\Lambda\subset\mathbb{R}^{3}$ with $m$ units of   mass
+particulate zinc in the atmosphere. Consider a closed region  $\Lambda\subset\mathbb{R}^{3}$ with a mass $m$ 
 of zinc within it. 
 Assume
 that in the interior of $\Lambda$ there is  a source of  zinc and that zinc is flowing throughout 
@@ -1908,13 +1910,12 @@ per unit time, of zinc that is flowing through the boundary is given by the expr
 \int_{\partial\Lambda}c(\x,t)\vv(\x,t)\cdot\hat{\textbf{n}}dA,
 \end{equation*}
 where  $\vv(\x,t)$ represents the wind velocity at a point $\x$ at time $t$ and $c(\x,t)$ in units of mass per units of volume is the concentration of zinc at a point $\x$
-at time $t$. The vector $\textbf{n}$ is the unit normal vector to $\partial\Lambda$ and $dA$ is an area element of it.
+at time $t$. The vector $\textbf{n}$ is the unit normal vector to $\partial\Lambda$ and $dA$ is an area element.
  On the other hand
 the rate of change of total mass $m$ at a time $t$ inside $\Lambda$  can be written as
 \begin{equation*}
 \frac{dm(t)}{dt}=\frac{d}{dt}\int_{\Lambda}c(\x,t)dV,
 \end{equation*}
-
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.5]{./FigChap4/controlVolume}
@@ -1922,7 +1923,7 @@ the rate of change of total mass $m$ at a time $t$ inside $\Lambda$  can be writ
 \label{figControlVolume}
 \end{figure}
 
-where $dV$ is an element of volume in $\Lambda$. Finally, the amount of zinc that comes from the source at a time $t$ is given by
+\noindent where $dV$ is an element of volume in $\Lambda$. Finally, the amount of zinc that comes from the source at a time $t$ is given by
 \begin{equation*}
 \int_{\Lambda}s(\x,t)dV,
 \end{equation*}
@@ -1934,8 +1935,8 @@ we can write
 \frac{d}{dt}\int_{\Lambda}c(\x,t)dV=-\oint_{\partial\Lambda}c(\x,t)\textbf{v}\cdot\textbf{n}dA+\int_{\Lambda}s(\x,t)dV.
 \end{equation*}
 Since we picked the orientation of $\partial\Lambda$ with the normal pointing outwards, it is
-necessary to put a minus in front of the surface integral for consistency. Assuming that
-the concentration and velocity field are continuous functions of time and space, an 
+necessary to put a minus sign in front of the surface integral for consistency. Assuming that
+the concentration and the velocity field are continuous functions of time and space, a 
 straightforward application of the divergence theorem and Leibniz rule for integrals gives
 \begin{equation*}
 \int_{\Lambda}\left(\frac{\partial c(\x,t)}{\partial t}+\nabla\cdot(c\textbf{v})-s(\x,t)\right)dV=0.
@@ -1945,7 +1946,8 @@ Since the region $\Lambda$ was arbitrary, the previous equality holds if and onl
 \frac{\partial c(\x,t)}{\partial t}+\nabla\cdot(c\textbf{v})=s(\x,t).
 \end{equation}
 If we apply this equation to estimate the concentration of zinc using real wind data measured experimentally, we 
-will find that the prediction for the concentration is not completely accurate, even if the model is completely accurate. 
+will find that the prediction for the concentration is not completely accurate, even if the model is believed to 
+be an accurate representation of the underlying physics and the model parameters are estimated as accurately as possible.
 One of the reasons for this is that at small scales, there
 are random fluctuations in the wind velocity that are very difficult to measure. To model this we follow \cite{seinfeld1998atmospheric}
 and write the wind velocity field as
@@ -1963,8 +1965,8 @@ variable as well. In this case we describe $c$ as the contribution of two terms 
 \begin{equation}\label{eqnNewC}
 c(\x,t):=\E(c)(\x,t)+c(\x,t)',
 \end{equation}
-where $c'$ satisfies $\E(c(\x,t)')=0$. The intuition behind this definition is the following: if we 
- measure the concentration at a point $\x$ and at time $t$ a large number of times under identical initial and boundary conditions,  then, we expect the 
+where $c'$ satisfies $\E(c(\x,t)')=0$. The motivation behind this definition is the following: if we 
+ measure the concentration at a point $\x$ and at time $t$ a large number of times under identical initial and boundary conditions,  then we expect the 
 measurements to have an underlying average behavior $\E(c)(\x,t)$ plus some  noise $c(\x,t)'$.
 By plugging   equation (\ref{eqnNewC}) into equation (\ref{eqnNewRandom}) we obtain
 \begin{equation}\label{eqnInconsistent}
@@ -1979,7 +1981,7 @@ We use the constitutive equation
 \end{equation}
 The term $\textbf{D}$ is  a rank two tensor called the eddy diffusivity tensor. This tensor is assumed 
 to be symmetric, hence is always diagonalizable. For simplicity we assume that we are working
-on the principal axis of $\textbf{D}$ \cite{seinfeld1998atmospheric}, hence 
+on the principal axes of $\textbf{D}$ \cite{seinfeld1998atmospheric}, hence 
 \begin{equation*}
 \textbf{D}=\begin{bmatrix}
 D_{xx}& 0 & 0\\
@@ -1996,7 +1998,7 @@ notation simpler,  we set $C(\x,t):=\E(c)$. Note that $C$ has the same units
 as $c$. We interpret $C(\x,t)$ as the expected concentration that we would measure
 at a point $\x$ at time $t$.
 
-We now turn our attention to the source density. W we assume point-wise emission sources. Suppose there are $n$ sources 
+We now turn our attention to the source density. We assume point-wise emission sources. Suppose there are $n$ sources 
  at the points $\x_{1},\x_{2},\ldots,\x_{n}$,
 then we assume that $s(\x,t)$ has the following the form
 \begin{equation}\label{eqnSourceDensity}
@@ -2024,12 +2026,12 @@ the assumptions on the diffusivity tensor and the wind velocity field in the nex
 
 
 \subsection{Assumptions on the Diffusivity Tensor}
-Following \cite{monin1954basic},  the vertical diffusivity coefficient (in the $z$ direction) $D_{zz}$ is modelled by the following expression
+Following \cite{monin1954basic},  the vertical diffusivity coefficient (in the $z$ direction) $D_{zz}$ is represented by the following expression
 \begin{equation}\label{eqnEddyVertical}
 D_{zz}=\frac{\kappa v_{*} z}{\phi(z/L)},
 \end{equation}
 
-where $\kappa$ is the \textit{Von-Karman} constant whose value in practice is set as $0.4$. The denominator
+\noindent where $\kappa$ is the \textit{Von-Karman} constant whose value in practice is set as $0.4$. The denominator
 is defined as the piece-wise continuous function
 \begin{equation*}
 \phi\left(\frac{z}{L}\right)=\left\{
@@ -2041,7 +2043,7 @@ is defined as the piece-wise continuous function
 		\right.
 \end{equation*}
 where $L$ is  the \textit{Monin-Obukhov length}. The parameter $v_{*}$ is known as 
-the \textit{friction velocity} and modelled by
+the \textit{friction velocity} and represented by
 
 \begin{equation*}
 v_{*}(t)=\frac{\kappa v_{r}(t)}{\ln(\frac{z_{r}}{z_{0}})},
@@ -2067,9 +2069,9 @@ Following \cite{hosseini2016airborne}, we consider a velocity vector field of th
 \vv=(v_{x}(z,t),v_{y}(z,t),v_{set}).
 \end{equation}
 Observe that we are assuming  the wind velocity field is independent of $x$ and $y$. The reason for this, is
-that the terrain of interest is regular, hence no significant variations of the wind velocity at a given height are 
+that the terrain of interest is flat, hence no significant variations of the wind velocity at a given height are 
 expected.
-In equation \eqref{eqn2Dvel}, $v_{set}$ is a constant given by  the settling velocity of the zinc particles. By Stoke's law,
+In equation \eqref{eqn2Dvel}, $v_{set}$ is a constant given by  the settling velocity of the zinc particles. By Stokes' law,
 this velocity for spherical particles is given by
 \begin{equation*}
 v_{set}=\frac{\rho g d^{2}}{18\mu},
@@ -2184,12 +2186,12 @@ form and  a numerical approximation is needed.
 \\
 If we had unlimited computational  budget we could solve equation 
 (\ref{eqnDifussivityFinalForm}) for as many different configurations
-of the parameters $(p,z_{0},z_{i},L,z_{cut})$ as we want and get a good
+of the parameters $(p,z_{0},z_{i},L,z_{cut})$ as we want and get an
 approximation to the coefficients $a_{ij}$. Clearly this 
 is not feasible. A more realistic approach is to solve equation (\ref{eqnDifussivityFinalForm})
-for a number of different values of $(p,z_{0},z_{i},L,z_{cut})$ and construct and approximation to $a_{ij}$
+for a number of different values of $(p,z_{0},z_{i},L,z_{cut})$ and construct an approximation to $a_{ij}$
 using these limited runs. We shall use the use Gaussian processes approach of Section \ref{secGPs}
-to construct such approximation. Before we construct the
+to construct such an approximation. Before we construct the
 Gaussian processes we perform a sensitivity analysis as described in Section \ref{subsecSensitivity} to see if is possible
 to reduce the dimensionality of the parameter space in order to further reduce to cost of constructing the Gaussian processes. 
 
@@ -2220,7 +2222,7 @@ Monin-Obukhov length (m) & $L$ & ${[}-500,-1{]}$\tabularnewline
 Cut-off length (m) & $z_{cut}$ & ${[}1,5{]}$\tabularnewline
 \hline 
 \end{tabular}
-\caption{Model of interest to out sensitivity  study and their accepted ranges}
+\caption{Parameters of interest to out sensitivity  study and their accepted ranges}
 \label{tabRanges}
 \end{table}
 We perform a sensitivity analysis as explained in Section \ref{subsecSensitivity},
@@ -2228,14 +2230,14 @@ on the set of maps $\{\varphi_{x_{i},y_{i}}\}_{i=1}^{9}$ ,
 where $(x_{i},y_{i})$ represent the location $R_{i}$ in Figure \ref{figAereal}.
 To make computations
 simpler we map bijectively the set of ranges of the parameters into the five-dimensional
-unit hypercube. Thus, without lost of generality we may assume the deposition maps are of the form 
+unit hypercube. Thus, without loss of generality we may assume the deposition maps are of the form 
 \begin{equation*}
 \varphi_{x_{i},y_{i}}:[0,1]^{5}\subset\mathbb{R}^{5}\rightarrow [0,\infty)\qquad\text{for }i=1,2,\ldots,9.
 \end{equation*} 
 
-Recall from  Section \ref{subsecSensitivity}, that in order to estimate the
+Recall from  Section \ref{subsecSensitivity} that in order to estimate the
 Sobol indices it is necessary to perform numerical integrations over the integrands $\{\varphi_{x_{i},y_{i}}\}_{i=1}^{9}$.
-These are five-dimensional integrals, and so, usual  quadrature methods are not suitable. It is
+These are five-dimensional integrals, and so usual  quadrature methods are not suitable. It is
 necessary to use Monte Carlo integration. But Monte Carlo integration requires us to evaluate 
 $\{\varphi_{x_{i},y_{i}}\}_{i=1}^{9}$ at a large number of points, which can be expensive.
 To overcome this issue we use Gaussian process emulation as described in Section \ref{secGPs}.
@@ -2257,10 +2259,10 @@ the results in the box plots in Figure \ref{figSensitivityPlot}.
 \centering
 \includegraphics[scale=0.70]{./FigChap4/sensitivityPlot}
 \caption{Boxplots containing the result  for the total effect Sobol index performed on each of the nine sensors.
-The dashed line represents the value of zero.}
+The dashed line represents a Sobol index of zero.}
 \label{figSensitivityPlot}
 \end{figure}
-Figure $\ref{figSensitivityPlot}$ shows that two of the five variables, namely $z_{i}$ and $z_{cut}$, have very little influence on the variance 
+\noindent This figure shows that two of the five variables, namely $z_{i}$ and $z_{cut}$, have very little influence on the variance 
 in the deposition. Therefore we ignore these and reduce the dimensionality of the parameter
 space from five to three. In this case we can write equation (\ref{eqnLinRel}) as 
 \begin{equation*}
@@ -2268,7 +2270,7 @@ space from five to three. In this case we can write equation (\ref{eqnLinRel}) a
 \end{equation*}  
 From now on we use the convention that the parameters $z_{i}$ and $z_{cut}$ 
 are  fixed at the values 100 and 2 respectively (see \cite{hosseini2016airborne}).  
-We now turn our attention in how to find an approximation for the 
+We now turn our attention into how to find an approximation for the 
 matrix $A(p,L,z_{0})$.
 \newline
 
@@ -2280,33 +2282,33 @@ matrix $A(p,L,z_{0})$.
 To solve 
 equation (\ref{eqnDifussivityFinalForm}) numerically, we use the finite volume solver of \cite{hosseini2016airborne}. The details
  are given in \cite{hosseini2016airborne}. Running the  finite
-volume code on a $30\times 30\times 30$ grid takes from 30 minutes and up to a few hours. Hence the 
-necessity to use Gaussian process regression to create an emulator
+volume code on a $30\times 30\times 30$ grid takes from 30 minutes  up to a few hours, hence the 
+necessity to use Gaussian process regression to create an emulator as shown in
 Section \ref{secGPs}.
 
 To construct the emulator we need a training set. For this purpose we create a space filling design for 
-the parameter space $(p,L,z_{0})$, as explained
+the parameter space $(p,L,z_{0})$ as explained
 in Section \ref{secDesignofExperiments} using  a maximin design. 
 Finding the optimal  maximin design
-is  challenging , hence we
+is  challenging, hence we
  use a numerical approximation. We use 
 the particle swarm algorithm for the optimization. See
  \cite{arora2015optimization} for details.  
 
 Considering our time and computational budget, we  chose to 
-do the experimental design with $n=64$ points. The maximin
+perform the experimental design with $n=64$ points. The maximin
 design obtained by using a particle swarm for the 
 optimization is shown in Figure \ref{figParticleSwarm}.
 
-With the experimental design at hand, we run the finite volume solver 
+With the experimental design in hand, we run the finite volume solver 
 for each of the different 64 configurations of parameters. We repeat this step four
 times. The first time we run the 64 simulations by fixing the first source $q_{1}$ to 1
 and the other three sources to zero, the second time we fix the second source $q_{2}$ to 1
 and the other three sources to zero and so on. The reason
 for this implementation is that we need to connect the output of the finite
-volume solver, which is the deposition vector $\y$ at the nine sites $R_{1},R_{2},\ldots,R_{9}$
+volume solver, which is the deposition vector $\y$ at the nine sites $R_{1},R_{2},\ldots,R_{9}$,
 with the components of the matrix $A(p,L,z_{0})$. Recall that the relation between these two quantities 
-is given by equation (\ref{eqnLinRel}), explicitly 
+is given by equation (\ref{eqnLinRel}) which we write explicitly  as
 \begin{equation}\label{eqnReminder}
 \y=A(p,L,z_{0})\underbrace{\begin{bmatrix}
 q_{1}\\q_{2}\\q_{3}\\q_{4}
@@ -2315,7 +2317,7 @@ q_{1}\\q_{2}\\q_{3}\\q_{4}
 
 For example if we run the finite volume code with the parameters set at the values
 $p^{*},L^{*},z_{0}^{*}$ with the $i$-th source set to one and the other 
-three to zero, obtaining the output
+three to zero, then we obtain the output
 \begin{equation*}
 \y^{*}=\begin{bmatrix}
 y_{1}^{*}\\
@@ -2337,8 +2339,8 @@ a_{9i}(p^{*},L^{*},z_{0}^{*})
 \end{bmatrix}
 \end{equation*}
 
-where the RHS is the $i$-th column of $A$. This result shows why
-it is necessary to run four times each of the 64 simulations to 
+\noindent where the RHS is the $i$-th column of $A$. This result shows why
+it is necessary to run each of the 64 simulations four times to 
 obtain the training set for the emulator of $A$.
 
 The emulator for $A$ will be represented by $\widehat{A}$. The
@@ -2354,11 +2356,11 @@ and sources, that is (cf. Chapter 3, Section \ref{secFindingLike})
 \y=\widehat{A}(p,L,z_{0})\q+\epsilon,
 \end{equation} 
 with $\epsilon\sim\mathcal{N}(0,\lambda I_{9\times 9})$. The value of 
-the parameter $\lambda$ is going to be set later in the chapter. 
+the parameter $\lambda$ will be specified  later in the chapter. 
 In equation (\ref{eqnChp4Additive})
 the vector $\y$ could represent either the output of the finite volume 
 code at the dustfall jars positions or the experimental deposition measures. 
-This interpretation of $\y$ implies  that the random variable $\epsilon$, also
+This interpretation of $\y$ implies  that the random variable $\epsilon$ also
 accounts for the discrepancy between simulation 
 of equation (\ref{eqnDifussivityFinalForm}), the physics and 
 experimental measurement errors.
@@ -2373,13 +2375,13 @@ experimental measurement errors.
 
 \section{Bayesian Framework for the Inverse Problem}
 
-With the emulator at hand, we are now in position to apply
+With the emulator in hand, we are now in a position to apply
 the Bayesian framework to estimate the values of the parameters and the source emission rate. 
 Our goal is to characterize the posterior distribution for the
-parameters and emission rates, more precisely
+parameters and emission rates; more precisely
 we want to find the posterior
 of the parameters $\pars$ and sources $\q$ given
-the experimental data $\y$. Recall By Bayes' rule in equation $\eqref{eqnBayes}$, the posterior
+the experimental data $\y$. Recall by Bayes' rule in equation $\eqref{eqnBayes}$, the posterior
 distribution is given by
 \begin{equation}\label{eqnBayesChp4}
 \post(p,z_{0},L,\q|\y)=\frac{\like(\y|p,z_{0},L,\q)\prior(p,z_{0},L,\q)}{Z(\y)}.
@@ -2387,22 +2389,22 @@ distribution is given by
 Given the Gaussian additive noise model in equation (\ref{eqnChp4Additive}),  a straightforward calculation yields
 the likelihood 
 \begin{equation}\label{eqnFinalLike}
-\like(\y|\pars,\q)=\frac{1}{(2\pi\lambda^{2})^{\frac{9}{2}}}\exp\left(-\frac{1}{2\lambda^{2}}\|\widehat{A}q-\y\|^{2}\right).
+\like(\y|\pars,\q)=\frac{1}{(2\pi\lambda^{2})^{\frac{9}{2}}}\exp\left(-\frac{1}{2\lambda^{2}}\|\widehat{A}q-\y\|^{2}\right),
 \end{equation}
 
 
 
 
-The constant of proportionality is given by
+\noindent where the constant of proportionality is given by
 \begin{equation}\label{eqnPropConst}
 Z(\y)=\int\like(\y|p,z_{0},L,\q)\prior(p,z_{0},L,\q)dpdz_{0}dLd\q.
 \end{equation}
-We now discuss the choice of the prior distribution
+We now discuss the choice of the prior distribution.
 
 
 
 \subsection{Choosing a Prior}
-The values of the  parameters $p,z_{0}.L$ depend on the environmental and meteorological conditions of the region, whereas
+The values of the  parameters $p,z_{0}, L$ depend on the environmental and meteorological conditions of the region, whereas
 the values of the emission rates $q_{1},\ldots,q_{4}$ do not. Thus, it is reasonable
 to assume that these  variables are independent
 of each other. This independence can be captured  as
@@ -2411,7 +2413,7 @@ of each other. This independence can be captured  as
 \end{equation*}
 By writing the prior distribution as the product of two distributions, we 
 simplify the problem by working with two different subsets of variables.
-Let us first introduce the prior for the parameters $p,z_{0}.L$. 
+Let us first introduce the prior for the parameters $p,z_{0}, L$. 
 We assume all three parameters are independent of each other, thus
 \begin{equation*}
 \prior(p,z_{0},L)=\prior(p)\prior(z_{0})\prior(L).
@@ -2420,7 +2422,7 @@ As mentioned in Chapter 1, there is no strong reason to pick a value over the ot
 for these parameters unless sufficient meteorological details are available.
 To this end, we assume a uniform
 distribution for each parameter. The allowed range for each parameter is given
-in Table (\ref{tabRanges}). Explicitly we have the  distribution
+in Table \ref{tabRanges}. Explicitly we have the  distribution
 density for each parameter as
 \begin{eqnarray}\label{eqnPriorparam}
 \prior(p)=\frac{1}{0.3}\textbf{1}_{[0.1,0.4]}\nonumber,\\
@@ -2432,8 +2434,8 @@ analysis since we are not completely ignorant about their possible values.
 Let us summarize our prior knowledge of these variables.
 \begin{enumerate}
 \item Each source is unrelated to the other three.
-\item the $q_{i}$ are positive and finite.
-\item Engineering estimates of emission rates are as follows (These values are taken as a guideline).
+\item The $q_{i}$ are positive and finite.
+\item Engineering estimates of emission rates are given in Table \ref{tabSources} (these values are taken as a guideline).
 \begin{table}[H]
 \centering
 \begin{tabular}{|c|c|}
@@ -2454,16 +2456,16 @@ $q_{4}$ & 5\tabularnewline
 \label{tabSources}
 \end{table}
 \end{enumerate}
-Mathematically, (1) above can be modelled with an independent  prior:
+Mathematically, Condition 1 above can be modelled with an independent  prior:
 \begin{equation*}
 \prior(q_{1},q_{2},q_{3},q_{4})=\prior(q_{1})\prior(q_{2})\prior(q_{3})\prior(q_{4}).
 \end{equation*}
 The second condition requires that the probability density for each source has to 
 be supported in the set $[0,\infty)$. The third  condition can be interpreted
-as follows: the mode of the prior  for each sources has to be at the
+as follows: the mode of the prior  for each source has to be at the
 engineering estimates, and $99\%$ of the mass should be contained between 0 and 3
 times that value. The reason for this is to give credibility to 
-engineering estimates but not too much credit. We choose to work with the gamma distribution which is A probability distribution that 
+engineering estimates but not too much credit. We choose to work with the gamma distribution which is a probability distribution that 
 satisfies the above conditions. We denote the probability measure of a gamma random variable by 
 $\mathscr{G}(\alpha,\beta)$. The Lebesgue density
 of the gamma distribution is given by
@@ -2472,9 +2474,9 @@ g(x;\alpha,\beta)=\frac{\beta^{\alpha}}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x}\
 \end{equation*}
 where $\alpha$ and $\beta$ are constants. We are going to assume that each source has 
 a  gamma distribution i.e.,
-\begin{equation*}
+\begin{equation}\label{eqnPriorq}
 q_{i}\sim \mathscr{G}(\alpha_{i},\beta_{i})\text{ for }{i=1,2,3,4},
-\end{equation*}
+\end{equation}
 %or equivalently
 %\begin{equation}\label{eqnPriorq}
 %\prior(q_{i})=\frac{\beta_{i}^{\alpha_{i}}}{\Gamma(\alpha_{i})}q_{i}^{\alpha_{i}-1}e^{-\beta_{i} q_{i}}\textbf{1}_{[0,\infty)}.
@@ -2511,8 +2513,8 @@ into Bayes' rule (\ref{eqnBayesChp4}). The posterior $\post(\pars,\q|\y)$ is pro
 
 To make notation simpler we have chosen to represent the vector $[q_{1},\ldots,q_{4}]^{T}$ as $\q$ or as component-wise in the summation. The indicator function represents the ranges of the allowed  values of the parameters in Table (\ref{tabRanges}). 
 These values are widely accepted in the literature, however there is not
-a technically sounded reason of why these ranges are acceptable.  We will expand the possible values for  these parameters
-in order to test the validity of the values in Table (\ref{tabRanges}). The new set of ranges we picked are shown
+a technically sound reason for why these ranges are acceptable.  We will expand the possible values for  these parameters
+in order to test the validity of the values in Table \ref{tabRanges}. The new set of ranges we picked is shown
 in Table \ref{tabNewRanges}.
 
 
@@ -2545,11 +2547,11 @@ Finding these estimates is the topic of the next section.
 
 
 
-\section{Inferring the Parameters and the sources}
+\section{Inferring the Parameters and the Sources}
 
 Recall that  there are different 
-types of point estimates, such as Maximum a posterior
-or posteri or conditional mean (see equation $\eqref{eqnpointestimates}$). To find any of these estimates   and its uncertainty associated,  is necessary to perform  high
+types of point estimates, such as maximum a posteriori,
+or conditional mean (see equation $\eqref{eqnpointestimates}$). To find any of these estimates   and its associated uncertainty,  is necessary to perform  high
 dimensional integrals that are not analytically tractable. Thus, we resort to  numerical integration techniques. In 
 particular   we use
 the Metropolis-Hastings(MH) algorithm (see Chapter 3, Algorithm 1) to sample  the posterior measure and 
@@ -2570,12 +2572,12 @@ When $\lambda$ is large the exponential in equation $\eqref{eqnExponentialTest}$
 the likelihood has less influence over the posterior,
 thus  the prior distribution is more credible.
 In this case the posterior behaves similarly to the prior. Thus, it is necessary to pick a value of 
-$\lambda$ that weights the importance of the likelihood correctly. That is,
+$\lambda$ that weights the importance of the likelihood correctly. That is, we are looking for
 a value of $\lambda$ that weights the data, the atmospheric model simulation output and
 the prior information appropriately according to the quality of the data. To achieve this we choose the value of $\lambda$ that
  minimizes the functional
 \begin{equation}\label{eqnFunctional2Optimize}
-J(\lambda)=\frac{1}{2}\int\left(\|\widehat{A}(p,L,z_{0})\q-\y)\|_{2}+\|\q-\q_{est}\|_{2}\right)d\post^{\lambda}.
+J(\lambda)=\frac{1}{2}\int\left(\|\widehat{A}(p,L,z_{0})\q-\y)\|_{2}+\|\q-\q_{est}\|_{2}\right)d\post^{\lambda},
 \end{equation}
 where $\q_{est}=[35,80,5,5]^{T}\frac{Ton}{yr}$. 
 We use the notation $\post^{\lambda}$ to explicitly show the dependence of the posterior measure $\post$ with the parameter $\lambda$.  The motivation
@@ -2600,7 +2602,7 @@ accomplishes that.
 \label{figLambdaEmul}
 \end{figure}
 
-Estimating $J(\lambda)$ exactly is expensive, since  it involves evaluating a seven-dimensional
+Estimating $J(\lambda)$ accurately is expensive, since  it involves evaluating a seven-dimensional
 integral. Thus, to approximate a minimizer for $\lambda$  we will approximate $J$ using Gaussian processes emulator. 
 To create the training set, we evaluate
 $J$ for six different values of $\lambda$ using Markov Chain Monte Carlo integration.
@@ -2608,29 +2610,36 @@ The results of the emulation are shown in Figure \ref{figLambdaEmul}. The minimu
 $J(\lambda)$ is attained approximately at $\lambda=2.80008\times 10^{-5}$, which is
  the value we pick for $\lambda$ in the reminder of this chapter. We note that if more
 accuracy is needed in finding the minimizer it is possible to use Gaussian processes to perform
-accurate  optimization, we refer the reader to \cite{osborne2009gaussian} for details in this topic.
+accurate  optimization; we refer the reader to \cite{osborne2009gaussian} for details in this topic.
 
 
 For the MH implementation we adapt Algorithm 1 in Chapter 3, in a way
 that the sampling of $u$ (line 3 in the Algorithm) is done adaptively as proposed in \cite{roberts2009examples}.
-Using the adaptative algorithm we obtained two million samples and  as a burn in period we discarded the first one million  samples. 
-Since the acceptance rate was relatively low, around $10\%$, we thined the last million samples
-by picking a sample every hundred samples. In this way we end up with $10.000$ samples that are
+Using the adaptative algorithm we obtained two million samples and  as a burn-in period we discarded the first one million  samples. 
+Since the acceptance rate was relatively low, around $10\%$, we thinned the last million samples
+by picking every hundredth sample. In this way we end up with $10,000$ samples that are
 weakly correlated in the sense that the autocorrelation function is close to zero.
 \\
 Using MH to sample
-from high-dimensional probability distributions is challenging. Specially assessing the convergence of the Markov chain
+from high-dimensional probability distributions is challenging, as is assessing the convergence of the Markov chain
 to the target distribution.
  To overcome these difficulties, several heuristics on convergence
-criteria have been develop, such as, graphical methods and non-parametric tests of stationarity. The reader
+criteria have been develop, such as graphical methods and non-parametric tests of stationarity. The reader
 interested in this topic is referred to \cite{casella2008monte} and the references within. 
 In this work we use the traces of the Markov chain to assess its convergence. 
-A \textit{trace plot} is a graphic display of the motion of the Markov chain in each
+A \textit{trace plot} is a graphical display of the motion of the Markov chain in each
 of the dimensions in the support of the target probability density. 
-Recall that the probability density we are interested in, is the  posterior in equation (\ref{eqnPosteriorFinal}). 
+Recall that the probability density we are interested in is the  posterior in equation (\ref{eqnPosteriorFinal}). 
 This posterior is supported in a  subset of $\mathbb{R}^{7}$. To obtain the trace plots,
 we  plot the motion of the Markov chain separately in each of the seven dimensions (see Figure \ref{figTraces}). 
-\\
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.75]{./FigChap4/traces}
+\caption{Trace plots of the Markov chain for each of the  variables $\pars$ and $\q$. Using
+the Metropolis-Hastings algorithm of Algorithm 1 in Chapter 3.}
+\label{figTraces}
+\end{figure}
+
 The trace plots in Figure \ref{figTraces} show that the Markov chain is moving around the whole 
 support of the posterior density. Another observation is that different regions in the support
 of $\post(\pars,\q|\y)$ are visited by the chain every so often. This means
@@ -2638,10 +2647,10 @@ that the chain is not getting stuck in a local mode of the distribution and is m
 trace plots have the behaviour one would expect of a Markov chain that has converged
 and whose realizations are taken from the  target probability density. 
 
-One of the advantages of every sampling algorithm is that the samples
+One of the advantages of most sampling algorithm is that the samples
 obtained in each dimension are distributed as the marginal distribution
 for that variable. If $X$ and $Y$ are random variables jointly distributed 
-as $\p(X,Y)$, then,
+as $\p(X,Y)$, then
 the \textit{marginal distribution} of the random variable $X$ is given by
 \begin{equation*}
 \p(X)=\int\p(X,Y)dY.
@@ -2668,7 +2677,7 @@ in Figure \ref{figHistograms}.
 
 
 
-In Figure \ref{figHistograms} we show the values of the point
+\noindent In Figure \ref{figHistograms} we show the values of the point
 estimates for each distribution and the fitting curves for the parametes $\pars$
 and the sources $q_{1}$ to $q_{4}$. We now explain how we chose the point
 estimates and the uncertainty associated.
@@ -2682,14 +2691,6 @@ advantage of the fact that the histograms for the marginals have a similar
 shape to a gamma distribution and we are going to a
  gamma distribution  to the histograms and
 take the point estimate to be the mode of the fitted distribution.
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.75]{./FigChap4/traces}
-\caption{Trace plots of the Markov chain for each of the  variables $\pars$ and $\q$. Using
-the Metropolis-Hastings algorithm of Algorithm 1 in Chapter 3.}
-\label{figTraces}
-\end{figure}
 
 
 For the parameters $\pars$ the situation is more subtle. For the parameter $p$
@@ -2709,10 +2710,9 @@ is defined as the ball of radius $r$ centered at $x^{*}$ such that
 \int_{B(x^{*},r)}\rho(x)dx=0.68.
 \end{equation*} 
 
-The reason to choose this uncertainty measure, is to replicate the classical ``mean plus standard deviation''
+The reason to choose this uncertainty measure is to replicate the classical ``mean plus standard deviation''
 measurement of confidence when dealing with Gaussian  probability distributions \cite{bulmer1979principles}.
-
-The estimates for the parameters and the uncertainties are shown in Table \ref{tabFinalEstimates}.
+\noindent The estimates for the parameters and the uncertainties are shown in Table \ref{tabFinalEstimates}.
 
 \begin{figure}[H]
 \centering
@@ -2729,19 +2729,19 @@ The estimates for the parameters and the uncertainties are shown in Table \ref{t
 \end{figure}
 
 The spread of the $68\%$ confidence interval for the distribution
-of the parameters show that the experimental data is not large enough
+of the parameters shows that the experimental data is not large enough
 so  the posterior marginal distribution for the parameters is 
 not decisively informative about  particular 
 values of the parameters. Despite this, 
-as we can see in the histograms in Figure \ref{figHistograms}, for
+as we can see in the histograms in Figure \ref{figHistograms} for
 $L$ and $z_{0}$  that there are region in the support
 that are more likely than others. Even though we have
 no prior information about the values of the parameters and only 
 $9$ measurements of zinc deposition, our approach is able
 to distinguish certain regions with high probability. For the value of $z_{0}$
 the region around the mode agrees with the typical values
-for this parameter in the literature, but for $L$, the high
-probability values does not agree with the typical
+for this parameter in the literature, but for $L$ the high
+probability values do not agree with the typical
 values chosen for this parameter \cite{hosseini2016airborne, seinfeld1998atmospheric}.
 
 \begin{table}[H]
@@ -2776,21 +2776,23 @@ Figure \ref{figQUnicertainty}
 our point estimate and the uncertainty associated to it.}
 \label{figQUnicertainty}
 \end{figure}
-The results in Figure \ref{figQUnicertainty}, show that sources $1$ and $2$ are most likely overestimated by the engineers.
+
+
+\noindent The results in Figure \ref{figQUnicertainty}, show that sources $1$ and $2$ are most likely overestimated by the engineers.
 Whereas sources $3$ and $4$ are  slightly underestimated. If we take into account the error bars for our estimates and
-the small difference between that estimate and the engineers estimate, we conclude that the experimental data
+the small difference between that estimate and the engineering estimate, we conclude that the experimental data
 is not necessary to make any strong conclusion about sources $3$ and $4$.
 For sources $1$, $3$ and $4$, our results agree
-with \cite{lushi2010inverse} and \cite{hosseini2016airborne}. However for  source $2$ The results
-we obtained  agree with \cite{lushi2010inverse} but in \cite{hosseini2016airborne}, source
+with \cite{lushi2010inverse} and \cite{hosseini2016airborne}. However for  source $2$ the results
+we obtained  agree with the results obtained in \cite{lushi2010inverse} for this same source, but in the result obtained in \cite{hosseini2016airborne}, source
 $2$ is severally underestimated. 
 
 
-The results obtained in Figure \ref{figQUnicertainty}, agree with the results obtained in \cite{lushi2010inverse} in 
+The results obtained in Figure \ref{figQUnicertainty} agree with the results obtained in \cite{lushi2010inverse} in 
 the sense that sources $1$ and $2$ are overestimated by the engineers and sources $3$ and $4$ are underestimated. 
 These results partially disagree with the results in \cite{hosseini2016airborne}, in this reference, source $2$
 is underestimated. In the other three sources our results agree.
-
+\textbf{Don't forget to add more discussion about agree  and disagree between previous results}
 
 
 \bibliography{Tesis}
