@@ -2788,11 +2788,105 @@ we obtained  agree with the results obtained in \cite{lushi2010inverse} for this
 $2$ is severally underestimated. 
 
 
+To conclude this chapter we will compare our results with the results obtained in \cite{lushi2010inverse} and \cite{hosseini2016airborne}.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline 
+Source & Estimated Emission Rate {[}ton/yr{]}\tabularnewline
+\hline 
+\hline 
+$q_{1}$ & 18\tabularnewline
+\hline 
+$q_{2}$ & 60\tabularnewline
+\hline 
+$q_{3}$ & 8\tabularnewline
+\hline 
+$q_{4}$ & 8\tabularnewline
+\hline 
+\end{tabular}
+\caption{Emission rates estimated in \cite{lushi2010inverse}.}
+\label{tabLushi}
+\end{table}
+
+
+
 The results obtained in Figure \ref{figQUnicertainty} agree with the results obtained in \cite{lushi2010inverse} in 
-the sense that sources $1$ and $2$ are overestimated by the engineers and sources $3$ and $4$ are underestimated. 
-These results partially disagree with the results in \cite{hosseini2016airborne}, in this reference, source $2$
-is underestimated. In the other three sources our results agree.
-\textbf{Don't forget to add more discussion about agree  and disagree between previous results}
+the sense that Sources $1$ and $2$ are overestimated by the engineers. Emissions in source one are overstimated
+by 12 and 20 tons per year respectively, whereas for Sources $3$ and $4$ are underestimated by 3 tons each (see Table \ref{tabLushi}). 
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline 
+Source & Estimated Emission Rate {[}ton/yr{]}\tabularnewline
+\hline 
+\hline 
+$q_{1}$ & 80\tabularnewline
+\hline 
+$q_{2}$ & 58\tabularnewline
+\hline 
+$q_{3}$ & 39\tabularnewline
+\hline 
+$q_{4}$ & 9\tabularnewline
+\hline 
+\end{tabular}
+\caption{Emission rates estimated in \cite{hosseini2016airborne}.}
+\label{tabHosseini}
+\end{table}
+When comparing the results in Figure \ref{figQUnicertainty} with the results obtained in \cite{hosseini2016airborne}, listed in Table \ref{tabHosseini}, we see that their 
+results for Source 2 partially disagree with the results 
+obtained in this work and in \cite{lushi2010inverse}. According to  reference \cite{hosseini2016airborne}, Source 1 is severely underestimated by the engineers
+by 45 tons a year. For the other three sources the results in this work and the results in \cite{hosseini2016airborne} and \cite{lushi2010inverse} agree in the sense
+that Source 2 is overestimated by the engineers and Sources 3 and 4 are underestimated.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Final Chapter %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\chapter{Conclusions}
+
+
+
+In this thesis we have developed a method to cheaply compute,  using Gaussian process,
+computationally expensive atmospheric dispersion models. Also how to combine
+this with the Bayesian framework to solve the source inversion problem. Furthermore
+we include in the process,  the estimation of the parameters the model depends upon.
+So far the estimation of parameters in atmospheric dispersion models has been
+done empirically with little or no use of experimental data. In this work we use
+the experimental data available and with the aid of 
+Bayes' rule we obtain point estimates for the parameter and the associated uncertainty.
+
+We stress out the conclusion that the methodology explained in this thesis goes beyond atmospheric dispersion models
+and partial differential equations such as the one used here (see equation \eqref{eqnParamtric}). 
+As long as there is a differential equation
+whose parameters we want to estimate, but is expensive to calculate, we can apply the methodology
+described here.
+
+Finally, the results obtained using our proposed approach, agree with the results obtained in other papers and books where
+more classical approaches have been used, showing that the emulation process does not affect the estimations
+and greatly accelerate calculations. This observation makes the approach used here a good candidate for real
+time applications. Again, we mention that the possible real time applications are not restricted to atmospheric 
+dispersion models but to a more general setting.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \bibliography{Tesis}

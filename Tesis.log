@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.7.20)  28 DEC 2017 22:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.7.20)  7 JAN 2018 21:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -804,23 +804,22 @@ nput line 2774.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [99]
-[100 <./FigChap4/qUncertainty-eps-converted-to.pdf>] (./Tesis.bbl [101]
-[102
+[100 <./FigChap4/qUncertainty-eps-converted-to.pdf>] [101] [102]
+Chapter 5.
+[103
 
-] [103] [104] [105]
-Missing character: There is no â in font cmr12!
-Missing character: There is no € in font cmr12!
-Missing character: There is no ™ in font cmr12!
- [106] [107]) [108] (./Tesis.aux)
+] (./Tesis.bbl [104] [105
+
+] [106] [107] [108] [109]) [110] (./Tesis.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 3779 strings out of 494977
- 51811 string characters out of 6180183
- 107294 words of memory out of 5000000
- 6874 multiletter control sequences out of 15000+600000
+ 3781 strings out of 494977
+ 51834 string characters out of 6180183
+ 107318 words of memory out of 5000000
+ 6876 multiletter control sequences out of 15000+600000
  18489 words of font info for 71 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  37i,18n,43p,655b,358s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -842,10 +841,10 @@ texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fo
 nts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fon
 ts/type1/public/rsfs/rsfs10.pfb>
-Output written on Tesis.pdf (108 pages, 2359779 bytes).
+Output written on Tesis.pdf (110 pages, 2362671 bytes).
 PDF statistics:
- 455 PDF objects out of 1000 (max. 8388607)
- 302 compressed objects within 4 object streams
+ 463 PDF objects out of 1000 (max. 8388607)
+ 308 compressed objects within 4 object streams
  0 named destinations out of 1000 (max. 500000)
  86 words of extra memory for PDF output out of 10000 (max. 10000000)
 
