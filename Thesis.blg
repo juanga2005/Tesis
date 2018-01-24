@@ -1,41 +1,35 @@
 This is BibTeX, Version 0.99d (TeX Live 2015/dev/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
-The top-level auxiliary file: Tesis.aux
+The top-level auxiliary file: Thesis.aux
 The style file: plain.bst
-Database file #1: Tesis.bib
-I was expecting a `,' or a `}'---line 218 of file Tesis.bib
- :   
- :   publisher={Springer}
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
+Database file #1: Thesis.bib
 Warning--empty year in adlergeometry
-Warning--empty publisher in casella2008monte
 You've used 43 entries,
             2118 wiz_defined-function locations,
-            738 strings with 10389 characters,
-and the built_in function-call counts, 12578 in all, are:
-= -- 1198
+            738 strings with 10391 characters,
+and the built_in function-call counts, 12577 in all, are:
+= -- 1199
 > -- 570
 < -- 6
 + -- 232
 - -- 184
-* -- 842
-:= -- 2159
+* -- 840
+:= -- 2160
 add.period$ -- 129
 call.type$ -- 43
 change.case$ -- 198
 chr.to.int$ -- 0
-cite$ -- 45
+cite$ -- 44
 duplicate$ -- 497
 empty$ -- 1040
 format.name$ -- 184
-if$ -- 2577
+if$ -- 2578
 int.to.chr$ -- 0
 int.to.str$ -- 43
 missing$ -- 62
 newline$ -- 218
 num.names$ -- 86
-pop$ -- 260
+pop$ -- 259
 preamble$ -- 1
 purify$ -- 176
 quote$ -- 0
@@ -47,8 +41,8 @@ text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 132
-warning$ -- 2
+warning$ -- 1
 while$ -- 125
 width$ -- 45
-write$ -- 456
-(There was 1 error message)
+write$ -- 457
+(There was 1 warning)
