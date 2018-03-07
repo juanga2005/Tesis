@@ -208,7 +208,7 @@ Experimental Design, Model Emulation, Bayesian Inversion, Atmospheric Dispersion
 %\clearpage
 
 \begin{abstract}
-In this thesis we present a method to obtain a computationally efficient way
+In this thesis we present a method to obtain an efficient algorithm
 to perform parameter estimation with uncertainty quantification 
 of mathematical models that are complex and computationally
 expensive. We achieve this with a combination of emulation of the mathematical
@@ -216,19 +216,20 @@ model using Gaussian processes  and Bayesian statistics and inversion for the pa
 and uncertainty quantification.
 In particular we apply these ideas to a source inversion problem in atmospheric dispersion.
 
-We constructively explain step by step the theory and ideas behind each relevant part 
+We  explain the theory and ideas behind each relevant part 
 of the process in the emulation and parameter estimation. The concepts and methodology presented 
-in this work are wide in scope and can be applied
-to all types of problems where is necessary to obtain a parameter estimation  but the underlying
-mathematical model is expensive, rendering unfeasible more classic approaches. 
+in this work are general and can be applied
+to a wide range of problems where it is necessary to estimate parameters  but the underlying
+mathematical model is expensive, rendering  more classical approaches unfeasible.
 
-To validate the concepts used, we do an emulation and a parameter estimation
-in a model that is computationally cheap and whose parameter values are known in 
-advanced. Finally we perform a parameter estimation with
-uncertainty quantification of an atmospheric dispersion model
-using real data from a mining site in Trail, British Columbia. 
-The estimation includes solving the source inversion problem
-in atmospheric dispersion using the Bayesian framework. 
+To validate the concepts used, we perform a parameter estimation study
+in a model that is relatively cheap to compute and whose parameter values are known in 
+advance. Finally we perform a parameter estimation with
+uncertainty quantification of a much more expensive atmospheric dispersion model
+using real data from a lead-zinc smelter  in Trail, British Columbia. 
+The parameter estimation includes  approximating high-dimensional integrals
+with Markov chain Monte Carlo methods and solving the source inversion problem
+in atmospheric dispersion using the Bayesian framework.
 
 
 
@@ -439,37 +440,39 @@ perspective, this number is interpreted as: for every hundred planets, on averag
  In the Bayesian
 perspective the number 0.01 is interpreted as a measure of how certain we are about life in the universe
 given the current state of knowledge about the outer space. 
-Clearly there is a big philosophical
+Clearly there is a philosophical
 difference between these two approaches that has a direct impact in how far reaching is each point of view 
 in terms of theoretical foundations and applications  \cite{jaynes2003probability}.
 
 
 %Talking about Bayes rule
-At this point we mention that when we talk about uncertainty we are talking about every possible 
+At this point we mention that when we mention uncertainty we are talking about every possible 
 source of randomness  or  lack of information. That is, the use of the word uncertainty in this work
 is related to either \cite{kennedy2001bayesian}
 \begin{itemize}
 \item Epistemic: a phenomenon might not be random but the complete lack of 
 understanding of it makes us see it as random.
-\item Aleatory: Inherent to the nature of the phenomenon. For 
+\item Aleatory: Uncertainty inherent to the nature of the phenomenon. For 
 example, this is the kind of randomness physicists believe is happening in quantum mechanics.
 \end{itemize}
 In real life the uncertainty associated with a  measurement or  quantity 
 of interest is usually connected  with the uncertainty  of other variables involved in the problem under study. 
 The Bayesian framework provides a rigorous framework to study these uncertainties, 
 using whatever information is available for the underlying problem. The cornerstone of this framework
-in the mathematical language is known as   Bayes' formula. Before we present it, let us 
+in the mathematical sense is known as   Bayes' formula. Before we present it, let us 
 introduce some important definitions taken from \cite{dudley2002real}.
 
+
+\section{Definitions and Notation}
 \begin{definition}\label{dfnprobabilitytriple}
 A probability space is a triple $(\Omega,\mathscr{F},\p)$, where $\Omega$ is a set called 
-sample space and $\mathscr{F}$ is a collection of subsets of $\Omega$ that satisfies
+the sample space and $\mathscr{F}$ is a collection of subsets of $\Omega$ that satisfies
 \begin{enumerate}
 \item $\emptyset,\Omega\in\mathscr{F}$.
 \item If $A\in\mathscr{F}$ then $A^{c}\in\mathscr{F}$.
 \item If $A_{1},A_{2},\ldots \in\mathscr{F}$ then $\bigcup_{i\in\mathbb{N}}A_{i}\in\mathscr{F}$.
 \end{enumerate}
-A  collection of sets that satisfies properties 1 to 3 is called a $\sigma-$ algebra and its elements are called
+A  collection of sets that satisfies properties 1 to 3 is called a $\sigma$-algebra and its elements are called
 events. 
 \\
 The map $\p:\mathscr{F}\rightarrow [0,1]$ is called a probability measure and satisfies
@@ -492,7 +495,7 @@ we define the conditional probability of $A$ given $B$ by
 \end{definition}
 
 
-With the definitions above, we are now in position to state Bayes' fomula as
+With the definitions above, we are now in a position to state Bayes' fomula as
 \begin{equation}\label{eqnBayes}
 \post(A|B)=\frac{1}{Z}\like(B|A)\prior(A).
 \end{equation}
@@ -511,12 +514,11 @@ anything about  $B$. The reciprocal of $Z$ is a \textit{normalization constant} 
 \begin{equation}\label{eqnNormalizationConstant}
 Z=\int_{\Omega} \like(B|A)d\prior.
 \end{equation}
-
 The integral
 is understood in the  Lebesgue sense as the  integral with respect to the measure $\prior$ \cite{lerner2014course}. 
 The term $\post(A|B)$ is  the \textit{posterior} probability of $A$ given $B$. The posterior contains  the information 
-that we gained by comparing our beliefs (decoded in the prior probability) with experimental data 
-(decoded in the likelihood). 
+that we gained by comparing our beliefs (encoded in the prior probability) with experimental data 
+(encoded in the likelihood). 
 \newline
 
 
@@ -529,7 +531,7 @@ forward problem, then we can use it to obtain information about the inverse prob
 puts in a mathematical language the connection between the inverse and forward problems. 
 If we consider the cause to be the
 event $A$ and the effect the event $B$, then the information about the forward problem
-is encoded in $\like(B|A)$. The information of the inverse problem is contained in 
+is represented by $\like(B|A)$. The information about the inverse problem is encoded in 
 $\post(A|B)$. That is why in the Bayesian framework, the posterior probability
 is the $\textit{solution to an inverse problem}$.
 
@@ -560,7 +562,7 @@ We can start by considering the following events
 \end{align*}
 Here we assume we know $B$, but $A$ is unknown. We can use Bayes' rule to estimate $A$ through
 the posterior $\post(A|B)$. In this case
-we need to find the connection between $A$ and $B$ via the forward problem, i.e. given 
+we need to find the connection between $A$ and $B$ via the forward problem, that is, given 
 the launch coordinates find the impact location. This connection is encoded in the likelihood $\like(B|A)$.
 In addition we also need to set the prior probability for $A$. 
 \newline
@@ -593,7 +595,7 @@ for the discrepancy of our model with reality. We propose
 \textbf{r}=\textbf{r}_{0}+\textbf{v}_{0}t+\frac{1}{2}\textbf{g}t^{2}+\mathbf{\epsilon},
 \end{equation} 
 where $\mathbf{\epsilon}$ is a \textit{random vector} distributed as \textit{multivariate Gaussian}. 
-Before we proceed it is necessary to define more terminology and mathematical objects  that are going 
+Before we define what a multivariate Gaussian distribution it is necessary to define more terminology and mathematical objects  that are going 
 to be used throughout the rest of the text. 
 
 \begin{definition}
@@ -659,14 +661,14 @@ and covariance matrix $\Sigma$. The matrix $\Sigma$ is symmetric and positive de
 In this case the components of $\textbf{X}$ are said to be \textit{jointly Gaussian}.
 \end{definition}
 
-We now return to equation (\ref{eqnParabolicEpsilon}), and assume $\epsilon\sim\mathcal{N}(0,\sigma^{2}I)$.
+We now return to equation (\ref{eqnParabolicEpsilon}) and assume $\epsilon\sim\mathcal{N}(0,\sigma^{2}I)$.
 Here $I$
-represents the $3\times 3$ identity matrix and $\sigma>0$ parametrizes One belief in quantifying the 
+represents the $3\times 3$ identity matrix and $\sigma>0$ parametrizes one's belief in quantifying the 
 accuracy  
 of equation (\ref{eqnKinematics}).  By introducing a random variable into the model
-we make all variables involved  in equation (\ref{eqnKinematics})
+we cause all variables involved  in equation (\ref{eqnKinematics})
 to be  random variables; that is, we now look at the  associated stochastic equation. With this notation
-we can cast equation (\ref{eqnBayes}) as  
+we can recast equation (\ref{eqnBayes}) as  
 \begin{equation}\label{eqnpostrock}
 \post(\textbf{r}_{0}|\textbf{r},\textbf{v}_{0})=\frac{\like(\textbf{r}|\textbf{r}_{0},\textbf{v}_{0})
 \prior(\textbf{r}_{0})}{Z},
@@ -674,19 +676,19 @@ we can cast equation (\ref{eqnBayes}) as
 where we assumed independence between $\textbf{r}_{0}$ and $\textbf{v}_{0}$.
 Since $\mathbf{\epsilon}$ is Gaussian we can readily obtain \cite{Somersalo}
 \begin{equation*}
-\textbf{r}|\textbf{r}_{0},\textbf{v}_{0}\sim \mathcal{N}(\textbf{r}_{0}+\textbf{v}_{0}t+\frac{1}{2}\textbf{g}t^{2}
+\textbf{r}|\textbf{r}_{0},\textbf{v}_{0}\sim \mathscr{N}(\textbf{r}_{0}+\textbf{v}_{0}t+\frac{1}{2}\textbf{g}t^{2}
 ,\sigma^{2} I).
 \end{equation*}
 This last equation gives an explicit density for the likelihood. 
 
 We now turn our attention to  the prior.
-Suppose that we suspect the rock was thrown from the bedroom a neighbor.
+Suppose that we suspect the rock was thrown from the bedroom of a neighbor.
  One way to model this suspicion is to assume a prior distribution on $\textbf{r}_{0}$ as
 \begin{equation*}
 \textbf{r}_{0}\sim\mathscr{N}(\textbf{w},\lambda^{2} I),
 \end{equation*}
-where $\textbf{w}$ is the coordinate vector of the center of mass of the neighbor's bedroom and $\lambda$ represents 
-One's belief the launch location is at the point $\textbf{w}$. We note that  this is only one way to model 
+where $\textbf{w}$ is the coordinate vector of the center of  the neighbor's bedroom and $\lambda$ represents 
+one's belief the launch location is at the point $\textbf{w}$. We note that  this is only one way to model 
  prior knowledge and other forms of the prior are also possible. Finally the normalization constant
 can be found as
 %probabilities  are normalized, if we integrate over the whole space equation (\ref{eqnpostrock}), we get
@@ -748,10 +750,10 @@ around $\textbf{r}_{0}$ as
 The diagonal of this matrix  contains the variance of each coordinate of $\textbf{r}^{*}$.
 
 Note that the posterior is a probability density and  does not necessarily have a closed form, which
-can make  difficult to calculate the uncertainties we mentioned above.
+can make it difficult to calculate the uncertainties we mentioned above.
 Hence we need a way of extracting information from $\post$. One approach is to generate 
 independent samples
-from it and do a Monte Carlo integration   to obtain the different uncertainty estimates. 
+from $\post$ and do a Monte Carlo integration   to obtain the different uncertainty estimates. 
 How to sample from a probability 
 density and do a Monte Carlo integration will be explained in Chapter 3. For the moment, we
 assume it is possible to evaluate any of the point estimates and the uncertainty measures. With 
@@ -780,7 +782,7 @@ to obtain the experimental data, and so, they are outside of our control.
 
 
 %%%%Dealing with computational complexity
-\section{Dealing with  the computational complexity of the physical model}
+\section{Dealing with  the Computational Complexity of the Physical Model}
 Models of physical processes can be represented in different ways.
 Following O'Hagan  \cite{o2006bayesian}, we represent the  mathematical model of the physical process
  as a function
@@ -821,7 +823,7 @@ the interpolation/extrapolation done at that point.
 \end{definition}
 
 
-From now on in this work we are going to refer to the mathematical model or the computationally expensive
+From now on in this work we will  to refer to the mathematical model or the computationally expensive
 function to calculate as $M(\cdot)$, and the emulator that approximates this function  by 
 $\widehat{M}(\cdot)$.
 %Talking about Gaussian processes
@@ -832,12 +834,12 @@ extrapolation/interpolation properties is  known as a Gaussian process regressio
 \subsection{Gaussian Processes}\label{secGPs}
 The conditions on the emulator $\widehat{M}(\cdot)$ imply that we need
 specify a probability distribution for each point $\textbf{x}$ in the domain of the model $M(\cdot)$.
-This means that  we need to work with 
- a set with high cardinality of random variables. 
+This means that  we need to work with  a set of random variables 
+with high cardinality. 
 When dealing with 
 several random variables there is one probability density that is computationally tractable and
 easy to work with: the multivariate Gaussian distribution (see Definition \ref{dfnrandonvariables}). 
-The computational tractability  of the multivariate Gaussian distribution can be used as a justification
+The computational tractability  of integrals involving the multivariate Gaussian distribution can be used as a justification
 to define a Gaussian process.
 \begin{definition}\label{dfnGP}
 A Gaussian process (GP) is a collection of random variables $\{g(\x)\}_{\x\in A}$ for some set $A$, 
@@ -862,14 +864,14 @@ g(\x)\sim \textbf{GP}(m(\x),k(\x,\x')).
 To  understand why the notion of a GP is useful for us, recall that our goal is to create
 an emulator $\widehat{M}(\cdot)$ that approximates a function $M(\cdot)$. 
 For a fixed $\x\in A$, a realization of the  random variable $g(\x)$ represents
-a possible value of $M(\x)$. The mean function at that point $\x$, i.e. $m(\x)$ 
+a possible value of $M(\x)$. The mean function at that point $\x$, that is, $m(\x)$ 
 represents the best prediction of the true value of $M(\x)$, so we may set
 $\widehat{M}(\x)=m(\x)$. Later we will show that one way to measure the  uncertainty 
 associated with that prediction is given by the quantity $k(\x,\x)$.
 
  
 
-We will use GPs to fit  functions in  high dimensional euclidean spaces, so 
+We will use GPs to fit  functions in  high dimensional Euclidean spaces, so 
 that we may think
 of the  index set $A$ of Definition \ref{dfnGP} as a subset of $\mathbb{R}^{n}$ for some $n\geq 1$. 
 \newline
@@ -894,8 +896,8 @@ some of the most common kernels used in practice \cite{rasmussen2006gaussian}, s
 \begin{itemize}
 \item Squared-Exponential: $k(r;\theta)=\exp\left[-\frac{1}{2}(\frac{r}{\theta})^{2}\right]$
 \item Exponential: $k(r;\theta)=\exp\left[-\frac{r}{\theta}\right]$\\
-\item Matern $\frac{3}{2}: k(r;\theta)=(1+\frac{\sqrt{3}r}{\theta})exp\left[-\frac{\sqrt{3}r}{\theta}\right]$.
-\item Matern $\frac{5}{2}: k(r;\theta)=(1+\frac{\sqrt{5}r}{\theta}+\frac{5}{3}
+\item Mat{\'e}rn $\frac{3}{2}: k(r;\theta)=(1+\frac{\sqrt{3}r}{\theta})exp\left[-\frac{\sqrt{3}r}{\theta}\right]$.
+\item Mat{\'e}rn $\frac{5}{2}: k(r;\theta)=(1+\frac{\sqrt{5}r}{\theta}+\frac{5}{3}
 (\frac{r}{\theta})^{2})\exp\left[-\frac{\sqrt{5}r}{\theta}\right]$.
 \item Power-Exponential: $k(r;\theta,p)=\exp\left[-(\frac{r}{\theta})^{p}\right]$.
 \end{itemize}
@@ -908,13 +910,13 @@ some of the most common kernels used in practice \cite{rasmussen2006gaussian}, s
 
 Alternatively GPs can be viewed as  measures on function spaces, and so we now discuss them in this
 context following the approach of \cite{lifshits2012lectures}.
-Relevant function spaces (e.g. $L^{p}$ spaces, Sobolev spaces, etc...) are 
+Relevant function spaces (e.g. $L^{p}$ spaces, Sobolev spaces, etc.) are 
 normed vector spaces with a topology inherited from the metric induced by the norm. So
-the function spaces of interest here, are topological vector spaces (TVS). 
+the function spaces of interest here are topological vector spaces (TVS). 
 
 Let $\mathscr{T}$ be a TVS and  let $\mathscr{T}^{*}$ be its topological dual. 
 We will denote the action of an 
-element $h\in\tvs^{*}$ over an element $z\in\tvs$ with $\langle h,z\rangle$. Moreover 
+element $h\in\tvs^{*}$ over an element $z\in\tvs$ by $\langle h,z\rangle$. Moreover 
 we  define a random variable taking values in $\tvs$ as a map 
 \begin{equation*}
 X:(\Omega,\mathscr{F},P)\longrightarrow\tvs,
@@ -941,28 +943,28 @@ matrix in the finite dimensional case) if
 for all $f_{1},f_{2}\in\tvs^{*}$. Then we say that $X$ is distributed as 
 $\mathcal{N}(a,K)$. It is worth mentioning
 that given a covariance operator $L$ and an element $b\in\tvs$ the distribution $\mathcal{N}(b,L)$
-does not always exist\cite{lifshits2013gaussian}. But if it does exist, the  Gaussian measure $\mathcal{N}(a,K)$, is completely
-identified with $a$ and $K$.
+does not always exist\cite{lifshits2013gaussian}. But if it does exist, the  Gaussian measure $\mathcal{N}(a,K)$ is completely
+identified by $a$ and $K$.
 \newline
 
 
 %In this work we are going to be mainly concerned to work with kernels that are at least continuous
 %(For example the SE kernel in equation (\ref{eqnsquareexponential}) is $C^{\infty}$). 
-As an example consider the  $\tvs=C(T)$ where 
+As an example consider  $\tvs=C(T)$ where 
 $T$ is compact subset of $\mathbb{R}^{n}$. This is the  space of real valued continuous functions 
 on
-$T$. This  is a Banach
+$T$, which is a Banach
 space with the norm \cite{bressan1900lecture}
 \begin{equation*}
 \|h\|=\max_{x\in T}|h(x)|.
 \end{equation*}
-The dual space of $\tvs$ is given by $\tvs^{*}=\mathbb{M}(T)$ the set of signed measures defined on 
-the Borel $\sigma-$ algebra of  $T$. In this 
+The dual space of $\tvs$ is given by $\tvs^{*}=\mathbb{M}(T)$ which is the set of signed measures defined on 
+the Borel $\sigma$-algebra of  $T$. In this 
 case the duality pairing is given by 
 \begin{equation*}
 \langle\mu,g \rangle=\int_{T}gd\mu.
 \end{equation*}
-A GP,  $\{g(t)\}_{t\in T}$ (see definition \ref{dfnGP}) with mean function $m(t)$ and 
+A GP,  $\{g(t)\}_{t\in T}$ (see Definition \ref{dfnGP}) with mean function $m(t)$ and 
 covariance kernel $k(t,t')$, can be thought of as a Gaussian measure $\mathcal{N}(m,K)$
 where
 \cite{lifshits2012lectures} 
@@ -974,14 +976,14 @@ where
 The above example illustrates the connection between GPs and distributions over function spaces, and more
 precisely how  is connected to Gaussian measures on function spaces. Next we will
 explain how to use GPs in practice.
-\newline
+
 Assume  we have  data $\{(\textbf{x}_{i},y_{i})\}_{i=1}^{m}\subset\mathbb{R}^{n}\times\mathbb{R}$ 
  from an expensive function  $M(\cdot)$,
 where $M(\textbf{x}_{i})=y_{i}$. The set $\{(\textbf{x}_{i},y_{i})\}_{i=1}^{m}$ is called
 the \textit{training set}. For
 simplicity we do not presume any trend in the \textit{training outputs} $\{y_{i}\}_{i=1}^{m}$. Given the training set
 we would like to infer  possible values of $M(\cdot)$ on another set of points 
-$\{\textbf{x}_{j}^{*}\}_{j=1}^{k}$. This set of points  is known as \textit{test set}.
+$\{\textbf{x}_{j}^{*}\}_{j=1}^{k}$. This set of points  is known as the \textit{test set}.
 For this purpose we construct an emulator $\widehat{M}(\cdot)$ (see introduction to section 2.1) by
 considering the GP denoted by $\{f(\textbf{x})\}_{\x\in\dom(M)}$
  where $\dom(M)$ 
@@ -1021,8 +1023,8 @@ where
 \langle\textbf{f}\rangle&=K(X^{*},X)K(X,X)^{-1}\textbf{f},\\
 \Sigma&=K(X^{*},X^{*})-K(X^{*},X)K(X,X)^{-1}K(X,X^{*}).
 \end{align*}
-Note that  if in the above equations, we only consider one  test point, $\x^{*}$, and
-we take the limit as $\x^{*}$ approaches  to the training input $\x_{j}$,
+Note that  if in the above equations we only consider one  test point $\x^{*}$, and
+we take the limit as $\x^{*}$ approaches   the training input $\x_{j}$,
  the matrix
 $K(\x^{*},X)$ reduces to a vector and  converges to  $K(\x_{j},X)$. In this case, it is not hard 
 to see that the mean
@@ -1048,9 +1050,9 @@ Equations (\ref{eqnExactPrediction}) and (\ref{eqnConfidence})  show that if we 
 \widehat{M}(\x^{*}):=\langle f\rangle(\x^{*}), 
 \end{equation}
 then $\widehat{M}(\cdot)$ satisfies the 
-conditions for an emulator laidout in Definition \ref{dfnEmulator}.
+conditions for an emulator laid out in Definition \ref{dfnEmulator}.
 
-In Figure \ref{figChp2}, it is shown an example that summarizes the discussion above.
+In Figure \ref{figChp2} is shown an example that summarizes the discussion above.
 We consider the problem of emulating the model $M(x)=\cos(2\pi x)$
 having five training points. The 95\% confidence region
 shows that in the training input $\x_{j}$  the variance is zero  and $\widehat{M}(\x_{j})=y_{j}$, 
@@ -1061,7 +1063,7 @@ The covariance kernel is the quantity that defines the mean and covariance for
 the Gaussian distribution obtained when we look at finitely many random variables in 
 a Gaussian Process. Therefore choosing it
 is a crucial step in the fitting process. We next discuss the properties
-of kernels and how to choose them depending on the data and the smooth properties we are looking
+of kernels and how to choose them depending on the data and the smoothness properties we are looking
 for in the emulation process. 
 
 \subsubsection*{Covariance Kernels}
@@ -1077,11 +1079,12 @@ C:=\begin{bmatrix} K(X,X) & K(X,X^{*}) \\
 \includegraphics[scale=0.33]{./FigChap2/partitionComparison}
 \caption{Comparison between the approximation quality of the emulator $\widehat{M}$ (solid line) for 
 for the model $M(x):=\cos(2\pi x)$ (dashed-dotted line) in the interval $[0,1]$ for two different partitions. 
-On the left, the emulation is performed in the partition $\{0,0.25,0.5,0.75,1\}$. On
-the right in the partition $\{0,0.1,0.2,0.3,1\}$. The dashed line represents the $95\%$ confidence region. The
+On the left, the emulation is performed on the partition $\{0,0.25,0.5,0.75,1\}$. On
+the right on the partition $\{0,0.1,0.2,0.3,1\}$. The dashed line represents the $95\%$ confidence region. The
 black points are the training set.}
 \label{figChp2}
 \end{figure}
+\noindent
 This is the covariance matrix of a multivariate Gaussian distribution and is obtained by evaluating
 the covariance kernel at different points. The matrix $C$ must be  symmetric and  positive definite 
 for any set of training and test inputs. This implies that the covariance kernel has to be symmetric,
@@ -1113,7 +1116,7 @@ where
 \E(f(x)):=\int_{\Omega}f(x)d\p.
 \end{equation*}
 \end{definition}
-We also have a definition for differentiability
+We also have a definition for differentiability.
 \begin{definition}
 The mean square derivative of the  collection $\{f(\x)\}$  in the $i$-th direction  at a point $\y$ is
 \begin{equation*}
@@ -1121,7 +1124,7 @@ The mean square derivative of the  collection $\{f(\x)\}$  in the $i$-th directi
 \lim_{h\rightarrow 0}\E\left(\left|\frac{f(\y+h\textbf{e}_{i})-f(\y)}{h}\right|^{2}\right),
 \end{equation*}
 where $\textbf{e}_{i}$ is the $i$-th canonical vector of the standard basis in $\mathbb{R}^{n}$.
-The mean square $n-th$ derivative is given by 
+The mean square $n$-th derivative is given by 
 \begin{equation*}
 \frac{\partial^{n} f(\y)}{\partial x_{i}^{n}}=
 \lim_{h\rightarrow 0}\E\left(\left|\frac{\frac{\partial^{n-1}f(\y+h\textbf{e}_{i})}{\partial x_{i}^{n-1}}-
@@ -1131,7 +1134,7 @@ whenever the limit exists.
 \end{definition}
 
 
-For Gaussian processes $\{f(\x)\}$ with stationary covariance kernel, it can be shown that 
+In the definitions above if we take $\{f(\x)\}$ to be a Gaussian process with stationary covariance kernel then, it can be shown that 
 the process is continuous in the mean at a point $\y$ if and only if $k$ is continuous at $(\y,\y)$. 
 Also the kernel function for the $n$-th derivative is given by \cite{adlergeometry}
 \begin{equation*}
@@ -1142,7 +1145,7 @@ depends exclusively in the continuity and differentiability properties of the co
 \newline
 
 Another important aspect of covariance kernels is that they are  defined in terms of parameters. 
-The way we choose the values of these parameters in practice, is based on the data
+The way we choose the values of these parameters in practice is based on the data
 we are analyzing. To see how this works, let us return to the problem of of approximating $M(\cdot)$
 by $\widehat{M}(\cdot)$ using Gaussian processes. Let   $k(x,x';\theta)$ be the covariance
 kernel for the GP that depends on the parameter $\theta$, where
@@ -1195,7 +1198,7 @@ shown in Figure \ref{figChp2}.
 
 Ideally we would like to pick as many training points as possible to improve the fit, 
 but picking too many points
-to create the training set, can result in a very high computational cost. On the other hand, if we pick 
+to create the training set can result in a very high computational cost. On the other hand, if we pick 
 just few points to create the training set, then it is possible to end up with unreliable predictions. 
 Thus we need a systematic way to choose the number and distribution of  the training points. One strategy is to  
  fill as much of the space as possible given a fixed number (possibly small) of  training points. 
@@ -1238,12 +1241,12 @@ $T\subset\mathbb{R}^{n}$, compact and $d$ the Euclidean distance) and a subset $
 with finite (fixed) cardinality, say $|S|=n$.
 A maximin distance design $S^{o}$ is a collection of points of $T$  such that
 \begin{equation*}
-\max_{S\subset T,\text{ }|S|=n}\min_{s,s'\in S}d(s,s')=\min_{s,s'\in S^{o}}d(s,s')=d^{o}.
+\max_{(S\subset T,\text{ }|S|=n)}\min_{(s,s'\in S)}d(s,s')=\min_{s,s'\in S^{o}}d(s,s')=d^{o}.
 \end{equation*}
 That is, we are looking for a set $S^{o}$ of cardinality $n$ that maximizes the minimum distance among 
 its elements. As an example consider $T=[0,1]^{3}$, the unit cube in $\mathbb{R}^{3}$ and $n=8$. In 
 this case the design that maximizes the minimum distance among its elements is given by choosing
- the 8 vertices of the cube. Or as shown if Figure \ref{figChp2} (right), if $T=[0,1]$ and $n=5$, 
+ the 8 vertices of the cube or as shown in Figure \ref{figChp2} (right), if $T=[0,1]$ and $n=5$, 
 the maximin design is given by a uniform partition  of the set $T$.
 
 
@@ -1281,9 +1284,9 @@ A survey of the theory behind maximin distance designs can be found in \cite{joh
 \subsection{Sensitivity Analysis}\label{subsecSensitivity}
 
 
-Having an space filling design for the training input permits us to create an
+Having a space filling design for the training input permits us to create an
 emulator $\widehat{M}(\cdot)$ that closely approximates $M(\cdot)$  over its whole domain. 
-By ``closely" we mean within a tolerable uncertainty in the output of the emulator 
+By ``closely'' we mean within a tolerable uncertainty in the output of the emulator 
 for all points in the domain (see Figure \ref{figChp2}).
 %Let us suppose that we have a good space filling design, we can construct a good GP, in the sense that 
 %the uncertainty in the interpolation is less compared to the interpolation error when
@@ -1351,7 +1354,7 @@ loss of generality we may  assume $i_{1}\neq \ell_{1}$. In this case we have
 \ldots,i_{j}}dx_{i_{1}}\right)}_{\text{$=0$ by (\ref{eqnSobolCond1})}}
 \left(\int_{[0,1]}\varphi_{l_{1},\ldots,l_{k}}dx_{l_{1}}\right)dx_{\sim i_{1},l_{1}}=0,
 \end{equation*}
-where we used Fubinni's theorem to split the integrals \cite{lerner2014course}. The symbols to the right of $\sim$ 
+where we used Fubini's theorem to split the integrals \cite{lerner2014course}. The symbols to the right of $\sim$ 
 represent the variables omitted in the integration.
 Another consequence of  (\ref{eqnSobolCond1}) is 
 \begin{eqnarray*}
@@ -1391,7 +1394,7 @@ the first order Sobol indices $S_{1},\ldots,S_{n}$ given by
 S_{i}=\frac{D_{i}}{D},\qquad\text{for }i=1,\ldots,n.
 \end{equation*}
 
-Finally if we want to assess the full effect of a  variable  in the total variance $D$, 
+Finally if we want to assess the full effect of a  variable  on the total variance $D$, 
 we calculate a quantity known 
 as the total effect index. For example if we want to calculate the total effect index
 for the variable $x_{i}$ we would do so by calculating
@@ -1413,9 +1416,6 @@ indices of $M(\cdot)$. In this way we can estimate what arguments of the model a
 relevant and what arguments are not. This will allow us to reduce the complexity of the
 model.
 
-In the next chapter we will show how  the theory explained in  this chapter
-can be applied in a practical setting using a toy problem. In Chapter 4 we 
-proceed to apply the tools developed here to the atmospheric dispersion problem explained in Chapter 1.
 
 
 %%Talking about R packages
@@ -1464,8 +1464,8 @@ proceed to apply the tools developed here to the atmospheric dispersion problem 
 
 In the previous chapter we reviewed some  of the theoretical and computational tools needed to solve
 a Bayesian inverse problem. In this chapter
-we are going to present  a toy problem to illustrate how the theory  can be applied in practice.
-We begin by considering the forward problem, given by the following partial differential equation (PDE).
+we will to present  a toy problem to illustrate how the theory  can be applied in practice.
+We begin by considering the forward problem, given by the following partial differential equation (PDE)
 
 \begin{equation}\label{eqntoyproblem}
 \left\{
@@ -1478,23 +1478,23 @@ We begin by considering the forward problem, given by the following partial diff
 where $b$ is some real positive parameter. For us, the 
 function $u$ represents the mathematical approximation of  a quantity $\tilde{u}$ that has a physical realization. 
 For example we may think of $\tilde{u}$ as the actual difference in  electric potential in $\Omega$ relative to a reference point
-and $u$ as the mathematical approximation to it. Since mathematical models of the physical world are  simplification
-of  reality, it is convenient to make a clear distinction between physics (e.g. $\tilde{u}$) and mathematics (e.g. $u$).
+and $u$ as the mathematical approximation to it. Since mathematical models of the physical world are a simplification
+of  reality, it is convenient to make a clear distinction between physics ($\tilde{u}$) and mathematics ($u$).
 
-In Chapter 2 Section 2.1, we explained how to build an emulator $\hat{M}(\cdot)$  that approximates
+In  Section 2.1, we explained how to build an emulator $\hat{M}(\cdot)$  that approximates
 the output $y$  of a computationally expensive function  $M(\cdot)$ at a point  in its domain. 
 In  this chapter, the function $M(\cdot)$ takes as input a point  $(\textbf{x},b)\in\Omega\times(0,\infty)$. The
 output is the value of the solution $u$ at that 
-point, i.e. $u(\textbf{x};b)=M(\textbf{x},b)$. Now we proceed to explain the associated inverse problem and  how we are going to construct $\hat{M}(\cdot)$.  
+point, that is $u(\textbf{x};b)=M(\textbf{x},b)$. Now we proceed to explain the associated inverse problem and  how we will to construct $\hat{M}(\cdot)$.  
 
 Assume that we have ten experimental measurements 
-of $\tilde{u}$. These measurements were taken  at the points $P:=\{\x_{1},\x_{2},\ldots,\x_{10}\}\subset\Omega$. 
+of $\tilde{u}$ at the points $P:=\{\x_{1},\x_{2},\ldots,\x_{10}\}\subset\Omega$. 
 That is, we know the vector of measurements 
 $\textbf{y}=(\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b))$.
 We want to estimate the value of $b$ that explains  the experimental data $\textbf{y}$ the best. 
 This is our inverse problem. 
 A simple approach to estimate $b$ 
-would be to solve equation (\ref{eqntoyproblem}) for a big number of values $b$ in the interval $(0,L]$ where $L$ 
+would be to solve equation (\ref{eqntoyproblem}) for a large number of values $b$ in the interval $(0,L]$ where $L$ 
 is chosen in a manner that there exists a $b^{*}\in (0,L]$ such that the vector 
 $(u(\x_{1};b^{*}),\ldots,u(\x_{10};b^{*}))$
 has `small' discrepancy with the experimental data $\y$. This approach is not feasible if solving the forward
@@ -1516,11 +1516,11 @@ equation (\ref{eqntoyproblem}) is computationally expensive and repeating the ca
 different values of $b$
 is not feasible. One way to get around that is by constructing an emulator $\widehat{u}(\cdot)$ that approximates $u(\cdot)$
 and is cheap to compute. 
-The way we are going to construct $\widehat{u}(\cdot)$ is as follows: for a fixed $\x\in\mathbb{R}^{2}$ we solve equation 
+The way we will construct $\widehat{u}(\cdot)$ is as follows: for a fixed $\x\in\mathbb{R}^{2}$ we solve equation 
 (\ref{eqntoyproblem}) for   $n$  different values of  $b$. We pick the value of $n$ in a way
 that the computational cost of computing (\ref{eqntoyproblem}) $n$ times, does not exceed our
 computational and time budget. Then use the data $\{b_{j},u(\x,b_{j})\}_{j=1}^{n}$  as a 
-training set to create a Gaussian process, as explained in Chapter 2, Section 2.1.1. Finally
+training set to create a Gaussian process, as explained in  Section 2.1.1. Finally
 for any value $\tilde{b}$ we use the mean of the Gaussian process at that point as $\widehat{u}(\x,\tilde{b})$.
 An sketch from the result for approximating an arbitrary model $u(\x;\cdot)$ with an emulator
 $\widehat{u}(\x;\cdot)$ is shown
@@ -1528,7 +1528,7 @@ in Figure \ref{figGPCreation}.
 
 
 For clarity in the exposition, the table below  summarizes the notation 
-we are going to use throughout the rest of the chapter.
+we will use throughout the rest of the chapter.
 
 
 
@@ -1570,10 +1570,10 @@ $\y:=(\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b))$ & \pbox{7cm}{Values of t
 \end{table}
 Let us return to our original goal:  to estimate the value of $b$ that explains  the experimental data 
 $\y$ as best as possible. To create the experimental data $\y$ we 
-assume that the true value of $b$ is $0,925$. Then, for this value of $b$,  we solve equation (\ref{eqntoyproblem})
+assume that the true value of $b$ is $0.925$. Then, for this value of $b$,  we solve equation (\ref{eqntoyproblem})
 using a finite difference five point  stencil approximation for the Laplacian. 
 Next we pick  ten points at random in $\Omega$ and save the value of the numerical 
-solution $u$ at those location (see Figure \ref{figsolU}).  Finally we add  noise from
+solution $u$ at those locations (see Figure \ref{figsolU}).  Finally we add  noise from
 a normal distribution with mean zero and standard deviation $0.01$ to each  of the ten values. 
 The resulting numbers  are what we use
 as the experimental data $\y=(\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b))$. 
@@ -1581,24 +1581,24 @@ Note that the noise added to the data obtained from the
 numerical  solution of equation
 (\ref{eqntoyproblem}) plays the role of possible  
 errors in the experimental measurements plus inaccuracies of the 
-model to describe the true behavior of the physical variable $\tilde{u}$.
+model to describe the true behavior in the physical variable $\tilde{u}$.
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.5]{./FigChap3/solu}
-\caption{Numerical solution of the system (\ref{eqntoyproblem}) using a five points stencil finite difference
+\caption{Numerical solution of the system (\ref{eqntoyproblem}) using a five point stencil finite difference
 approximation for the Laplacian. The mesh
-size used in $x$ and $y$ was $0.01$. The value of the parameter $b$ was set at $0.925$. The black dots
+size used in $x$ and $y$ was $0.01$ and $b=0.925$. The black dots
 in the plot represent the points used to generate the experimental data 
-$\y=(\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b))$}
+$\y=(\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b))$.}
 \label{figsolU}
 \end{figure}
 
-With the experimental data $\y$ created, we now proceed to obtain a point estimate value of $b$ that produced that data. 
-To that end
-we first compute the posterior distribution. We are going to explain step by step how to obtain such distribution.
 
 \section{Computing the Posterior}
+With the experimental data $\y$ created, we now proceed to obtain a point estimate value of $b$ that produced that data. 
+To that end
+we first compute the posterior distribution.
 To calculate the posterior we use Bayes' rule to get
 
 \begin{equation} \label{eqnpropto}
@@ -1607,12 +1607,12 @@ To calculate the posterior we use Bayes' rule to get
 Note that finding the posterior enables us to obtain   any of point
 estimate from equation (\ref{eqnpointestimates}) and the uncertainty associated with that estimate.
 To compute $\post(b|\y)$ we need to choose
-a prior distribution and the likelihood for $b$. Let us start with the prior. 
+a prior distribution and the likelihood for $b$. 
 
 \subsection{Choosing the Prior}
 
 For the sake of
-the example let us assume that  it is known that
+the example  assume  that
 the parameter $b$ cannot be greater than $2$. In this case one way to choose a prior distribution
 for $b$ that does not assume any other knowledge than $b\in (0,2]$, is the \textit{uniform distribution}. 
 %With this distribution, given a Borel measurable set $A\subset(0,2]$, the probability that $b$ belongs to $A$ is given by
@@ -1635,18 +1635,18 @@ defined as
 \end{equation*}
 
 \subsection{Finding the Likelihood}\label{secFindingLike}
-To calculate the likelihood,first we need to know how the set of possible measurements 
+To calculate the likelihood, first we need to know how the set of possible measurements 
 $\y=(\tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b))$ is related to $b$ when
-we let $b$ to vary. Since we don't know the experimental values of the physical variable $\tilde{u}$
+$b$ is allowed to vary. Since we don't know the experimental values of the physical variable $\tilde{u}$
 for different values of $b$, it is necessary to approximate the relation between $\tilde{u}$ and $b$
 by the relation between $u$ and $b$.
-To obtain such relation we need to solve
+To obtain such  a relation we need to solve
 equation (\ref{eqntoyproblem}). By solving  this equation explicitly we can find a functional relation
 between $u$ and $b$ for each one of the ten locations depicted in Figure \ref{figsolU}.
-It is possible to  solve analytically  equation (\ref{eqntoyproblem}). However
+It is possible to  solve analytically  equation (\ref{eqntoyproblem}), however
 the relation between $u$ and $b$ is  given by an infinite series.  Indeed equation 
 (\ref{eqntoyproblem}) is  Poisson's equation with homogeneous boundary conditions. This
-equation can be solve using an eigenfunction expansion \cite{logan2014applied}. The
+equation can be solved using an eigenfunction expansion \cite{logan2014applied}. The
 eigenfunctions of the Laplacian in the unit square are given by
 \begin{equation*}
 \phi_{mn}=\sin(n\pi x)\sin(m\pi y),\qquad\text{for }m,n\in\mathbb{N},\
@@ -1669,7 +1669,7 @@ The symbol $\langle\cdot,\cdot\rangle$ represents the standard inner product in 
 
 Having a functional relation given
 by an infinite series is often not very useful. For example in equation (\ref{eqnIntegrals})
-the integral on the numerator does not have a closed form.
+the integral in the numerator does not have a closed form.
 Hence we need a different approach to gain insight into the relation between $\y$ and $b$. 
 The  approach  we will use is the  same as the one that allowed us to obtain
 Figure \ref{figGPCreation}.  First we solve equation (\ref{eqntoyproblem}) for
@@ -1679,14 +1679,14 @@ set $\{b_{j},u(\x_{k};b_{j})\}_{j=1}^{10}$ to train a Gaussian process for each 
 Finally for any $\tilde{b}\in (0,2]$ we use the mean of the Gaussian process at that point as
 the value $\widehat{u}(\x_{k};\tilde{b})$. By proceeding in this manner we obtain 
 a cheap method to approximate  the behavior   of 
-$\y=( \tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b))$ when we let 
+$\y=( \tilde{u}(\x_{1};b),\ldots,\tilde{u}(\x_{10};b))$ when we allow 
 $b$ to vary.
 
 The next step is to choose  the values of $b$  for which the  PDE (\ref{eqntoyproblem}) is solved in a 
-way the uncertainty associated with to the emulator is as small as possible. 
+way that the uncertainty associated with the emulator is as small as possible. 
 We shall denote the points we choose as $\{b_{1},\dots,b_{10}\}$. To choose the points 
-we use a maximin design as explained in Chapter 2 Section \ref{secDesignofExperiments}. In this case
-it is straightforward to check that the maximin design is the set of equidistant points
+we use a maximin design as explained in  Section \ref{secDesignofExperiments}. In this case
+it is straightforward to check that a maximin design is the set of equidistant points
 \begin{equation*}
 \{b_{1}=0.2,b_{2}=0.4,\ldots,b_{10}=2\}.
 \end{equation*}
@@ -1696,9 +1696,9 @@ each $\x$ in $P$, we know the values in the set $\{u(b_{j},\x_{k})\}_{j,k=1}^{10
 %We  use  the set of equidistant  points to train a GP for each of the ten sites in $P$. 
 We use this set  to train ten Gaussian Process. With these processes we define the functions 
 \begin{equation*}
-G_{k}:(0,2]\rightarrow\mathbb{R}\qquad\text{for }k=1,2,\ldots 10.
+G_{k}:(0,2]\rightarrow\mathbb{R}\qquad\text{for }k=1,2,\ldots 10,
 \end{equation*}
-such that  for each $k$ and $b$,  the value of the mean of the $k$-th GP is going to be given by $G_{k}(b)$.
+such that  for each $k$ and $b$,  the value of the mean of the $k$-th GP is given by $G_{k}(b)$.
 That is, $G_{k}(\cdot)$ is the emulator for $u(\x_{k},\cdot)$. More precisely
 \begin{equation*}
 G_{k}(b)=\hat{u}(\x_{k};b).
@@ -1707,15 +1707,13 @@ G_{k}(b)=\hat{u}(\x_{k};b).
 The functions $G_{k}(\cdot)$ are cheap to evaluate and are a good 
 approximation of $\tilde{u}(\x_{k},\cdot)$. Now it is possible
 to approximate the value of $b$ that explains $\y=(\tilde{u}(\x_{1},b),
-\ldots,\tilde{u}(\x_{10},b))$ by trying a big number of different values
+\ldots,\tilde{u}(\x_{10},b))$ by trying a large number of different values
 of $b$ and then compare with the experimental data, to see what choice
 of $b$ gives the smallest discrepancy. To this end, we calculate
 the values of $G_{k}(\cdot)$, for $k=1,\ldots,10$ in the set
 \begin{equation*}
 \{0.01,0.02,\ldots,1.99,2\}.
-\end{equation*}
-
- 
+\end{equation*} 
 In Figure \ref{fignofitted} are plotted  
 the emulator at these points,  the true value of $b$, the experimental measurement $\tilde{u}(\x_{k};b)$
 and the training data $\{u(\x_{k};b_{j})\}_{j=1}^{10}$ for each of the ten sites.
@@ -1738,10 +1736,10 @@ and the training data $\{u(\x_{k};b_{j})\}_{j=1}^{10}$ for each of the ten sites
 
 We are now ready to make the mathematical connection between $\tilde{u},u$ and $\hat{u}$. Recall
 that $u$ is the mathematical approximation of the physical variable $\tilde{u}$ and $\hat{u}$
-is an emulator for $u$. Hence if $\hat{u}$ approximates well $u$, we would expect that 
+is an emulator for $u$. Hence if $\hat{u}$ approximates $u$ well, we would expect that 
 $\hat{u}$ approximates $\tilde{u}$. For any point $\x_{k}\in P$ we do not know exactly
 how  $\hat{u}(\x_{k},\cdot)=G_{k}(\cdot)$ differs from $\tilde{u}(\x_{k},\cdot)$.
-If we define $y_{k}(b):=\tilde{u}(\x_{k},b)$, then, a possible 
+If we define $y_{k}(b):=\tilde{u}(\x_{k},b)$, then a possible 
 relation
 that connects these quantities is given by the following Gaussian additive model \cite{Somersalo}
 \begin{equation}\label{eqnreal2interp}
@@ -1751,7 +1749,7 @@ where $\lambda$ is  a positive number that models how much we believe  the emula
 We chose the value $\lambda=5.4\times 10^{-3}$ to get a signal to noise ratio  of 1:10.
 By defining the vector  
 $\textbf{G}(b)=(\hat{u}(\x_{1};b),\ldots,\hat{u}(\x_{10};b))$ and  the definition of $\y$ 
-(see table \ref{tabSymboltable}). Then equation (\ref{eqnreal2interp}) can we written more compactly as
+(see table \ref{tabSymboltable}), equation (\ref{eqnreal2interp}) can we written more compactly as
 \begin{equation}\label{eqnvector2interp}
 \textbf{y}=\textbf{G}(b)+\epsilon,\qquad\text{with }\epsilon\sim\mathcal{N}(0,\lambda^{2} I_{10\times 10}).
 \end{equation}
@@ -1762,7 +1760,7 @@ to conclude
 \begin{equation*}
 \textbf{y}|b\sim \mathcal{N}(\textbf{G}(b),\lambda^{2} I_{10\times 10}),
 \end{equation*}
-i.e.
+that is
 \begin{equation}\label{eqnlikelihoodtoyproblem}
 \like(\textbf{y}|b)\propto e^{-\frac{1}{2\lambda^{2}}\|\textbf{G}(b)-\textbf{y}\|_{2}^{2}},
 \end{equation}
@@ -1848,7 +1846,7 @@ parameter $b$ is encoded in the posterior distribution. Figure \ref{figlikeprior
 It is not always possible to visualize a probability density so it is necessary to sample from it
 in order to obtain statistics about the parameters of interest.
 A family of methods for this purpose
-are known as Markov Chain Monte Carlo (MCMC). In this work we 
+is known as Markov Chain Monte Carlo (MCMC). In this work we 
 focus on a particular algorithm known as Metropolis-Hastings  (MH). We now proceed  to explain
 how MH works in practice using the posterior for $b$ in equation (\ref{eqnposteriorforb}) as an example. 
 \newline
@@ -1861,8 +1859,8 @@ we will accept
 that move with probability one if $\post(q_{1}|\y)\leq\post(q_{2}|\y)$ and with probability 
 $\frac{\post(q_{2}|\y)}{\post(q_{1}|\y)}$.  We choose
 in what direction to move, randomly, using some probability distribution that is easy to sample from.
-For simplicity, In this and the next Chapter we chose the uniform distribution to decide in what  direction to move.
-The pseudocode  for the MH algorithm as described above is \cite{Somersalo}
+For simplicity, in this and the next Chapter we choose the uniform distribution to decide in what  direction to move.
+The pseudocode  for the MH algorithm as described above is given below  \cite{Somersalo}
 
 \begin{algorithm}\label{algMH}
 \caption{Metropolis-Hastings Algorithm}
@@ -1901,19 +1899,19 @@ The pseudocode  for the MH algorithm as described above is \cite{Somersalo}
 The rule of thumb for choosing the parameter $\alpha$ in the scheme above is that   the proportion of times we accept
 a move 
 is about $0.25$ \cite{casella2008monte}. It can be shown that the sequence $q_{1},q_{2},\ldots,q_{N}$
-are realizations of a Markov chain that in the limit as $N\rightarrow\infty$ are distributed according to the distribution
+is a realization of a Markov chain that in the limit as $N\rightarrow\infty$ is distributed according to the distribution
 $\post(b|\y)$. This convergence result works under mild conditions over the distribution that is being sampled.
 For more details about the theory behind MCMC methods we refer the reader to \cite{casella2008monte}. 
-Since we do not have the computational power to let $N\rightarrow\infty$. We let the chain run for a large number of steps
+Since we do not have the computational power to let $N\rightarrow\infty$ we let the chain run for a large number of steps
 until it converges. Then, we throw away the \textit{burn-in} portion of the chain and compute statistics using 
-the remaining samples.  The burn-in portion of the chain are the samples obtained before the chain is close 
-to converge. A common choice is to discard the first $\frac{N}{2}$ samples.
+the remaining samples.  The burn-in portion of the chain consists of samples obtained before the chain is close 
+to converging. A common choice is to discard the first $\frac{N}{2}$ samples.
 \newline
 
 
-Using Algorithm 1, we sample from the posterior distribution $\post(b|\y)$ setting the values $\alpha=0.23$
-and $N=10000$. The  burn-in  period is set to be  the first $5000$ samples. An histogram of the last $5000$
-is shown below.
+Using Algorithm 1, we sample from the posterior distribution $\post(b|\y)$ and take the values $\alpha=0.23$
+and $N=10000$. The  burn-in  period is set to be  the first $5000$ samples. A histogram of the last $5000$
+is shown in Figure \ref{figToyMCMC}.
 
 %Returning to the problem of sampling the posterior distribution for $b$. We are going to use the Metropolis Hastings algorithm
 %using an step size of $\delta=0.23$, $10000$ samples and we chose the first $5000$ to be the burning period. The results 
@@ -1927,6 +1925,7 @@ is shown below.
 \caption{Histogram obtained for the posterior distribution (\ref{eqnpropto}) 
 from $5000$ samples from MH algorithm with step size $\alpha=0.23$. The solid line
 is the  graph for the posterior $\post(b|D)$.}
+\label{figToyMCMC}
 \end{figure}
 
 With the samples obtained we readily obtain useful statistics for $b$. For example, we can estimate
@@ -1947,18 +1946,18 @@ case the interval is given by
 \end{equation*}
 
 
-Let us do a short digression about the idea behind Monte Carlo integration. 
+Let us make a short digression about the idea behind Monte Carlo integration. 
 Consider the generic problem of evaluating the $n$-dimensional
 integral
 \begin{equation}\label{eqnmontecarlo}
 \int_{\mathbb{R}^{n}}h(x)\rho(x)dx,
 \end{equation}  
 where $\rho$ is the Lebesgue density of some probability measure $\p$. This means that calculating (\ref{eqnmontecarlo}) 
-is equivalent to calculating the expected value of $h$, i.e.
+is equivalent to calculating the expected value of $h$, that is
 \begin{equation*}
 \mathbb{E}[h]=\int_{\mathbb{R}^{n}}h(x)\rho(x)dx.
 \end{equation*}
-If we have $X_{1},\ldots,X_{n}$ random variables independent with density $\rho$, then by the strong law of large numbers, the sequence of random
+If  $X_{1},\ldots,X_{n}$ are independent random variables  with density $\rho$, then by the strong law of large numbers, the sequence of random
 variables
 \begin{equation*}
 h_{n}=\frac{1}{n}\sum_{k=1}^{n} h(X_{k}),
@@ -1975,13 +1974,13 @@ where
 \end{equation*}
 This means that the uncertainty in the approximation $h_{n}$ for $\mathbb{E}[h]$ goes to $0$ as $\mathcal{O}(\frac{1}{\sqrt{n}})$.
 Note that the convergence rate is independent of the dimension of the problem. That is the reason why Monte Carlo integration
-is used in high dimensional problems, where quadrature methods are prohibitively  expensive to implement. In Chapter 4 we are going to apply 
+is used in high dimensional problems, where quadrature methods are prohibitively  expensive to implement. In Chapter 4 we  apply 
 this method to calculate integrals of real valued functions supported in a seven dimensional space.
 
-The estimate for $b$ in equation (\ref{eqnbcmMC}), depends on the choice of the prior. At this point it is unclear
+The estimate for $b$ in equation (\ref{eqnbcmMC}) depends on the choice of the prior. At this point it is unclear
 how choosing a different prior would give a different estimate for $b$.
 To close this chapter we discuss  the role that the prior has in inference in the Bayesian Framework.
-\section{The Importance of the Prior}
+\section{Importance of the Prior}
 Once again  consider  problem of estimating
 the value of the parameter $b$, whose real value is, as before, $0.925$. This time we assume the parameter
 $b$ can be any real number (not just $0<b\leq 2$ as before) and the  prior distribution for $b$ to be
@@ -1998,7 +1997,7 @@ of the parameter given the data $\textbf{y}$, suppose that
 \begin{equation*}
 b\sim\mathscr{N}(4,2.5).
 \end{equation*}
-This prior assumes that, with $95\%$ of confidence, the value of
+This prior assumes that, with $95\%$ confidence, the value of
 $b$ is in the interval $[1.8,8.2]$. Clearly, there is a mismatch between
 the true value of $b$ and the range of values that the prior distribution
 assigns high probability. Let us evaluate how the posterior
@@ -2006,9 +2005,9 @@ distribution for $b$ evolves as we consider more and more experimental
 data from the measurements of $\tilde{u}$. Figure \ref{figpostevolution} shows
 how the posterior evolves when we calculate the likelihood with more 
 and more data. The first frame shows the result when only the measurement
-$\tilde{u}(\x_{1};b)$ is taken into account. The second frame
+$\tilde{u}(\x_{1};b)$ is taken into account, the second frame
 when the measurements $\tilde{u}(\x_{1};b),\tilde{u}(\x_{2};b)$ are taken
-into account. In each new frame we proceed adding one more measurement 
+into account. In each new frame we proceed by adding one more measurement 
 to calculate the likelihood.
 
 \begin{figure}[H]
@@ -2024,14 +2023,14 @@ all 10 experimental measurements, the mode that is close to the true value of $b
 by the prior at the point $b=4$. The explanation for this behavior  is that the prior  has a high value near $b=4$, 
 but it is close to zero for values around $b=0.925$.
 Then, when the experimental data is used, the likelihood distribution has a higher  value for points  close to $b=0.925$
-than points close to $b=4$. The more data, the higher the value of the likelihood around $b=0.925$ and closer to zero
+than points close to $b=4$. The more data are used, the higher the value of the likelihood around $b=0.925$ and the closer to zero
 away from it. However since
 the prior distribution gives negligible probability to values close to the true value of $b$, when all data are used the 
 product $\prior(\y|b)\p(b)$ will be non-negligible only in regions close to $b=4$ or $b=0.925$.
 
 The above example is a warning example. If we know how to choose the prior distribution in a way that is meaningful to the
-problem, reliable inference could be done even with small amount of data. On the contrary if the prior distribution
-is not realistic, inference could not be done or  may not be reliable even with a large amount of data.  
+problem, reliable inference can be done even with a small amount of data. On the contrary if the prior distribution
+is not realistic, inference   may not be reliable even with a large amount of data.  
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Chapter 4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,0 +1,35 @@
+\documentclass[12pt]{article}
+
+
+\begin{document}
+
+\section*{Parameter estimation and uncertainty quantification applied to
+advection-diffusion problems arising in atmospheric sources inversion}
+
+
+\subsection*{abstract}
+In this thesis we present a method to obtain an efficient algorithm
+to perform parameter estimation with uncertainty quantification 
+of mathematical models that are complex and computationally
+expensive. We achieve this with a combination of emulation of the mathematical
+model using Gaussian processes  and Bayesian statistics and inversion for the parameter estimation
+and uncertainty quantification.
+In particular we apply these ideas to a source inversion problem in atmospheric dispersion.
+
+We  explain the theory and ideas behind each relevant part 
+of the process in the emulation and parameter estimation. The concepts and methodology presented 
+in this work are general and can be applied
+to a wide range of problems where it is necessary to estimate parameters  but the underlying
+mathematical model is expensive, rendering  more classical approaches unfeasible.
+
+To validate the concepts used, we perform a parameter estimation study
+in a model that is relatively cheap to compute and whose parameter values are known in 
+advance. Finally we perform a parameter estimation with
+uncertainty quantification of a much more expensive atmospheric dispersion model
+using real data from a lead-zinc smelter  in Trail, British Columbia. 
+The parameter estimation includes  approximating high-dimensional integrals
+with Markov chain Monte Carlo methods and solving the source inversion problem
+in atmospheric dispersion using the Bayesian framework.
+
+\end{document}
+
