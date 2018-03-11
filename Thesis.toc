@@ -18,14 +18,14 @@
 \contentsline {subsection}{\numberline {3.1.1}Choosing the Prior}{27}{subsection.3.1.1}
 \contentsline {subsection}{\numberline {3.1.2}Finding the Likelihood}{28}{subsection.3.1.2}
 \contentsline {section}{\numberline {3.2}Importance of the Prior}{34}{section.3.2}
-\contentsline {chapter}{\numberline {4}Industrial Case Problem}{38}{chapter.4}
+\contentsline {chapter}{\numberline {4}Industrial Case Study}{38}{chapter.4}
 \contentsline {section}{\numberline {4.1}A Mathematical Model for Pollutant Dispersion}{39}{section.4.1}
 \contentsline {subsection}{\numberline {4.1.1}Assumptions on the Diffusivity Tensor}{42}{subsection.4.1.1}
 \contentsline {subsection}{\numberline {4.1.2}Assumptions on the Wind Velocity Distribution}{42}{subsection.4.1.2}
 \contentsline {section}{\numberline {4.2}Sensitivity Analysis}{45}{section.4.2}
-\contentsline {section}{\numberline {4.3}Building an Emulator for $A(p,L,z_{0})$}{48}{section.4.3}
+\contentsline {section}{\numberline {4.3}Building an Emulator for $\mathscr {A}(p,L,z_{0})$}{48}{section.4.3}
 \contentsline {section}{\numberline {4.4}Bayesian Framework for the Inverse Problem}{50}{section.4.4}
 \contentsline {subsection}{\numberline {4.4.1}Choosing a Prior}{50}{subsection.4.4.1}
-\contentsline {section}{\numberline {4.5}Inferring the Parameters and the Sources}{53}{section.4.5}
+\contentsline {section}{\numberline {4.5}Inferring Parameters the Sources}{53}{section.4.5}
 \contentsline {chapter}{\numberline {5}Conclusions}{61}{chapter.5}
 \contentsline {chapter}{Bibliography}{62}{section*.14}

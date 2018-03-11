@@ -11,10 +11,10 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Aerial photograph taken from \cite {hosseini2016airborne} of the lead-zinc smelter in Trail, British Columbia, Canada. The points $Q_{1}$ to $Q_{4}$ represent the sources of zinc. The green triangles $R_{1}$ to $R_{9}$ represent the location of the measurement devices. }}{38}{figure.4.1}
 \contentsline {figure}{\numberline {4.2}{\ignorespaces Schematic representation of the region $\Lambda $ in space containing a source of zinc.}}{39}{figure.4.2}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Boxplots containing the result for the total effect Sobol index performed on each of the nine sensors. The dashed line represents a Sobol index of zero.}}{47}{figure.4.3}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Boxplots containing the result for the total effect Sobol' index performed on each of the nine sensors. The dashed line represents a Sobol' index of zero.}}{47}{figure.4.3}
 \contentsline {figure}{\numberline {4.4}{\ignorespaces Maximin design with 64 points in the parameter space $(p,L,z_{0})$.}}{49}{figure.4.4}
 \contentsline {figure}{\numberline {4.5}{\ignorespaces Emulator for the $J(\lambda )$ in equation (\ref {eqnFunctional2Optimize})}}{54}{figure.4.5}
 \contentsline {figure}{\numberline {4.6}{\ignorespaces Trace plots of the Markov chain for each of the variables $p,z_{0},L$ and $\textbf {q}$. Using the Metropolis-Hastings algorithm of Algorithm 1 in Chapter 3.}}{56}{figure.4.6}
 \contentsline {figure}{\numberline {4.7}{\ignorespaces Histograms for the marginal posterior distribution for each of the seven unknowns in our model}}{58}{figure.4.7}
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Comparison between engineers source strength estimation with our point estimate and the uncertainty associated to it.}}{59}{figure.4.8}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Comparison between engineering estimates of the source strength source with our point estimate and the uncertainty associated to it.}}{59}{figure.4.8}
 \addvspace {10\p@ }

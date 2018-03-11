@@ -17,7 +17,7 @@
 \BOOKMARK [2][-]{subsection.3.1.1}{Choosing the Prior}{section.3.1}% 17
 \BOOKMARK [2][-]{subsection.3.1.2}{Finding the Likelihood}{section.3.1}% 18
 \BOOKMARK [1][-]{section.3.2}{Importance of the Prior}{chapter.3}% 19
-\BOOKMARK [0][-]{chapter.4}{Industrial Case Problem}{}% 20
+\BOOKMARK [0][-]{chapter.4}{Industrial Case Study}{}% 20
 \BOOKMARK [1][-]{section.4.1}{A Mathematical Model for Pollutant Dispersion}{chapter.4}% 21
 \BOOKMARK [2][-]{subsection.4.1.1}{Assumptions on the Diffusivity Tensor}{section.4.1}% 22
 \BOOKMARK [2][-]{subsection.4.1.2}{Assumptions on the Wind Velocity Distribution}{section.4.1}% 23
@@ -25,6 +25,6 @@
 \BOOKMARK [1][-]{section.4.3}{Building an Emulator for A\(p,L,z0\)}{chapter.4}% 25
 \BOOKMARK [1][-]{section.4.4}{Bayesian Framework for the Inverse Problem}{chapter.4}% 26
 \BOOKMARK [2][-]{subsection.4.4.1}{Choosing a Prior}{section.4.4}% 27
-\BOOKMARK [1][-]{section.4.5}{Inferring the Parameters and the Sources}{chapter.4}% 28
+\BOOKMARK [1][-]{section.4.5}{Inferring Parameters the Sources}{chapter.4}% 28
 \BOOKMARK [0][-]{chapter.5}{Conclusions}{}% 29
 \BOOKMARK [0][-]{section*.14}{Bibliography}{}% 30
