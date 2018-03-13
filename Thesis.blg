@@ -3,46 +3,44 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: Thesis.aux
 The style file: plain.bst
 Database file #1: Thesis.bib
-Warning--empty year in adlergeometry
 You've used 43 entries,
             2118 wiz_defined-function locations,
-            738 strings with 10391 characters,
-and the built_in function-call counts, 12577 in all, are:
-= -- 1199
-> -- 570
-< -- 6
-+ -- 232
-- -- 184
-* -- 840
-:= -- 2160
-add.period$ -- 129
+            749 strings with 10702 characters,
+and the built_in function-call counts, 12850 in all, are:
+= -- 1232
+> -- 566
+< -- 8
++ -- 230
+- -- 182
+* -- 879
+:= -- 2190
+add.period$ -- 131
 call.type$ -- 43
-change.case$ -- 198
+change.case$ -- 199
 chr.to.int$ -- 0
-cite$ -- 44
-duplicate$ -- 497
-empty$ -- 1040
-format.name$ -- 184
-if$ -- 2578
+cite$ -- 43
+duplicate$ -- 501
+empty$ -- 1071
+format.name$ -- 182
+if$ -- 2659
 int.to.chr$ -- 0
 int.to.str$ -- 43
 missing$ -- 62
 newline$ -- 218
 num.names$ -- 86
-pop$ -- 259
+pop$ -- 248
 preamble$ -- 1
-purify$ -- 176
+purify$ -- 177
 quote$ -- 0
-skip$ -- 307
+skip$ -- 305
 stack$ -- 0
-substring$ -- 700
-swap$ -- 55
-text.length$ -- 6
+substring$ -- 762
+swap$ -- 59
+text.length$ -- 8
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 132
-warning$ -- 1
-while$ -- 125
+warning$ -- 0
+while$ -- 123
 width$ -- 45
-write$ -- 457
-(There was 1 warning)
+write$ -- 465
