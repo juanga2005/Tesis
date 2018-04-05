@@ -1,0 +1,2 @@
+1. How does the delta function as the source affects the behaviour of the solution?
+2. What about the initial conditions of the model?

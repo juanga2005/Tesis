@@ -1,0 +1,7 @@
+\beamer@endinputifotherversion {3.33pt}
+\beamer@sectionintoc {1}{Overview}{2}{0}{1}
+\beamer@sectionintoc {2}{Finding a Surrogate for $u$}{8}{0}{2}
+\beamer@sectionintoc {3}{Optimizing the Surrogate interpolation Capabilities}{13}{0}{3}
+\beamer@sectionintoc {4}{Reducing the Complexity of the Model}{17}{0}{4}
+\beamer@sectionintoc {5}{Introducing the Bayesian Framework}{24}{0}{5}
+\beamer@sectionintoc {6}{Decoding the Posterior}{29}{0}{6}
