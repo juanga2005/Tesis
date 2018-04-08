@@ -1,6 +1,7 @@
 \BOOKMARK [2][]{Outline0.1}{Overview}{}% 1
-\BOOKMARK [2][]{Outline0.2}{Finding a Surrogate for u}{}% 2
-\BOOKMARK [2][]{Outline0.3}{Optimizing the Surrogate interpolation Capabilities}{}% 3
-\BOOKMARK [2][]{Outline0.4}{Reducing the Complexity of the Model}{}% 4
-\BOOKMARK [2][]{Outline0.5}{Introducing the Bayesian Framework}{}% 5
-\BOOKMARK [2][]{Outline0.6}{Decoding the Posterior}{}% 6
+\BOOKMARK [2][]{Outline0.2}{Setting up the Problem}{}% 2
+\BOOKMARK [3][]{Outline0.2.1.11}{Finding a Surrogate for F}{Outline0.2}% 3
+\BOOKMARK [3][]{Outline0.2.2.14}{Optimizing the Surrogate Interpolation Capabilities}{Outline0.2}% 4
+\BOOKMARK [3][]{Outline0.2.3.17}{Reducing the Complexity of the Model}{Outline0.2}% 5
+\BOOKMARK [2][]{Outline0.3}{Introducing the Bayesian Framework}{}% 6
+\BOOKMARK [2][]{Outline0.4}{Decoding the Posterior}{}% 7

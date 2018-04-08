@@ -3,9 +3,12 @@
 \usetheme{Warsaw}
 \usepackage{mathrsfs}
 \usepackage{amsmath}
+\usepackage[absolute,overlay]{textpos}
 \usepackage{graphicx}
 \usepackage{caption}
+\usepackage{algorithm}
 %\usepackage{subcaption}
+\usepackage{algpseudocode}
 
 %Mathematical writting
 \theoremstyle{plain}
@@ -35,7 +38,8 @@
 \includegraphics[scale=0.15]{log}
 \end{figure}
 \begin{center}
-Parameter Estimation Using Gaussian Process Regression.
+Parameter Estimation and Uncertainty Quantification Applied to 
+Advection-Diffusion Problems Arising in Atmospheric Source Inversion
 \end{center}
 
 \begin{center}
@@ -71,12 +75,12 @@ April 10 of 2018
 
 Given a function
 \begin{equation*}
-u:A\times\Theta\rightarrow \mathbb{R},
+F:A\times\Theta\rightarrow \mathbb{R},
 \end{equation*}
 where $A\subset\mathbb{R}^{n}$ and $\Theta$ is a set of parameters. Given
-experimental (noisy) measures of $u$ at known points $\textbf{x}_{1},\ldots,\textbf{x}_{n}\in A$.
+experimental (noisy) measures of $F$ at known points $\textbf{x}_{1},\ldots,\textbf{x}_{n}\in A$.
 How to infer the values of the parameters in $\Theta$ and their uncertainties when 
-$u$ is computationally expensive?
+$F$ is computationally expensive?
 
 \end{frame}
 
@@ -101,7 +105,7 @@ Goal: Estimate $Q_{i}$ and $\theta$ using measurements of deposition in  $R_{j}$
 
 
 
-\begin{frame}{Case Study}
+\begin{frame}{Mathematical Model}
 \begin{equation*}
 \partial_{t} c(\textbf{x},t)+\nabla\cdot(\textbf{u}(\textbf{x},t)c+\textbf{S}(\textbf{x},t)\nabla c)
 =q(\textbf{x},t)\qquad\text{on }\mathbb{R}^{2}\times\mathbb{R}_{\geq 0}\times(0,T).
@@ -109,35 +113,89 @@ Goal: Estimate $Q_{i}$ and $\theta$ using measurements of deposition in  $R_{j}$
 \begin{itemize}
 \item $\textbf{u}(\textbf{x},t)=(u_{x}(z,t),u_{y}(z,t),u_{set})$ 
 (Wind velocity field)
-\item $\|(u_{x},u_{y})\|_{2}\propto\left(\frac{z}{z_{r}}\right)^{\gamma}$.
-\item $\textbf{S}=diag(s_{x},s_{y},s_{z})$ (Eddy diffusion matrix)
-\item $s_{z}=f(L,z_{cut})$, where $\frac{1}{L}=a+b\log_{10}(z_{0})$.
+\item $\|(u_{x},u_{y})\|_{2}\propto\left(\frac{z}{z_{r}}\right)^{\gamma}$,
+\item $\textbf{S}=diag(s_{x},s_{y},s_{z})$ (Eddy diffusion matrix),
+\item $s_{z}=f(L,z_{cut})$,
 \item $s_{x}=s_{y}=g(z_{i},L)$, with $z_{i}$ Mixing layer height.
 \end{itemize}
 \end{frame}
 
 
 
-\begin{frame}{Case Study}
-In this slide expand a little on the model,
-like initial conditions and such
+\begin{frame}{Boundary Conditions}
+
+\begin{itemize}
+\item Far-field boundary condition
+\begin{equation*}
+c(\textbf{x},t)\rightarrow 0 as \|x\|\rightarrow \infty
+\end{equation*}
+
+\item Robin boundary conditions at $z=0$
+\begin{equation*}
+\left(u_{set}c+s_{z}\frac{\partial c}{\partial z}\right)|{z=0}=u_{dep}c|_{z=0}
+\end{equation*}
+
+
+\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Steps}
-How to proceed?
+\begin{frame}
+
+
+\begin{itemize}
+\item Concentration and deposition are related via
+
+\begin{equation}\label{eqnw}
+w(x,y,T)=\int_{0}^{T}c(x,y,0,t)u_{set}dt.
+\end{equation}
+
+\begin{equation*}
+F(x_{i},y_{i},T)=\int_{R_{i}}w(x,y,T)dxdy\approx w(x_{i},y_{i},T)\Delta A,
+\end{equation*}
+\item $\Delta A$ is the cross-sectional area of the dust-fall jar
+\item $T$ is taken to be one month.
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+\begin{itemize}
+
+\item Numerical solution of the concentration $c$ was obtained via 
+a finite volume solver\footnote{Hosseini, Bamdad and Stockie, J.M. Estimating airborne particulate emissions using a finite-volume
+forward solver coupled with a Bayesian inversion approach.}
+using a 30x30 resolution grid on the domain.
+
+
+
+\item Solving for one set of parameters can take up to half an hour.
+\end{itemize}
+
+\textbf{Conclusion:} Finding the deposition $F$  is computationally very expensive.
+\end{frame}
+
+
+
+
+
+
+\begin{frame}{Roadmap}
 \begin{enumerate}
-\item Find a surrogate for $u$.
-\item Locate the optimal points to evaluate $u$ so that the surrogate is accurate.
-\item See if it is possible to do dimensionality reduction
+\item Find a surrogate for $F$,
+\item Locate the optimal points to evaluate $F$ so that the surrogate is accurate,
+\item See if it is possible to do dimensionality reduction,
 \item Use the Bayesian framework to obtain the posterior distribution of the parameters 
-in the light of the experimental data
+in the light of the experimental data,
 \item Perform inference on the posterior using numerical methods.
 \end{enumerate}
 \end{frame}  
 
 
-\section{Finding a Surrogate for $u$}
+\section{Setting up the Problem}
+
+\subsection{Finding a Surrogate for $F$}
 
 
 \begin{frame}{Gaussian Process}
@@ -147,42 +205,26 @@ possibly uncountable,
  such that any finite subset of random variables
  $\{g(x_{k})\}_{k=1}^{N}\subset\{g(x)\}_{x\in A}$ for
 $\{x_{k}\}_{k=1}^{N}\subset A$ are jointly Gaussian.
-\end{dfn}
-\end{frame}
-\begin{frame}
-\frametitle{Multivariate Gaussian Distribution}
-\begin{dfn}
-Two random vectors $X\in\mathbb{R}^{n}$ and $Y\in\mathbb{R}^{m}$
-are jointly Gaussian if their joint density function is given by
+
+A GP is completely defined by its mean m(x) and covariance operator k(x,x'):
 \begin{equation*}
-\frac{1}{(2\pi)^{\frac{m+n}{2}}|\Sigma|^{\frac{1}{2}}}
-\exp(-([x,y]-[\mu_{x},\mu_{y}])
-\underbrace{\begin{bmatrix}
-\Sigma_{xx} & \Sigma_{xy}\\
-\Sigma_{xy}^{T} & \Sigma_{yy}
-\end{bmatrix}}_{\Sigma}
-([x,y]-\underbrace{[\mu_{x},\mu_{y}]}_{\mu})^{T})
+m(x)=\mathbb{E}(g(x)),
 \end{equation*}
-%In this case we write
-%\begin{equation*}
-%(X,Y)\sim\mathcal{N}(\mu,\Sigma)
-%\end{equation*}
+\begin{equation*}
+k(x,x')=\mathbb{E}\left((x-m(x))(x'-m(x'))\right).
+\end{equation*}
+
 \end{dfn}
-\begin{itemize}
-\item Marginal distribution is multivariate Gaussian.
-	\begin{itemize}
-		\item $X\sim\mathcal{N}(\mu_{x},\Sigma_{xx})$.
-		\item $Y\sim\mathcal{N}(\mu_{y},\Sigma_{yy})$.
-	\end{itemize}
-\item Conditional distribution is multivariate Gaussian.
-	\begin{itemize}
-		\item $X|Y=y\sim\mathcal{N}(\mu_{x}-\Sigma_{xy}\Sigma_{yy}^{-1}
-		(y-\mu_{y}),\Sigma_{xx}-\Sigma_{xy}\Sigma_{yy}^{-1}\Sigma_{yx})$.
-	\end{itemize}
-\end{itemize}
 \end{frame}
 
 %In this section you introduce everything that is related to GPs
+
+
+
+
+
+
+
 
 \begin{frame}
 \frametitle{Gaussian Process as Interpolator}
@@ -193,12 +235,16 @@ are jointly Gaussian if their joint density function is given by
 \end{frame}
 
 
-\begin{frame}
+\begin{frame}{Interpolation with Real Data}
+
+
 \begin{figure}
 \includegraphics[scale=0.2]{./codes/GP_regression.png}
 \end{figure}
+
 \end{frame}
-\section{Optimizing the Surrogate interpolation Capabilities}
+
+\subsection{Optimizing the Surrogate Interpolation Capabilities}
 
 
 \begin{frame}{Why Experimental Design}
@@ -209,10 +255,16 @@ are jointly Gaussian if their joint density function is given by
 \end{frame}
 
 \begin{frame}{Maximin Design}
-In this slide you talk about maximin design
+
+Given $T\subset\mathbb{R}^{n}$ and a subset $S$ of $T$, 
+with finite (fixed) cardinality, say $|S|=n$.
+A maximin distance design $S^{o}$ is a collection of points of $T$  such that
+\begin{equation*}
+\max_{(S\subset T,\text{ }|S|=n)}\min_{(s,s'\in S)}\|s-s'\|=\min_{s,s'\in S^{o}}\|s-s'\|=max!,
+\end{equation*}
 \end{frame}
 
-\begin{frame}{Example of a design}
+\begin{frame}{Example of a Design}
 \begin{figure}
 \includegraphics[scale=0.35]{./codes/experimental_design128.png}
 \end{figure}
@@ -220,53 +272,15 @@ In this slide you talk about maximin design
 \end{frame}
 %Here comes the part when you talk about design of experiments
 
-\section{Reducing the Complexity of the Model}
+\subsection{Reducing the Complexity of the Model}
 
-\begin{frame}{Sobol Indices}
-\ChangeFont
-To assess the relevance of the parameters we do a Sensitivity analysis.
-\begin{itemize}
-\item Given a function of interest $\varphi$ we decompose it as 
-\begin{equation*}
-\varphi(x_{1},\ldots,x_{n})=\varphi_{0}+\sum_{k=1}^{n}\varphi_{k}(x_{k})+
-\sum_{1\leq k< l\leq n}\varphi_{kl}(x_{k},x_{l})+\ldots+
-\varphi_{1,2,\ldots,n}(x_{1},\ldots,x_{n}).
-\end{equation*}
-\item With the constraint
-\begin{equation}\label{eqnSobolCond1}
-\int_{[0,1]}\varphi_{i_{1},\ldots,i_{j}}dx_{i_{k}}=0\qquad\text{if }  i_{k}\in \{i_{1},\ldots,i_{j}\}
-\end{equation}
-\item This condition allows to find each element in the decomposition recursively.
-\end{itemize}
-\end{frame}
 
-\begin{frame}
-\frametitle{Sobol Indices}
-The total variance $D$ of $\varphi$ is defined as
-\ChangeFont
-\begin{equation*}
-D=\int_{\Omega^{n}}\varphi^{2}(x)dx-\varphi_{0}^{2}.
-\end{equation*}
-Similarly we can compute the partial variances as
-\begin{equation*}
-D_{i_{1},\ldots,i_{s}}=\int_{[0,1]^{n-1}}\varphi^{2}_{i_{1},\ldots,i_{s}}dx_{i_{1}}\ldots dx_{i_{s}}.
-\end{equation*}
-With these variances we define the $s-th$ order  Sobol index
-\begin{equation*} 
-S_{i_{1},\ldots,i_{s}}=\frac{D_{i_{1},\ldots,i_{s}}}{D}.
-\end{equation*}
-To measure the relevance of the $i$-th parameter we calculate
-\begin{equation*}
-S_{i}+S_{i1}+S_{i2}+\ldots+S_{i12}+S_{i13}+\ldots+S_{12\ldots,i,\ldots, n}.
-\text{ (Total Sobol Index)}
-\end{equation*}
-\end{frame}
 
 
 \begin{frame}
 \frametitle{Sensitivity Analysis}
 \begin{columns}[c]
-\column{1.5in}
+\column{0.4\textwidth}
 \ChangeFont
 \begin{itemize}
 \item $\gamma$: Fitting parameter for the z dependence of the velocity.
@@ -276,18 +290,14 @@ S_{i}+S_{i1}+S_{i2}+\ldots+S_{i12}+S_{i13}+\ldots+S_{12\ldots,i,\ldots, n}.
 \item $z_{cut}$: cutoff height.
 \end{itemize}
 
-\column{1.5in}
+\column{2.5in}
 \begin{figure}
-\includegraphics[scale=0.3]{../FigChap4/sensitivityPlot.pdf}
+\includegraphics[scale=0.35]{../FigChap4/sensitivityPlot.pdf}
 \end{figure}
-
 \end{columns}
-\end{frame}
-
-\begin{frame}
-In this frame it is necessary to explain why you add an $\epsilon$ for the noise and stuff
 
 \end{frame}
+
 
 
 \begin{frame}
@@ -302,61 +312,107 @@ R_{1} \\
 R_{2} \\
 \vdots\\
 R_{9}
-\end{bmatrix}=A(\gamma,z_{0},L)
+\end{bmatrix}=\mathcal{A}(\gamma,z_{0},L)
 \begin{bmatrix}
 q_{1}\\
 \vdots\\
 q_{4}
 \end{bmatrix}
-+\vec{\epsilon},\qquad\text{ where } \vec{\epsilon}\sim\mathcal{N}(0,
-\sigma^{2}I_{9\times 9}).
 \end{equation*}
-To evaluate the matrix $A(\gamma,z_{0},L)$ in points $(\gamma,z_{0},L)$ outside the experimental design we fit a 
-Gaussian process in each of the 36 entries of $A(\gamma,z_{0},L)$.
+To evaluate the matrix $\mathcal{A}(\gamma,z_{0},L)$ we approximate its entries by Gaussian process
+and create a surrogate $A(\gamma,z_{0},L)$.
 \end{dfn}
 \end{frame}
 
-\begin{frame}
-In this frame explain how, now everything is a
-random variable and proceed to introduce the
-bayesian model
-\end{frame}
 
 
 \section{Introducing the Bayesian Framework}
+
+\begin{frame}{Bayes' Rule}
+
+Given a probability space $(\Omega,\mathscr{F},\p)$ and two events $A,B\in\mathscr{F}$, with $\p(B)\neq 0$,
+we define the conditional probability of $A$ given $B$ by
+
+\begin{equation*}
+\p(A|B)=\frac{\p(A\cap B)}{\p(B)}.
+\end{equation*}
+
+
+With the definitions above, we are now in a position to state Bayes' fomula as
+\begin{equation}\label{eqnBayes}
+\post(A|B)\propto\like(B|A)\prior(A).
+\end{equation}
+
+\end{frame}
+
+
+
+\begin{frame}{Looking at the Stochastic Model}
+\begin{dfn}
+To account for the uncertainties in the model and in the experimental measurements we propose the model
+\begin{equation*}
+\begin{bmatrix}
+R_{1} \\
+R_{2} \\
+\vdots\\
+R_{9}
+\end{bmatrix}=A(\gamma,z_{0},L)
+\begin{bmatrix}
+q_{1}\\
+\vdots\\
+q_{4}
+\end{bmatrix}+\epsilon,\qquad\text{where }\epsilon\sim \mathcal{N}(0,\lambda_{\epsilon} I_{9\times 9})
+\end{equation*}
+\end{dfn}
+\end{frame}
 
 
 \begin{frame}
 \frametitle{Probabilistic Model}
 
 \begin{dfn}
-Our goal is to estimate the values of $p:=(\gamma,z_{0},L)$ and 
+Our goal is to estimate the values of $\omega:=(\gamma,z_{0},L)$ and 
 $q:=(q_{1},q_{2},q_{3},q_{4})$ given the measurements
 $\vec{R}$. Mathematically we want to estimate:
 
 \begin{equation*}
-\post(p,q|\vec{R})\propto
-\underbrace{\like(\vec{R}|p,q)\prior(p)\prior(q)}_{\text{Assuming $p$ and $q$ independent}}
+\post(\omega,q|\vec{R})\propto
+\underbrace{\like(\vec{R}|\omega,q)\prior(\omega)\prior(q)}_{\text{Assuming $p$ and $q$ independent}}
 \end{equation*}
-We assume $p\sim Uniform$ over the domain of definition of the parameters.
+We assume $\omega\sim Uniform$ over the domain of definition of the parameters.
  
 \end{dfn}
 \end{frame}
 
 \begin{frame}
-\frametitle{What about $q$?}
-To set a prior for $q$ we first need to check what do we know about $q$. This knowledge can be 
-summarized as follows
+\frametitle{What About $q$?}
 \begin{itemize}
 \item $q_{k}>0$ for $k=1,2,3,4$.
-\item If we trust the engineers the most likely value for $q$ is the engineers estimate.
-\item If we think they know what they are doing the true value for $q$ cannot be very far away from their
-estimate.
+\item If we trust the engineers the most likely value for $q$ is the engineers estimate and the 
+true value cannot be very far away from those estimates.
 \end{itemize}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline 
+Source & Estimated Emission Rate {[}ton/yr{]}\tabularnewline
+\hline 
+\hline 
+$q_{1}$ & 35\tabularnewline
+\hline 
+$q_{2}$ & 80\tabularnewline
+\hline 
+$q_{3}$ & 5\tabularnewline
+\hline 
+$q_{4}$ & 5\tabularnewline
+\hline 
+\end{tabular}
+\end{table}
 \end{frame}
 
 \begin{frame}
-\frametitle{Choosing a prior for $q$}
+\frametitle{Choosing a Prior for $q$}
 \begin{columns}[c]
 \column{2.2in}
 A consistent assumption is $q_{k}\sim Ga(\alpha_{k},\beta_{k})$,for $k=1,2,3,4$,
@@ -374,43 +430,165 @@ the following conditions that define $\alpha_{k}$ and $\beta_{k}$ for all $k$ un
 \end{frame}
 
 
-\begin{frame}
-\frametitle{Getting the posterior}
+\begin{frame}{Likelihood}
+
+
+Recall that $\epsilon\sim\mathcal{N}(0,\lambda_{\epsilon}I_{9\times 9})$ then
+
 \begin{itemize}
-\item We have $\like(\vec{m}|q,p)\propto
-\exp(-\frac{1}{2\sigma_{\epsilon}^{2}}\|m-A(p)q\|^{2}_{2})$
-\item Also $\prior(q_{k})\propto q_{k}^{\alpha_{k}-1}\exp(\beta_{k}q_{k})$.
-\item and $\prior(p)\propto\textbf{1}_{[0.1,0.4]\times[10^{-3},2]\times[-500,-1]}
-:=\textbf{1}_{B}$
+\item $\p(\epsilon)\propto\exp\left(-\frac{\|\epsilon\|_{2}^{2}}{2\lambda_{\epsilon}^{2}}\right)$
+\item $\like(\vec{R}|\omega,q)\propto
+\exp\left(-\frac{1}{2\lambda_{\epsilon}^{2}}\|\vec{R}-A(\omega)q\|^{2}_{2}\right)$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Calculating the Posterior}
+\begin{itemize}
+\item $\like(\vec{R}|\omega,q)\propto
+\exp\left(-\frac{1}{2\lambda_{\epsilon}^{2}}\|\vec{R}-A(\omega)q\|^{2}_{2}\right)$
+\item $\prior(q_{k})\propto q_{k}^{\alpha_{k}-1}\exp(\beta_{k}q_{k})$
+\item $\prior(\omega)\propto\textbf{1}_{[0.1,0.6]\times[0,2]\times[-600,0]}$
 \end{itemize}
 \bigskip
 Then
-\newline 
-\newline
-$\post(q,p|\vec{m})\propto
-\textbf{1}_{B}\left(\prod_{k=1}^{4}q_{k}\right)\exp(-\frac{1}{2\sigma_{\epsilon}^{2}}\|\vec{m}-A(p)q\|^{2}_{2}+
-\sum_{k=1}^{4}\beta_{k}q_{k})$.
+\begin{equation*}
+\post(\omega,q|\vec{R})\propto\like(\vec{R}|\omega,q)\prior(\omega)\prior(q)
+\end{equation*}
 \end{frame}
 
 
 
 
 \section{Decoding the Posterior}
-\begin{frame}
-In a couple of frames, talk about MCMC methods
+
+
+\begin{frame}{Sampling From a Probability Distribution}
+%
+\begin{algorithm}[H]
+\ChangeFont
+\caption{Metropolis-Hastings Algorithm}
+\begin{algorithmic}[1]\label{algMH}
+\State pick a point $q_{1}$ in the support of the distribution
+\For{j=2:N}
+\State Draw $u\sim U([0,\alpha])$
+\State $q_{j}\leftarrow q_{j-1}+u$
+\State $\beta\leftarrow\min(1,\frac{\post(q_{j}|D)}{\post(q_{j-1}|\y)})$
+\State Draw $w\sim U([0,1])$
+\If{$w<\beta$}
+\State $q_{j-1}=q_{j}\qquad$   (Accept the move)
+\Else
+\State $q_{j-1}=q_{j-1}\qquad$ (Reject the move)
+\EndIf
+\EndFor
+\end{algorithmic}
+\end{algorithm}
 \end{frame}
 
-\begin{frame}
-Finally show the results you got
-\end{frame}
+\begin{frame}{Setting $\lambda_{\epsilon}$}
+We define
+\begin{equation*}
+J(\lambda_{\epsilon})=\frac{1}{2}\int\left(\|A(p)q-\vec{R})\|_{2}+\|q-q_{est}\|_{2}\right)d\post^{\lambda_{\epsilon}},
+\end{equation*}
+
+and choose a minimizer of $J$ 
+\begin{equation*}
+\hat{\lambda_{\epsilon}}=argmin\text{ } J(\lambda_{\epsilon}).
+\end{equation*}
 %Finally explain the MCMC techniques
 
+\end{frame}
+
+
+\begin{frame}{Calculating $J$}
+\begin{figure}
+\centering
+\includegraphics[scale=0.35]{../FigChap4/lambdaEmul}
+\end{figure}
+
+
+\end{frame}
+
+\begin{frame}{Histograms for the Parameters}
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.35]{./codes/histogramsI.jpg}
+%\caption{Histograms for the marginal distribution for each of the seven variables
+%in the support of the posterior density.}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}{Histograms for the Sources}
+\begin{figure}
+\centering
+\includegraphics[scale=0.35]{../FigChap4/histogramsII}
+\end{figure}
+\end{frame}
 
 
 
+\begin{frame}{Results for the Parameters}
+
+\begin{table}
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline 
+Parameter & Point Estimate & $68\%$ Confidence Interval\tabularnewline
+\hline 
+\hline 
+$\gamma$ &  0.3478 & $[0.1498,0.5458]$\tabularnewline
+\hline 
+$z_{0}$ & 0.0811 & $[0,1.5781]$\tabularnewline
+\hline 
+$L$  & -379.45 & $[-195.86,-563.04]$\tabularnewline
+\hline 
+\end{tabular}
+\end{table}
+
+\end{frame}
+
+\begin{frame}{Results for the Sources}
+\begin{figure}
+\includegraphics[scale=0.4]{../FigChap4/qUncertainty}
+\end{figure}
+\end{frame}
 
 
+\begin{frame}{Comparison with Related Work}
+\begin{figure}
+\begin{columns}[c]
+\column{.5\textwidth}
+%\begin{textblock*}{5cm}(5cm,5cm)
+\begin{figure}
+\includegraphics[scale=0.25]{Stockie_Lushi}
+\caption{Hosseini, Bamdad and Stockie, J.M. Estimating airborne particulate emissions using a finite-volume
+forward solver coupled with a Bayesian inversion approach.}
+\end{figure}
+%\end{textblock*}
+\column{.5\textwidth}
+\begin{figure}
+\includegraphics[scale=0.28]{Hosseini}
+\caption{Lushi, E. and Stockie, J.M. An inverse Gaussian plume approach for estimating atmospheric
+pollutant emissions from multiple point sources}
+\end{figure}
+\end{columns}
+\end{figure}
+\end{frame}
 
+
+\begin{frame}{Conclusions}
+\begin{itemize}
+\item We have developed a method to cheaply estimate parameters in computationally expensive models.
+\item Instead of trial and error, we propose a methodology that allows to estimate
+parameters in complex models using experimental data.
+\item Besides a point estimate we are able to obtain a confidence interval for it.
+\item Our results qualitatively agree with previous results.
+\end{itemize}
+
+
+\end{frame}
 
 
 \end{document}

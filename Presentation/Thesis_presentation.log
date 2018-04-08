@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.7.20)  5 APR 2018 00:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.7.20)  8 APR 2018 14:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -729,19 +729,36 @@ Package: beamercolorthemewhale 2010/06/17  (rcs-revision d02a7cf4d8ae)
 Package: mathrsfs 1996/01/01 Math RSFS package v1.0 (jk)
 \symrsfs=\mathgroup6
 )
-(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+(/usr/share/texlive/texmf-dist/tex/latex/textpos/textpos.sty
+Package: textpos 2014/01/03 v1.7j
+
+Package: textpos 2014/01/03 1.7j, absolute positioning of text on the page
+\TP@textbox=\box53
+\TP@holdbox=\box54
+\TPHorizModule=\dimen188
+\TPVertModule=\dimen189
+\TP@margin=\dimen190
+\TP@absmargin=\dimen191
+Grid set 16 x 16 = 22.7622pt x 17.07166pt
+\TPboxrulesize=\dimen192
+\TP@ox=\dimen193
+\TP@oy=\dimen194
+\TP@tbargs=\toks43
+\TP@prevdepth=\dimen195
+TextBlockOrigin set to 0pt x 0pt
+) (/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
 Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
 
 (/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 57.
-\captionmargin=\dimen188
-\captionmargin@=\dimen189
-\captionwidth=\dimen190
-\caption@tempdima=\dimen191
-\caption@indent=\dimen192
-\caption@parindent=\dimen193
-\caption@hangindent=\dimen194
+\captionmargin=\dimen196
+\captionmargin@=\dimen197
+\captionwidth=\dimen198
+\caption@tempdima=\dimen199
+\caption@indent=\dimen200
+\caption@parindent=\dimen201
+\caption@hangindent=\dimen202
 )
 \c@ContinuedFloat=\count153
 Package caption Info: beamer document class.
@@ -749,26 +766,63 @@ Package caption Info: hyperref package is loaded.
 Package caption Info: Hyperref support is turned off
 (caption)             because hyperref has stopped early.
 )
-\c@thm=\count154
-\c@dfn=\count155
+(/usr/share/texlive/texmf-dist/tex/latex/algorithms/algorithm.sty
+Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
+nment
 
-(./Thesis_presentation.aux)
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count154
+\float@exts=\toks44
+\float@box=\box55
+\@float@everytoks=\toks45
+\@floatcapt=\box56
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\@float@every@algorithm=\toks46
+\c@algorithm=\count155
+)
+(/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
+Package: algpseudocode 
+
+(/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
+Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
+
+Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
+\c@ALG@line=\count156
+\c@ALG@rem=\count157
+\c@ALG@nested=\count158
+\ALG@tlm=\skip57
+\ALG@thistlm=\skip58
+\c@ALG@Lnr=\count159
+\c@ALG@blocknr=\count160
+\c@ALG@storecount=\count161
+\c@ALG@tmpcounter=\count162
+\ALG@tmplength=\skip59
+)
+Document Style - pseudocode environments for use with the `algorithmicx' style
+)
+\c@thm=\count163
+\c@dfn=\count164
+ (./Thesis_presentation.aux)
 \openout1 = `Thesis_presentation.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -806,17 +860,17 @@ LaTeX Font Info:    ... okay on input line 27.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count156
-\scratchdimen=\dimen195
-\scratchbox=\box53
-\nofMPsegments=\count157
-\nofMParguments=\count158
-\everyMPshowfont=\toks43
-\MPscratchCnt=\count159
-\MPscratchDim=\dimen196
-\MPnumerator=\count160
-\makeMPintoPDFobject=\count161
-\everyMPtoPDFconversion=\toks44
+\scratchcounter=\count165
+\scratchdimen=\dimen203
+\scratchbox=\box57
+\nofMPsegments=\count166
+\nofMParguments=\count167
+\everyMPshowfont=\toks47
+\MPscratchCnt=\count168
+\MPscratchDim=\dimen204
+\MPnumerator=\count169
+\makeMPintoPDFobject=\count170
+\everyMPtoPDFconversion=\toks48
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
@@ -833,8 +887,8 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 ABD: EveryShipout initializing macros
-\AtBeginShipoutBox=\box54
-Package hyperref Info: Link coloring OFF on input line 27.
+\AtBeginShipoutBox=\box58
+Package hyperref Info: Link coloring OFF on input line 30.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -842,68 +896,68 @@ Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count162
+\c@section@level=\count171
 )
-LaTeX Info: Redefining \ref on input line 27.
-LaTeX Info: Redefining \pageref on input line 27.
-LaTeX Info: Redefining \nameref on input line 27.
+LaTeX Info: Redefining \ref on input line 30.
+LaTeX Info: Redefining \pageref on input line 30.
+LaTeX Info: Redefining \nameref on input line 30.
 
 (./Thesis_presentation.out) (./Thesis_presentation.out)
 \@outlinefile=\write5
 \openout5 = `Thesis_presentation.out'.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 27.
+(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 30.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/bx/n on input line 27.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/bx/n on input line 30.
 \symnumbers=\mathgroup7
 \sympureletters=\mathgroup8
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/cmr/m/n on input line 27.
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 27.
+(Font)                  OT1/cmss/m/n --> OT1/cmr/m/n on input line 30.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 30.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/bx/n on input line 27.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/bx/n on input line 30.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/bx/n on input line 27.
-LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 27.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/bx/n on input line 30.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 30.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/m/n on input line 27.
+(Font)                  OT1/cmss/m/n --> OT1/cmss/m/n on input line 30.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> OT1/cmss/m/n on input line 27.
-LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 27.
+(Font)                  OT1/cmss/bx/n --> OT1/cmss/m/n on input line 30.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 30.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> OT1/cmss/m/it on input line 27.
+(Font)                  OT1/cmr/m/it --> OT1/cmss/m/it on input line 30.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> OT1/cmss/m/it on input line 27.
-LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 27.
+(Font)                  OT1/cmr/bx/it --> OT1/cmss/m/it on input line 30.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 30.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 27.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 30.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 27.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 30.
 LaTeX Font Info:    Overwriting symbol font `numbers' in version `bold'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/bx/n on input line 27.
+(Font)                  OT1/cmss/m/n --> OT1/cmss/bx/n on input line 30.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  OT1/cmss/m/it --> OT1/cmss/bx/it on input line 27.
+(Font)                  OT1/cmss/m/it --> OT1/cmss/bx/it on input line 30.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
-(Font)                  OT1/cmss/bx/n --> OT1/cmr/bx/n on input line 27.
+(Font)                  OT1/cmss/bx/n --> OT1/cmr/bx/n on input line 30.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> OT1/cmss/bx/n on input line 27.
+(Font)                  OT1/cmss/bx/n --> OT1/cmss/bx/n on input line 30.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/bx/n on input line 27.
+(Font)                  OT1/cmss/m/n --> OT1/cmss/bx/n on input line 30.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmss/m/it --> OT1/cmss/bx/it on input line 27.
+(Font)                  OT1/cmss/m/it --> OT1/cmss/bx/it on input line 30.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/bx/n on input line 27.
-LaTeX Font Info:    Redeclaring symbol font `pureletters' on input line 27.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/bx/n on input line 30.
+LaTeX Font Info:    Redeclaring symbol font `pureletters' on input line 30.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `normal'
-(Font)                  OT1/cmss/m/it --> OT1/mathkerncmss/m/sl on input line 2
-7.
+(Font)                  OT1/cmss/m/it --> OT1/mathkerncmss/m/sl on input line 3
+0.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
 (Font)                  OT1/cmss/bx/it --> OT1/mathkerncmss/m/sl on input line 
-27.
+30.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
 (Font)                  OT1/mathkerncmss/m/sl --> OT1/mathkerncmss/bx/sl on inp
-ut line 27.
+ut line 30.
 
 (/usr/share/texlive/texmf-dist/tex/latex/beamer/translator/dicts/translator-bas
 ic-dictionary/translator-basic-dictionary-English.dict
@@ -929,76 +983,66 @@ Dictionary: translator-numbers-dictionary, Language: English
 orem-dictionary/translator-theorem-dictionary-English.dict
 Dictionary: translator-theorem-dictionary, Language: English 
 )
-LaTeX Info: Redefining \includegraphics on input line 27.
+LaTeX Info: Redefining \includegraphics on input line 30.
 Package caption Info: Begin \AtBeginDocument code.
-Package caption Info: Incompatible package detected (regarding \caption).
-(caption)             \caption = macro:->\ifx \@captype \@undefined \@latex@err
-or {\noexpand \caption outside figure or table}\@ehd \expandafter \@gobble \els
-e \refstepcounter \@captype \expandafter \@firstofone \fi {\@dblarg {\@caption 
-\@captype }}.
-
-
-Package caption Warning: \caption will not be redefined since it's already
-(caption)                redefined by a document class or package which is
-(caption)                unknown to the caption package.
-See the caption package documentation for explanation.
-
+Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
-(./Thesis_presentation.nav)
-LaTeX Font Info:    Try loading font information for U+msa on input line 27.
+
+(./Thesis_presentation.nav) <log.png, id=48, 319.1925pt x 421.575pt>
+File: log.png Graphic file (type png)
+
+<use log.png>
+Package pdftex.def Info: log.png used on input line 52.
+(pdftex.def)             Requested size: 47.8768pt x 63.23352pt.
+
+
+LaTeX Font Warning: Font shape `OT1/cmss/m/n' in size <4> not available
+(Font)              size <5> substituted on input line 52.
+
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+
+ <./log.png>]
+(./Thesis_presentation.toc
+LaTeX Font Info:    Try loading font information for U+msa on input line 4.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 27.
+LaTeX Font Info:    Try loading font information for U+msb on input line 4.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+rsfs on input line 27.
+LaTeX Font Info:    Try loading font information for U+rsfs on input line 4.
 
 (/usr/share/texlive/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
 LaTeX Font Info:    Try loading font information for OT1+mathkerncmss on input 
-line 27.
+line 4.
 
 (/usr/share/texlive/texmf-dist/tex/latex/sansmathaccent/ot1mathkerncmss.fd
 File: ot1mathkerncmss.fd 2013/03/27 Fontinst v1.933 font definitions for OT1/ma
 thkerncmss.
-)
-<log.png, id=46, 319.1925pt x 421.575pt>
-File: log.png Graphic file (type png)
- <use log.png>
-Package pdftex.def Info: log.png used on input line 48.
-(pdftex.def)             Requested size: 47.8768pt x 63.23352pt.
-
-
-LaTeX Font Warning: Font shape `OT1/cmss/m/n' in size <4> not available
-(Font)              size <5> substituted on input line 48.
-
-[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
-
- <./log.png>]
-(./Thesis_presentation.toc) [2
+))
+[2
 
 ] [3
 
-]
-<BCtrail.png, id=178, 321.45094pt x 305.64188pt>
+] <BCtrail.png, id=178, 321.45094pt x 305.64188pt>
 File: BCtrail.png Graphic file (type png)
  <use BCtrail.png>
-Package pdftex.def Info: BCtrail.png used on input line 99.
+Package pdftex.def Info: BCtrail.png used on input line 103.
 (pdftex.def)             Requested size: 115.72224pt x 110.03098pt.
 
-Overfull \hbox (7.31725pt too wide) in paragraph at lines 99--99
+Overfull \hbox (7.31725pt too wide) in paragraph at lines 103--103
  [] 
  []
 
 [4
 
  <./BCtrail.png (PNG copy)>]
-Overfull \hbox (11.26448pt too wide) detected at line 117
+Overfull \hbox (11.26448pt too wide) detected at line 121
 \OML/cmm/m/it/10.95 @[]\OT1/mathkerncmss/m/sl/10.95 c\OT1/cmss/m/n/10.95 ([]\OM
 L/cmm/m/it/10.95 ; \OT1/mathkerncmss/m/sl/10.95 t\OT1/cmss/m/n/10.95 ) + \OMS/c
 msy/m/n/10.95 r ^^A \OT1/cmss/m/n/10.95 ([]([]\OML/cmm/m/it/10.95 ; \OT1/mathke
@@ -1018,145 +1062,178 @@ s/m/n/10.95 )\OMS/cmsy/m/n/10.95 r\OT1/mathkerncmss/m/sl/10.95 c\OT1/cmss/m/n/1
 
 ] [7
 
-]
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 140.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 140.
-
-(./Thesis_presentation.toc) [8
+] [8
 
 ] [9
 
+] (./Thesis_presentation.toc) [10
+
 ]
-Overfull \hbox (2.33115pt too wide) detected at line 183
-[] []\OT1/cmss/m/n/10.95 (\OMS/cmsy/m/n/10.95 ^^@\OT1/cmss/m/n/10.95 ([\OT1/mat
-hkerncmss/m/sl/10.95 x\OML/cmm/m/it/10.95 ; \OT1/mathkerncmss/m/sl/10.95 y\OT1/
-cmss/m/n/10.95 ] \OMS/cmsy/m/n/10.95 ^^@ \OT1/cmss/m/n/10.95 [\OML/cmm/m/it/10.
-95 ^^V[]; ^^V[]\OT1/cmss/m/n/10.95 ]) []([\OT1/mathkerncmss/m/sl/10.95 x\OML/cm
-m/m/it/10.95 ; \OT1/mathkerncmss/m/sl/10.95 y\OT1/cmss/m/n/10.95 ] \OMS/cmsy/m/
-n/10.95 ^^@ []\OT1/cmss/m/n/10.95 )[])
- []
 
-[10
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 198.
 
-] <./codes/Gp_interpolation.png, id=425, 1396.4672pt x 753.5653pt>
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 198.
+
+[11
+
+] <./codes/Gp_interpolation.png, id=446, 1396.4672pt x 753.5653pt>
 File: ./codes/Gp_interpolation.png Graphic file (type png)
 
 <use ./codes/Gp_interpolation.png>
-Package pdftex.def Info: ./codes/Gp_interpolation.png used on input line 193.
+Package pdftex.def Info: ./codes/Gp_interpolation.png used on input line 235.
 (pdftex.def)             Requested size: 349.11594pt x 188.39085pt.
 
-Overfull \hbox (41.82607pt too wide) in paragraph at lines 193--193
+Overfull \hbox (41.82607pt too wide) in paragraph at lines 235--235
  [] 
  []
 
 
-Overfull \vbox (24.31491pt too high) detected at line 193
+Overfull \vbox (11.31497pt too high) detected at line 235
  []
 
-[11
+[12
 
  <./codes/Gp_interpolation.png (PNG copy)>]
-<./codes/GP_regression.png, id=457, 1396.4672pt x 753.5653pt>
+<./codes/GP_regression.png, id=480, 1396.4672pt x 753.5653pt>
 File: ./codes/GP_regression.png Graphic file (type png)
 
 <use ./codes/GP_regression.png>
-Package pdftex.def Info: ./codes/GP_regression.png used on input line 200.
+Package pdftex.def Info: ./codes/GP_regression.png used on input line 245.
 (pdftex.def)             Requested size: 279.28848pt x 150.71039pt.
- [12
+ [13
 
  <./codes/GP_regression.png (PNG copy)>]
-(./Thesis_presentation.toc) [13
-
-]
-<../FigChap2/partitionComparison.jpg, id=530, 1204.5pt x 803.0pt>
+<../FigChap2/partitionComparison.jpg, id=514, 1204.5pt x 803.0pt>
 File: ../FigChap2/partitionComparison.jpg Graphic file (type jpg)
 
 <use ../FigChap2/partitionComparison.jpg>
 Package pdftex.def Info: ../FigChap2/partitionComparison.jpg used on input line
- 209.
+ 255.
 (pdftex.def)             Requested size: 240.89574pt x 160.59715pt.
  [14
 
  <../FigChap2/partitionComparison.jpg>] [15
 
-] <./codes/experimental_design128.png, id=595, 481.8pt x 481.8pt>
+] <./codes/experimental_design128.png, id=582, 481.8pt x 481.8pt>
 File: ./codes/experimental_design128.png Graphic file (type png)
 
 <use ./codes/experimental_design128.png>
 Package pdftex.def Info: ./codes/experimental_design128.png used on input line 
-220.
+272.
 (pdftex.def)             Requested size: 168.63252pt x 168.63252pt.
  [16
 
- <./codes/experimental_design128.png>] (./Thesis_presentation.toc) [17
-
-]
-Overfull \hbox (12.57338pt too wide) detected at line 241
-\OML/cmm/m/it/9 '\OT1/cmss/m/n/9 (\OT1/mathkerncmss/m/sl/9 x[]\OML/cmm/m/it/9 ;
- [] ; \OT1/mathkerncmss/m/sl/9 x[]\OT1/cmss/m/n/9 ) = \OML/cmm/m/it/9 '[] \OT1/
-cmss/m/n/9 + [] \OML/cmm/m/it/9 '[]\OT1/cmss/m/n/9 (\OT1/mathkerncmss/m/sl/9 x[
-]\OT1/cmss/m/n/9 ) + [] \OML/cmm/m/it/9 '[]\OT1/cmss/m/n/9 (\OT1/mathkerncmss/m
-/sl/9 x[]\OML/cmm/m/it/9 ; \OT1/mathkerncmss/m/sl/9 x[]\OT1/cmss/m/n/9 ) + [] +
- \OML/cmm/m/it/9 '[]\OT1/cmss/m/n/9 (\OT1/mathkerncmss/m/sl/9 x[]\OML/cmm/m/it/
-9 ; [] ; \OT1/mathkerncmss/m/sl/9 x[]\OT1/cmss/m/n/9 )\OML/cmm/m/it/9 :
- []
-
-[18
-
-] [19
-
-] <../FigChap4/sensitivityPlot.pdf, id=740, 505.89pt x 505.89pt>
+ <./codes/experimental_design128.png>] <../FigChap4/sensitivityPlot.pdf, id=617
+, 505.89pt x 505.89pt>
 File: ../FigChap4/sensitivityPlot.pdf Graphic file (type pdf)
 
 <use ../FigChap4/sensitivityPlot.pdf>
-Package pdftex.def Info: ../FigChap4/sensitivityPlot.pdf used on input line 285
+Package pdftex.def Info: ../FigChap4/sensitivityPlot.pdf used on input line 299
 .
-(pdftex.def)             Requested size: 151.76816pt x 151.76816pt.
+(pdftex.def)             Requested size: 177.06415pt x 177.06415pt.
+ [17
 
-Overfull \hbox (43.36316pt too wide) in paragraph at lines 285--285
- [] 
- []
+ <../FigChap4/sensitivityPlot.pdf>]
+[18
 
-[20
+] (./Thesis_presentation.toc) [19
 
- <../FigChap4/sensitivityPlot.pdf>] [21
+] [20
+
+] [21
 
 ] [22
 
 ] [23
 
 ]
-(./Thesis_presentation.toc) [24
-
-] [25
-
-] [26
-
-]
-<gamma_generic.jpg, id=981, 481.8pt x 481.8pt>
+<gamma_generic.jpg, id=854, 481.8pt x 481.8pt>
 File: gamma_generic.jpg Graphic file (type jpg)
  <use gamma_generic.jpg>
-Package pdftex.def Info: gamma_generic.jpg used on input line 374.
+Package pdftex.def Info: gamma_generic.jpg used on input line 430.
 (pdftex.def)             Requested size: 144.5411pt x 144.5411pt.
 
-Overfull \hbox (36.13611pt too wide) in paragraph at lines 374--374
+Overfull \hbox (36.13611pt too wide) in paragraph at lines 430--430
  [] 
  []
 
-[27
+[24
 
- <./gamma_generic.jpg>] [28
+ <./gamma_generic.jpg>] [25
 
-] (./Thesis_presentation.toc) [29
+] [26
 
-] [30
+] (./Thesis_presentation.toc) [27
 
-] [31
+] [28
+
+]
+[29
+
+] <../FigChap4/lambdaEmul.jpg, id=1049, 481.8pt x 481.8pt>
+File: ../FigChap4/lambdaEmul.jpg Graphic file (type jpg)
+
+<use ../FigChap4/lambdaEmul.jpg>
+Package pdftex.def Info: ../FigChap4/lambdaEmul.jpg used on input line 510.
+(pdftex.def)             Requested size: 168.63252pt x 168.63252pt.
+ [30
+
+ <../FigChap4/lambdaEmul.jpg>]
+<./codes/histogramsI.jpg, id=1080, 481.8pt x 481.8pt>
+File: ./codes/histogramsI.jpg Graphic file (type jpg)
+
+<use ./codes/histogramsI.jpg>
+Package pdftex.def Info: ./codes/histogramsI.jpg used on input line 520.
+(pdftex.def)             Requested size: 168.63252pt x 168.63252pt.
+ [31
+
+ <./codes/histogramsI.jpg>]
+<../FigChap4/histogramsII.pdf, id=1112, 505.89pt x 505.89pt>
+File: ../FigChap4/histogramsII.pdf Graphic file (type pdf)
+
+<use ../FigChap4/histogramsII.pdf>
+Package pdftex.def Info: ../FigChap4/histogramsII.pdf used on input line 528.
+(pdftex.def)             Requested size: 177.06415pt x 177.06415pt.
+ [32
+
+ <../FigChap4/histogramsII.pdf>] [33
+
+]
+<../FigChap4/qUncertainty.pdf, id=1180, 505.89pt x 505.89pt>
+File: ../FigChap4/qUncertainty.pdf Graphic file (type pdf)
+
+<use ../FigChap4/qUncertainty.pdf>
+Package pdftex.def Info: ../FigChap4/qUncertainty.pdf used on input line 556.
+(pdftex.def)             Requested size: 202.3524pt x 202.3524pt.
+
+Overfull \vbox (11.67651pt too high) detected at line 556
+ []
+
+[34
+
+ <../FigChap4/qUncertainty.pdf>]
+<Stockie_Lushi.png, id=1216, 540.51938pt x 439.6425pt>
+File: Stockie_Lushi.png Graphic file (type png)
+ <use Stockie_Lushi.png>
+Package pdftex.def Info: Stockie_Lushi.png used on input line 578.
+(pdftex.def)             Requested size: 135.1295pt x 109.91035pt.
+
+<Hosseini.png, id=1217, 572.89032pt x 305.64188pt>
+File: Hosseini.png Graphic file (type png)
+ <use Hosseini.png>
+Package pdftex.def Info: Hosseini.png used on input line 578.
+(pdftex.def)             Requested size: 160.40819pt x 85.57913pt.
+
+Overfull \hbox (6.76326pt too wide) in paragraph at lines 578--578
+ [] 
+ []
+
+[35
+
+ <./Stockie_Lushi.png (PNG copy)> <./Hosseini.png (PNG copy)>] [36
 
 ]
 \tf@nav=\write6
@@ -1168,54 +1245,55 @@ Overfull \hbox (36.13611pt too wide) in paragraph at lines 374--374
 \tf@snm=\write8
 \openout8 = `Thesis_presentation.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 416.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 416.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 594.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 594.
 
 (./Thesis_presentation.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 416.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 416.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 594.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 594.
 Package rerunfilecheck Info: File `Thesis_presentation.out' has not changed.
-(rerunfilecheck)             Checksum: ADD88D67E66A515BE5C09B07985FBFA5;386.
+(rerunfilecheck)             Checksum: DE5DD74E72B7F9392A6272B6989FDCD0;488.
 
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.0pt have occurred.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 416.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 594.
  ) 
 Here is how much of TeX's memory you used:
- 18007 strings out of 494977
- 345786 string characters out of 6180183
- 410514 words of memory out of 5000000
- 20711 multiletter control sequences out of 15000+600000
- 19995 words of font info for 76 fonts, out of 8000000 for 9000
+ 18789 strings out of 494977
+ 357729 string characters out of 6180183
+ 419691 words of memory out of 5000000
+ 21456 multiletter control sequences out of 15000+600000
+ 20583 words of font info for 78 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 56i,22n,65p,399b,669s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 56i,22n,65p,399b,837s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmss12.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmss9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mssi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi1
-2.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/amsfonts/symbols/msbm10.pfb>
-Output written on Thesis_presentation.pdf (31 pages, 1049825 bytes).
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmss12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmss9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi
+10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi12.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/amsfonts/symbols/msbm7.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/rsfs/rsfs10.pfb>
+Output written on Thesis_presentation.pdf (36 pages, 1150450 bytes).
 PDF statistics:
- 1234 PDF objects out of 1440 (max. 8388607)
- 1134 compressed objects within 12 object streams
- 70 named destinations out of 1000 (max. 500000)
- 185 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1370 PDF objects out of 1440 (max. 8388607)
+ 1257 compressed objects within 13 object streams
+ 83 named destinations out of 1000 (max. 500000)
+ 223 words of extra memory for PDF output out of 10000 (max. 10000000)
 

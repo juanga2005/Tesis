@@ -8,7 +8,7 @@
 
 %*Email: jggarcia@sfu.ca
 
-%*Last Modified: mié 04 abr 2018 23:16:01 PDT
+%*Last Modified: dom 08 abr 2018 12:37:02 PDT
 
 %*Purpose:
 
@@ -43,17 +43,17 @@ ysd1=reshape(ysd(:,1),size(x));
 ysd2=reshape(ysd(:,2),size(x));
 
 
-plot3(data{:,1},data{:,2},data{:,3},'mo','markers',12);
+plot3(data{:,1},data{:,2},data{:,3},'.','markerSize',50,'color','black');
 hold on 
-mesh(x,y,yhat);
-mesh(x,y,ysd1);
-mesh(x,y,ysd2);
+surf(x,y,yhat,'FaceColor','blue');
+surf(x,y,ysd1,'FaceColor',[0 1 1]);
+surf(x,y,ysd2,'FaceColor',[1 0 1]);
 
 fontsize=24;
-xlabel('gamma','FontSize',fontsize);
+xlabel('\gamma','FontSize',fontsize);
 ylabel('L','FontSize',fontsize);
-zlabel('concentration','FontSize',fontsize);
+zlabel('deposition','FontSize',fontsize);
 
-title('GP regression for the concentration','FontSize',fontsize);
+title('GP regression for the Deposition','FontSize',fontsize);
 
 legend({'Simulation data','GP prediction','Lower 95%','Upper 95%'},'FontSize',18);

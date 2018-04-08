@@ -1,2 +1,4 @@
 1. How does the delta function as the source affects the behaviour of the solution?
-2. What about the initial conditions of the model?
+2. To what space does the solution u belong? is it H^1xC^1?
+3. What about the initial conditions of the model?
+4. From your theory or T.J. Sullivan's theory, is our problem well posed from a Bayesian perspective?
