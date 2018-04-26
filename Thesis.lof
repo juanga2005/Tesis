@@ -6,7 +6,7 @@
 \contentsline {figure}{\numberline {3.2}{\ignorespaces Numerical solution of the system (\ref {eqntoyproblem}) using a five point stencil finite difference approximation for the Laplacian. The mesh size used in $x$ and $y$ was $0.01$ and $b=0.925$. The black dots in the plot represent the points used to generate the experimental data $\textbf {y}=(\mathaccentV {tilde}07E{u}(\textbf {x}_{1};b),\ldots ,\mathaccentV {tilde}07E{u}(\textbf {x}_{10};b))$.}}{27}{figure.3.2}
 \contentsline {figure}{\numberline {3.3}{\ignorespaces Training points, GP regression, true value of $b$ and experimental measures for each one of the ten sites labeled from 1 to 10 in Figure \ref {figsolU}}}{30}{figure.3.3}
 \contentsline {figure}{\numberline {3.4}{\ignorespaces Plots of the prior distribution, posterior distribution and true value of the parameter $b$.}}{31}{figure.3.4}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Histogram obtained for the posterior distribution (\ref {eqnpropto}) from $5000$ samples from MH algorithm with step size $\alpha =0.23$. The solid line is the graph for the posterior $\mathbb {P}_{post}(b|D)$.}}{33}{figure.3.5}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Histogram obtained for the posterior distribution (\ref {eqnpropto}) from $5000$ samples from MH algorithm with step size $\alpha =0.23$. The solid line is the graph for the posterior $\mathbb {P}_{post}(b|\textbf {y})$.}}{33}{figure.3.5}
 \contentsline {figure}{\numberline {3.6}{\ignorespaces Evolution of the posterior distribution when more experimental data is taken into account}}{36}{figure.3.6}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Aerial photograph taken from \cite {hosseini2016airborne} of the lead-zinc smelter in Trail, British Columbia, Canada. The points $Q_{1}$ to $Q_{4}$ represent the sources of zinc. The green triangles $R_{1}$ to $R_{9}$ represent the location of the measurement devices. }}{38}{figure.4.1}
@@ -16,5 +16,5 @@
 \contentsline {figure}{\numberline {4.5}{\ignorespaces Emulator for the $J(\lambda )$ in equation (\ref {eqnFunctional2Optimize})}}{54}{figure.4.5}
 \contentsline {figure}{\numberline {4.6}{\ignorespaces Trace plots of the Markov chain for each of the variables $p,z_{0},L$ and $\textbf {q}$. Using the Metropolis-Hastings algorithm of Algorithm 1 in Chapter 3.}}{56}{figure.4.6}
 \contentsline {figure}{\numberline {4.7}{\ignorespaces Histograms for the marginal posterior distribution for each of the seven unknowns in our model}}{58}{figure.4.7}
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Comparison between engineering estimates of the source strength source with our point estimate and the uncertainty associated to it.}}{59}{figure.4.8}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Comparison between engineering estimates of the source strength source with our point estimate and the uncertainty associated to it. We also compare with the results obtained in \cite {hosseini2016airborne}(S $\&$ H) and \cite {lushi2010inverse}(S $\&$ L).}}{59}{figure.4.8}
 \addvspace {10\p@ }

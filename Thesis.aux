@@ -26,6 +26,8 @@
 \@writefile{toc}{\contentsline {chapter}{List of Tables}{viii}{section*.10}}
 \citation{hosseini2016airborne}
 \@writefile{toc}{\contentsline {chapter}{List of Figures}{ix}{section*.11}}
+\citation{hosseini2016airborne}
+\citation{lushi2010inverse}
 \citation{chatwin1982use}
 \citation{lewellen1989meteorological}
 \citation{rao2005uncertainty}
@@ -91,6 +93,7 @@
 \newlabel{eqnExactPrediction}{{2.15}{15}{Gaussian Processes as Distributions Over Function Spaces}{equation.2.2.15}{}}
 \newlabel{eqnConfidence}{{2.16}{16}{Gaussian Processes as Distributions Over Function Spaces}{equation.2.2.16}{}}
 \newlabel{eqnDefEmulator}{{2.17}{16}{Gaussian Processes as Distributions Over Function Spaces}{equation.2.2.17}{}}
+\citation{rasmussen2006gaussian}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Comparison between the approximation quality of the emulator $\setbox \z@ \hbox {\frozen@everymath \@emptytoks \mathsurround \z@ $\textstyle M$}\mathaccent "0362{M}$ (solid line) for for the model $M(x):=\qopname  \relax o{cos}(2\pi x)$ (dashed-dotted line) in the interval $[0,1]$ for two different partitions. On the left, the emulation is performed on the partition $\{0,0.25,0.5,0.75,1\}$. On the right on the partition $\{0,0.1,0.2,0.3,1\}$. The dashed line represents the $95\%$ confidence region. The black points are the training set.}}{17}{figure.2.1}}
 \newlabel{figChp2}{{2.1}{17}{Comparison between the approximation quality of the emulator $\widehat {M}$ (solid line) for for the model $M(x):=\cos (2\pi x)$ (dashed-dotted line) in the interval $[0,1]$ for two different partitions. On the left, the emulation is performed on the partition $\{0,0.25,0.5,0.75,1\}$. On the right on the partition $\{0,0.1,0.2,0.3,1\}$. The dashed line represents the $95\%$ confidence region. The black points are the training set}{figure.2.1}{}}
 \citation{adlergeometry}
@@ -143,8 +146,8 @@
 \@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Metropolis-Hastings Algorithm}}{32}{algorithm.1}}
 \newlabel{algMH}{{0}{32}{Finding the Likelihood}{algorithm.1}{}}
 \citation{casella2008monte}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces Histogram obtained for the posterior distribution (\ref  {eqnpropto}) from $5000$ samples from MH algorithm with step size $\alpha =0.23$. The solid line is the graph for the posterior $\mathbb  {P}_{post}(b|D)$.}}{33}{figure.3.5}}
-\newlabel{figToyMCMC}{{3.5}{33}{Histogram obtained for the posterior distribution (\ref {eqnpropto}) from $5000$ samples from MH algorithm with step size $\alpha =0.23$. The solid line is the graph for the posterior $\post (b|D)$}{figure.3.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces Histogram obtained for the posterior distribution (\ref  {eqnpropto}) from $5000$ samples from MH algorithm with step size $\alpha =0.23$. The solid line is the graph for the posterior $\mathbb  {P}_{post}(b|\textbf  {y})$.}}{33}{figure.3.5}}
+\newlabel{figToyMCMC}{{3.5}{33}{Histogram obtained for the posterior distribution (\ref {eqnpropto}) from $5000$ samples from MH algorithm with step size $\alpha =0.23$. The solid line is the graph for the posterior $\post (b|\y )$}{figure.3.5}{}}
 \newlabel{eqnbcmMC}{{3.9}{33}{Finding the Likelihood}{equation.3.1.9}{}}
 \citation{dudley2002real}
 \newlabel{eqnmontecarlo}{{3.10}{34}{Finding the Likelihood}{equation.3.1.10}{}}
@@ -224,13 +227,13 @@
 \@writefile{lot}{\contentsline {table}{\numberline {4.3}{\ignorespaces Model parameters under study and their new allowed ranges.}}{53}{table.4.3}}
 \newlabel{tabNewRanges}{{4.3}{53}{Model parameters under study and their new allowed ranges}{table.4.3}{}}
 \newlabel{eqnPosteriorFinal}{{4.26}{53}{Choosing a Prior}{equation.4.4.26}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.5}Inferring Parameters the Sources}{53}{section.4.5}}
-\newlabel{eqnExponentialTest}{{4.27}{53}{Inferring Parameters the Sources}{equation.4.5.27}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.5}Inferring Parameters and the Sources}{53}{section.4.5}}
+\newlabel{eqnExponentialTest}{{4.27}{53}{Inferring Parameters and the Sources}{equation.4.5.27}{}}
 \citation{osborne2009gaussian}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces Emulator for the $J(\lambda )$ in equation (\ref  {eqnFunctional2Optimize})}}{54}{figure.4.5}}
 \newlabel{figLambdaEmul}{{4.5}{54}{Emulator for the $J(\lambda )$ in equation (\ref {eqnFunctional2Optimize})}{figure.4.5}{}}
-\newlabel{eqnFunctional2Optimize}{{4.28}{54}{Inferring Parameters the Sources}{equation.4.5.28}{}}
-\newlabel{eqnPreFunctional}{{4.29}{54}{Inferring Parameters the Sources}{equation.4.5.29}{}}
+\newlabel{eqnFunctional2Optimize}{{4.28}{54}{Inferring Parameters and the Sources}{equation.4.5.28}{}}
+\newlabel{eqnPreFunctional}{{4.29}{54}{Inferring Parameters and the Sources}{equation.4.5.29}{}}
 \citation{roberts2009examples}
 \citation{casella2008monte}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.6}{\ignorespaces Trace plots of the Markov chain for each of the variables $p,z_{0},L$ and $\textbf  {q}$. Using the Metropolis-Hastings algorithm of Algorithm 1 in Chapter 3.}}{56}{figure.4.6}}
@@ -238,17 +241,21 @@
 \citation{bulmer1979principles}
 \citation{hosseini2016airborne}
 \citation{seinfeld1998atmospheric}
-\newlabel{figHistograms}{{4.5}{58}{Inferring Parameters the Sources}{figure.4.6}{}}
+\newlabel{figHistograms}{{4.5}{58}{Inferring Parameters and the Sources}{figure.4.6}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.7}{\ignorespaces Histograms for the marginal posterior distribution for each of the seven unknowns in our model}}{58}{figure.4.7}}
 \newlabel{figHistograms}{{4.7}{58}{Histograms for the marginal posterior distribution for each of the seven unknowns in our model}{figure.4.7}{}}
+\citation{hosseini2016airborne}
+\citation{lushi2010inverse}
+\citation{hosseini2016airborne}
+\citation{lushi2010inverse}
 \citation{lushi2010inverse}
 \citation{hosseini2016airborne}
 \citation{lushi2010inverse}
 \citation{hosseini2016airborne}
 \@writefile{lot}{\contentsline {table}{\numberline {4.4}{\ignorespaces Parameters along with their point estimates and $68\%$ confidence interval.}}{59}{table.4.4}}
 \newlabel{tabFinalEstimates}{{4.4}{59}{Parameters along with their point estimates and $68\%$ confidence interval}{table.4.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.8}{\ignorespaces Comparison between engineering estimates of the source strength source with our point estimate and the uncertainty associated to it.}}{59}{figure.4.8}}
-\newlabel{figQUnicertainty}{{4.8}{59}{Comparison between engineering estimates of the source strength source with our point estimate and the uncertainty associated to it}{figure.4.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.8}{\ignorespaces Comparison between engineering estimates of the source strength source with our point estimate and the uncertainty associated to it. We also compare with the results obtained in \cite  {hosseini2016airborne}(S $\&$ H) and \cite  {lushi2010inverse}(S $\&$ L).}}{59}{figure.4.8}}
+\newlabel{figQUnicertainty}{{4.8}{59}{Comparison between engineering estimates of the source strength source with our point estimate and the uncertainty associated to it. We also compare with the results obtained in \cite {hosseini2016airborne}(S $\&$ H) and \cite {lushi2010inverse}(S $\&$ L)}{figure.4.8}{}}
 \citation{lushi2010inverse}
 \citation{hosseini2016airborne}
 \citation{lushi2010inverse}
@@ -263,7 +270,7 @@
 \newlabel{tabLushi}{{4.5}{60}{Emission rates estimated in \cite {lushi2010inverse}}{table.4.5}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {4.6}{\ignorespaces Emission rates estimated in \cite  {hosseini2016airborne}.}}{60}{table.4.6}}
 \newlabel{tabHosseini}{{4.6}{60}{Emission rates estimated in \cite {hosseini2016airborne}}{table.4.6}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Conclusions}{61}{chapter.5}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Conclusions}{62}{chapter.5}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \bibstyle{plain}
@@ -283,7 +290,7 @@
 \bibcite{johnson1990minimax}{13}
 \bibcite{Somersalo}{14}
 \bibcite{keats2007bayesian}{15}
-\@writefile{toc}{\contentsline {chapter}{Bibliography}{62}{section*.14}}
+\@writefile{toc}{\contentsline {chapter}{Bibliography}{63}{section*.14}}
 \bibcite{kennedy2001bayesian}{16}
 \bibcite{lebedev2012functional}{17}
 \bibcite{leelHossy2014dispersion}{18}

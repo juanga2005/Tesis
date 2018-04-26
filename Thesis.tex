@@ -28,7 +28,7 @@
 \title{Parameter estimation and uncertainty quantification applied to
 advection-diffusion problems arising in atmospheric source inversion}
 \thesistype{Thesis}
-\author{Juan Gabriel Garcia Osorio}
+\author{Juan Gabriel Garc{\'i}a Osorio}
 \previousdegrees{%
 	B.Sc(Physics), National University of Colombia, 2013\\
 	B.Sc(Mathematics), National University of Colombia, 2015}
@@ -246,7 +246,7 @@ in atmospheric dispersion using the Bayesian framework.
 \begin{acknowledgements}
 Like everything in life, this work is the contribution of many people. I apologize if in the next paragraphs
 I omit to mention someone that was part of this journey to complete my masters, but rest assure that it is an honest
-mistake. First I would like to express my gratitude to the people that is closest to my life: my mom and my best friends 
+mistake. First I would like to express my gratitude to the people that are closest to my life: my mom and my best friends 
 that coincidentally are also my siblings and girlfriend. Luisa, Maria Jose, Juan Lukas and Paola you are the reason why I
 do what I do, you are the people that make success feel meaningful and worth sharing. Thanks for being there for
 me and give me your unconditional love, you guys make me a happy person. 
@@ -257,9 +257,9 @@ for his unconditional support during this process, but most importantly for
 believing in me and giving me the opportunity 
 to come here to this amazing country and amazing university to keep growing as a person and to look for
 a better future for me and my family. A very special gratitude goes to Bamdad for his infinite patience
-with me, and the many hours and expertise he put into helping me ensemble this thesis. Last but not least
+with me, and the many hours and expertise he put into helping me assemble this thesis. Last but not least
 a very special thank you to all my friends at PIMS and SFU that made my way through grad school  a total blast 
-and all the professor to whom I had the fortune to learn, not only academically but also how to be a better
+and all the professors from  whom I had the fortune to learn, not only academically but also how to be a better
 person.
 
 \end{acknowledgements}
@@ -293,13 +293,13 @@ person.
 
 
 
-With raising concerns over for climate change and anthropogenic impact on the environment, such as 
+With raising concerns over  climate change and anthropogenic impact on the environment, such as 
 airborne emissions of pollutants from industrial sites, 
 the importance of atmospheric dispersion models has grown over the years. Unfortunately,
 atmospheric dispersion models are imprecise \cite{chatwin1982use,lewellen1989meteorological}. 
 Although the precision of a model can be improved at the expense
 of adding more parameters that explain the missing physics in the model, even
-in this case there is a limit in how accurate a model can be due to uncertainties
+in this case there is a limit to how accurate a model can be due to uncertainties
 in measurement of the relevant parameters.
 The reason for this comes from the fact that sources of uncertainty
 are diverse and different in nature, following  \cite{rao2005uncertainty}
@@ -309,7 +309,7 @@ we have
 \begin{itemize}
 \item Model uncertainty: the model does not explain all of the physical processes of interest.
 \item Data uncertainty: experimental measurements or parameter estimates are inaccurate.
-\item Stochastic uncertainty: Physical processes in the atmosphere are inherently unpredictable, e.g. turbulence.
+\item Stochastic uncertainty: physical processes in the atmosphere are inherently unpredictable, e.g. turbulence.
 \end{itemize}
 Despite this difficulty in obtaining accurate predictions
 there is a  growing necessity to develop
@@ -332,9 +332,9 @@ Here $\x=(x,y,z)\in\mathbb{R}^{3}$, $t$ is the time variable, $\bar{\vv}$  is th
 is the diffusivity tensor and the right hand side of the equation is the emission rate. In the scenario
 we are interested in modeling, we have $N$ zinc sources at known locations $\{\x_{j}\}_{j=1}^{N}$ 
 with strengths $\{q_{j}\}_{j=1}^{N}$ respectively. The values of the wind velocity field $\bar{\vv}$
-and the diffusivity tensor $\textbf{D}$ depend upon certain number of parameters. These parameters are going
-to be explained in detail in Chapter 4. For the moment it is enough to consider these
-parameters to be represented in a $k$-dimensional vector denoted by  $\Theta$.
+and the diffusivity tensor $\textbf{D}$ depend upon certain number of parameters. These parameters will
+be explained in detail in Chapter 4. For the moment it is enough to consider these
+parameters to be represented by a $k$-dimensional vector denoted by  $\Theta$.
 By replacing the linear operator $\dv(\vv+\textbf{D}\nabla)$ on the left hand side by $L(\Theta)$, to make the dependence on $\Theta$ explicit, we can write equation \eqref{eqnModelIntro}
 more compactly as
 \begin{equation}\label{eqnParamtric}
@@ -454,9 +454,10 @@ The framework of Bayesian statistics is the foundation of  our approach to estim
 inverse problems. Unlike frequentist statistics, in the Bayesian approach, randomness
 is a measure of uncertainty or lack of information,  not a matter of frequency. Consider a statement such  as:
 the probability of having life in the universe is 0.01. In the frequentist
-perspective, this number is interpreted as: for every hundred planets, on average, one planet shelters life.
+perspective, this number can be interpreted as: in all multiverses similar to ours, on average, one universe
+out of a hundred, shelters life.
  In the Bayesian
-perspective the number 0.01 is interpreted as a measure of how certain we are about life in the universe
+perspective the number 0.01 is interpreted as a measure of how certain we are about life in our universe
 given the current state of knowledge about the outer space. 
 Clearly there is a philosophical
 difference between these two approaches that has a direct impact in how far reaching is each point of view 
@@ -464,7 +465,7 @@ in terms of theoretical foundations and applications  \cite{jaynes2003probabilit
 
 
 %Talking about Bayes rule
-At this point we mention that when we mention uncertainty we are talking about every possible 
+When we mention uncertainty we are talking about every possible 
 source of randomness  or  lack of information. That is, the use of the word uncertainty in this work
 is related to either \cite{kennedy2001bayesian}
 \begin{itemize}
@@ -743,7 +744,7 @@ Common choices of pointwise estimates include
 \qquad\text{(Maximum a posteriori),}\\
 \textbf{r}_{CM}&=&\int_{\mathbb{R}^{3}}\textbf{r}_{0}\post(\textbf{r}_{0}|\textbf{r},\textbf{v}_{0})d\textbf{r}_{0}
 \qquad\text{(Conditional mean)}, \\
-\textbf{r}_{ML}&=&\argmax_{\textbf{r}_{0}}\post(\textbf{r}|\textbf{r}_{0},\textbf{v}_{0})
+\textbf{r}_{ML}&=&\argmax_{\textbf{r}_{0}}\like(\textbf{r}|\textbf{r}_{0},\textbf{v}_{0})
 \qquad\text{(Maximum likelihood).}
 \end{eqnarray} 
 
@@ -791,7 +792,7 @@ deal with further issues such as
 \item Computational complexity of  physical models that are too expensive to evaluate.
 \item Parameters that might belong to high dimensional spaces so the associated probability density is 
 hard to sample from.
-\item Evaluating any of the possible point estimates for the quantity of interest might computationally difficult.
+\item Evaluating any of the possible point estimates for the quantity of interest might  be computationally difficult.
 \end{enumerate}
 In the problem that we outlined in  Chapter 1, we have to deal with all of  the above mentioned issues.
 In this chapter we are going to discuss our approach for dealling with issues 3, 4 and 5 above. We 
@@ -830,7 +831,7 @@ the following definition
 \begin{definition}\label{dfnEmulator}
 An emulator $\widehat{M}(\cdot)$ of a function $M(\cdot)$, is a map that:
 \begin{itemize}
-\item At points $\{\x\}_{k=1}^{N}$  were we know the output of the mathematical model (i.e. we know 
+\item At points $\{\x\}_{k=1}^{N}$  where we know the output of the mathematical model (i.e. we know 
 $M(\x_{k})$ for $k=1,2,\ldots, N$)
 the emulator should satisfy $\widehat{M}(\x_{k})=M(\x_{k})$.
 \item For  points $\{\x_{k}^{*}\}_{k=1}^{T}$ where we don't know the output $M(\x_{k}^{*})$, the emulator should
@@ -950,7 +951,7 @@ We say that a random variable $X\in\tvs$ is called Gaussian if $\langle h,X\rang
 a Gaussian random variable on the real line for all $h\in\tvs^{*}$. An element $a\in\tvs$ is the 
 expectation of $X\in\tvs$ if 
 \begin{equation*}
-\E(f,X)=\langle f, a\rangle,\qquad\text{for all }f\in\tvs^{*}.
+\E(f,X)=\langle f, x\rangle,\qquad\text{for all }f\in\tvs^{*}.
 \end{equation*}
 Also a linear and positive definite operator $K:\tvs^{*}\longrightarrow \tvs$ 
 is called the covariance operator (the covariance
@@ -968,7 +969,7 @@ identified by $a$ and $K$.
 
 %In this work we are going to be mainly concerned to work with kernels that are at least continuous
 %(For example the SE kernel in equation (\ref{eqnsquareexponential}) is $C^{\infty}$). 
-As an example consider  $\tvs=C(T)$ where 
+As an example consider  $\tvs=\mathbb{C}(T)$, the set of continuous real valued functions on $T$, where 
 $T$ is compact subset of $\mathbb{R}^{n}$. This is the  space of real valued continuous functions 
 on
 $T$, which is a Banach
@@ -987,7 +988,7 @@ covariance kernel $k(t,t')$, can be thought of as a Gaussian measure $\mathcal{N
 where
 \cite{lifshits2012lectures} 
 \begin{align*}
-\E(f)&=m\in\mathbb{C}(T), \\
+\E(g)&=m\in\mathbb{C}(T), \\
 (K\nu)(t)&=\int_{T}k(t,t')d\nu(t'),\qquad\text{for }\nu\in\mathbb{M}(T).
 \end{align*}
 
@@ -1125,7 +1126,7 @@ Let $\y,\x_{1},\x_{2},\ldots$ be a sequence of points in $\mathbb{R}^{n}$, such 
 \|\x_{n}-\y\|_{2}\rightarrow 0\qquad\text{as }n\rightarrow\infty.
 \end{equation*}
 Then the collection of real valued random variables $\{f(\x)\}$ defined in a probability space
-$(\Omega,\mathscr{F},\p)$ are said to be continuous at $y$ in the mean sense if 
+$(\Omega,\mathscr{F},\p)$ are said to be continuous at $y$ in the mean-squared sense if \cite{rasmussen2006gaussian} 
 \begin{equation*}
 \E(|f(\x_{n})-f(\y)|^{2})\rightarrow 0\qquad\text{as } n\rightarrow\infty,
 \end{equation*}
@@ -1141,7 +1142,7 @@ The mean square derivative of the  collection $\{f(\x)\}$  in the $i$-th directi
 \frac{\partial f(\y)}{\partial x_{i}}=
 \lim_{h\rightarrow 0}\E\left(\left|\frac{f(\y+h\textbf{e}_{i})-f(\y)}{h}\right|^{2}\right),
 \end{equation*}
-where $\textbf{e}_{i}$ is the $i$-th canonical vector of the standard basis in $\mathbb{R}^{n}$.
+whenever the limit exists. Here $\textbf{e}_{i}$ is the $i$-th canonical vector of the standard basis in $\mathbb{R}^{n}$.
 The mean square $n$-th derivative is given by 
 \begin{equation*}
 \frac{\partial^{n} f(\y)}{\partial x_{i}^{n}}=
@@ -1152,7 +1153,7 @@ whenever the limit exists.
 \end{definition}
 
 
-In the definitions above if we take $\{f(\x)\}$ to be a Gaussian process with stationary covariance kernel then, it can be shown that 
+In the definitions above if we take $\{f(\x)\}$ to be a Gaussian process with stationary covariance kernel $k$ then, it can be shown that 
 the process is continuous in the mean at a point $\y$ if and only if $k$ is continuous at $(\y,\y)$. 
 Also the kernel function for the $n$-th derivative is given by \cite{adlergeometry}
 \begin{equation*}
@@ -1259,7 +1260,7 @@ $T\subset\mathbb{R}^{n}$, compact and $d$ the Euclidean distance) and a subset $
 with finite (fixed) cardinality, say $|S|=n$.
 A maximin distance design $S^{o}$ is a collection of points of $T$  such that
 \begin{equation*}
-\max_{(S\subset T,\text{ }|S|=n)}\min_{(s,s'\in S)}d(s,s')=\min_{s,s'\in S^{o}}d(s,s')=d^{o}.
+\max_{(S\subset T,\text{ }|S|=n)}\min_{(s,s'\in S,s\neq s')}d(s,s')=\min_{s,s'\in S^{o},s\neq s'}d(s,s')=d^{o}.
 \end{equation*}
 That is, we are looking for a set $S^{o}$ of cardinality $n$ that maximizes the minimum distance among 
 its elements. As an example consider $T=[0,1]^{3}$, the unit cube in $\mathbb{R}^{3}$ and $n=8$. In 
@@ -1359,7 +1360,7 @@ in the expansion satisfies
 \end{equation}
 then the decomposition is unique and all terms in the expansion are orthogonal in $L^{2}(\Omega^{k})$. To 
 demonstrate  the orthogonality property, 
-we may  consider the functions $g=\varphi_{i_{1},\ldots,i_{j}}$ and $h=\varphi_{ell_{1},\ldots,ell_{k}}$ 
+we may  consider the functions $g=\varphi_{i_{1},\ldots,i_{j}}$ and $h=\varphi_{\ell_{1},\ldots,\ell_{k}}$ 
 with arbitrary indices $(i_{1},\ldots,i_{j})\neq(\ell_{i},\ldots,\ell_{k})$. Without 
 loss of generality we may  assume $i_{1}\neq \ell_{1}$. In this case we have
 %by Fubinni's theorem \cite{lerner2014course} we may conclude that functions with different subindices are 
@@ -1400,14 +1401,14 @@ and similarly we can compute the partial variances as
 \begin{equation*}
 D_{i_{1},\ldots,i_{s}}=\int_{[0,1]^{n-1}}\varphi^{2}_{i_{1},\ldots,i_{s}}dx_{i_{1}}\ldots dx_{i_{s}}.
 \end{equation*}
-With these variances we define the $s$-th order  Sobol index  
+With these variances we define the $s$-th order  Sobol' index  
 \begin{equation*} 
 S_{i_{1},\ldots,i_{s}}=\frac{D_{i_{1},\ldots,i_{s}}}{D},
 \end{equation*}
 which is a measure of the contribution of the variables $x_{i_{1}},\ldots,x_{i_{s}}$ to the total variance $D$.
 If we want to know the separate effect  of each variable
 $x_{1},\ldots,x_{n}$ in the total variance $D$, we look at
-the first order Sobol indices $S_{1},\ldots,S_{n}$ given by
+the first order Sobol' indices $S_{1},\ldots,S_{n}$ given by
 \begin{equation*}
 S_{i}=\frac{D_{i}}{D},\qquad\text{for }i=1,\ldots,n.
 \end{equation*}
@@ -1712,7 +1713,7 @@ it is straightforward to check that a maximin design is the set of equidistant p
 By solving equation (\ref{eqntoyproblem}) for these values of $b$ and for 
 each $\x$ in $P$, we know the values in the set $\{u(b_{j},\x_{k})\}_{j,k=1}^{10}$.
 %We  use  the set of equidistant  points to train a GP for each of the ten sites in $P$. 
-We use this set  to train ten Gaussian Process. With these processes we define the functions 
+We use this set  to train ten Gaussian Processes. With these processes we define the functions 
 \begin{equation*}
 G_{k}:(0,2]\rightarrow\mathbb{R}\qquad\text{for }k=1,2,\ldots 10,
 \end{equation*}
@@ -1875,7 +1876,7 @@ in a way that the chain spends more time in regions with high probability.
 One way to achive that is as follows: if we are at a point $q_{1}$ and we want to move to a point $q_{2}$ 
 we will accept 
 that move with probability one if $\post(q_{1}|\y)\leq\post(q_{2}|\y)$ and with probability 
-$\frac{\post(q_{2}|\y)}{\post(q_{1}|\y)}$.  We choose
+$\frac{\post(q_{2}|\y)}{\post(q_{1}|\y)}$ otherwise.  We choose
 in what direction to move, randomly, using some probability distribution that is easy to sample from.
 For simplicity, in this and the next Chapter we choose the uniform distribution to decide in what  direction to move.
 The pseudocode  for the MH algorithm as described above is given below  \cite{Somersalo}
@@ -1942,7 +1943,7 @@ is shown in Figure \ref{figToyMCMC}.
 \includegraphics[scale=0.60]{./FigChap3/histogram_mcmc.jpg}
 \caption{Histogram obtained for the posterior distribution (\ref{eqnpropto}) 
 from $5000$ samples from MH algorithm with step size $\alpha=0.23$. The solid line
-is the  graph for the posterior $\post(b|D)$.}
+is the  graph for the posterior $\post(b|\y)$.}
 \label{figToyMCMC}
 \end{figure}
 
@@ -1950,12 +1951,12 @@ With the samples obtained we readily obtain useful statistics for $b$. For examp
 the conditional mean using \cite{casella2008monte}
 
 \begin{equation}\label{eqnbcmMC}
-b_{cm}=\int_{(0,2]}b\post(b|D)db\approx\frac{1}{5000}\sum_{j=1}^{5000}b_{j}=0.9247042,
+b_{cm}=\int_{(0,2]}b\post(b|\y)db\approx\frac{1}{5000}\sum_{j=1}^{5000}b_{j}=0.9247042,
 \end{equation}
 where the summands $b_{j}$ are the samples obtained after the burn-in period of $5000$ samples. We can 
 also estimate the variance of the samples as
 \begin{equation*}
-\int_{(0,2]}(b-b_{cm})^{2}\post(b|D)db\approx\frac{1}{5000}\sum_{j=1}^{5000}(b_{j}-b_{cm})^{2}=0.01427.
+\int_{(0,2]}(b-b_{cm})^{2}\post(b|\y)db\approx\frac{1}{5000}\sum_{j=1}^{5000}(b_{j}-b_{cm})^{2}=0.01427.
 \end{equation*}
 With these values we can compute a $95\%$ confidence interval for $b$. In this
 case the interval is given by 
@@ -2461,7 +2462,7 @@ the results in the box plots in Figure \ref{figSensitivityPlot}.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.70]{./FigChap4/sensitivityPlot}
+\includegraphics[scale=0.75]{./FigChap4/sensitivityPlotPaper.pdf}
 \caption{Boxplots containing the result  for the total effect Sobol' index performed on each of the nine sensors.
 The dashed line represents a Sobol' index of zero.}
 \label{figSensitivityPlot}
@@ -2753,7 +2754,7 @@ Finding these estimates is the topic of the next section.
 
 
 
-\section{Inferring  Parameters the Sources}
+\section{Inferring  Parameters and  the Sources}
 
 Recall that  there are different 
 types of point estimates, such as maximum a posteriori,
@@ -2967,9 +2968,10 @@ Figure \ref{figQUnicertainty}
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{./FigChap4/qUncertainty}
+\includegraphics[scale=0.5]{./FigChap4/bar_plot_all_results}
 \caption{Comparison between engineering estimates of the source strength source with 
-our point estimate and the uncertainty associated to it.}
+our point estimate and the uncertainty associated to it. We also compare with the results 
+obtained in \cite{hosseini2016airborne}(S $\&$ H) and \cite{lushi2010inverse}(S $\&$ L).}
 \label{figQUnicertainty}
 \end{figure}
 

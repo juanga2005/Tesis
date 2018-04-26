@@ -18,7 +18,7 @@
 \newtheorem{dfn}{}[section]
 
 %New commands
-\newcommand\ChangeFont{\fontsize{9}{7.2}\selectfont}
+\newcommand\ChangeFont{\fontsize{7}{7.2}\selectfont}
 \newcommand{\y}{\textbf{y}}
 \newcommand{\x}{\textbf{x}}
 
@@ -26,6 +26,7 @@
 \newcommand{\like}{\p_{like}}
 \newcommand{\prior}{\p_{prior}}
 \newcommand{\post}{\p_{post}}
+\newcommand{\q}{\textbf{q}}
 
 \begin{document}
 %Presentation slide
@@ -47,7 +48,7 @@ Juan Gabriel Garc{\'i}a
 \end{center}
 
 \begin{center}
-April 10 of 2018
+April 10  2018
 \end{center}
 \end{frame}
 
@@ -88,7 +89,7 @@ $F$ is computationally expensive?
 
 \begin{columns}[c]
 \column{1.5in}
-Consider the model of pollutant transport for the concentration $c$ of a pollutant
+Consider the model of pollutant transport for the concentration $c(x,y,z,t)$ of a pollutant
 \begin{equation*}
 \partial_{t} c+L(\theta)c=f
 \end{equation*}
@@ -113,7 +114,7 @@ Goal: Estimate $Q_{i}$ and $\theta$ using measurements of deposition in  $R_{j}$
 \begin{itemize}
 \item $\textbf{u}(\textbf{x},t)=(u_{x}(z,t),u_{y}(z,t),u_{set})$ 
 (Wind velocity field)
-\item $\|(u_{x},u_{y})\|_{2}\propto\left(\frac{z}{z_{r}}\right)^{\gamma}$,
+\item $\|(u_{x},u_{y})\|_{2}\propto\left(z\right)^{\gamma}$,
 \item $\textbf{S}=diag(s_{x},s_{y},s_{z})$ (Eddy diffusion matrix),
 \item $s_{z}=f(L,z_{cut})$,
 \item $s_{x}=s_{y}=g(z_{i},L)$, with $z_{i}$ Mixing layer height.
@@ -127,13 +128,15 @@ Goal: Estimate $Q_{i}$ and $\theta$ using measurements of deposition in  $R_{j}$
 \begin{itemize}
 \item Far-field boundary condition
 \begin{equation*}
-c(\textbf{x},t)\rightarrow 0 as \|x\|\rightarrow \infty
+c(\textbf{x},t)\rightarrow 0\text{ as }\|x\|\rightarrow \infty
 \end{equation*}
 
 \item Robin boundary conditions at $z=0$
 \begin{equation*}
-\left(u_{set}c+s_{z}\frac{\partial c}{\partial z}\right)|{z=0}=u_{dep}c|_{z=0}
+\left(u_{set}c+s_{z}\frac{\partial c}{\partial z}\right)\Big|_{z=0}=u_{dep}c\Big|_{z=0}
 \end{equation*}
+
+\item To avoid inconsistencies in the Robin B.C. we define a cutoff length $z_{cut}$.
 
 
 \end{itemize}
@@ -164,8 +167,7 @@ F(x_{i},y_{i},T)=\int_{R_{i}}w(x,y,T)dxdy\approx w(x_{i},y_{i},T)\Delta A,
 \begin{itemize}
 
 \item Numerical solution of the concentration $c$ was obtained via 
-a finite volume solver\footnote{Hosseini, Bamdad and Stockie, J.M. Estimating airborne particulate emissions using a finite-volume
-forward solver coupled with a Bayesian inversion approach.}
+a finite volume solver\footnote{Hosseini and Stockie, Computers and Fluids, 2017}
 using a 30x30 resolution grid on the domain.
 
 
@@ -184,10 +186,10 @@ using a 30x30 resolution grid on the domain.
 \begin{frame}{Roadmap}
 \begin{enumerate}
 \item Find a surrogate for $F$,
-\item Locate the optimal points to evaluate $F$ so that the surrogate is accurate,
+\item Locate  optimal points to evaluate $F$ so that surrogate is accurate,
 \item See if it is possible to do dimensionality reduction,
-\item Use the Bayesian framework to obtain the posterior distribution of the parameters 
-in the light of the experimental data,
+\item Use the Bayesian framework to obtain the posterior distribution of  parameters 
+in the light of  experimental data,
 \item Perform inference on the posterior using numerical methods.
 \end{enumerate}
 \end{frame}  
@@ -247,7 +249,7 @@ k(x,x')=\mathbb{E}\left((x-m(x))(x'-m(x'))\right).
 \subsection{Optimizing the Surrogate Interpolation Capabilities}
 
 
-\begin{frame}{Why Experimental Design}
+\begin{frame}{Why Experimental Design?}
 \begin{figure}
 \includegraphics[scale=0.2]{../FigChap2/partitionComparison.jpg}
 \end{figure}
@@ -319,11 +321,17 @@ q_{1}\\
 q_{4}
 \end{bmatrix}
 \end{equation*}
-To evaluate the matrix $\mathcal{A}(\gamma,z_{0},L)$ we approximate its entries by Gaussian process
+To evaluate the matrix $\mathcal{A}(\gamma,z_{0},L)$ we approximate its entries by Gaussian processes
 and create a surrogate $A(\gamma,z_{0},L)$.
 \end{dfn}
 \end{frame}
 
+\begin{frame}{Cross Validating the Surrogates}
+\begin{figure}
+\includegraphics[scale=0.35]{cross_val.pdf}
+\end{figure}
+
+\end{frame}
 
 
 \section{Introducing the Bayesian Framework}
@@ -338,7 +346,7 @@ we define the conditional probability of $A$ given $B$ by
 \end{equation*}
 
 
-With the definitions above, we are now in a position to state Bayes' fomula as
+and Bayes' formula 
 \begin{equation}\label{eqnBayes}
 \post(A|B)\propto\like(B|A)\prior(A).
 \end{equation}
@@ -349,7 +357,7 @@ With the definitions above, we are now in a position to state Bayes' fomula as
 
 \begin{frame}{Looking at the Stochastic Model}
 \begin{dfn}
-To account for the uncertainties in the model and in the experimental measurements we propose the model
+To account for the uncertainties in the interpolation and in the experimental measurements we propose the model
 \begin{equation*}
 \begin{bmatrix}
 R_{1} \\
@@ -371,8 +379,8 @@ q_{4}
 \frametitle{Probabilistic Model}
 
 \begin{dfn}
-Our goal is to estimate the values of $\omega:=(\gamma,z_{0},L)$ and 
-$q:=(q_{1},q_{2},q_{3},q_{4})$ given the measurements
+Our goal is to estimate  values of $\omega:=(\gamma,z_{0},L)$ and 
+$q:=(q_{1},q_{2},q_{3},q_{4})$ given  measurements
 $\vec{R}$. Mathematically we want to estimate:
 
 \begin{equation*}
@@ -433,7 +441,7 @@ the following conditions that define $\alpha_{k}$ and $\beta_{k}$ for all $k$ un
 \begin{frame}{Likelihood}
 
 
-Recall that $\epsilon\sim\mathcal{N}(0,\lambda_{\epsilon}I_{9\times 9})$ then
+Since $\epsilon\sim\mathcal{N}(0,\lambda_{\epsilon}I_{9\times 9})$ then
 
 \begin{itemize}
 \item $\p(\epsilon)\propto\exp\left(-\frac{\|\epsilon\|_{2}^{2}}{2\lambda_{\epsilon}^{2}}\right)$
@@ -444,11 +452,12 @@ Recall that $\epsilon\sim\mathcal{N}(0,\lambda_{\epsilon}I_{9\times 9})$ then
 
 \begin{frame}
 \frametitle{Calculating the Posterior}
+Putting everything together
 \begin{itemize}
 \item $\like(\vec{R}|\omega,q)\propto
 \exp\left(-\frac{1}{2\lambda_{\epsilon}^{2}}\|\vec{R}-A(\omega)q\|^{2}_{2}\right)$
-\item $\prior(q_{k})\propto q_{k}^{\alpha_{k}-1}\exp(\beta_{k}q_{k})$
-\item $\prior(\omega)\propto\textbf{1}_{[0.1,0.6]\times[0,2]\times[-600,0]}$
+\item $\prior(\q)\propto \Pi_{k=1}^{k}q_{k}^{\alpha_{k}-1}\exp(\beta_{k}q_{k})$
+\item $\prior(\omega)\propto\textbf{1}_{[0,0.6]\times[0,3]\times[-600,0]}$
 \end{itemize}
 \bigskip
 Then
@@ -465,20 +474,45 @@ Then
 
 \begin{frame}{Sampling From a Probability Distribution}
 %
+%\begin{algorithm}[H]
+%\ChangeFont
+%\caption{Metropolis-Hastings Algorithm}
+%\begin{algorithmic}[1]\label{algMH}
+%\State pick a point $q_{1}$ in the support of the distribution
+%\For{j=2:N}
+%\State Draw $u\sim U([0,\alpha])$
+%\State $q_{j}\leftarrow q_{j-1}+u$
+%\State $\beta\leftarrow\min(1,\frac{\post(q_{j}|D)}{\post(q_{j-1}|\y)})$
+%\State Draw $w\sim U([0,1])$
+%\If{$w<\beta$}
+%\State $q_{j-1}=q_{j}\qquad$   (Accept the move)
+%\Else
+%\State $q_{j-1}=q_{j-1}\qquad$ (Reject the move)
+%\EndIf
+%\EndFor
+%\end{algorithmic}
+%\end{algorithm}
 \begin{algorithm}[H]
 \ChangeFont
-\caption{Metropolis-Hastings Algorithm}
+\caption{Adaptive Metropolis-Hastings Algorithm}
 \begin{algorithmic}[1]\label{algMH}
-\State pick a point $q_{1}$ in the support of the distribution
-\For{j=2:N}
-\State Draw $u\sim U([0,\alpha])$
-\State $q_{j}\leftarrow q_{j-1}+u$
-\State $\beta\leftarrow\min(1,\frac{\post(q_{j}|D)}{\post(q_{j-1}|\y)})$
-\State Draw $w\sim U([0,1])$
-\If{$w<\beta$}
-\State $q_{j-1}=q_{j}\qquad$   (Accept the move)
+\State Choose an initial point $(\omega_{1},\q_{1})$ in the support of $\post(\omega,\q|\vec{R})$
+\State $\beta=0.05$
+\For{$j=2:N$}
+\If{$j\leq 14$}
+\State Draw $u$ from $\mathcal{N}((\omega_{j},\q_{j}),\frac{0.01}{7}I_{7\times 7})$.
 \Else
-\State $q_{j-1}=q_{j-1}\qquad$ (Reject the move)
+\State estimate the empirical covariance matrix $\Sigma_{j}$ based on the samples generated so far
+\State Draw $u$ from $(1-\beta)\mathcal{N}((\omega_{j},\q_{j}),\frac{(2.38)^{2}}{7}\Sigma_{j})+\beta\mathcal{N}((\omega_{j},\q_{j}),\frac{(0.1)^{2}}{7}I_{7\times 7})$.
+\EndIf
+\State Propose $(\tilde{\omega}_j,\tilde{\q}_{j})\leftarrow (\omega_{j-1},\q_{j-1})+u$.
+\State Compute 
+$\beta\leftarrow\min \left(1,\frac{\post(\omega_{j},\q_{j}|\y)}{\post(\omega_{j-1},\q_{j-1}|\y)} \right)$.
+\State Draw $w\sim U([0,1])$.
+\If{$w<\beta$}
+\State $(\omega_{j},\q_{j}) \leftarrow (\tilde{\omega}_{j},\tilde{\q}_{j})\qquad$   (Accept the move)
+\Else
+\State $(\omega_{j},\q_{j})=(\omega_{j-1},\q_{j-1})\qquad$ (Reject the move)
 \EndIf
 \EndFor
 \end{algorithmic}
@@ -488,7 +522,7 @@ Then
 \begin{frame}{Setting $\lambda_{\epsilon}$}
 We define
 \begin{equation*}
-J(\lambda_{\epsilon})=\frac{1}{2}\int\left(\|A(p)q-\vec{R})\|_{2}+\|q-q_{est}\|_{2}\right)d\post^{\lambda_{\epsilon}},
+J(\lambda_{\epsilon})=\frac{1}{2}\int\left(\|A(\omega)q-\vec{R})\|_{2}+\|q-q_{est}\|_{2}\right)d\post^{\lambda_{\epsilon}},
 \end{equation*}
 
 and choose a minimizer of $J$ 
@@ -563,15 +597,13 @@ $L$  & -379.45 & $[-195.86,-563.04]$\tabularnewline
 %\begin{textblock*}{5cm}(5cm,5cm)
 \begin{figure}
 \includegraphics[scale=0.25]{Stockie_Lushi}
-\caption{Hosseini, Bamdad and Stockie, J.M. Estimating airborne particulate emissions using a finite-volume
-forward solver coupled with a Bayesian inversion approach.}
+\caption{Lushi, E. and Stockie, J.M. Atmospheric Environment, 2010}
 \end{figure}
 %\end{textblock*}
 \column{.5\textwidth}
 \begin{figure}
 \includegraphics[scale=0.28]{Hosseini}
-\caption{Lushi, E. and Stockie, J.M. An inverse Gaussian plume approach for estimating atmospheric
-pollutant emissions from multiple point sources}
+\caption{Hosseini and Stockie, Computers and Fluids, 2017}
 \end{figure}
 \end{columns}
 \end{figure}
@@ -581,10 +613,10 @@ pollutant emissions from multiple point sources}
 \begin{frame}{Conclusions}
 \begin{itemize}
 \item We have developed a method to cheaply estimate parameters in computationally expensive models.
-\item Instead of trial and error, we propose a methodology that allows to estimate
+\item Instead of trial and error, we propose a methodology that allows estimating
 parameters in complex models using experimental data.
 \item Besides a point estimate we are able to obtain a confidence interval for it.
-\item Our results qualitatively agree with previous results.
+\item Our results agree well with previous results.
 \end{itemize}
 
 

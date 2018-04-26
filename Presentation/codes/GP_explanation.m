@@ -8,7 +8,7 @@
 
 %*Email: jggarcia@sfu.ca
 
-%*Last Modified: dom 08 abr 2018 12:26:58 PDT
+%*Last Modified: lun 09 abr 2018 23:01:52 PDT
 
 %*Purpose:
 
@@ -45,7 +45,7 @@ z2=linspace(-1,1,100);
 plot3(x,y,z,'.','MarkerSize',50,'Color','green');zlim([0,1]);xlabel('x');ylabel('y');
 hold on;
 plot3(x_full,yhat,0*yhat,'LineWidth',2,'Color','black');
-plot3(x_star,sin(x_star),0,'*','MarkerSize',40);
+plot3(x_star,sin(x_star),0,'.','MarkerSize',50,'color','blue');
 m=max(prob_density(z2))*1.2;
 plot3(0*z2+x_star,z2,prob_density(z2)/m,'LineWidth',2,'color','red');
 grid on
